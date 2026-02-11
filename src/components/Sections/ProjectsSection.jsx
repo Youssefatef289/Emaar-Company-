@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
 import { FiMapPin, FiMaximize2 } from 'react-icons/fi'
 import ProjectModal from '../ProjectModal'
+import { getProjectTypeIcon } from '../../constants/assets'
 
 const ProjectsSection = () => {
   const [ref, inView] = useInView({
@@ -176,6 +177,18 @@ const ProjectsSection = () => {
                 <div className="absolute top-4 left-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(project.status)}`}>
                     {project.status}
+                  </span>
+                </div>
+                <div className="absolute top-4 right-4">
+                  <span className="inline-flex items-center gap-2 bg-white text-gray-800 px-3 py-1 rounded-full text-sm font-semibold shadow-sm">
+                    <img
+                      src={getProjectTypeIcon(project.type)}
+                      alt=""
+                      className="w-4 h-4"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>{project.type}</span>
                   </span>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

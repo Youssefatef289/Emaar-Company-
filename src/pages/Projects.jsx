@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiMapPin, FiMaximize2, FiFilter } from 'react-icons/fi'
 import ProjectModal from '../components/ProjectModal'
+import { getProjectTypeIcon } from '../constants/assets'
 
 const Projects = () => {
   const [filter, setFilter] = useState('الكل')
@@ -175,6 +176,11 @@ const Projects = () => {
 
   const filters = ['الكل', 'سكني', 'تجاري', 'قيد التنفيذ', 'مكتمل']
 
+  const filterIcons = {
+    سكني: getProjectTypeIcon('سكني'),
+    تجاري: getProjectTypeIcon('تجاري'),
+  }
+
   const filteredProjects = filter === 'الكل'
     ? projects
     : filter === 'قيد التنفيذ' || filter === 'مكتمل'
@@ -232,7 +238,18 @@ const Projects = () => {
                   : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
               }`}
             >
-              {filterOption}
+              <span className="inline-flex items-center gap-2">
+                {filterIcons[filterOption] && (
+                  <img
+                    src={filterIcons[filterOption]}
+                    alt=""
+                    className="w-5 h-5"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+                <span>{filterOption}</span>
+              </span>
             </button>
           ))}
         </motion.div>
@@ -256,6 +273,18 @@ const Projects = () => {
                 <div className="absolute top-4 left-4">
                   <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(project.status)}`}>
                     {project.status}
+                  </span>
+                </div>
+                <div className="absolute top-4 right-4">
+                  <span className="inline-flex items-center gap-2 bg-white text-gray-800 px-3 py-1 rounded-full text-sm font-semibold shadow-sm">
+                    <img
+                      src={getProjectTypeIcon(project.type)}
+                      alt=""
+                      className="w-4 h-4"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>{project.type}</span>
                   </span>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

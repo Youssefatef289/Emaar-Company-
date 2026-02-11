@@ -3,6 +3,7 @@ import { Autoplay } from 'swiper/modules'
 import { Link } from 'react-router-dom'
 import 'swiper/css'
 import './HeroSlider.css'
+import { ICONS } from '../../constants/assets'
 
 const HeroSlider = () => {
   // صورة ثابتة واحدة
@@ -80,8 +81,18 @@ const HeroSlider = () => {
                     {slide.description}
                   </p>
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Link to={slide.primaryLink} className="btn-primary text-base md:text-lg px-6 md:px-8 py-3 md:py-4">
-                      {slide.primaryCta}
+                    <Link
+                      to={slide.primaryLink}
+                      className="btn-primary text-base md:text-lg px-6 md:px-8 py-3 md:py-4 inline-flex items-center gap-2 flex-row-reverse"
+                    >
+                      <img
+                        src={ICONS.plus}
+                        alt=""
+                        className="w-5 h-5 opacity-90"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <span>{slide.primaryCta}</span>
                     </Link>
                     <Link to={slide.secondaryLink} className="btn-secondary text-base md:text-lg px-6 md:px-8 py-3 md:py-4 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20">
                       {slide.secondaryCta}

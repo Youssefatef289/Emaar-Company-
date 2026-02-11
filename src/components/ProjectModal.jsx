@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiX, FiMapPin, FiCalendar, FiHome, FiCheckCircle } from 'react-icons/fi'
+import { getProjectTypeIcon } from '../constants/assets'
 
 const ProjectModal = ({ project, isOpen, onClose }) => {
   if (!project) return null
@@ -86,7 +87,13 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
                   <div className="flex items-start space-x-3 space-x-reverse">
                     <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <FiCheckCircle className="text-primary-600" size={24} />
+                      <img
+                        src={getProjectTypeIcon(project.type)}
+                        alt=""
+                        className="w-7 h-7"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-700 mb-1">النوع</h4>
