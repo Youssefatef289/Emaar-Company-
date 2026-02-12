@@ -37,5 +37,36 @@
     @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
   }
   
+  /* News Ticker Animation */
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @keyframes ticker-scroll-rtl {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(50%);
+    }
+  }
+  
+  .ticker-scroll {
+    animation: ticker-scroll linear infinite;
+    will-change: transform;
+  }
+  
+  [dir="rtl"] .ticker-scroll {
+    animation-name: ticker-scroll-rtl;
+  }
+  
+  .ticker-scroll.paused {
+    animation-play-state: paused;
+  }
 }
 
