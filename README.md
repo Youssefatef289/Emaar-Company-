@@ -2,6 +2,9 @@
 
 موقع إلكتروني احترافي ومتكامل لشركة إعمار للتطوير والتسويق العقاري، مطور باستخدام React.js مع تصميم عصري وتجربة مستخدم احترافية.
 
+🔗 **المستودع على GitHub:** [https://github.com/Youssefatef289/Emaar-Company-.git](https://github.com/Youssefatef289/Emaar-Company-.git)  
+🌐 **الموقع المباشر:** [emaar-company.vercel.app](https://emaar-company.vercel.app)
+
 ## 🌟 المميزات الرئيسية
 
 ### 1. **واجهة المستخدم**
@@ -98,10 +101,10 @@
 
 ```bash
 # استنساخ المشروع
-git clone [repository-url]
+git clone https://github.com/Youssefatef289/Emaar-Company-.git
 
 # الانتقال إلى المجلد
-cd emaar-website
+cd Emaar-Company-
 
 # تثبيت المكتبات
 npm install
