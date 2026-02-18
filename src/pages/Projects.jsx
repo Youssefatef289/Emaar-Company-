@@ -215,7 +215,7 @@ const Projects = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
             مشاريعنا
           </h1>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+          <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             استعرض مشاريعنا المتميزة في التطوير العقاري
           </p>
@@ -234,9 +234,10 @@ const Projects = () => {
               onClick={() => setFilter(filterOption)}
               className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 filter === filterOption
-                  ? 'bg-primary-600 text-white shadow-lg'
+                  ? 'text-white shadow-lg'
                   : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
               }`}
+              style={filter === filterOption ? { backgroundColor: '#d6ac72' } : {}}
             >
               <span className="inline-flex items-center gap-2">
                 {filterIcons[filterOption] && (
@@ -290,7 +291,8 @@ const Projects = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <button
                     onClick={() => handleOpenModal(project)}
-                    className="bg-white text-primary-600 p-3 rounded-full hover:bg-primary-600 hover:text-white transition-colors"
+                    className="bg-white p-3 rounded-full transition-colors hover:bg-[#d6ac72] hover:text-white"
+                    style={{ color: '#d6ac72' }}
                   >
                     <FiMaximize2 size={24} />
                   </button>

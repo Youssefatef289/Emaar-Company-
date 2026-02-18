@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
+# Large image files (keep only used images in public/image)
+image/
+!public/image/
+

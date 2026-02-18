@@ -6,6 +6,7 @@ import ProjectsSection from '../components/Sections/ProjectsSection'
 import ClientsSection from '../components/Sections/ClientsSection'
 import StatsSection from '../components/Sections/StatsSection'
 import HowWeHelpSection from '../components/Sections/HowWeHelpSection'
+import './Home.css'
 
 const Home = () => {
   return (

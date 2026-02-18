@@ -49,7 +49,7 @@ const StatsSection = () => {
   }, [inView, stats])
 
   return (
-    <section ref={ref} className="section-padding bg-primary-600 text-white">
+    <section ref={ref} className="section-padding stats-section text-white">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

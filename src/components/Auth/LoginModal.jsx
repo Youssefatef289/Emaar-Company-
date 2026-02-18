@@ -110,7 +110,7 @@ const LoginModal = ({ isOpen, onClose, onSwitchToRegister }) => {
               ليس لديك حساب؟{' '}
               <button
                 onClick={onSwitchToRegister}
-                className="text-primary-600 hover:text-primary-700 font-semibold"
+                className="text-primary-500 hover:text-primary-500 font-semibold"
               >
                 إنشاء حساب جديد
               </button>

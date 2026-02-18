@@ -80,10 +80,10 @@ const HowWeHelpSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
             كيف تستفيد منا
           </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+          <div className="how-we-help-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             نقدم لك تجربة استثنائية في مجال التطوير العقاري مع حلول متكاملة وخدمات احترافية
           </p>
@@ -127,7 +127,7 @@ const HowWeHelpSection = () => {
                 transition={{ delay: 0.7 + index * 0.1, duration: 0.6 }}
                 className="text-center"
               >
-                <div className="w-24 h-24 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold shadow-lg">
+                <div className="how-we-help-step-circle text-2xl font-bold">
                   {step.number}
                 </div>
                 <h4 className="text-xl font-bold mb-3 text-gray-800">{step.title}</h4>
@@ -142,7 +142,7 @@ const HowWeHelpSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.1, duration: 0.6 }}
-          className="bg-primary-600 rounded-2xl p-8 md:p-12 text-center text-white"
+          className="how-we-help-cta"
         >
           <h3 className="text-3xl md:text-4xl font-bold mb-4">
             جاهزون لبدء مشروعك؟
@@ -151,10 +151,10 @@ const HowWeHelpSection = () => {
             تواصل معنا اليوم واحصل على استشارة مجانية لمشروعك العقاري
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="/contact" className="bg-white text-primary-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <a href="/contact" className="how-we-help-cta-button-white">
               تواصل معنا الآن
             </a>
-            <a href="/projects" className="bg-primary-700 text-white font-semibold py-3 px-8 rounded-lg border-2 border-white/30 hover:bg-primary-800 transition-all duration-300">
+            <a href="/projects" className="how-we-help-cta-button-dark">
               شاهد مشاريعنا
             </a>
           </div>

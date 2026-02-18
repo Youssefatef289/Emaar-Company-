@@ -1,111 +1,104 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  FiMessageCircle, 
-  FiX, 
-  FiFacebook, 
-  FiInstagram,
-  FiPhone,
-  FiMail
-} from 'react-icons/fi'
-import { FaWhatsapp, FaYoutube } from 'react-icons/fa'
+  FaPhoneAlt, 
+  FaWhatsapp, 
+  FaFacebook,
+  FaInstagram,
+  FaYoutube
+} from 'react-icons/fa'
+import { FiMessageCircle, FiX } from 'react-icons/fi'
+import './FloatingContactButton.css'
+
+// TikTok Icon Component
+const TikTokIcon = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+)
 
 const FloatingContactButton = () => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen)
+  }
 
   const contactLinks = [
     {
       name: 'واتساب',
       icon: FaWhatsapp,
-      href: 'https://wa.me/201234567890',
-      color: 'bg-green-500 hover:bg-green-600',
-      delay: 0.1,
+      href: 'https://wa.me/201005617186',
+      color: 'whatsapp-color',
+      gradient: 'linear-gradient(0deg, #00B100, #09db09)',
     },
     {
       name: 'فيسبوك',
-      icon: FiFacebook,
+      icon: FaFacebook,
       href: 'https://facebook.com/emaar',
-      color: 'bg-blue-600 hover:bg-blue-700',
-      delay: 0.2,
+      color: 'facebook-color',
+      gradient: 'linear-gradient(0deg, #1877F2, #42A5F5)',
     },
     {
       name: 'إنستجرام',
-      icon: FiInstagram,
+      icon: FaInstagram,
       href: 'https://instagram.com/emaar',
-      color: 'bg-pink-600 hover:bg-pink-700',
-      delay: 0.3,
+      color: 'instagram-color',
+      gradient: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
+    },
+    {
+      name: 'تيك توك',
+      icon: TikTokIcon,
+      href: 'https://tiktok.com/@emaar',
+      color: 'tiktok-color',
+      gradient: 'linear-gradient(0deg, #000000, #FE2C55)',
     },
     {
       name: 'يوتيوب',
       icon: FaYoutube,
       href: 'https://youtube.com/@emaar',
-      color: 'bg-red-600 hover:bg-red-700',
-      delay: 0.4,
-    },
-    {
-      name: 'اتصل بنا',
-      icon: FiPhone,
-      href: 'tel:+201234567890',
-      color: 'bg-primary-600 hover:bg-primary-700',
-      delay: 0.5,
-    },
-    {
-      name: 'البريد الإلكتروني',
-      icon: FiMail,
-      href: 'mailto:info@emaar.com',
-      color: 'bg-gray-600 hover:bg-gray-700',
-      delay: 0.6,
+      color: 'youtube-color',
+      gradient: 'linear-gradient(0deg, #FF0000, #FF4444)',
     },
   ]
 
   return (
-    <div className="fixed bottom-6 left-6 z-50">
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
-            className="mb-4 space-y-3"
-          >
-            {contactLinks.map((link, index) => {
-              const Icon = link.icon
-              return (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ delay: link.delay }}
-                  className={`${link.color} text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center space-x-3 space-x-reverse group`}
-                  aria-label={link.name}
-                >
-                  <Icon size={20} />
-                  <span className="text-sm font-semibold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                    {link.name}
-                  </span>
-                </motion.a>
-              )
-            })}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className={`${isOpen ? 'bg-red-500 hover:bg-red-600' : 'bg-primary-600 hover:bg-primary-700'} text-white p-4 rounded-full shadow-2xl transition-all`}
-        aria-label={isOpen ? 'Close contact menu' : 'Open contact menu'}
-      >
-        {isOpen ? <FiX size={24} /> : <FiMessageCircle size={24} />}
-      </motion.button>
+    <div className="floating-contact-wrapper">
+      <div id="main-div">
+        <div 
+          id="main-button" 
+          className={`wave ${isOpen ? 'open' : ''}`}
+          onClick={handleToggle}
+        >
+          {isOpen ? <FiX size={20} /> : <FiMessageCircle size={20} />}
+        </div>
+        <button 
+          className={isOpen ? 'open' : ''}
+          onClick={() => window.location.href = '/contact'}
+        >
+          <FaPhoneAlt style={{ marginLeft: '8px' }} />
+          استشارة مجانية
+        </button>
+        {contactLinks.map((link, index) => {
+          const Icon = link.icon
+          return (
+            <a
+              key={link.name}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${link.color} ${isOpen ? 'open' : ''}`}
+              style={{ 
+                background: link.gradient
+              }}
+              aria-label={link.name}
+            >
+              <Icon size={20} />
+            </a>
+          )
+        })}
+      </div>
     </div>
   )
 }
 
 export default FloatingContactButton
-

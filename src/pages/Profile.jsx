@@ -23,7 +23,7 @@ const Profile = () => {
           className="bg-white rounded-2xl shadow-lg p-8 mb-8"
         >
           <div className="flex items-center space-x-4 space-x-reverse mb-6">
-            <div className="w-20 h-20 bg-primary-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">
+            <div className="w-20 h-20 rounded-full flex items-center justify-center text-white text-3xl font-bold" style={{ backgroundColor: '#d6ac72' }}>
               {user.name?.charAt(0) || 'U'}
             </div>
             <div>
@@ -42,14 +42,14 @@ const Profile = () => {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">معلومات الحساب</h2>
           <div className="space-y-4">
             <div className="flex items-center space-x-3 space-x-reverse">
-              <FiUser className="text-primary-600" size={20} />
+              <FiUser style={{ color: '#d6ac72' }} size={20} />
               <div>
                 <p className="text-sm text-gray-600">الاسم</p>
                 <p className="font-semibold text-gray-900">{user.name}</p>
               </div>
             </div>
             <div className="flex items-center space-x-3 space-x-reverse">
-              <FiMail className="text-primary-600" size={20} />
+              <FiMail style={{ color: '#d6ac72' }} size={20} />
               <div>
                 <p className="text-sm text-gray-600">البريد الإلكتروني</p>
                 <p className="font-semibold text-gray-900">{user.email}</p>
@@ -57,7 +57,7 @@ const Profile = () => {
             </div>
             {user.phone && (
               <div className="flex items-center space-x-3 space-x-reverse">
-                <FiPhone className="text-primary-600" size={20} />
+                <FiPhone style={{ color: '#d6ac72' }} size={20} />
                 <div>
                   <p className="text-sm text-gray-600">رقم الهاتف</p>
                   <p className="font-semibold text-gray-900">{user.phone}</p>
@@ -75,7 +75,7 @@ const Profile = () => {
           className="bg-white rounded-2xl shadow-lg p-8 mb-8"
         >
           <div className="flex items-center space-x-3 space-x-reverse mb-6">
-            <FiPackage className="text-primary-600" size={24} />
+            <FiPackage style={{ color: '#d6ac72' }} size={24} />
             <h2 className="text-2xl font-bold text-gray-900">حجوزاتي</h2>
           </div>
           {user.bookings && user.bookings.length > 0 ? (
@@ -125,7 +125,7 @@ const Profile = () => {
           className="bg-white rounded-2xl shadow-lg p-8"
         >
           <div className="flex items-center space-x-3 space-x-reverse mb-6">
-            <FiHeart className="text-primary-600" size={24} />
+            <FiHeart style={{ color: '#d6ac72' }} size={24} />
             <h2 className="text-2xl font-bold text-gray-900">مفضلاتي</h2>
           </div>
           {user.favorites && user.favorites.length > 0 ? (

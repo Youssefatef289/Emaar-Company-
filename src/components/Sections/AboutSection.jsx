@@ -35,10 +35,10 @@ const AboutSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
             من نحن
           </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+          <div className="about-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             شركة إعمار للتطوير العقاري هي شركة رائدة في مجال التطوير العقاري والمقاولات في مصر، 
             تأسست بهدف تقديم حلول متكاملة وعالية الجودة في قطاع العقارات.
@@ -77,7 +77,7 @@ const AboutSection = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-6 -left-6 bg-primary-600 text-white p-6 rounded-xl shadow-xl hidden md:block">
+            <div className="absolute -bottom-6 -left-6 about-section-badge hidden md:block">
               <div className="text-4xl font-bold">15+</div>
               <div className="text-lg">سنة خبرة</div>
             </div>
@@ -94,7 +94,7 @@ const AboutSection = () => {
               className="bg-white p-8 rounded-xl shadow-lg card-hover text-center"
             >
               <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <feature.icon className="text-primary-600" size={32} />
+                <feature.icon className="about-section-icon" size={32} />
               </div>
               <h4 className="text-xl font-bold mb-3 text-gray-800">{feature.title}</h4>
               <p className="text-gray-600 leading-relaxed">{feature.description}</p>

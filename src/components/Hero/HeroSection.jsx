@@ -65,7 +65,7 @@ const HeroSection = () => {
             >
               <Link 
                 to="/contact" 
-                className="btn-primary text-lg bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                className="btn-primary text-lg bg-primary-500 hover:bg-primary-500 text-white px-8 py-4 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
               >
                 اطلب عرض سعر
               </Link>
@@ -118,7 +118,7 @@ const HeroSection = () => {
               </div>
 
               {/* Decorative Elements */}
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary-600 rounded-full opacity-20 blur-3xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-primary-500 rounded-full opacity-20 blur-3xl"></div>
               <div className="absolute -top-6 -right-6 w-40 h-40 bg-primary-400 rounded-full opacity-10 blur-3xl"></div>
               
               {/* Floating Badge */}
@@ -128,7 +128,7 @@ const HeroSection = () => {
                 transition={{ delay: 1.2, duration: 0.5, type: "spring" }}
                 className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-xl"
               >
-                <div className="text-2xl font-bold text-primary-600">15+</div>
+                <div className="text-2xl font-bold text-primary-500">15+</div>
                 <div className="text-sm text-gray-600">سنة خبرة</div>
               </motion.div>
             </div>

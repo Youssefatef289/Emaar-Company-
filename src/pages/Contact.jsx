@@ -77,7 +77,7 @@ const Contact = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
             تواصل معنا
           </h1>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+          <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             نحن هنا للإجابة على جميع استفساراتك ومساعدتك في تحقيق أهدافك العقارية
           </p>
@@ -93,13 +93,14 @@ const Contact = () => {
               className="bg-white p-8 rounded-xl shadow-lg card-hover text-center"
             >
               <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <info.icon className="text-primary-600" size={32} />
+                <info.icon style={{ color: '#d6ac72' }} size={32} />
               </div>
               <h3 className="text-xl font-bold mb-2 text-gray-800">{info.title}</h3>
               {info.link ? (
                 <a
                   href={info.link}
-                  className="text-primary-600 hover:text-primary-700 transition-colors"
+                  className="transition-colors"
+                  style={{ color: '#d6ac72' }}
                 >
                   {info.content}
                 </a>
@@ -133,7 +134,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
                     placeholder="أدخل اسمك الكامل"
                   />
                 </div>
@@ -152,7 +153,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
                     placeholder="example@email.com"
                   />
                 </div>
@@ -171,7 +172,7 @@ const Contact = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
                     placeholder="+20 123 456 7890"
                   />
                 </div>
@@ -188,7 +189,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
                   placeholder="موضوع الرسالة"
                 />
               </div>
@@ -206,7 +207,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     rows="5"
-                    className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                    className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent resize-none"
                     placeholder="اكتب رسالتك هنا..."
                   />
                 </div>
@@ -257,26 +258,26 @@ const Contact = () => {
             </div>
             <div className="mt-6 space-y-3">
               <div className="flex items-start">
-                <FiMapPin className="text-primary-600 ml-3 mt-1 flex-shrink-0" size={20} />
+                <FiMapPin className="ml-3 mt-1 flex-shrink-0" style={{ color: '#d6ac72' }} size={20} />
                 <div>
                   <p className="font-semibold text-gray-800">العنوان:</p>
                   <p className="text-gray-600">القاهرة، مصر</p>
                 </div>
               </div>
               <div className="flex items-start">
-                <FiPhone className="text-primary-600 ml-3 mt-1 flex-shrink-0" size={20} />
+                <FiPhone className="ml-3 mt-1 flex-shrink-0" style={{ color: '#d6ac72' }} size={20} />
                 <div>
                   <p className="font-semibold text-gray-800">الهاتف:</p>
-                  <a href="tel:+201234567890" className="text-primary-600 hover:text-primary-700">
+                  <a href="tel:+201234567890" style={{ color: '#d6ac72' }}>
                     +20 123 456 7890
                   </a>
                 </div>
               </div>
               <div className="flex items-start">
-                <FiMail className="text-primary-600 ml-3 mt-1 flex-shrink-0" size={20} />
+                <FiMail className="ml-3 mt-1 flex-shrink-0" style={{ color: '#d6ac72' }} size={20} />
                 <div>
                   <p className="font-semibold text-gray-800">البريد الإلكتروني:</p>
-                  <a href="mailto:info@emaar.com" className="text-primary-600 hover:text-primary-700">
+                  <a href="mailto:info@emaar.com" style={{ color: '#d6ac72' }}>
                     info@emaar.com
                   </a>
                 </div>

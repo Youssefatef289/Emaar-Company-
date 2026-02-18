@@ -26,10 +26,10 @@ const ClientsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
             عملاؤنا وشركاؤنا
           </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+          <div className="about-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             نفتخر بثقة عملائنا وشركائنا في جميع مشاريعنا
           </p>
@@ -67,7 +67,8 @@ const ClientsSection = () => {
                     {[...Array(5)].map((_, i) => (
                       <svg
                         key={i}
-                        className="w-5 h-5 text-gold-500 ml-1"
+                        className="w-5 h-5 ml-1"
+                        style={{ color: '#d6ac72' }}
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >

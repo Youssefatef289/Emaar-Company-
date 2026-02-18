@@ -90,7 +90,8 @@ const SurveyingServices = () => {
         <div className="container-custom">
           <button
             onClick={() => setSelectedCourse(null)}
-            className="flex items-center text-primary-600 hover:text-primary-700 mb-6"
+            className="flex items-center mb-6"
+            style={{ color: '#d6ac72' }}
           >
             <FiArrowLeft className="ml-2" size={20} />
             <span>العودة إلى الدورات</span>
@@ -115,7 +116,7 @@ const SurveyingServices = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                  <FiClock className="text-primary-600" size={24} />
+                  <FiClock size={24} style={{ color: '#d6ac72' }} />
                   <div>
                     <p className="text-sm text-gray-600">المدة</p>
                     <p className="font-bold text-gray-900">{selectedCourse.duration}</p>
@@ -123,7 +124,7 @@ const SurveyingServices = () => {
                 </div>
 
                 <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                  <FiDollarSign className="text-primary-600" size={24} />
+                  <FiDollarSign size={24} style={{ color: '#d6ac72' }} />
                   <div>
                     <p className="text-sm text-gray-600">السعر</p>
                     <p className="font-bold text-gray-900">{selectedCourse.price.toLocaleString()} جنيه</p>
@@ -131,7 +132,7 @@ const SurveyingServices = () => {
                 </div>
 
                 <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                  <FiUsers className="text-primary-600" size={24} />
+                  <FiUsers size={24} style={{ color: '#d6ac72' }} />
                   <div>
                     <p className="text-sm text-gray-600">المدرب</p>
                     <p className="font-bold text-gray-900">{selectedCourse.instructor}</p>
@@ -144,7 +145,7 @@ const SurveyingServices = () => {
                 <ul className="space-y-3">
                   {selectedCourse.content.map((item, index) => (
                     <li key={index} className="flex items-start space-x-3 space-x-reverse">
-                      <FiBook className="text-primary-600 mt-1 flex-shrink-0" size={18} />
+                      <FiBook className="mt-1 flex-shrink-0" size={18} style={{ color: '#d6ac72' }} />
                       <span className="text-gray-700">{item}</span>
                     </li>
                   ))}
@@ -242,7 +243,7 @@ const SurveyingServices = () => {
                       <FiClock className="ml-2" size={18} />
                       <span className="text-sm">{course.duration}</span>
                     </div>
-                    <div className="flex items-center text-primary-600 font-bold">
+                    <div className="flex items-center font-bold" style={{ color: '#d6ac72' }}>
                       <FiDollarSign size={18} />
                       <span>{course.price.toLocaleString()} جنيه</span>
                     </div>

@@ -71,10 +71,10 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
             خدماتنا
           </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+          <div className="services-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             نقدم مجموعة شاملة من الخدمات المتخصصة في مجال التطوير العقاري والمقاولات
           </p>
@@ -96,7 +96,7 @@ const ServicesSection = () => {
               <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
               <Link
                 to="/services"
-                className="text-primary-600 font-semibold hover:text-primary-700 transition-colors inline-flex items-center"
+                className="services-section-link inline-flex items-center"
               >
                 اعرف المزيد
                 <span className="mr-2">←</span>

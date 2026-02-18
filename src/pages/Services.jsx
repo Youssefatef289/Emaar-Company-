@@ -109,7 +109,7 @@ const Services = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
             خدماتنا
           </h1>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+          <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             نقدم مجموعة شاملة من الخدمات المتخصصة في مجال التطوير العقاري والمقاولات
           </p>
@@ -137,7 +137,7 @@ const Services = () => {
                 <ul className="space-y-3">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-start">
-                      <span className="text-primary-600 ml-3 mt-1">✓</span>
+                      <span className="ml-3 mt-1" style={{ color: '#d6ac72' }}>✓</span>
                       <span className="text-gray-700">{feature}</span>
                     </li>
                   ))}

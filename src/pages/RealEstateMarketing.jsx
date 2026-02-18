@@ -140,14 +140,15 @@ const RealEstateMarketing = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="ابحث عن منطقة أو عنوان..."
-                className="w-full pr-12 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full pr-12 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
               />
             </div>
 
             {/* Filter Toggle */}
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors flex items-center justify-center space-x-2 space-x-reverse"
+              className="px-6 py-3 text-white rounded-lg hover:opacity-90 transition-colors flex items-center justify-center space-x-2 space-x-reverse"
+              style={{ backgroundColor: '#d6ac72' }}
             >
               <FiFilter size={20} />
               <span>فلترة</span>
@@ -167,7 +168,7 @@ const RealEstateMarketing = () => {
                 <select
                   value={filters.area}
                   onChange={(e) => setFilters({ ...filters, area: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 >
                   <option value="">جميع المناطق</option>
                   {areas.map(area => (
@@ -181,7 +182,7 @@ const RealEstateMarketing = () => {
                 <select
                   value={filters.rooms}
                   onChange={(e) => setFilters({ ...filters, rooms: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 >
                   <option value="">جميع الأعداد</option>
                   <option value="1">1 غرفة</option>
@@ -197,7 +198,7 @@ const RealEstateMarketing = () => {
                 <select
                   value={filters.finishing}
                   onChange={(e) => setFilters({ ...filters, finishing: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 >
                   <option value="">جميع الأنواع</option>
                   {finishingTypes.map(type => (
@@ -213,7 +214,7 @@ const RealEstateMarketing = () => {
                   value={filters.floor}
                   onChange={(e) => setFilters({ ...filters, floor: e.target.value })}
                   placeholder="أي دور"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
@@ -224,7 +225,7 @@ const RealEstateMarketing = () => {
                   value={filters.minArea}
                   onChange={(e) => setFilters({ ...filters, minArea: e.target.value })}
                   placeholder="الحد الأدنى"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
@@ -235,7 +236,7 @@ const RealEstateMarketing = () => {
                   value={filters.maxArea}
                   onChange={(e) => setFilters({ ...filters, maxArea: e.target.value })}
                   placeholder="الحد الأقصى"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
@@ -246,7 +247,7 @@ const RealEstateMarketing = () => {
                   value={filters.minPrice}
                   onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })}
                   placeholder="الحد الأدنى"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
@@ -257,7 +258,7 @@ const RealEstateMarketing = () => {
                   value={filters.maxPrice}
                   onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })}
                   placeholder="الحد الأقصى"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
@@ -276,7 +277,7 @@ const RealEstateMarketing = () => {
         {/* Results Count */}
         <div className="mb-6">
           <p className="text-gray-600">
-            تم العثور على <span className="font-bold text-primary-600">{filteredUnits.length}</span> وحدة
+            تم العثور على <span className="font-bold" style={{ color: '#d6ac72' }}>{filteredUnits.length}</span> وحدة
           </p>
         </div>
 
@@ -297,7 +298,7 @@ const RealEstateMarketing = () => {
                     alt={unit.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  <div className="absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold" style={{ backgroundColor: '#d6ac72' }}>
                     {unit.finishing}
                   </div>
                 </div>
@@ -321,7 +322,7 @@ const RealEstateMarketing = () => {
                     <div className="flex items-center text-gray-600">
                       <span className="ml-2">الدور: {unit.floor}</span>
                     </div>
-                    <div className="flex items-center text-primary-600 font-bold text-lg">
+                    <div className="flex items-center font-bold text-lg" style={{ color: '#d6ac72' }}>
                       <FiDollarSign size={20} />
                       <span>{unit.price.toLocaleString()} جنيه</span>
                     </div>
@@ -339,7 +340,8 @@ const RealEstateMarketing = () => {
                     {isAuthenticated && (
                       <button
                         onClick={() => addFavorite(unit.id, 'unit')}
-                        className="px-4 py-2 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors"
+                        className="px-4 py-2 border-2 rounded-lg hover:bg-primary-50 transition-colors"
+                        style={{ color: '#d6ac72', borderColor: '#d6ac72' }}
                       >
                         ♡
                       </button>

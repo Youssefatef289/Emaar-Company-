@@ -1,0 +1,198 @@
+.floating-contact-wrapper {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 1000;
+}
+
+#main-div {
+  position: relative;
+}
+
+#main-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  color: #d6ac72;
+  cursor: pointer;
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+#main-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.6);
+}
+
+#main-button ~ button {
+  visibility: hidden;
+  font-weight: 600;
+  height: 50px;
+  padding: 0 20px;
+  color: #fff;
+  background: linear-gradient(90deg, #d6ac72, #c49a5f);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border: 0;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: 0.2s all linear;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+}
+
+#main-button.open ~ button {
+  visibility: visible;
+  left: 70px;
+  opacity: 1;
+  transition: 0.4s all cubic-bezier(0, 0.01, 0, 1.27);
+}
+
+#main-button ~ a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  opacity: 0;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  transition: 0.2s all linear;
+}
+
+#main-button.open ~ a {
+  opacity: 1;
+  transition: 0.4s all cubic-bezier(0, 0.01, 0, 1.27);
+}
+
+#main-button.open ~ a:nth-of-type(1) {
+  bottom: 60px;
+}
+
+#main-button.open ~ a:nth-of-type(2) {
+  bottom: 120px;
+}
+
+#main-button.open ~ a:nth-of-type(3) {
+  bottom: 180px;
+}
+
+#main-button.open ~ a:nth-of-type(4) {
+  bottom: 240px;
+}
+
+#main-button.open ~ a:nth-of-type(5) {
+  bottom: 300px;
+}
+
+/* Colors for each social media */
+.whatsapp-color {
+  background: linear-gradient(0deg, #00B100, #09db09) !important;
+}
+
+.facebook-color {
+  background: linear-gradient(0deg, #1877F2, #42A5F5) !important;
+}
+
+.instagram-color {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+}
+
+.tiktok-color {
+  background: linear-gradient(0deg, #000000, #FE2C55) !important;
+}
+
+.youtube-color {
+  background: linear-gradient(0deg, #FF0000, #FF4444) !important;
+}
+
+
+.wave {
+  animation-name: wave;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes wave {
+  0% {
+    box-shadow: 0 0 0px 0px rgba(214, 172, 114, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0px 10px rgba(214, 172, 114, 0);
+  }
+}
+
+.open {
+  animation-iteration-count: 1;
+}
+
+/* RTL Support */
+[dir="rtl"] .floating-contact-wrapper {
+  left: auto;
+  right: 20px;
+}
+
+[dir="rtl"] #main-button {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] #main-button ~ button {
+  left: auto;
+  right: 70px;
+}
+
+[dir="rtl"] #main-button ~ a {
+  left: auto;
+  right: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .floating-contact-wrapper {
+    left: 15px;
+    bottom: 15px;
+  }
+  
+  #main-button {
+    height: 45px;
+    width: 45px;
+    font-size: 18px;
+  }
+  
+  #main-button ~ button {
+    height: 45px;
+    padding: 0 15px;
+    font-size: 14px;
+  }
+  
+  #main-button ~ a {
+    height: 45px;
+    width: 45px;
+    font-size: 18px;
+  }
+}
+

@@ -198,7 +198,7 @@ const RegisterModal = ({ isOpen, onClose, onSwitchToLogin }) => {
             لديك حساب بالفعل؟{' '}
             <button
               onClick={onSwitchToLogin}
-              className="text-primary-600 hover:text-primary-700 font-semibold"
+              className="text-primary-500 hover:text-primary-500 font-semibold"
             >
               تسجيل الدخول
             </button>

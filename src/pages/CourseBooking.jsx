@@ -131,7 +131,7 @@ const CourseBooking = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-3 space-x-reverse">
-                <FiClock className="text-primary-600" size={24} />
+                <FiClock style={{ color: '#d6ac72' }} size={24} />
                 <div>
                   <p className="text-sm text-gray-600">المدة</p>
                   <p className="font-bold text-gray-900">{course.duration}</p>
@@ -139,7 +139,7 @@ const CourseBooking = () => {
               </div>
 
               <div className="flex items-center space-x-3 space-x-reverse">
-                <FiDollarSign className="text-primary-600" size={24} />
+                <FiDollarSign style={{ color: '#d6ac72' }} size={24} />
                 <div>
                   <p className="text-sm text-gray-600">السعر</p>
                   <p className="font-bold text-gray-900">{course.price.toLocaleString()} جنيه</p>
@@ -147,7 +147,7 @@ const CourseBooking = () => {
               </div>
 
               <div className="flex items-center space-x-3 space-x-reverse">
-                <FiUsers className="text-primary-600" size={24} />
+                <FiUsers style={{ color: '#d6ac72' }} size={24} />
                 <div>
                   <p className="text-sm text-gray-600">المدرب</p>
                   <p className="font-bold text-gray-900">{course.instructor}</p>
@@ -176,7 +176,7 @@ const CourseBooking = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
               />
             </div>
 
@@ -190,7 +190,7 @@ const CourseBooking = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
               />
             </div>
 
@@ -204,7 +204,7 @@ const CourseBooking = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
                 placeholder="01XXXXXXXXX"
               />
             </div>
@@ -218,7 +218,7 @@ const CourseBooking = () => {
                 value={formData.notes}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
                 placeholder="أي ملاحظات أو طلبات خاصة..."
               />
             </div>

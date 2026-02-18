@@ -93,7 +93,7 @@ const Offers = () => {
               )}
 
               {/* Type Badge */}
-              <div className="absolute top-4 left-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
+              <div className="absolute top-4 left-4 text-white px-3 py-1 rounded-full text-sm font-semibold z-10" style={{ backgroundColor: '#d6ac72' }}>
                 {getOfferTypeLabel(offer.type)}
               </div>
 
@@ -133,13 +133,14 @@ const Offers = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-16 bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 text-center text-white"
+          className="mt-16 rounded-2xl p-8 text-center text-white"
+          style={{ background: 'linear-gradient(to right, #d6ac72, #c49a5f)' }}
         >
           <h2 className="text-3xl font-bold mb-4">هل تبحث عن عرض خاص؟</h2>
           <p className="text-lg mb-6 opacity-90">
             تواصل معنا للحصول على عروض مخصصة تناسب احتياجاتك
           </p>
-          <Link to="/contact" className="btn-secondary bg-white text-primary-600 hover:bg-gray-50 inline-block">
+          <Link to="/contact" className="btn-secondary bg-white hover:bg-gray-50 inline-block" style={{ color: '#d6ac72' }}>
             تواصل معنا الآن
           </Link>
         </motion.div>

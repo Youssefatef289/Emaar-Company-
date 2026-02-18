@@ -60,7 +60,7 @@ const ProjectDetail = () => {
     return (
       <div className="min-h-screen bg-gray-50 pb-16 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#d6ac72' }}></div>
           <p className="text-gray-600">جاري التحميل...</p>
         </div>
       </div>
@@ -72,7 +72,7 @@ const ProjectDetail = () => {
       <div className="min-h-screen bg-gray-50 pb-16 flex items-center justify-center">
         <div className="text-center">
           <p className="text-gray-600 text-lg mb-4">المشروع غير موجود</p>
-          <Link to="/current-projects" className="text-primary-600 hover:text-primary-700">
+          <Link to="/current-projects" style={{ color: '#d6ac72' }}>
             العودة إلى المشاريع
           </Link>
         </div>
@@ -86,7 +86,8 @@ const ProjectDetail = () => {
         {/* Back Button */}
         <Link
           to="/current-projects"
-          className="flex items-center text-primary-600 hover:text-primary-700 mb-6"
+          className="flex items-center mb-6"
+          style={{ color: '#d6ac72' }}
         >
           <FiArrowLeft className="ml-2" size={20} />
           <span>العودة إلى المشاريع</span>
@@ -112,7 +113,7 @@ const ProjectDetail = () => {
                   <FiMapPin className="ml-1" size={18} />
                   <span>{project.location}</span>
                 </div>
-                <span className="px-3 py-1 bg-primary-600 rounded-full text-sm font-semibold">
+                <span className="px-3 py-1 rounded-full text-sm font-semibold text-white" style={{ backgroundColor: '#d6ac72' }}>
                   {project.type}
                 </span>
               </div>
@@ -217,26 +218,26 @@ const ProjectDetail = () => {
               <h3 className="text-xl font-bold text-gray-900 mb-4">معلومات المشروع</h3>
               <div className="space-y-4">
                 <div className="flex items-center text-gray-700">
-                  <FiHome className="ml-2 text-primary-600" size={20} />
+                  <FiHome className="ml-2" size={20} style={{ color: '#d6ac72' }} />
                   <span>{project.units} وحدة</span>
                 </div>
                 <div className="flex items-center text-gray-700">
-                  <FiCalendar className="ml-2 text-primary-600" size={20} />
+                  <FiCalendar className="ml-2" size={20} style={{ color: '#d6ac72' }} />
                   <span>تاريخ الانتهاء: {project.completionDate}</span>
                 </div>
                 <div className="flex items-center text-gray-700">
-                  <FiDollarSign className="ml-2 text-primary-600" size={20} />
+                  <FiDollarSign className="ml-2" size={20} style={{ color: '#d6ac72' }} />
                   <span>السعر يبدأ من: {project.startingPrice.toLocaleString()} جنيه</span>
                 </div>
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm font-medium text-gray-700">نسبة الإنجاز</span>
-                    <span className="text-sm font-bold text-primary-600">{project.progress}%</span>
+                    <span className="text-sm font-bold" style={{ color: '#d6ac72' }}>{project.progress}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
-                      className="bg-primary-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${project.progress}%` }}
+                      className="h-2 rounded-full transition-all duration-300"
+                      style={{ backgroundColor: '#d6ac72', width: `${project.progress}%` }}
                     />
                   </div>
                 </div>
@@ -248,7 +249,8 @@ const ProjectDetail = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl shadow-lg p-6 text-white"
+              className="rounded-2xl shadow-lg p-6 text-white"
+              style={{ background: 'linear-gradient(to right, #d6ac72, #c49a5f)' }}
             >
               <h3 className="text-xl font-bold mb-4">استفسر عن المشروع</h3>
               <p className="mb-6 opacity-90">
@@ -256,7 +258,8 @@ const ProjectDetail = () => {
               </p>
               <Link
                 to="/contact"
-                className="block w-full bg-white text-primary-600 text-center py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                className="block w-full bg-white text-center py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                style={{ color: '#d6ac72' }}
               >
                 تواصل معنا
               </Link>

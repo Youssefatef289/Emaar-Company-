@@ -38,10 +38,10 @@ const NewsTicker = () => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-primary-600 to-primary-800 text-white shadow-md h-[40px] flex items-center overflow-hidden">
+      <div className="fixed top-0 left-0 right-0 z-[60] text-white shadow-md h-[40px] flex items-center overflow-hidden" style={{ background: 'linear-gradient(to right, #b2884c, #8e6426)' }}>
         <div className="flex items-center h-full w-full">
           {/* News Label */}
-          <div className="flex-shrink-0 px-4 md:px-6 bg-primary-700/50 h-full flex items-center z-10">
+          <div className="flex-shrink-0 px-4 md:px-6 h-full flex items-center z-10" style={{ backgroundColor: 'rgba(142, 100, 38, 0.5)' }}>
             <span className="text-sm font-bold whitespace-nowrap">
               📢 آخر الأخبار:
             </span>
@@ -73,7 +73,7 @@ const NewsTicker = () => {
           </div>
 
           {/* Close Button */}
-          <div className="flex-shrink-0 px-3 md:px-4 h-full flex items-center z-10 bg-primary-700/50">
+          <div className="flex-shrink-0 px-3 md:px-4 h-full flex items-center z-10" style={{ backgroundColor: 'rgba(142, 100, 38, 0.5)' }}>
             <button
               onClick={() => setIsVisible(false)}
               className="p-1.5 hover:bg-white/20 rounded transition-colors"

@@ -64,9 +64,10 @@ const AdminDashboard = () => {
                       onClick={() => setActiveTab(tab.id)}
                       className={`w-full flex items-center space-x-3 space-x-reverse px-4 py-3 rounded-lg transition-colors ${
                         activeTab === tab.id
-                          ? 'bg-primary-600 text-white'
+                          ? 'text-white'
                           : 'text-gray-700 hover:bg-gray-100'
                       }`}
+                      style={activeTab === tab.id ? { backgroundColor: '#d6ac72' } : {}}
                     >
                       <Icon size={20} />
                       <span>{tab.label}</span>
@@ -94,7 +95,7 @@ const AdminDashboard = () => {
                         <p className="text-3xl font-bold text-gray-900">{stats.totalProjects}</p>
                       </div>
                       <div className="bg-primary-100 p-3 rounded-lg">
-                        <FiPackage className="text-primary-600" size={24} />
+                        <FiPackage size={24} style={{ color: '#d6ac72' }} />
                       </div>
                     </div>
                   </motion.div>
@@ -176,7 +177,7 @@ const AdminDashboard = () => {
                           <p className="text-sm text-gray-600">{project.status}</p>
                         </div>
                         <div className="flex items-center space-x-4 space-x-reverse">
-                          <span className="text-sm font-semibold text-primary-600">
+                          <span className="text-sm font-semibold" style={{ color: '#d6ac72' }}>
                             {project.progress}%
                           </span>
                           <button className="p-2 hover:bg-gray-100 rounded-lg">

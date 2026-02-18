@@ -77,7 +77,7 @@ const CurrentProjects = () => {
                   alt={project.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold" style={{ backgroundColor: '#d6ac72' }}>
                   {project.type}
                 </div>
                 <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -108,11 +108,12 @@ const CurrentProjects = () => {
                 <div className="mb-4">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-sm font-medium text-gray-700">نسبة الإنجاز</span>
-                    <span className="text-sm font-bold text-primary-600">{project.progress}%</span>
+                    <span className="text-sm font-bold" style={{ color: '#d6ac72' }}>{project.progress}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
-                      className="bg-primary-600 h-2 rounded-full transition-all duration-300"
+                      className="h-2 rounded-full transition-all duration-300"
+                      style={{ backgroundColor: '#d6ac72' }}
                       style={{ width: `${project.progress}%` }}
                     />
                   </div>
@@ -135,13 +136,14 @@ const CurrentProjects = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-16 bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 text-center text-white"
+          className="mt-16 rounded-2xl p-8 text-center text-white"
+          style={{ background: 'linear-gradient(to right, #d6ac72, #c49a5f)' }}
         >
           <h2 className="text-3xl font-bold mb-4">استفسر عن مشاريعنا</h2>
           <p className="text-lg mb-6 opacity-90">
             تواصل معنا لمعرفة المزيد عن مشاريعنا الحالية والوحدات المتاحة
           </p>
-          <Link to="/contact" className="btn-secondary bg-white text-primary-600 hover:bg-gray-50 inline-block">
+          <Link to="/contact" className="btn-secondary bg-white hover:bg-gray-50 inline-block" style={{ color: '#d6ac72' }}>
             تواصل معنا الآن
           </Link>
         </motion.div>

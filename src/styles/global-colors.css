@@ -1,0 +1,35 @@
+/* Global Colors - Using #d6ac72 */
+:root {
+  --primary-color: #d6ac72;
+  --primary-dark: #c49a5f;
+  --primary-darker: #b2884c;
+  --primary-light: #e0be8a;
+  --primary-lighter: #ead0a8;
+  
+  /* Text Colors */
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+}
+
+/* Global Primary Color Classes */
+.primary-bg {
+  background-color: var(--primary-color) !important;
+}
+
+.primary-text {
+  color: var(--primary-color) !important;
+}
+
+.primary-border {
+  border-color: var(--primary-color) !important;
+}
+
+.primary-bg-dark {
+  background-color: var(--primary-dark) !important;
+}
+
+.primary-bg-darker {
+  background-color: var(--primary-darker) !important;
+}
+

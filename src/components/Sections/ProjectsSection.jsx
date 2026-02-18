@@ -150,10 +150,10 @@ const ProjectsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
             مشاريعنا
           </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+          <div className="projects-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             نفتخر بمشاريعنا المتميزة التي تعكس خبرتنا والتزامنا بالجودة
           </p>
@@ -194,7 +194,7 @@ const ProjectsSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <button
                     onClick={() => handleOpenModal(project)}
-                    className="bg-white text-primary-600 p-3 rounded-full hover:bg-primary-600 hover:text-white transition-colors"
+                    className="projects-section-button"
                   >
                     <FiMaximize2 size={24} />
                   </button>
@@ -216,7 +216,7 @@ const ProjectsSection = () => {
                 </div>
                 <button
                   onClick={() => handleOpenModal(project)}
-                  className="text-primary-600 font-semibold hover:text-primary-700 transition-colors inline-flex items-center"
+                  className="projects-section-link inline-flex items-center"
                 >
                   عرض التفاصيل
                   <span className="mr-2">←</span>

@@ -49,7 +49,7 @@ const About = () => {
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
               قيمنا
             </h2>
-            <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
+            <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
@@ -62,7 +62,7 @@ const About = () => {
                 className="bg-white p-8 rounded-xl shadow-lg card-hover text-center"
               >
                 <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="text-primary-600" size={32} />
+                  <value.icon style={{ color: '#d6ac72' }} size={32} />
                 </div>
                 <h4 className="text-xl font-bold mb-3 text-gray-800">{value.title}</h4>
                 <p className="text-gray-600 leading-relaxed">{value.description}</p>
@@ -86,7 +86,7 @@ const About = () => {
                     transition={{ delay: index * 0.1, duration: 0.6 }}
                     className="flex items-start"
                   >
-                    <FiCheckCircle className="text-primary-600 ml-3 mt-1 flex-shrink-0" size={24} />
+                    <FiCheckCircle className="ml-3 mt-1 flex-shrink-0" style={{ color: '#d6ac72' }} size={24} />
                     <span className="text-lg text-gray-700">{achievement}</span>
                   </motion.li>
                 ))}
