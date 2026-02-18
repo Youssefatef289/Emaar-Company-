@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FiMapPin, FiCalendar, FiHome, FiDollarSign, FiArrowLeft } from 'react-icons/fi'
+import { FiMapPin, FiCalendar, FiHome, FiDollarSign, FiArrowLeft, FiLayers } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 const ProjectDetail = () => {
@@ -13,18 +13,18 @@ const ProjectDetail = () => {
   const projects = {
     1: {
       id: 1,
-      title: 'مشروع إعمار الجديد',
-      location: 'المعادي، القاهرة',
-      address: 'شارع كورنيش المعادي، المعادي، القاهرة',
+      title: 'أبراج إعمار',
+      location: 'مدينة نصر، القاهرة',
+      address: 'شارع مصطفى النحاس، مدينة نصر، القاهرة',
       type: 'سكني',
       status: 'قيد الإنشاء',
-      completionDate: '2025-06-30',
-      description: 'مشروع سكني فاخر يضم وحدات سكنية وتجارية في موقع مميز بقلب المعادي. يتميز المشروع بتصميم عصري ومرافق متكاملة.',
+      completionDate: '2025-12-31',
+      description: 'مجمع أبراج سكني فاخر يضم وحدات سكنية عصرية بتشطيبات راقية ومرافق متكاملة في موقع استراتيجي بمدينة نصر',
       longDescription: `
-        مشروع إعمار الجديد هو مشروع سكني فاخر يقع في قلب المعادي، أحد أرقى المناطق السكنية في القاهرة. 
+        أبراج إعمار هو مشروع سكني فاخر يقع في قلب مدينة نصر، أحد أرقى المناطق السكنية في القاهرة. 
         يتميز المشروع بتصميم عصري يجمع بين الفخامة والراحة، مع مراعاة أعلى معايير الجودة في البناء والتشطيب.
         
-        يضم المشروع وحدات سكنية متنوعة تتراوح بين الشقق العادية والدوبلكس والبنتهاوس، 
+        يضم المشروع 15 طابقاً مع 240 وحدة سكنية متنوعة تتراوح بين الشقق العادية والدوبلكس والبنتهاوس، 
         بالإضافة إلى وحدات تجارية في الطابق الأرضي.
         
         المرافق والخدمات:
@@ -33,18 +33,90 @@ const ProjectDetail = () => {
         - موقف سيارات تحت الأرض
         - أمن 24/7
         - خدمات صيانة متكاملة
+        - مصاعد عالية السرعة
+        - نظام إطفاء حريق متكامل
+        - أندية اجتماعية
+        - مناطق ترفيهية للأطفال
       `,
       images: [
-        '/image/medium (12).webp',
-        '/image/medium (13).webp',
-        '/image/medium (14).webp',
-        '/image/medium (15).webp',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (2).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (3).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (4).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (5).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (1).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (2).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (3).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (4).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (5).jpg',
       ],
-      video: null, // 'https://www.youtube.com/embed/...'
-      units: 150,
-      progress: 65,
-      startingPrice: 2000000,
-      coordinates: { lat: 29.9602, lng: 31.2569 }, // Mock coordinates for Maadi
+      video: null,
+      units: 240,
+      floors: 15,
+      progress: 75,
+      startingPrice: 3500000,
+      features: [
+        'نادي رياضي مجهز',
+        'مساحات خضراء واسعة',
+        'موقف سيارات تحت الأرض',
+        'أمن 24/7',
+        'خدمات صيانة متكاملة',
+        'مصاعد عالية السرعة',
+        'نظام إطفاء حريق متكامل',
+      ],
+      coordinates: { lat: 30.0626, lng: 31.3197 }, // Mock coordinates for Nasr City
+    },
+    2: {
+      id: 2,
+      title: 'رويال سيتي',
+      location: 'الشروق، القاهرة',
+      address: 'طريق القاهرة - السويس الصحراوي، الشروق، القاهرة',
+      type: 'سكني',
+      status: 'قيد الإنشاء',
+      completionDate: '2025-09-30',
+      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة في منطقة الشروق المتميزة، يضم وحدات سكنية متنوعة بأسعار تنافسية',
+      longDescription: `
+        رويال سيتي هو مجمع سكني راقي يقع في منطقة الشروق المتميزة، يتميز بتصميم عصري ومرافق متكاملة.
+        يضم المشروع 12 طابقاً مع 180 وحدة سكنية متنوعة بتشطيبات فاخرة.
+        
+        يتميز المشروع بموقع استراتيجي على طريق القاهرة - السويس الصحراوي، مما يوفر سهولة الوصول 
+        إلى جميع مناطق القاهرة الكبرى.
+        
+        المرافق والخدمات:
+        - حدائق واسعة
+        - منطقة ألعاب للأطفال
+        - نادي اجتماعي
+        - موقف سيارات
+        - أمن 24/7
+        - خدمات صيانة
+        - مسجد
+        - مناطق ترفيهية
+        - مساحات خضراء
+      `,
+      images: [
+        '/image/Our current projects/Royal city/royal city (1).jpg',
+        '/image/Our current projects/Royal city/royal city (2).jpg',
+        '/image/Our current projects/Royal city/royal city (3).jpg',
+        '/image/Our current projects/Royal city/Royal City Apartment (1).jpg',
+        '/image/Our current projects/Royal city/Royal City Apartment (2).jpg',
+        '/image/Our current projects/Royal city/Royal City Apartment (3).jpg',
+        '/image/Our current projects/Royal city/Royal City Apartment (4).jpg',
+      ],
+      video: null,
+      units: 180,
+      floors: 12,
+      progress: 55,
+      startingPrice: 2800000,
+      features: [
+        'حدائق واسعة',
+        'منطقة ألعاب للأطفال',
+        'نادي اجتماعي',
+        'موقف سيارات',
+        'أمن 24/7',
+        'خدمات صيانة',
+        'مسجد',
+      ],
+      coordinates: { lat: 30.1286, lng: 31.6250 }, // Mock coordinates for Shorouk
     },
   }
 
@@ -221,26 +293,69 @@ const ProjectDetail = () => {
                   <FiHome className="ml-2" size={20} style={{ color: '#d6ac72' }} />
                   <span>{project.units} وحدة</span>
                 </div>
+                {project.floors && (
+                  <div className="flex items-center text-gray-700">
+                    <FiLayers className="ml-2" size={20} style={{ color: '#d6ac72' }} />
+                    <span>{project.floors} طابق</span>
+                  </div>
+                )}
                 <div className="flex items-center text-gray-700">
                   <FiCalendar className="ml-2" size={20} style={{ color: '#d6ac72' }} />
                   <span>تاريخ الانتهاء: {project.completionDate}</span>
                 </div>
-                <div className="flex items-center text-gray-700">
-                  <FiDollarSign className="ml-2" size={20} style={{ color: '#d6ac72' }} />
-                  <span>السعر يبدأ من: {project.startingPrice.toLocaleString()} جنيه</span>
-                </div>
+                {project.startingPrice && (
+                  <div className="flex items-center text-gray-700">
+                    <FiDollarSign className="ml-2" size={20} style={{ color: '#d6ac72' }} />
+                    <span>السعر يبدأ من: {project.startingPrice.toLocaleString()} جنيه</span>
+                  </div>
+                )}
                 <div className="pt-4 border-t border-gray-200">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-700">نسبة الإنجاز</span>
-                    <span className="text-sm font-bold" style={{ color: '#d6ac72' }}>{project.progress}%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="h-2 rounded-full transition-all duration-300"
-                      style={{ backgroundColor: '#d6ac72', width: `${project.progress}%` }}
-                    />
+                  <div className="flex justify-center items-center mb-4">
+                    <div className="relative w-32 h-32">
+                      <svg className="transform -rotate-90 w-32 h-32">
+                        <circle
+                          cx="64"
+                          cy="64"
+                          r="56"
+                          stroke="rgba(214, 172, 114, 0.2)"
+                          strokeWidth="8"
+                          fill="none"
+                        />
+                        <circle
+                          cx="64"
+                          cy="64"
+                          r="56"
+                          stroke="#d6ac72"
+                          strokeWidth="8"
+                          fill="none"
+                          strokeDasharray={`${2 * Math.PI * 56}`}
+                          strokeDashoffset={`${2 * Math.PI * 56 * (1 - project.progress / 100)}`}
+                          strokeLinecap="round"
+                          className="transition-all duration-500"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center">
+                          <span className="text-3xl font-bold block" style={{ color: '#d6ac72' }}>{project.progress}%</span>
+                          <span className="text-sm text-gray-600">نسبة الإنجاز</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                {project.features && (
+                  <div className="pt-4 border-t border-gray-200">
+                    <h4 className="text-sm font-bold text-gray-700 mb-3" style={{ color: '#d6ac72' }}>المميزات:</h4>
+                    <ul className="space-y-2">
+                      {project.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start text-gray-700 text-sm">
+                          <span className="ml-2" style={{ color: '#d6ac72' }}>•</span>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </motion.div>
 

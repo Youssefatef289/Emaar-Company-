@@ -1,130 +1,239 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiMapPin, FiCalendar, FiArrowRight, FiHome } from 'react-icons/fi'
+import { FiMapPin, FiCalendar, FiArrowRight, FiHome, FiLayers, FiTrendingUp } from 'react-icons/fi'
 
 const CurrentProjects = () => {
   // Mock data - In production, this would come from an API
   const projects = [
     {
       id: 1,
-      title: 'مشروع إعمار الجديد',
-      location: 'المعادي، القاهرة',
+      title: 'أبراج إعمار',
+      location: 'مدينة نصر، القاهرة',
       type: 'سكني',
       status: 'قيد الإنشاء',
-      completionDate: '2025-06-30',
-      description: 'مشروع سكني فاخر يضم وحدات سكنية وتجارية في موقع مميز',
-      image: '/image/medium (12).webp',
-      units: 150,
-      progress: 65,
+      completionDate: '2025-12-31',
+      description: 'مجمع أبراج سكني فاخر يضم وحدات سكنية عصرية بتشطيبات راقية ومرافق متكاملة في موقع استراتيجي بمدينة نصر',
+      image: '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
+      images: [
+        '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (2).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (3).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (4).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers (5).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (1).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (2).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (3).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (4).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers Split (5).jpg',
+      ],
+      units: 240,
+      progress: 75,
+      floors: 15,
+      startingPrice: 3500000,
+      features: [
+        'نادي رياضي مجهز',
+        'مساحات خضراء واسعة',
+        'موقف سيارات تحت الأرض',
+        'أمن 24/7',
+        'خدمات صيانة متكاملة',
+        'مصاعد عالية السرعة',
+        'نظام إطفاء حريق متكامل',
+      ],
+      longDescription: `
+        أبراج إعمار هو مشروع سكني فاخر يقع في قلب مدينة نصر، أحد أرقى المناطق السكنية في القاهرة. 
+        يتميز المشروع بتصميم عصري يجمع بين الفخامة والراحة، مع مراعاة أعلى معايير الجودة في البناء والتشطيب.
+        
+        يضم المشروع 15 طابقاً مع 240 وحدة سكنية متنوعة تتراوح بين الشقق العادية والدوبلكس والبنتهاوس، 
+        بالإضافة إلى وحدات تجارية في الطابق الأرضي.
+        
+        المرافق والخدمات:
+        - نادي رياضي مجهز بأحدث الأجهزة
+        - مساحات خضراء واسعة
+        - موقف سيارات تحت الأرض
+        - أمن 24/7
+        - خدمات صيانة متكاملة
+        - مصاعد عالية السرعة
+        - نظام إطفاء حريق متكامل
+      `,
     },
     {
       id: 2,
-      title: 'مشروع إعمار التجاري',
-      location: 'مدينة نصر، القاهرة',
-      type: 'تجاري',
-      status: 'قيد الإنشاء',
-      completionDate: '2025-03-15',
-      description: 'مجمع تجاري متكامل يضم محلات ومكاتب في قلب مدينة نصر',
-      image: '/image/medium (13).webp',
-      units: 80,
-      progress: 45,
-    },
-    {
-      id: 3,
-      title: 'مشروع إعمار السكني المميز',
+      title: 'رويال سيتي',
       location: 'الشروق، القاهرة',
       type: 'سكني',
       status: 'قيد الإنشاء',
       completionDate: '2025-09-30',
-      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة',
-      image: '/image/medium (14).webp',
-      units: 200,
-      progress: 30,
+      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة في منطقة الشروق المتميزة، يضم وحدات سكنية متنوعة بأسعار تنافسية',
+      image: '/image/Our current projects/Royal city/royal city (1).jpg',
+      images: [
+        '/image/Our current projects/Royal city/royal city (1).jpg',
+        '/image/Our current projects/Royal city/royal city (2).jpg',
+        '/image/Our current projects/Royal city/royal city (3).jpg',
+        '/image/Our current projects/Royal city/Royal City Apartment (1).jpg',
+        '/image/Our current projects/Royal city/Royal City Apartment (2).jpg',
+        '/image/Our current projects/Royal city/Royal City Apartment (3).jpg',
+        '/image/Our current projects/Royal city/Royal City Apartment (4).jpg',
+      ],
+      units: 180,
+      progress: 55,
+      floors: 12,
+      startingPrice: 2800000,
+      features: [
+        'حدائق واسعة',
+        'منطقة ألعاب للأطفال',
+        'نادي اجتماعي',
+        'موقف سيارات',
+        'أمن 24/7',
+        'خدمات صيانة',
+        'مسجد',
+      ],
+      longDescription: `
+        رويال سيتي هو مجمع سكني راقي يقع في منطقة الشروق المتميزة، يتميز بتصميم عصري ومرافق متكاملة.
+        يضم المشروع 12 طابقاً مع 180 وحدة سكنية متنوعة بتشطيبات فاخرة.
+        
+        المرافق والخدمات:
+        - حدائق واسعة
+        - منطقة ألعاب للأطفال
+        - نادي اجتماعي
+        - موقف سيارات
+        - أمن 24/7
+        - خدمات صيانة
+        - مسجد
+      `,
     },
   ]
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
-      <div className="container-custom">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            مشاريعنا الحالية
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            تعرف على مشاريعنا الجارية وأحدث التطورات
-          </p>
-        </motion.div>
+      {/* Hero Section */}
+      <div className="relative py-20 md:py-28 overflow-hidden" style={{ background: 'linear-gradient(135deg, #d6ac72 0%, #c49a5f 50%, #b2884c 100%)' }}>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ backgroundImage: 'url(/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        </div>
+        <div className="container-custom relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+              مشاريعنا الحالية
+            </h1>
+            <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
+              تعرف على مشاريعنا الجارية وأحدث التطورات
+            </p>
+            <p className="text-lg text-white drop-shadow-md">
+              مشاريع متميزة بجودة عالية وتصميم عصري
+            </p>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="container-custom mt-12">
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden card-hover"
+              className="bg-white rounded-xl shadow-md overflow-hidden card-hover"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-56 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                 />
-                <div className="absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold" style={{ backgroundColor: '#d6ac72' }}>
+                <div className="absolute top-2 right-2 text-white px-2 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: '#d6ac72' }}>
                   {project.type}
                 </div>
-                <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
                   {project.status}
+                </div>
+                
+                {/* Circular Progress */}
+                <div className="absolute bottom-2 right-2">
+                  <div className="relative w-16 h-16">
+                    <svg className="transform -rotate-90 w-16 h-16">
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="28"
+                        stroke="rgba(255,255,255,0.3)"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="28"
+                        stroke="#ffffff"
+                        strokeWidth="4"
+                        fill="none"
+                        strokeDasharray={`${2 * Math.PI * 28}`}
+                        strokeDashoffset={`${2 * Math.PI * 28 * (1 - project.progress / 100)}`}
+                        strokeLinecap="round"
+                        className="transition-all duration-500"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-white font-bold text-sm">{project.progress}%</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">{project.title}</h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
+              <div className="p-4">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+                <p className="text-sm text-gray-600 mb-3 leading-relaxed line-clamp-2">{project.description}</p>
 
                 <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-gray-600">
-                    <FiMapPin className="ml-2" size={18} />
+                  <div className="flex items-center text-gray-700 text-sm">
+                    <FiMapPin className="ml-2" size={14} style={{ color: '#d6ac72' }} />
                     <span>{project.location}</span>
                   </div>
-                  <div className="flex items-center text-gray-600">
-                    <FiHome className="ml-2" size={18} />
+                  <div className="flex items-center text-gray-700 text-sm">
+                    <FiHome className="ml-2" size={14} style={{ color: '#d6ac72' }} />
                     <span>{project.units} وحدة</span>
                   </div>
-                  <div className="flex items-center text-gray-600">
-                    <FiCalendar className="ml-2" size={18} />
-                    <span>تاريخ الانتهاء: {project.completionDate}</span>
-                  </div>
+                  {project.floors && (
+                    <div className="flex items-center text-gray-700 text-sm">
+                      <FiLayers className="ml-2" size={14} style={{ color: '#d6ac72' }} />
+                      <span>{project.floors} طابق</span>
+                    </div>
+                  )}
+                  {project.startingPrice && (
+                    <div className="flex items-center text-gray-700 text-sm">
+                      <FiTrendingUp className="ml-2" size={14} style={{ color: '#d6ac72' }} />
+                      <span>من {project.startingPrice.toLocaleString()} جنيه</span>
+                    </div>
+                  )}
                 </div>
 
-                {/* Progress Bar */}
-                <div className="mb-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-700">نسبة الإنجاز</span>
-                    <span className="text-sm font-bold" style={{ color: '#d6ac72' }}>{project.progress}%</span>
+                {/* Features Preview */}
+                {project.features && (
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.features.slice(0, 3).map((feature, idx) => (
+                        <span key={idx} className="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div
-                      className="h-2 rounded-full transition-all duration-300"
-                      style={{ backgroundColor: '#d6ac72' }}
-                      style={{ width: `${project.progress}%` }}
-                    />
-                  </div>
-                </div>
+                )}
 
                 <Link
                   to={`/projects/${project.id}`}
-                  className="btn-primary w-full flex items-center justify-center space-x-2 space-x-reverse"
+                  className="btn-primary w-full flex items-center justify-center space-x-2 space-x-reverse text-sm py-2"
                 >
                   <span>عرض التفاصيل</span>
-                  <FiArrowRight size={18} />
+                  <FiArrowRight size={16} />
                 </Link>
               </div>
             </motion.div>

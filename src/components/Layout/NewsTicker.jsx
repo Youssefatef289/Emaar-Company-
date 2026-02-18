@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FiX } from 'react-icons/fi'
+import { FiX, FiGift, FiBookOpen, FiHome, FiDollarSign, FiAward } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 const NewsTicker = () => {
@@ -8,11 +8,11 @@ const NewsTicker = () => {
 
   // This will be fetched from API/Admin Dashboard in production
   const newsItems = [
-    { id: 1, text: '🎉 عرض خاص: خصم 10% على جميع الوحدات السكنية في مشروعنا الجديد', type: 'offer' },
-    { id: 2, text: '📢 افتتاح دورة جديدة في الأعمال المساحية - سجل الآن واحصل على خصم 20%', type: 'course' },
-    { id: 3, text: '🏗️ إطلاق مشروع جديد في منطقة مميزة - استفسر الآن', type: 'project' },
-    { id: 4, text: '✨ عروض تمويل ميسرة تصل إلى 10 سنوات - تواصل معنا', type: 'offer' },
-    { id: 5, text: '🏆 حصلنا على جائزة أفضل شركة تطوير عقاري لعام 2024', type: 'award' },
+    { id: 1, text: 'عرض خاص: خصم 10% على جميع الوحدات السكنية في مشروعنا الجديد', type: 'offer', icon: FiGift },
+    { id: 2, text: 'افتتاح دورة جديدة في الأعمال المساحية - سجل الآن واحصل على خصم 20%', type: 'course', icon: FiBookOpen },
+    { id: 3, text: 'إطلاق مشروع جديد في منطقة مميزة - استفسر الآن', type: 'project', icon: FiHome },
+    { id: 4, text: 'عروض تمويل ميسرة تصل إلى 10 سنوات - تواصل معنا', type: 'offer', icon: FiDollarSign },
+    { id: 5, text: 'حصلنا على جائزة أفضل شركة تطوير عقاري لعام 2024', type: 'award', icon: FiAward },
   ]
 
   // Duplicate items for seamless infinite scroll
@@ -42,8 +42,9 @@ const NewsTicker = () => {
         <div className="flex items-center h-full w-full">
           {/* News Label */}
           <div className="flex-shrink-0 px-4 md:px-6 h-full flex items-center z-10" style={{ backgroundColor: 'rgba(142, 100, 38, 0.5)' }}>
-            <span className="text-sm font-bold whitespace-nowrap">
-              📢 آخر الأخبار:
+            <span className="text-sm font-bold whitespace-nowrap flex items-center gap-2 text-white">
+              <FiBookOpen size={16} />
+              آخر الأخبار:
             </span>
           </div>
 
@@ -59,16 +60,20 @@ const NewsTicker = () => {
                 animationDuration: `${animationDuration}s`,
               }}
             >
-              {duplicatedItems.map((item, index) => (
-                <Link
-                  key={`${item.id}-${index}`}
-                  to={getLinkPath(item.type)}
-                  className="inline-block px-8 text-sm hover:underline flex items-center h-full transition-opacity hover:opacity-90"
-                >
-                  {item.text}
-                  <span className="mx-6 text-white/30">•</span>
-                </Link>
-              ))}
+              {duplicatedItems.map((item, index) => {
+                const IconComponent = item.icon
+                return (
+                  <Link
+                    key={`${item.id}-${index}`}
+                    to={getLinkPath(item.type)}
+                    className="inline-block px-8 text-sm hover:underline flex items-center gap-2 h-full transition-opacity hover:opacity-90 text-white"
+                  >
+                    <IconComponent size={16} className="flex-shrink-0" />
+                    <span>{item.text}</span>
+                    <span className="mx-6 text-white/30">•</span>
+                  </Link>
+                )
+              })}
             </div>
           </div>
 
