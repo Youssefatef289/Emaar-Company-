@@ -23,6 +23,7 @@ const Navbar = () => {
   const navLinks = [
     { path: '/', label: 'الرئيسية', labelEn: 'Home' },
     { path: '/about', label: 'من نحن', labelEn: 'About Us' },
+    { path: '/services', label: 'خدماتنا', labelEn: 'Our Services' },
     { path: '/offers', label: 'عروضنا', labelEn: 'Our Offers' },
     { 
       path: '/projects', 
@@ -30,8 +31,7 @@ const Navbar = () => {
       labelEn: 'Our Projects',
       hasDropdown: true 
     },
-    { path: '/real-estate-marketing', label: 'التسويق العقاري', labelEn: 'Real Estate Marketing' },
-    { path: '/surveying-services', label: 'الأعمال المساحية', labelEn: 'Surveying Services' },
+    { path: '/surveying-services', label: 'الدورات المساحية', labelEn: 'Surveying Courses' },
     { path: '/contact', label: 'تواصل معنا', labelEn: 'Contact Us' },
   ]
 
@@ -105,27 +105,6 @@ const Navbar = () => {
                               onClick={() => setIsProjectsDropdownOpen(false)}
                             >
                               {t('nav.allProjects')}
-                            </Link>
-                            <Link
-                              to="/projects?type=سكني"
-                              className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
-                              onClick={() => setIsProjectsDropdownOpen(false)}
-                            >
-                              {t('nav.residential')}
-                            </Link>
-                            <Link
-                              to="/projects?type=تجاري"
-                              className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
-                              onClick={() => setIsProjectsDropdownOpen(false)}
-                            >
-                              {t('nav.commercial')}
-                            </Link>
-                            <Link
-                              to="/projects?type=إداري"
-                              className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
-                              onClick={() => setIsProjectsDropdownOpen(false)}
-                            >
-                              {t('nav.administrative')}
                             </Link>
                           </motion.div>
                         )}
@@ -221,36 +200,6 @@ const Navbar = () => {
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
                                 {t('nav.allProjects')}
-                              </Link>
-                              <Link
-                                to="/projects?type=سكني"
-                                onClick={() => {
-                                  setIsMobileMenuOpen(false)
-                                  setIsProjectsDropdownOpen(false)
-                                }}
-                                className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
-                              >
-                                {t('nav.residential')}
-                              </Link>
-                              <Link
-                                to="/projects?type=تجاري"
-                                onClick={() => {
-                                  setIsMobileMenuOpen(false)
-                                  setIsProjectsDropdownOpen(false)
-                                }}
-                                className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
-                              >
-                                {t('nav.commercial')}
-                              </Link>
-                              <Link
-                                to="/projects?type=إداري"
-                                onClick={() => {
-                                  setIsMobileMenuOpen(false)
-                                  setIsProjectsDropdownOpen(false)
-                                }}
-                                className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
-                              >
-                                {t('nav.administrative')}
                               </Link>
                             </div>
                           </motion.div>

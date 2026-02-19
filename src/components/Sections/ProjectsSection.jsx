@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
-import { FiMapPin, FiMaximize2 } from 'react-icons/fi'
+import { FiMapPin, FiMaximize2, FiLayers, FiTrendingUp } from 'react-icons/fi'
 import ProjectModal from '../ProjectModal'
 import { getProjectTypeIcon } from '../../constants/assets'
 
@@ -17,111 +17,47 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      image: '/image/medium  (5).webp',
-      title: 'مشروع النور السكني',
-      location: 'القاهرة الجديدة',
-      area: '5000 متر مربع',
-      status: 'قيد التنفيذ',
+      image: '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
+      title: 'أبراج إعمار',
+      location: 'بنى سويف - حى الرمد - خلف ارض الطيارين',
+      area: '4 أبراج - 7 طوابق',
+      status: 'قيد الإنشاء',
       type: 'سكني',
-      description: 'مشروع سكني راقي يضم وحدات سكنية عصرية بمواصفات فاخرة، مع مرافق متكاملة وخدمات عالية الجودة',
+      description: 'مجمع أبراج فاخر بتصميم عصري وخدمات متكاملة. 4 ابراج كل برج منفصل عن الاخر - شقق سكنيه - شقق اداريه - محلات - بدروم',
       features: [
-        'وحدات سكنية عصرية',
-        'مرافق ترفيهية متكاملة',
-        'أماكن انتظار واسعة',
-        'نظام أمني متطور',
-        'خدمات صيانة مستمرة',
-        'موقع مميز وهادئ',
+        '4 أبراج منفصلة',
+        '7 طوابق لكل برج',
+        '4 شقق بالدور',
+        'شقق سكنية وإدارية',
+        'محلات تجارية',
+        'بدروم',
       ],
+      progress: 75,
+      floors: 7,
+      startingPrice: 3500000,
+      cardNote: '4 ابراج كل برج منفصل عن الاخر',
+      cardUnitsMix: 'شقق سكنيه - شقق اداريه - محلات - بدروم',
     },
     {
       id: 2,
-      image: '/image/medium  (6).webp',
-      title: 'مجمع الأندلس التجاري',
-      location: 'مدينة نصر',
-      area: '3000 متر مربع',
-      status: 'مكتمل',
-      type: 'تجاري',
-      description: 'مجمع تجاري متكامل يضم محلات ومكاتب ومرافق خدمية، مصمم بأحدث المعايير العالمية',
-      features: [
-        'محلات تجارية متنوعة',
-        'مكاتب إدارية',
-        'مواقف سيارات',
-        'نظام تكييف مركزي',
-        'أمان وحراسة 24/7',
-        'موقع استراتيجي',
-      ],
-    },
-    {
-      id: 3,
-      image: '/image/medium  (7).webp',
-      title: 'فيلات الجنة السكنية',
-      location: 'المنيا',
-      area: '8000 متر مربع',
-      status: 'قيد التنفيذ',
+      image: '/image/Our current projects/Royal city/royal city (1).jpg',
+      title: 'رويال سيتي',
+      location: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
+      area: '7 طوابق',
+      status: 'قيد الإنشاء',
       type: 'سكني',
-      description: 'مجمع فيلات فاخر بمساحات واسعة وتصميم عصري، يوفر تجربة سكنية استثنائية',
+      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة. 4 شقق بالدور',
       features: [
-        'فيلات بمساحات كبيرة',
-        'حدائق خاصة',
-        'مسابح فاخرة',
-        'نادي رياضي',
-        'منطقة أطفال',
-        'تصميم عصري راقي',
-      ],
-    },
-    {
-      id: 4,
-      image: '/image/medium  (8).webp',
-      title: 'برج الأعمال',
-      location: 'المعادي',
-      area: '2500 متر مربع',
-      status: 'مكتمل',
-      type: 'تجاري',
-      description: 'برج أعمال حديث يضم مكاتب ومحلات تجارية، مصمم لخدمة رجال الأعمال والمستثمرين',
-      features: [
-        'مكاتب فاخرة',
-        'محلات تجارية',
-        'قاعات اجتماعات',
-        'مواقف متعددة الطوابق',
-        'نظام إدارة ذكي',
+        '7 طوابق',
+        '4 شقق بالدور',
+        'تشطيبات فاخرة',
+        'مرافق متكاملة',
         'موقع مميز',
       ],
-    },
-    {
-      id: 5,
-      image: '/image/medium  (9).webp',
-      title: 'مشروع الواحة السكني',
-      location: '6 أكتوبر',
-      area: '6000 متر مربع',
-      status: 'قيد التنفيذ',
-      type: 'سكني',
-      description: 'مشروع سكني متكامل بمرافق وخدمات عالية الجودة، يوفر بيئة سكنية مثالية',
-      features: [
-        'شقق بمواصفات فاخرة',
-        'مرافق رياضية',
-        'حدائق واسعة',
-        'أماكن ترفيهية',
-        'خدمات أمنية',
-        'موقع هادئ',
-      ],
-    },
-    {
-      id: 6,
-      image: '/image/medium  (10).webp',
-      title: 'مركز التسوق الحديث',
-      location: 'الزقازيق',
-      area: '4000 متر مربع',
-      status: 'مكتمل',
-      type: 'تجاري',
-      description: 'مركز تسوق حديث يضم محلات ومطاعم وترفيه، يوفر تجربة تسوق متكاملة',
-      features: [
-        'محلات متنوعة',
-        'مطاعم و كافيهات',
-        'صالة ترفيهية',
-        'مواقف واسعة',
-        'نظام تكييف',
-        'موقع حيوي',
-      ],
+      progress: 55,
+      floors: 7,
+      startingPrice: 2800000,
+      cardNote: '4 شقق بالدور',
     },
   ]
 
@@ -159,7 +95,7 @@ const ProjectsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -202,25 +138,52 @@ const ProjectsSection = () => {
               </div>
               <div className="p-6">
                 <h3 className="text-2xl font-bold mb-3 text-gray-800">{project.title}</h3>
+                {project.cardNote && (
+                  <p className="text-sm font-bold text-gray-800 mb-2" style={{ color: '#d6ac72' }}>
+                    {project.cardNote}
+                  </p>
+                )}
+                {project.cardUnitsMix && (
+                  <p className="text-sm text-gray-700 mb-3">
+                    {project.cardUnitsMix}
+                  </p>
+                )}
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center text-gray-600">
                     <FiMapPin className="ml-2" size={18} />
-                    <span>{project.location}</span>
+                    <span className="text-sm">{project.location}</span>
                   </div>
-                  <div className="text-gray-600">
-                    <span className="font-semibold">المساحة:</span> {project.area}
-                  </div>
-                  <div className="text-gray-600">
-                    <span className="font-semibold">النوع:</span> {project.type}
-                  </div>
+                  {project.floors && (
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <FiLayers className="ml-2" size={16} style={{ color: '#d6ac72' }} />
+                      <span>{project.floors} طابق</span>
+                    </div>
+                  )}
+                  {project.progress && (
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <FiTrendingUp className="ml-2" size={16} style={{ color: '#d6ac72' }} />
+                      <span>نسبة الإنجاز: {project.progress}%</span>
+                      <div className="flex-1 mr-3 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${project.progress}%`, backgroundColor: '#d6ac72' }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
+                  {project.startingPrice && (
+                    <div className="text-gray-600 text-sm">
+                      <span className="font-semibold">السعر يبدأ من:</span> {project.startingPrice.toLocaleString()} جنيه
+                    </div>
+                  )}
                 </div>
-                <button
-                  onClick={() => handleOpenModal(project)}
+                <Link
+                  to={`/projects/${project.id}`}
                   className="projects-section-link inline-flex items-center"
                 >
                   عرض التفاصيل
                   <span className="mr-2">←</span>
-                </button>
+                </Link>
               </div>
             </motion.div>
           ))}

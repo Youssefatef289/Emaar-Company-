@@ -9,11 +9,13 @@ const CurrentProjects = () => {
     {
       id: 1,
       title: 'أبراج إعمار',
-      location: 'مدينة نصر، القاهرة',
+      location: 'بنى سويف - حى الرمد - خلف ارض الطيارين',
       type: 'سكني',
       status: 'قيد الإنشاء',
       completionDate: '2025-12-31',
-      description: 'مجمع أبراج سكني فاخر يضم وحدات سكنية عصرية بتشطيبات راقية ومرافق متكاملة في موقع استراتيجي بمدينة نصر',
+      description: 'مجمع أبراج فاخر بتصميم عصري وخدمات متكاملة.',
+      cardNote: '4 ابراج كل برج منفصل عن الاخر',
+      cardUnitsMix: 'شقق سكنيه - شقق اداريه - محلات - بدروم',
       image: '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
       images: [
         '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
@@ -27,44 +29,26 @@ const CurrentProjects = () => {
         '/image/Our current projects/Emaar Towers/Emaar Towers Split (4).jpg',
         '/image/Our current projects/Emaar Towers/Emaar Towers Split (5).jpg',
       ],
-      units: 240,
       progress: 75,
-      floors: 15,
+      floors: 7,
       startingPrice: 3500000,
-      features: [
-        'نادي رياضي مجهز',
-        'مساحات خضراء واسعة',
-        'موقف سيارات تحت الأرض',
-        'أمن 24/7',
-        'خدمات صيانة متكاملة',
-        'مصاعد عالية السرعة',
-        'نظام إطفاء حريق متكامل',
-      ],
+      features: [],
       longDescription: `
-        أبراج إعمار هو مشروع سكني فاخر يقع في قلب مدينة نصر، أحد أرقى المناطق السكنية في القاهرة. 
+        أبراج إعمار هو مشروع سكني فاخر يقع في بنى سويف - حى الرمد - خلف ارض الطيارين. 
         يتميز المشروع بتصميم عصري يجمع بين الفخامة والراحة، مع مراعاة أعلى معايير الجودة في البناء والتشطيب.
         
-        يضم المشروع 15 طابقاً مع 240 وحدة سكنية متنوعة تتراوح بين الشقق العادية والدوبلكس والبنتهاوس، 
-        بالإضافة إلى وحدات تجارية في الطابق الأرضي.
-        
-        المرافق والخدمات:
-        - نادي رياضي مجهز بأحدث الأجهزة
-        - مساحات خضراء واسعة
-        - موقف سيارات تحت الأرض
-        - أمن 24/7
-        - خدمات صيانة متكاملة
-        - مصاعد عالية السرعة
-        - نظام إطفاء حريق متكامل
+        يضم المشروع 4 أبراج منفصلة، كل برج يتكون من 7 طوابق، وكل طابق يحتوي على 4 شقق.
+        المشروع يضم شقق سكنية، شقق إدارية، محلات، وبدروم.
       `,
     },
     {
       id: 2,
       title: 'رويال سيتي',
-      location: 'الشروق، القاهرة',
+      location: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
       type: 'سكني',
       status: 'قيد الإنشاء',
       completionDate: '2025-09-30',
-      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة في منطقة الشروق المتميزة، يضم وحدات سكنية متنوعة بأسعار تنافسية',
+      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة',
       image: '/image/Our current projects/Royal city/royal city (1).jpg',
       images: [
         '/image/Our current projects/Royal city/royal city (1).jpg',
@@ -75,31 +59,14 @@ const CurrentProjects = () => {
         '/image/Our current projects/Royal city/Royal City Apartment (3).jpg',
         '/image/Our current projects/Royal city/Royal City Apartment (4).jpg',
       ],
-      units: 180,
       progress: 55,
-      floors: 12,
+      floors: 7,
       startingPrice: 2800000,
-      features: [
-        'حدائق واسعة',
-        'منطقة ألعاب للأطفال',
-        'نادي اجتماعي',
-        'موقف سيارات',
-        'أمن 24/7',
-        'خدمات صيانة',
-        'مسجد',
-      ],
+      cardNote: '4 شقق بالدور',
+      features: [],
       longDescription: `
-        رويال سيتي هو مجمع سكني راقي يقع في منطقة الشروق المتميزة، يتميز بتصميم عصري ومرافق متكاملة.
-        يضم المشروع 12 طابقاً مع 180 وحدة سكنية متنوعة بتشطيبات فاخرة.
-        
-        المرافق والخدمات:
-        - حدائق واسعة
-        - منطقة ألعاب للأطفال
-        - نادي اجتماعي
-        - موقف سيارات
-        - أمن 24/7
-        - خدمات صيانة
-        - مسجد
+        رويال سيتي هو مجمع سكني راقي يتميز بتصميم عصري ومرافق متكاملة.
+        يضم المشروع 7 طوابق، وكل طابق يحتوي على 4 شقق.
       `,
     },
   ]
@@ -191,15 +158,25 @@ const CurrentProjects = () => {
               <div className="p-4">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
                 <p className="text-sm text-gray-600 mb-3 leading-relaxed line-clamp-2">{project.description}</p>
+                {(project.cardNote || project.cardUnitsMix) && (
+                  <div className="mb-3 space-y-1">
+                    {project.cardNote && (
+                      <p className="text-xs font-bold text-gray-800">
+                        {project.cardNote}
+                      </p>
+                    )}
+                    {project.cardUnitsMix && (
+                      <p className="text-xs text-gray-700">
+                        {project.cardUnitsMix}
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 <div className="space-y-2 mb-4">
                   <div className="flex items-center text-gray-700 text-sm">
                     <FiMapPin className="ml-2" size={14} style={{ color: '#d6ac72' }} />
                     <span>{project.location}</span>
-                  </div>
-                  <div className="flex items-center text-gray-700 text-sm">
-                    <FiHome className="ml-2" size={14} style={{ color: '#d6ac72' }} />
-                    <span>{project.units} وحدة</span>
                   </div>
                   {project.floors && (
                     <div className="flex items-center text-gray-700 text-sm">

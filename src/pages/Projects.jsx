@@ -1,206 +1,65 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FiMapPin, FiMaximize2, FiFilter } from 'react-icons/fi'
-import ProjectModal from '../components/ProjectModal'
-import { getProjectTypeIcon } from '../constants/assets'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FiX } from 'react-icons/fi'
 
 const Projects = () => {
-  const [filter, setFilter] = useState('الكل')
-  const [selectedProject, setSelectedProject] = useState(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null)
+  const [selectedProjectImages, setSelectedProjectImages] = useState([])
 
-  const projects = [
-    {
-      id: 1,
-      image: '/image/medium  (5).webp',
-      title: 'مشروع النور السكني',
-      location: 'القاهرة الجديدة',
-      area: '5000 متر مربع',
-      status: 'قيد التنفيذ',
-      type: 'سكني',
-      description: 'مشروع سكني راقي يضم وحدات سكنية عصرية بمواصفات فاخرة',
-      features: [
-        'وحدات سكنية عصرية',
-        'مرافق ترفيهية متكاملة',
-        'أماكن انتظار واسعة',
-        'نظام أمني متطور',
-        'خدمات صيانة مستمرة',
-        'موقع مميز وهادئ',
-      ],
-    },
-    {
-      id: 2,
-      image: '/image/medium  (6).webp',
-      title: 'مجمع الأندلس التجاري',
-      location: 'مدينة نصر',
-      area: '3000 متر مربع',
-      status: 'مكتمل',
-      type: 'تجاري',
-      description: 'مجمع تجاري متكامل يضم محلات ومكاتب ومرافق خدمية',
-      features: [
-        'محلات تجارية متنوعة',
-        'مكاتب إدارية',
-        'مواقف سيارات',
-        'نظام تكييف مركزي',
-        'أمان وحراسة 24/7',
-        'موقع استراتيجي',
-      ],
-    },
-    {
-      id: 3,
-      image: '/image/medium  (7).webp',
-      title: 'فيلات الجنة السكنية',
-      location: 'المنيا',
-      area: '8000 متر مربع',
-      status: 'قيد التنفيذ',
-      type: 'سكني',
-      description: 'مجمع فيلات فاخر بمساحات واسعة وتصميم عصري',
-      features: [
-        'فيلات بمساحات كبيرة',
-        'حدائق خاصة',
-        'مسابح فاخرة',
-        'نادي رياضي',
-        'منطقة أطفال',
-        'تصميم عصري راقي',
-      ],
-    },
-    {
-      id: 4,
-      image: '/image/medium  (8).webp',
-      title: 'برج الأعمال',
-      location: 'المعادي',
-      area: '2500 متر مربع',
-      status: 'مكتمل',
-      type: 'تجاري',
-      description: 'برج أعمال حديث يضم مكاتب ومحلات تجارية',
-      features: [
-        'مكاتب فاخرة',
-        'محلات تجارية',
-        'قاعات اجتماعات',
-        'مواقف متعددة الطوابق',
-        'نظام إدارة ذكي',
-        'موقع مميز',
-      ],
-    },
-    {
-      id: 5,
-      image: '/image/medium  (9).webp',
-      title: 'مشروع الواحة السكني',
-      location: '6 أكتوبر',
-      area: '6000 متر مربع',
-      status: 'قيد التنفيذ',
-      type: 'سكني',
-      description: 'مشروع سكني متكامل بمرافق وخدمات عالية الجودة',
-      features: [
-        'شقق بمواصفات فاخرة',
-        'مرافق رياضية',
-        'حدائق واسعة',
-        'أماكن ترفيهية',
-        'خدمات أمنية',
-        'موقع هادئ',
-      ],
-    },
-    {
-      id: 6,
-      image: '/image/medium  (10).webp',
-      title: 'مركز التسوق الحديث',
-      location: 'الزقازيق',
-      area: '4000 متر مربع',
-      status: 'مكتمل',
-      type: 'تجاري',
-      description: 'مركز تسوق حديث يضم محلات ومطاعم وترفيه',
-      features: [
-        'محلات متنوعة',
-        'مطاعم و كافيهات',
-        'صالة ترفيهية',
-        'مواقف واسعة',
-        'نظام تكييف',
-        'موقع حيوي',
-      ],
-    },
-    {
-      id: 7,
-      image: '/image/medium  (15).webp',
-      title: 'مشروع الأمل السكني',
-      location: 'الإسكندرية',
-      area: '5500 متر مربع',
-      status: 'قيد التنفيذ',
-      type: 'سكني',
-      description: 'مشروع سكني راقي بموقع مميز ومرافق متكاملة',
-      features: [
-        'شقق فاخرة',
-        'مرافق متكاملة',
-        'حدائق',
-        'أماكن ترفيه',
-        'خدمات أمنية',
-        'موقع مميز',
-      ],
-    },
-    {
-      id: 8,
-      image: '/image/medium  (16).webp',
-      title: 'برج المال والأعمال',
-      location: 'المعادي',
-      area: '3500 متر مربع',
-      status: 'مكتمل',
-      type: 'تجاري',
-      description: 'برج متعدد الأغراض للمكاتب والمحلات التجارية',
-      features: [
-        'مكاتب متعددة',
-        'محلات تجارية',
-        'قاعات',
-        'مواقف',
-        'نظام إدارة',
-        'موقع استراتيجي',
-      ],
-    },
-    {
-      id: 9,
-      image: '/image/medium  (17).webp',
-      title: 'مجمع النجوم السكني',
-      location: 'القاهرة الجديدة',
-      area: '7000 متر مربع',
-      status: 'قيد التنفيذ',
-      type: 'سكني',
-      description: 'مجمع سكني فاخر بمساحات خضراء ومرافق ترفيهية',
-      features: [
-        'شقق فاخرة',
-        'مساحات خضراء',
-        'مرافق ترفيهية',
-        'نادي رياضي',
-        'خدمات متكاملة',
-        'موقع هادئ',
-      ],
-    },
+  // جميع الصور من المشاريع
+  const allImages = [
+    '/image/Our projects/Our projects (1).jpg',
+    '/image/Our projects/Our projects (2).jpg',
+    '/image/Our projects/Our projects (3).jpg',
+    '/image/Our projects/Our projects (4).jpg',
+    '/image/Our projects/Our projects (5).jpg',
+    '/image/Our projects/Our projects (6).jpg',
+    '/image/Our projects/Our projects (7).jpg',
+    '/image/Our projects/Our projects (8).jpg',
+    '/image/Our projects/Our projects (9).jpg',
+    '/image/Our projects/Our projects (10).jpg',
+    '/image/Our projects/Our projects (11).jpg',
+    '/image/Our projects/Our projects (12).jpg',
+    '/image/Our projects/Our projects (13).jpg',
+    '/image/Our projects/Our projects (14).jpg',
+    '/image/Our projects/Our projects (15).jpg',
+    '/image/Our projects/Our projects (16).jpg',
+    '/image/Our projects/Our projects (17).jpg',
+    '/image/Our projects/Our projects (18).jpg',
+    '/image/Our projects/Our projects (19).jpg',
+    '/image/Our projects/Our projects (20).jpg',
+    '/image/Our projects/Our projects (21).jpg',
+    '/image/Our projects/Our projects (22).jpg',
+    '/image/Our projects/Our projects (23).jpg',
+    '/image/Our projects/Our projects (24).jpg',
+    '/image/Our projects/Our projects (25).jpg',
+    '/image/Our projects/Our projects (26).jpg',
+    '/image/Our projects/Our projects (27).jpg',
+    '/image/Our projects/Our projects (28).jpg',
+    '/image/Our projects/Our projects (29).jpg',
+    '/image/Our projects/Our projects (30).jpg',
   ]
 
-  const filters = ['الكل', 'سكني', 'تجاري', 'قيد التنفيذ', 'مكتمل']
-
-  const filterIcons = {
-    سكني: getProjectTypeIcon('سكني'),
-    تجاري: getProjectTypeIcon('تجاري'),
-  }
-
-  const filteredProjects = filter === 'الكل'
-    ? projects
-    : filter === 'قيد التنفيذ' || filter === 'مكتمل'
-    ? projects.filter((p) => p.status === filter)
-    : projects.filter((p) => p.type === filter)
-
-  const getStatusColor = (status) => {
-    if (status === 'مكتمل') return 'bg-green-100 text-green-800'
-    if (status === 'قيد التنفيذ') return 'bg-blue-100 text-blue-800'
-    return 'bg-gray-100 text-gray-800'
-  }
-
-  const handleOpenModal = (project) => {
-    setSelectedProject(project)
-    setIsModalOpen(true)
+  const handleImageClick = (index) => {
+    setSelectedImageIndex(index)
+    setSelectedProjectImages(allImages)
   }
 
   const handleCloseModal = () => {
-    setIsModalOpen(false)
-    setSelectedProject(null)
+    setSelectedImageIndex(null)
+    setSelectedProjectImages([])
+  }
+
+  const handleNextImage = () => {
+    if (selectedImageIndex !== null && selectedImageIndex < allImages.length - 1) {
+      setSelectedImageIndex(selectedImageIndex + 1)
+    }
+  }
+
+  const handlePrevImage = () => {
+    if (selectedImageIndex !== null && selectedImageIndex > 0) {
+      setSelectedImageIndex(selectedImageIndex - 1)
+    }
   }
 
   return (
@@ -221,122 +80,106 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* Filters */}
+        {/* Images Gallery */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-12 flex flex-wrap justify-center gap-4"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
         >
-          {filters.map((filterOption) => (
-            <button
-              key={filterOption}
-              onClick={() => setFilter(filterOption)}
-              className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                filter === filterOption
-                  ? 'text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
-              }`}
-              style={filter === filterOption ? { backgroundColor: '#d6ac72' } : {}}
-            >
-              <span className="inline-flex items-center gap-2">
-                {filterIcons[filterOption] && (
-                  <img
-                    src={filterIcons[filterOption]}
-                    alt=""
-                    className="w-5 h-5"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                )}
-                <span>{filterOption}</span>
-              </span>
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
+          {allImages.map((image, index) => (
             <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="bg-white rounded-xl overflow-hidden shadow-lg card-hover"
+              key={index}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.05, duration: 0.3 }}
+              className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group shadow-md hover:shadow-xl transition-all"
+              onClick={() => handleImageClick(index)}
             >
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(project.status)}`}>
-                    {project.status}
-                  </span>
-                </div>
-                <div className="absolute top-4 right-4">
-                  <span className="inline-flex items-center gap-2 bg-white text-gray-800 px-3 py-1 rounded-full text-sm font-semibold shadow-sm">
-                    <img
-                      src={getProjectTypeIcon(project.type)}
-                      alt=""
-                      className="w-4 h-4"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <span>{project.type}</span>
-                  </span>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <button
-                    onClick={() => handleOpenModal(project)}
-                    className="bg-white p-3 rounded-full transition-colors hover:bg-[#d6ac72] hover:text-white"
-                    style={{ color: '#d6ac72' }}
-                  >
-                    <FiMaximize2 size={24} />
-                  </button>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3 text-gray-800">{project.title}</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-gray-600">
-                    <FiMapPin className="ml-2" size={18} />
-                    <span>{project.location}</span>
-                  </div>
-                  <div className="text-gray-600">
-                    <span className="font-semibold">المساحة:</span> {project.area}
-                  </div>
-                  <div className="text-gray-600">
-                    <span className="font-semibold">النوع:</span> {project.type}
-                  </div>
-                </div>
-                <button
-                  onClick={() => handleOpenModal(project)}
-                  className="w-full btn-primary"
-                >
-                  عرض التفاصيل
-                </button>
+              <img
+                src={image}
+                alt={`مشروع ${index + 1}`}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
+                onError={(e) => {
+                  console.error('Failed to load image:', image);
+                  e.target.style.display = 'none';
+                }}
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                <span className="opacity-0 group-hover:opacity-100 text-white text-sm font-semibold transition-opacity">
+                  اضغط للتكبير
+                </span>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-xl text-gray-600">لا توجد مشاريع متاحة في هذا التصنيف</p>
-          </div>
-        )}
+        </motion.div>
       </div>
 
-      {/* Project Modal */}
-      <ProjectModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+      {/* Image Modal */}
+      <AnimatePresence>
+        {selectedImageIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+            onClick={handleCloseModal}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={handleCloseModal}
+                className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors z-10"
+                aria-label="إغلاق"
+              >
+                <FiX size={24} />
+              </button>
+              
+              {selectedImageIndex > 0 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handlePrevImage();
+                  }}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
+                  aria-label="الصورة السابقة"
+                >
+                  <span className="text-2xl">‹</span>
+                </button>
+              )}
+              
+              {selectedImageIndex < allImages.length - 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleNextImage();
+                  }}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
+                  aria-label="الصورة التالية"
+                >
+                  <span className="text-2xl">›</span>
+                </button>
+              )}
+              
+              <img
+                src={allImages[selectedImageIndex]}
+                alt={`مشروع ${selectedImageIndex + 1}`}
+                className="max-w-full max-h-full object-contain rounded-lg"
+              />
+              
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm">
+                {selectedImageIndex + 1} / {allImages.length}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

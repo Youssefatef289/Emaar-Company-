@@ -48,20 +48,26 @@ const Contact = () => {
     {
       icon: FiMapPin,
       title: 'العنوان',
-      content: 'القاهرة، مصر',
+      content: 'الزراعيين - عبد السلام عارف - اعلى مطعم بكار',
       link: null,
     },
     {
       icon: FiPhone,
       title: 'الهاتف',
-      content: '+20 123 456 7890',
-      link: 'tel:+201234567890',
+      content: '0100 561 7186',
+      link: 'tel:+201005617186',
+    },
+    {
+      icon: FiPhone,
+      title: 'الهاتف',
+      content: '0102 734 7377',
+      link: 'tel:+2010027347377',
     },
     {
       icon: FiMail,
       title: 'البريد الإلكتروني',
-      content: 'info@emaar.com',
-      link: 'mailto:info@emaar.com',
+      content: 'emaarcompany83@gmail.com',
+      link: 'mailto:emaarcompany83@gmail.com',
     },
   ]
 
@@ -99,8 +105,8 @@ const Contact = () => {
               {info.link ? (
                 <a
                   href={info.link}
-                  className="transition-colors"
-                  style={{ color: '#d6ac72' }}
+                  className="transition-all hover:underline"
+                  style={{ color: '#d6ac72', cursor: 'pointer' }}
                 >
                   {info.content}
                 </a>
@@ -261,24 +267,29 @@ const Contact = () => {
                 <FiMapPin className="ml-3 mt-1 flex-shrink-0" style={{ color: '#d6ac72' }} size={20} />
                 <div>
                   <p className="font-semibold text-gray-800">العنوان:</p>
-                  <p className="text-gray-600">القاهرة، مصر</p>
+                  <p className="text-gray-600">الزراعيين - عبد السلام عارف - اعلى مطعم بكار</p>
                 </div>
               </div>
               <div className="flex items-start">
                 <FiPhone className="ml-3 mt-1 flex-shrink-0" style={{ color: '#d6ac72' }} size={20} />
                 <div>
                   <p className="font-semibold text-gray-800">الهاتف:</p>
-                  <a href="tel:+201234567890" style={{ color: '#d6ac72' }}>
-                    +20 123 456 7890
-                  </a>
+                  <div className="space-y-1">
+                    <a href="tel:+201005617186" className="block hover:underline transition-all" style={{ color: '#d6ac72', cursor: 'pointer' }}>
+                      0100 561 7186
+                    </a>
+                    <a href="tel:+2010027347377" className="block hover:underline transition-all" style={{ color: '#d6ac72', cursor: 'pointer' }}>
+                      0102 734 7377
+                    </a>
+                  </div>
                 </div>
               </div>
               <div className="flex items-start">
                 <FiMail className="ml-3 mt-1 flex-shrink-0" style={{ color: '#d6ac72' }} size={20} />
                 <div>
                   <p className="font-semibold text-gray-800">البريد الإلكتروني:</p>
-                  <a href="mailto:info@emaar.com" style={{ color: '#d6ac72' }}>
-                    info@emaar.com
+                  <a href="mailto:emaarcompany83@gmail.com" style={{ color: '#d6ac72' }}>
+                    emaarcompany83@gmail.com
                   </a>
                 </div>
               </div>

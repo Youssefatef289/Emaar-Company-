@@ -125,7 +125,7 @@ const HeroSlider = () => {
                       <p className="text-base md:text-lg lg:text-xl mb-8 lg:mb-10 leading-relaxed max-w-xl lg:max-w-2xl lg:mr-0 mx-auto">
                         {slide.description}
                       </p>
-                      <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-end hero-buttons">
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center hero-buttons">
                         <Link
                           to={slide.primaryLink}
                           className="btn-primary text-sm md:text-base lg:text-lg px-6 md:px-8 py-3 md:py-4 inline-flex items-center justify-center gap-2 flex-row-reverse font-semibold rounded-lg transition-all hover:shadow-lg"

@@ -1,48 +1,41 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { FiMapPin, FiCalendar, FiHome, FiDollarSign, FiArrowLeft, FiLayers } from 'react-icons/fi'
+import { motion, AnimatePresence } from 'framer-motion'
+import { FiMapPin, FiCalendar, FiHome, FiDollarSign, FiArrowLeft, FiLayers, FiX } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 const ProjectDetail = () => {
   const { id } = useParams()
   const [project, setProject] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [selectedImage, setSelectedImage] = useState(null)
 
   // Mock data - In production, this would come from an API
   const projects = {
     1: {
       id: 1,
       title: 'أبراج إعمار',
-      location: 'مدينة نصر، القاهرة',
-      address: 'شارع مصطفى النحاس، مدينة نصر، القاهرة',
+      location: 'بنى سويف',
+      address: 'بنى سويف - حى الرمد - خلف ارض الطيارين',
       type: 'سكني',
       status: 'قيد الإنشاء',
       completionDate: '2025-12-31',
-      description: 'مجمع أبراج سكني فاخر يضم وحدات سكنية عصرية بتشطيبات راقية ومرافق متكاملة في موقع استراتيجي بمدينة نصر',
+      description: 'مجمع أبراج فاخر بتصميم عصري وخدمات متكاملة.',
       longDescription: `
-        أبراج إعمار هو مشروع سكني فاخر يقع في قلب مدينة نصر، أحد أرقى المناطق السكنية في القاهرة. 
-        يتميز المشروع بتصميم عصري يجمع بين الفخامة والراحة، مع مراعاة أعلى معايير الجودة في البناء والتشطيب.
+        4 ابراج كل برج منفصل عن الاخر
+        شقق سكنيه - شقق اداريه - محلات - بدروم
+        العنوان: بنى سويف - حى الرمد - خلف ارض الطيارين
         
-        يضم المشروع 15 طابقاً مع 240 وحدة سكنية متنوعة تتراوح بين الشقق العادية والدوبلكس والبنتهاوس، 
-        بالإضافة إلى وحدات تجارية في الطابق الأرضي.
+        أبراج إعمار هو مشروع فاخر يتميز بتصميم عصري يجمع بين الفخامة والراحة، مع مراعاة أعلى معايير الجودة في البناء والتشطيب.
         
-        المرافق والخدمات:
-        - نادي رياضي مجهز بأحدث الأجهزة
-        - مساحات خضراء واسعة
-        - موقف سيارات تحت الأرض
-        - أمن 24/7
-        - خدمات صيانة متكاملة
-        - مصاعد عالية السرعة
-        - نظام إطفاء حريق متكامل
-        - أندية اجتماعية
-        - مناطق ترفيهية للأطفال
+        يضم المشروع 4 أبراج منفصلة، كل برج يتكون من 7 طوابق، وكل طابق يحتوي على 4 شقق.
+        المشروع يضم شقق سكنية، شقق إدارية، محلات، وبدروم.
       `,
       images: [
         '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
-        '/image/Our current projects/Emaar Towers/Emaar Towers (2).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers  (2).jpg',
         '/image/Our current projects/Emaar Towers/Emaar Towers (3).jpg',
-        '/image/Our current projects/Emaar Towers/Emaar Towers (4).jpg',
+        '/image/Our current projects/Emaar Towers/Emaar Towers  (4).jpg',
         '/image/Our current projects/Emaar Towers/Emaar Towers (5).jpg',
         '/image/Our current projects/Emaar Towers/Emaar Towers Split (1).jpg',
         '/image/Our current projects/Emaar Towers/Emaar Towers Split (2).jpg',
@@ -51,47 +44,190 @@ const ProjectDetail = () => {
         '/image/Our current projects/Emaar Towers/Emaar Towers Split (5).jpg',
       ],
       video: null,
-      units: 240,
-      floors: 15,
+      floors: 7,
       progress: 75,
       startingPrice: 3500000,
-      features: [
-        'نادي رياضي مجهز',
-        'مساحات خضراء واسعة',
-        'موقف سيارات تحت الأرض',
-        'أمن 24/7',
-        'خدمات صيانة متكاملة',
-        'مصاعد عالية السرعة',
-        'نظام إطفاء حريق متكامل',
+      features: [],
+      coordinates: { lat: 29.0661, lng: 31.0994 }, // Mock coordinates for Beni Suef
+      towers: [
+        {
+          id: 1,
+          name: 'برج 1',
+          location: 'على ش 10 و ش 12 ناصيه',
+          basement: true,
+          shops: true,
+          apartments: [
+            { 
+              number: 1, 
+              area: 110, 
+              unit: 'م²',
+              rooms: 2,
+              bathrooms: 2,
+              features: ['2 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 2, 
+              area: 135, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 3, 
+              area: 155, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 4, 
+              area: 230, 
+              unit: 'م²',
+              rooms: 4,
+              bathrooms: 2,
+              features: ['4 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: 'برج 2',
+          location: 'على ش 10 واجهه',
+          basement: true,
+          shops: true,
+          apartments: [
+            { 
+              number: 1, 
+              area: 110, 
+              unit: 'م²',
+              rooms: 2,
+              bathrooms: 2,
+              features: ['2 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 2, 
+              area: 135, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 3, 
+              area: 155, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 4, 
+              area: 196, 
+              unit: 'م²',
+              rooms: 4,
+              bathrooms: 2,
+              features: ['4 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: 'برج 3',
+          location: 'على ش 10 واجهه',
+          basement: true,
+          shops: true,
+          apartments: [
+            { 
+              number: 1, 
+              area: 110, 
+              unit: 'م²',
+              rooms: 2,
+              bathrooms: 2,
+              features: ['2 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 2, 
+              area: 135, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 3, 
+              area: 155, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 4, 
+              area: 196, 
+              unit: 'م²',
+              rooms: 4,
+              bathrooms: 2,
+              features: ['4 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+          ],
+        },
+        {
+          id: 4,
+          name: 'برج 4',
+          location: 'على ش 10 واجهه',
+          basement: true,
+          shops: true,
+          apartments: [
+            { 
+              number: 1, 
+              area: 110, 
+              unit: 'م²',
+              rooms: 2,
+              bathrooms: 2,
+              features: ['2 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 2, 
+              area: 135, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 3, 
+              area: 155, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 4, 
+              area: 196, 
+              unit: 'م²',
+              rooms: 4,
+              bathrooms: 2,
+              features: ['4 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+          ],
+        },
       ],
-      coordinates: { lat: 30.0626, lng: 31.3197 }, // Mock coordinates for Nasr City
     },
     2: {
       id: 2,
       title: 'رويال سيتي',
-      location: 'الشروق، القاهرة',
-      address: 'طريق القاهرة - السويس الصحراوي، الشروق، القاهرة',
+      location: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
+      address: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
       type: 'سكني',
       status: 'قيد الإنشاء',
       completionDate: '2025-09-30',
-      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة في منطقة الشروق المتميزة، يضم وحدات سكنية متنوعة بأسعار تنافسية',
+      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة',
       longDescription: `
-        رويال سيتي هو مجمع سكني راقي يقع في منطقة الشروق المتميزة، يتميز بتصميم عصري ومرافق متكاملة.
-        يضم المشروع 12 طابقاً مع 180 وحدة سكنية متنوعة بتشطيبات فاخرة.
-        
-        يتميز المشروع بموقع استراتيجي على طريق القاهرة - السويس الصحراوي، مما يوفر سهولة الوصول 
-        إلى جميع مناطق القاهرة الكبرى.
-        
-        المرافق والخدمات:
-        - حدائق واسعة
-        - منطقة ألعاب للأطفال
-        - نادي اجتماعي
-        - موقف سيارات
-        - أمن 24/7
-        - خدمات صيانة
-        - مسجد
-        - مناطق ترفيهية
-        - مساحات خضراء
+        رويال سيتي هو مجمع سكني راقي يتميز بتصميم عصري ومرافق متكاملة.
+        يضم المشروع 7 طوابق، وكل طابق يحتوي على 4 شقق.
       `,
       images: [
         '/image/Our current projects/Royal city/royal city (1).jpg',
@@ -103,20 +239,54 @@ const ProjectDetail = () => {
         '/image/Our current projects/Royal city/Royal City Apartment (4).jpg',
       ],
       video: null,
-      units: 180,
-      floors: 12,
+      floors: 7,
       progress: 55,
       startingPrice: 2800000,
-      features: [
-        'حدائق واسعة',
-        'منطقة ألعاب للأطفال',
-        'نادي اجتماعي',
-        'موقف سيارات',
-        'أمن 24/7',
-        'خدمات صيانة',
-        'مسجد',
+      features: [],
+      coordinates: { lat: 29.0661, lng: 31.0994 }, // Mock coordinates for Beni Suef
+      towers: [
+        {
+          id: 1,
+          name: 'رويال سيتي',
+          location: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
+          basement: false,
+          shops: false,
+          apartments: [
+            { 
+              number: 1, 
+              area: 115, 
+              unit: 'م²',
+              rooms: 2,
+              bathrooms: 2,
+              features: ['2 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 2, 
+              area: 150, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 3, 
+              area: 175, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+            { 
+              number: 4, 
+              area: 175, 
+              unit: 'م²',
+              rooms: 3,
+              bathrooms: 2,
+              features: ['3 غرفة نوم', 'مطبخ', 'ريسبشن', '2 حمام', 'طرقة']
+            },
+          ],
+        },
       ],
-      coordinates: { lat: 30.1286, lng: 31.6250 }, // Mock coordinates for Shorouk
     },
   }
 
@@ -209,6 +379,66 @@ const ProjectDetail = () => {
               </p>
             </motion.div>
 
+            {/* Apartments Details */}
+            {project.towers && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                className="bg-white rounded-2xl shadow-lg p-8"
+              >
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">تفاصيل الشقق</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {project.towers.map((tower) => (
+                    <div key={tower.id} className="border-2 rounded-xl p-6" style={{ borderColor: '#d6ac72' }}>
+                      <div className="mb-4">
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">{tower.name}</h3>
+                        <p className="text-sm text-gray-600 mb-3">{tower.location}</p>
+                        <div className="flex gap-2 mb-3">
+                          {tower.basement && (
+                            <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">بدروم</span>
+                          )}
+                          {tower.shops && (
+                            <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">محلات</span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <h4 className="text-sm font-semibold text-gray-700 mb-3">الشقق:</h4>
+                        {tower.apartments.map((apt) => (
+                          <div key={apt.number} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-gray-900 font-semibold">
+                                شقة رقم {apt.number}
+                              </span>
+                              <span className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {apt.area} {apt.unit}
+                              </span>
+                            </div>
+                            {apt.rooms && (
+                              <div className="flex items-center gap-4 text-xs text-gray-600 mb-2">
+                                <span>{apt.rooms} غرفة</span>
+                                {apt.bathrooms && <span>{apt.bathrooms} حمام</span>}
+                              </div>
+                            )}
+                            {apt.features && apt.features.length > 0 && (
+                              <div className="flex flex-wrap gap-1.5 mt-2">
+                                {apt.features.map((feature, idx) => (
+                                  <span key={idx} className="text-xs bg-white text-gray-700 px-2 py-1 rounded-full border border-gray-300">
+                                    {feature}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
             {/* Images Gallery */}
             {project.images.length > 1 && (
               <motion.div
@@ -218,19 +448,73 @@ const ProjectDetail = () => {
                 className="bg-white rounded-2xl shadow-lg p-8"
               >
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">معرض الصور</h2>
-                <div className="grid grid-cols-2 gap-4">
-                  {project.images.slice(1).map((image, index) => (
-                    <div key={index} className="relative h-64 rounded-lg overflow-hidden">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {project.images.map((image, index) => (
+                    <div 
+                      key={`${image}-${index}`} 
+                      className="relative h-64 rounded-lg overflow-hidden cursor-pointer group"
+                      onClick={() => setSelectedImage(image)}
+                    >
                       <img
                         src={image}
-                        alt={`${project.title} - ${index + 2}`}
-                        className="w-full h-full object-cover"
+                        alt={`${project.title} - ${index + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        loading="lazy"
+                        onError={(e) => {
+                          console.error('Failed to load image:', image);
+                          e.target.style.display = 'none';
+                        }}
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                        <span className="opacity-0 group-hover:opacity-100 text-white text-sm font-semibold transition-opacity">
+                          اضغط للتكبير
+                        </span>
+                      </div>
                     </div>
                   ))}
                 </div>
+                {project.images.length === 0 && (
+                  <p className="text-center text-gray-500 py-8">لا توجد صور متاحة</p>
+                )}
               </motion.div>
             )}
+
+            {/* Image Modal */}
+            <AnimatePresence>
+              {selectedImage && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+                  onClick={() => setSelectedImage(null)}
+                >
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      onClick={() => setSelectedImage(null)}
+                      className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors z-10"
+                      aria-label="إغلاق"
+                    >
+                      <FiX size={24} />
+                    </button>
+                    <img
+                      src={selectedImage}
+                      alt={project.title}
+                      className="max-w-full max-h-full object-contain rounded-lg"
+                    />
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm">
+                      {project.images.indexOf(selectedImage) + 1} / {project.images.length}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Video */}
             {project.video && (
@@ -289,10 +573,12 @@ const ProjectDetail = () => {
             >
               <h3 className="text-xl font-bold text-gray-900 mb-4">معلومات المشروع</h3>
               <div className="space-y-4">
-                <div className="flex items-center text-gray-700">
-                  <FiHome className="ml-2" size={20} style={{ color: '#d6ac72' }} />
-                  <span>{project.units} وحدة</span>
-                </div>
+                {project.units && (
+                  <div className="flex items-center text-gray-700">
+                    <FiHome className="ml-2" size={20} style={{ color: '#d6ac72' }} />
+                    <span>{project.units} وحدة</span>
+                  </div>
+                )}
                 {project.floors && (
                   <div className="flex items-center text-gray-700">
                     <FiLayers className="ml-2" size={20} style={{ color: '#d6ac72' }} />

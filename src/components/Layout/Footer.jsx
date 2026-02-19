@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
-import { FiMail, FiPhone, FiMapPin, FiFacebook, FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi'
+import { FiMail, FiPhone, FiMapPin, FiFacebook, FiInstagram, FiYoutube } from 'react-icons/fi'
+import { FaWhatsapp } from 'react-icons/fa'
+import './Footer.css'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -8,45 +10,54 @@ const Footer = () => {
     'المقاولات العامة',
     'الأعمال المساحية',
     'التسويق العقاري',
-    'أعمال المباني',
-    'التشطيبات',
-    'أعمال الطرق',
+    'التطوير العقاري',
+    'الاستثمار العقاري',
   ]
 
   const quickLinks = [
     { path: '/', label: 'الرئيسية' },
     { path: '/about', label: 'من نحن' },
-    { path: '/services', label: 'خدماتنا' },
-    { path: '/projects', label: 'مشاريعنا' },
+    { path: '/offers', label: 'عروضنا' },
+    { path: '/projects', label: 'مشارعنا' },
+    { path: '/real-estate-marketing', label: 'التسويق العقاري' },
+    { path: '/surveying-services', label: 'الأعمال المساحية' },
     { path: '/contact', label: 'تواصل معنا' },
   ]
 
   const socialLinks = [
-    { icon: FiFacebook, href: '#', label: 'Facebook' },
-    { icon: FiInstagram, href: '#', label: 'Instagram' },
-    { icon: FiLinkedin, href: '#', label: 'LinkedIn' },
-    { icon: FiTwitter, href: '#', label: 'Twitter' },
+    { icon: FaWhatsapp, href: 'https://wa.me/2010027347377', label: 'WhatsApp', color: '#25D366' },
+    { icon: FiFacebook, href: 'https://www.facebook.com/share/18Aw9QebCy/', label: 'Facebook', color: '#1877F2' },
+    { icon: FiInstagram, href: 'https://www.instagram.com/emaarcompany1?igsh=MTF4NmJ2dWJvd3huNQ==', label: 'Instagram', color: '#E4405F' },
+    { icon: FiYoutube, href: 'https://youtube.com/channel/UCZfRI4IthrN74NOuJO-KVzw?si=6WRGbj5O4mRQ4699', label: 'YouTube', color: '#FF0000' },
   ]
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="footer-container">
       <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Info */}
-          <div>
-            <img src="/image/logo-black.png" alt="شركة إعمار" className="h-12 mb-4" />
-            <p className="text-gray-400 mb-4 leading-relaxed">
-              شركة إعمار للتطوير العقاري - رائدة في مجال التطوير العقاري والمقاولات في مصر، 
+          <div className="footer-company">
+            <div className="footer-logo mb-4">
+              <img src="/image/Logo.png" alt="شركة إعمار" className="h-14 mb-3" />
+              <div className="footer-company-name">
+                <h3 className="text-xl font-bold mb-1">اعمار</h3>
+                <p className="text-sm">للمقاولات و الاعمال المساحيه</p>
+                <p className="text-sm">و الاستثمار العفارى</p>
+              </div>
+            </div>
+            <p className="footer-description mb-6 leading-relaxed">
+              شركة إعمار للمقاولات والأعمال المساحية والاستثمار العقاري - رائدة في مجال التطوير العقاري والمقاولات في مصر، 
               نسعى لتقديم أفضل الخدمات والحلول العقارية لعملائنا.
             </p>
-            <div className="flex space-x-4 space-x-reverse">
+            <div className="flex space-x-3 space-x-reverse">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary-500 transition-colors"
+                  className="footer-social-link"
+                  style={{ backgroundColor: social.color }}
                   aria-label={social.label}
                 >
                   <social.icon size={20} />
@@ -56,14 +67,14 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-white text-lg font-bold mb-4">روابط سريعة</h3>
-            <ul className="space-y-2">
+          <div className="footer-section">
+            <h3 className="footer-title">روابط سريعة</h3>
+            <ul className="footer-links">
               {quickLinks.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="hover:text-primary-400 transition-colors"
+                    className="footer-link"
                   >
                     {link.label}
                   </Link>
@@ -73,14 +84,14 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div>
-            <h3 className="text-white text-lg font-bold mb-4">خدماتنا</h3>
-            <ul className="space-y-2">
+          <div className="footer-section">
+            <h3 className="footer-title">خدماتنا</h3>
+            <ul className="footer-links">
               {services.map((service) => (
                 <li key={service}>
                   <Link
                     to="/services"
-                    className="hover:text-primary-400 transition-colors"
+                    className="footer-link"
                   >
                     {service}
                   </Link>
@@ -90,32 +101,38 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className="text-white text-lg font-bold mb-4">تواصل معنا</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3 space-x-reverse">
-                <FiMapPin className="mt-1 flex-shrink-0 text-primary-400" size={20} />
-                <span className="text-gray-400">القاهرة، مصر</span>
+          <div className="footer-section">
+            <h3 className="footer-title">تواصل معنا</h3>
+            <ul className="footer-contact">
+              <li className="footer-contact-item">
+                <FiMapPin className="footer-icon" size={20} />
+                <span>الزراعيين - عبد السلام عارف - اعلى مطعم بكار</span>
               </li>
-              <li className="flex items-center space-x-3 space-x-reverse">
-                <FiPhone className="flex-shrink-0 text-primary-400" size={20} />
-                <a href="tel:+201234567890" className="hover:text-primary-400 transition-colors">
-                  +20 123 456 7890
+              <li className="footer-contact-item">
+                <FiPhone className="footer-icon" size={20} />
+                <a href="tel:+201005617186" className="footer-link" style={{ cursor: 'pointer' }}>
+                  0100 561 7186
                 </a>
               </li>
-              <li className="flex items-center space-x-3 space-x-reverse">
-                <FiMail className="flex-shrink-0 text-primary-400" size={20} />
-                <a href="mailto:info@emaar.com" className="hover:text-primary-400 transition-colors">
-                  info@emaar.com
+              <li className="footer-contact-item">
+                <FiPhone className="footer-icon" size={20} />
+                <a href="tel:+2010027347377" className="footer-link" style={{ cursor: 'pointer' }}>
+                  0102 734 7377
+                </a>
+              </li>
+              <li className="footer-contact-item">
+                <FiMail className="footer-icon" size={20} />
+                <a href="mailto:emaarcompany83@gmail.com" className="footer-link">
+                  emaarcompany83@gmail.com
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-gray-400">
-            © {currentYear} شركة إعمار للتطوير العقاري. جميع الحقوق محفوظة.
+        <div className="footer-bottom">
+          <p className="footer-copyright">
+            © {currentYear} شركة إعمار للمقاولات والأعمال المساحية والاستثمار العقاري. جميع الحقوق محفوظة.
           </p>
         </div>
       </div>

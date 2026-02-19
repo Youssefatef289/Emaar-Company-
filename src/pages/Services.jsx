@@ -146,9 +146,10 @@ const Services = () => {
               <div className="flex-1">
                 <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                   <img
-                    src={`/image/medium  (${index + 18}).webp`}
+                    src={`/image/about/about (${(index % 4) + 1}).jpg`}
                     alt={service.title}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
               </div>

@@ -16,6 +16,7 @@ import CurrentProjects from './pages/CurrentProjects'
 import RealEstateMarketing from './pages/RealEstateMarketing'
 import SurveyingServices from './pages/SurveyingServices'
 import CourseBooking from './pages/CourseBooking'
+import CourseDetail from './pages/CourseDetail'
 import Profile from './pages/Profile'
 import ProjectDetail from './pages/ProjectDetail'
 import AdminDashboard from './pages/AdminDashboard'
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/current-projects" element={<CurrentProjects />} />
                 <Route path="/real-estate-marketing" element={<RealEstateMarketing />} />
                 <Route path="/surveying-services" element={<SurveyingServices />} />
+                <Route path="/surveying-services/course/:courseId" element={<CourseDetail />} />
                 <Route path="/surveying-services/course/:courseId/book" element={<CourseBooking />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/projects/:id" element={<ProjectDetail />} />
