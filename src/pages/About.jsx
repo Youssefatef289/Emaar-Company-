@@ -101,9 +101,10 @@ const About = () => {
             >
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/image/medium  (20).webp"
+                  src="/image/about/about (1).jpg"
                   alt="إنجازاتنا"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  loading="lazy"
                 />
               </div>
             </motion.div>
