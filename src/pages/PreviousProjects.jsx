@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiMapPin, FiImage, FiArrowRight, FiX } from 'react-icons/fi'
+import { FiMapPin, FiImage, FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 const PreviousProjects = () => {
   const [selectedProjectImages, setSelectedProjectImages] = useState(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [selectedGalleryImageIndex, setSelectedGalleryImageIndex] = useState(null)
+  const [cardImageIndices, setCardImageIndices] = useState({})
 
   // المشاريع السابقة
   const previousProjects = [
@@ -214,19 +215,72 @@ const PreviousProjects = () => {
               transition={{ delay: index * 0.1 }}
               className="bg-white rounded-xl shadow-md overflow-hidden card-hover"
             >
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  onError={(e) => {
-                    e.target.src = '/image/medium (1).webp'
-                  }}
-                />
-                <div className="absolute top-2 right-2 text-white px-2 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: '#d6ac72' }}>
+              <div className="relative h-56 overflow-hidden group">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={cardImageIndices[project.id] || 0}
+                    src={project.images[cardImageIndices[project.id] || 0]}
+                    alt={project.title}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    onError={(e) => {
+                      e.target.src = '/image/medium (1).webp'
+                    }}
+                  />
+                </AnimatePresence>
+                
+                {/* Navigation Buttons */}
+                {project.images.length > 1 && (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        const currentIndex = cardImageIndices[project.id] || 0
+                        const newIndex = currentIndex > 0 ? currentIndex - 1 : project.images.length - 1
+                        setCardImageIndices({ ...cardImageIndices, [project.id]: newIndex })
+                      }}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                    >
+                      <FiChevronLeft size={20} />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        const currentIndex = cardImageIndices[project.id] || 0
+                        const newIndex = currentIndex < project.images.length - 1 ? currentIndex + 1 : 0
+                        setCardImageIndices({ ...cardImageIndices, [project.id]: newIndex })
+                      }}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                    >
+                      <FiChevronRight size={20} />
+                    </button>
+                    
+                    {/* Image Indicators */}
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                      {project.images.slice(0, 5).map((_, idx) => (
+                        <div
+                          key={idx}
+                          className={`h-1.5 rounded-full transition-all ${
+                            (cardImageIndices[project.id] || 0) === idx
+                              ? 'bg-white w-6'
+                              : 'bg-white/50 w-1.5'
+                          }`}
+                        />
+                      ))}
+                      {project.images.length > 5 && (
+                        <span className="text-white text-xs mr-1">+{project.images.length - 5}</span>
+                      )}
+                    </div>
+                  </>
+                )}
+                
+                <div className="absolute top-2 right-2 text-white px-2 py-1 rounded-full text-xs font-semibold z-10" style={{ backgroundColor: '#d6ac72' }}>
                   {project.type}
                 </div>
-                <div className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                <div className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-semibold z-10">
                   {project.status}
                 </div>
               </div>
