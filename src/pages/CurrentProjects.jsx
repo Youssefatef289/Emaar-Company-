@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiMapPin, FiCalendar, FiArrowRight, FiHome, FiLayers, FiTrendingUp } from 'react-icons/fi'
+import { FiMapPin, FiCalendar, FiArrowRight, FiHome, FiLayers, FiTrendingUp, FiX, FiImage } from 'react-icons/fi'
 
 const CurrentProjects = () => {
+  const [selectedProjectImages, setSelectedProjectImages] = useState(null)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   // Mock data - In production, this would come from an API
   const projects = [
     {
@@ -70,6 +72,29 @@ const CurrentProjects = () => {
       `,
     },
   ]
+
+
+  const handleViewImages = (projectImages, index = 0) => {
+    setSelectedProjectImages(projectImages)
+    setSelectedImageIndex(index)
+  }
+
+  const handleCloseImageModal = () => {
+    setSelectedProjectImages(null)
+    setSelectedImageIndex(0)
+  }
+
+  const handleNextImage = () => {
+    if (selectedProjectImages && selectedImageIndex < selectedProjectImages.length - 1) {
+      setSelectedImageIndex(selectedImageIndex + 1)
+    }
+  }
+
+  const handlePrevImage = () => {
+    if (selectedProjectImages && selectedImageIndex > 0) {
+      setSelectedImageIndex(selectedImageIndex - 1)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
@@ -234,6 +259,74 @@ const CurrentProjects = () => {
           </Link>
         </motion.div>
       </div>
+
+      {/* Image Gallery Modal */}
+      <AnimatePresence>
+        {selectedProjectImages && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+            onClick={handleCloseImageModal}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative max-w-7xl max-h-[90vh] w-full h-full flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={handleCloseImageModal}
+                className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors z-10"
+                aria-label="إغلاق"
+              >
+                <FiX size={24} />
+              </button>
+              
+              {selectedImageIndex > 0 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handlePrevImage()
+                  }}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
+                  aria-label="الصورة السابقة"
+                >
+                  <span className="text-2xl">‹</span>
+                </button>
+              )}
+              
+              {selectedImageIndex < selectedProjectImages.length - 1 && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleNextImage()
+                  }}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
+                  aria-label="الصورة التالية"
+                >
+                  <span className="text-2xl">›</span>
+                </button>
+              )}
+              
+              <img
+                src={selectedProjectImages[selectedImageIndex]}
+                alt={`صورة ${selectedImageIndex + 1}`}
+                className="max-w-full max-h-full object-contain rounded-lg"
+                onError={(e) => {
+                  e.target.src = '/image/medium (1).webp'
+                }}
+              />
+              
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm">
+                {selectedImageIndex + 1} / {selectedProjectImages.length}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

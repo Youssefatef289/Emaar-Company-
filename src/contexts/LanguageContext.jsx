@@ -36,6 +36,38 @@ const translations = {
       loading: 'جاري التحميل...',
       noResults: 'لا توجد نتائج',
     },
+    hero: {
+      slide1: {
+        subtitle: 'ليه تختار',
+        title: 'إعمار',
+        titleSuffix: 'للاستثمار العقاري؟',
+        description: 'نقدم لك أفضل الفرص الاستثمارية في السوق العقاري المصري مع ضمانات عالية الجودة وخطط سداد مرنة تناسب احتياجاتك.',
+        primaryCta: 'اطلب استشارة مجانية',
+        secondaryCta: 'شاهد مشاريعنا',
+      },
+      slide2: {
+        subtitle: 'حقق حلمك مع',
+        title: 'إعمار',
+        titleSuffix: 'من غير ما تقلق من التكاليف',
+        description: 'خطط سداد مرنة وأسعار تنافسية تجعل حلمك في امتلاك عقار حقيقي. نضمن لك أفضل قيمة مقابل المال مع جودة لا مثيل لها.',
+        primaryCta: 'اطلب عرض سعر',
+        secondaryCta: 'تعرف على عروضنا',
+      },
+      slide3: {
+        subtitle: 'عمرك فكرت ليه الاستثمار في العقارات',
+        title: 'قيمته بتزيد مع الوقت',
+        titleSuffix: '',
+        description: 'الاستثمار العقاري هو الاستثمار الأكثر أماناً وربحية على المدى الطويل. مع إعمار، تضمن نمو قيمة استثمارك مع مرور الوقت.',
+        primaryCta: 'ابدأ استثمارك الآن',
+        secondaryCta: 'تعرف علينا',
+      },
+    },
+    stats: {
+      completedProjects: 'مشروع منجز',
+      satisfiedClients: 'عميل راضٍ',
+      yearsExperience: 'سنة خبرة',
+      professionalTeam: 'فريق محترف',
+    },
   },
   en: {
     nav: {
@@ -61,6 +93,38 @@ const translations = {
       reset: 'Reset',
       loading: 'Loading...',
       noResults: 'No Results',
+    },
+    hero: {
+      slide1: {
+        subtitle: 'Why Choose',
+        title: 'Emaar',
+        titleSuffix: 'for Real Estate Investment?',
+        description: 'We offer you the best investment opportunities in the Egyptian real estate market with high-quality guarantees and flexible payment plans that suit your needs.',
+        primaryCta: 'Request Free Consultation',
+        secondaryCta: 'View Our Projects',
+      },
+      slide2: {
+        subtitle: 'Achieve Your Dream with',
+        title: 'Emaar',
+        titleSuffix: 'Without Worrying About Costs',
+        description: 'Flexible payment plans and competitive prices make your dream of owning real estate a reality. We guarantee you the best value for money with unmatched quality.',
+        primaryCta: 'Request a Quote',
+        secondaryCta: 'View Our Offers',
+      },
+      slide3: {
+        subtitle: 'Have You Ever Wondered Why',
+        title: 'Real Estate Investment',
+        titleSuffix: 'Increases in Value Over Time',
+        description: 'Real estate investment is the safest and most profitable investment in the long term. With Emaar, you ensure the growth of your investment value over time.',
+        primaryCta: 'Start Your Investment Now',
+        secondaryCta: 'Learn About Us',
+      },
+    },
+    stats: {
+      completedProjects: 'Completed Projects',
+      satisfiedClients: 'Satisfied Clients',
+      yearsExperience: 'Years of Experience',
+      professionalTeam: 'Professional Team',
     },
   },
 }

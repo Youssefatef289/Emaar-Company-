@@ -31,6 +31,7 @@ const Navbar = () => {
       labelEn: 'Our Projects',
       hasDropdown: true 
     },
+    { path: '/real-estate-marketing', label: 'التسويق العقاري', labelEn: 'Real Estate Marketing' },
     { path: '/surveying-services', label: 'الدورات المساحية', labelEn: 'Surveying Courses' },
     { path: '/contact', label: 'تواصل معنا', labelEn: 'Contact Us' },
   ]
@@ -97,14 +98,14 @@ const Navbar = () => {
                               className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
                               onClick={() => setIsProjectsDropdownOpen(false)}
                             >
-                              المشاريع السابقه والحاليه
+                              المشاريع الحالية
                             </Link>
                             <Link
-                              to="/projects"
+                              to="/previous-projects"
                               className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
                               onClick={() => setIsProjectsDropdownOpen(false)}
                             >
-                              {t('nav.allProjects')}
+                              المشاريع السابقة
                             </Link>
                           </motion.div>
                         )}
@@ -189,17 +190,17 @@ const Navbar = () => {
                                 }}
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
-                                المشاريع السابقه والحاليه
+                                المشاريع الحالية
                               </Link>
                               <Link
-                                to="/projects"
+                                to="/previous-projects"
                                 onClick={() => {
                                   setIsMobileMenuOpen(false)
                                   setIsProjectsDropdownOpen(false)
                                 }}
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
-                                {t('nav.allProjects')}
+                                المشاريع السابقة
                               </Link>
                             </div>
                           </motion.div>

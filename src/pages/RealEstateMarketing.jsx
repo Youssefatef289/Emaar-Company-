@@ -110,26 +110,42 @@ const RealEstateMarketing = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
-      <div className="container-custom">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            التسويق العقاري
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            اكتشف أفضل الوحدات السكنية والتجارية المتاحة لدينا
-          </p>
-        </motion.div>
+      {/* Hero Section */}
+      <div className="relative py-20 md:py-28 overflow-hidden" style={{ background: 'linear-gradient(135deg, #d6ac72 0%, #c49a5f 50%, #b2884c 100%)' }}>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{ 
+            backgroundImage: 'url(/image/medium (1).webp)', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+          }}></div>
+        </div>
+        <div className="container-custom relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+              التسويق العقاري
+            </h1>
+            <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
+              اكتشف أفضل الوحدات السكنية والتجارية المتاحة لدينا
+            </p>
+            <p className="text-lg text-white drop-shadow-md">
+              وحدات فاخرة بمواقع مميزة وأسعار تنافسية
+            </p>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="container-custom mt-12">
 
         {/* Search and Filter Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl shadow-lg p-6 mb-8"
+          className="bg-white rounded-xl shadow-md p-5 mb-6"
         >
           <div className="flex flex-col md:flex-row gap-4">
             {/* Search Input */}
@@ -275,72 +291,72 @@ const RealEstateMarketing = () => {
         </motion.div>
 
         {/* Results Count */}
-        <div className="mb-6">
-          <p className="text-gray-600">
+        <div className="mb-4">
+          <p className="text-gray-600 text-sm">
             تم العثور على <span className="font-bold" style={{ color: '#d6ac72' }}>{filteredUnits.length}</span> وحدة
           </p>
         </div>
 
         {/* Units Grid */}
         {filteredUnits.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredUnits.map((unit, index) => (
               <motion.div
                 key={unit.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden card-hover"
+                className="bg-white rounded-xl shadow-md overflow-hidden card-hover"
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
                   <img
                     src={unit.image}
                     alt={unit.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   />
-                  <div className="absolute top-4 right-4 text-white px-3 py-1 rounded-full text-sm font-semibold" style={{ backgroundColor: '#d6ac72' }}>
+                  <div className="absolute top-2 right-2 text-white px-2 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: '#d6ac72' }}>
                     {unit.finishing}
                   </div>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{unit.title}</h3>
+                <div className="p-4">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{unit.title}</h3>
                   
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-gray-600">
-                      <FiMapPin className="ml-2" size={18} />
+                  <div className="space-y-1.5 mb-3">
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <FiMapPin className="ml-1.5" size={14} />
                       <span>{unit.area}</span>
                     </div>
-                    <div className="flex items-center text-gray-600">
-                      <FiHome className="ml-2" size={18} />
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <FiHome className="ml-1.5" size={14} />
                       <span>{unit.rooms} غرف</span>
                     </div>
-                    <div className="flex items-center text-gray-600">
-                      <FiMaximize2 className="ml-2" size={18} />
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <FiMaximize2 className="ml-1.5" size={14} />
                       <span>{unit.areaSize} م²</span>
                     </div>
-                    <div className="flex items-center text-gray-600">
-                      <span className="ml-2">الدور: {unit.floor}</span>
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <span className="ml-1.5">الدور: {unit.floor}</span>
                     </div>
-                    <div className="flex items-center font-bold text-lg" style={{ color: '#d6ac72' }}>
-                      <FiDollarSign size={20} />
+                    <div className="flex items-center font-bold text-base pt-1" style={{ color: '#d6ac72' }}>
+                      <FiDollarSign size={16} />
                       <span>{unit.price.toLocaleString()} جنيه</span>
                     </div>
                   </div>
 
-                  <p className="text-gray-600 text-sm mb-4">{unit.description}</p>
+                  <p className="text-gray-600 text-xs mb-3 line-clamp-2">{unit.description}</p>
 
-                  <div className="flex gap-3">
+                  <div className="flex gap-2">
                     <a
                       href={`/real-estate-marketing/${unit.id}`}
-                      className="flex-1 btn-primary text-center"
+                      className="flex-1 btn-primary text-center text-sm py-2"
                     >
                       عرض التفاصيل
                     </a>
                     {isAuthenticated && (
                       <button
                         onClick={() => addFavorite(unit.id, 'unit')}
-                        className="px-4 py-2 border-2 rounded-lg hover:bg-primary-50 transition-colors"
+                        className="px-3 py-2 border-2 rounded-lg hover:bg-primary-50 transition-colors text-sm"
                         style={{ color: '#d6ac72', borderColor: '#d6ac72' }}
                       >
                         ♡

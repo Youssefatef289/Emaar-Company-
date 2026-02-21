@@ -13,6 +13,7 @@ import Projects from './pages/Projects'
 import Contact from './pages/Contact'
 import Offers from './pages/Offers'
 import CurrentProjects from './pages/CurrentProjects'
+import PreviousProjects from './pages/PreviousProjects'
 import RealEstateMarketing from './pages/RealEstateMarketing'
 import SurveyingServices from './pages/SurveyingServices'
 import CourseBooking from './pages/CourseBooking'
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/offers" element={<Offers />} />
                 <Route path="/current-projects" element={<CurrentProjects />} />
+                <Route path="/previous-projects" element={<PreviousProjects />} />
                 <Route path="/real-estate-marketing" element={<RealEstateMarketing />} />
                 <Route path="/surveying-services" element={<SurveyingServices />} />
                 <Route path="/surveying-services/course/:courseId" element={<CourseDetail />} />

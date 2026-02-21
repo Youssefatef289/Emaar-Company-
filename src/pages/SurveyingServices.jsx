@@ -1,36 +1,17 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { FiClock, FiDollarSign, FiUsers, FiBook, FiArrowLeft, FiInfo } from 'react-icons/fi'
+import { FiClock, FiDollarSign, FiUsers, FiBook, FiArrowLeft, FiInfo, FiX, FiPlay } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 
 const SurveyingServices = () => {
   const { t } = useLanguage()
   const [selectedCourse, setSelectedCourse] = useState(null)
+  const [videoUrl, setVideoUrl] = useState(null)
+  const [showVideoInDetail, setShowVideoInDetail] = useState(false)
 
   // Mock data - In production, this would come from an API
-  const services = [
-    {
-      id: 1,
-      title: 'المساحة التطبيقية',
-      description: 'خدمات المساحة التطبيقية الشاملة لجميع أنواع المشاريع',
-      icon: '📐',
-    },
-    {
-      id: 2,
-      title: 'الرفع المساحي',
-      description: 'رفع مساحي دقيق باستخدام أحدث الأجهزة والتقنيات',
-      icon: '📏',
-    },
-    {
-      id: 3,
-      title: 'التخطيط والتصميم',
-      description: 'خدمات التخطيط والتصميم المساحي للمشاريع الكبرى',
-      icon: '🗺️',
-    },
-  ]
-
   const courses = [
     {
       id: 1,
@@ -83,6 +64,52 @@ const SurveyingServices = () => {
       instructorBio: 'خبيرة في المساحة التصويرية والاستشعار عن بعد',
       image: '/image/medium (7).webp',
     },
+    {
+      id: 4,
+      title: 'دورة Total Station (توتال ستيشن)',
+      description: 'دورة متخصصة في استخدام جهاز Total Station للرفع المساحي الدقيق والتوقيع',
+      duration: '45 ساعة',
+      price: 6000,
+      content: [
+        'مقدمة في جهاز Total Station',
+        'مكونات الجهاز وطرق التشغيل',
+        'إعداد الجهاز والمعايرة',
+        'الرفع المساحي باستخدام Total Station',
+        'التوقيع والاستكشاف',
+        'قياس المسافات والزوايا',
+        'معالجة البيانات والتصدير',
+        'التدريب العملي داخل الموقع',
+        'حل المشاكل الشائعة',
+        'تطبيقات عملية متقدمة',
+      ],
+      instructor: 'م. محمود السيد',
+      instructorBio: 'خبير في أجهزة Total Station مع أكثر من 12 عامًا من الخبرة العملية',
+      image: '/image/سعر-جهاز-توتال-ستيشن-سوكيا.jpg',
+      videoUrl: 'https://www.youtube.com/embed/bkeLrvY5i2E',
+    },
+    {
+      id: 5,
+      title: 'دورة تعليم الأوتوكاد (AutoCAD)',
+      description: 'دورة شاملة لتعلم برنامج AutoCAD من البداية إلى الاحتراف في الرسم والتصميم الهندسي',
+      duration: '40 ساعة',
+      price: 5000,
+      content: [
+        'مقدمة في برنامج AutoCAD',
+        'واجهة البرنامج والأدوات الأساسية',
+        'أوامر الرسم الأساسية (Line, Circle, Arc, etc.)',
+        'أوامر التعديل (Move, Copy, Rotate, Scale)',
+        'الطبقات (Layers) وإدارة الألوان',
+        'النصوص والكتابة (Text, MText)',
+        'الأبعاد والقياسات (Dimensions)',
+        'الكتل والمراجع (Blocks & References)',
+        'الطباعة والتصدير (Plot & Export)',
+        'مشاريع عملية وتطبيقات متقدمة',
+      ],
+      instructor: 'م. أحمد محمد',
+      instructorBio: 'خبير في برامج التصميم الهندسي مع أكثر من 15 عامًا من الخبرة في AutoCAD',
+      image: '/image/maxresdefault.jpg',
+      videoUrl: 'https://www.youtube.com/embed/nmA5m_7Enf8',
+    },
   ]
 
   if (selectedCourse) {
@@ -90,7 +117,10 @@ const SurveyingServices = () => {
       <div className="min-h-screen bg-gray-50 pb-16">
         <div className="container-custom">
           <button
-            onClick={() => setSelectedCourse(null)}
+            onClick={() => {
+              setSelectedCourse(null)
+              setShowVideoInDetail(false)
+            }}
             className="flex items-center mb-6"
             style={{ color: '#d6ac72' }}
           >
@@ -158,6 +188,42 @@ const SurveyingServices = () => {
                 <p className="text-gray-700">{selectedCourse.instructorBio}</p>
               </div>
 
+              {selectedCourse.videoUrl && (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">فيديو تعريفي</h2>
+                  {!showVideoInDetail ? (
+                    <button
+                      onClick={() => setShowVideoInDetail(true)}
+                      className="flex items-center justify-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
+                    >
+                      <FiPlay size={20} />
+                      <span>شاهد الفيديو</span>
+                    </button>
+                  ) : (
+                    <div className="bg-gray-100 rounded-xl shadow-lg overflow-hidden">
+                      <div className="flex items-center justify-between p-4 bg-gray-200">
+                        <h3 className="font-semibold text-gray-900">فيديو الدورة</h3>
+                        <button
+                          onClick={() => setShowVideoInDetail(false)}
+                          className="text-gray-600 hover:text-gray-900 transition-colors"
+                        >
+                          <FiX size={24} />
+                        </button>
+                      </div>
+                      <div className="aspect-video">
+                        <iframe
+                          src={selectedCourse.videoUrl}
+                          title="فيديو الدورة"
+                          className="w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <Link
                 to={`/surveying-services/course/${selectedCourse.id}/book`}
                 className="btn-primary inline-block text-center w-full md:w-auto"
@@ -193,201 +259,26 @@ const SurveyingServices = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              الأعمال المساحية
+              الدورات المساحية
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
-              خدمات مساحية احترافية ودورات تدريبية متخصصة
+              دورات تدريبية متخصصة وشاملة
             </p>
-            <p className="text-base md:text-lg text-white/90 drop-shadow-md max-w-2xl mx-auto leading-relaxed">
-              نقدم لكم أفضل الخدمات المساحية والدورات التدريبية الشاملة من البداية إلى الاحتراف
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-white">
-                <p className="text-sm font-semibold">📐 مساحة تطبيقية</p>
-              </div>
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-white">
-                <p className="text-sm font-semibold">🎓 دورات تدريبية</p>
-              </div>
-              <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 text-white">
-                <p className="text-sm font-semibold">💼 شهادات معتمدة</p>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>
 
       <div className="container-custom">
-
-        {/* Diploma Section */}
+        {/* Courses Packages */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-16"
         >
-          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-            {/* Header with Golden Background */}
-            <div 
-              className="p-8 md:p-12 text-center text-white"
-              style={{ background: 'linear-gradient(135deg, #d6ac72 0%, #c49a5f 50%, #b2884c 100%)' }}
-            >
-              <div className="mb-4">
-                <span className="text-4xl md:text-5xl">📢</span>
-              </div>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 drop-shadow-lg leading-tight">
-                يعلن مكتب إعمار للأعمال المساحية
-              </h2>
-              <p className="text-xl md:text-2xl lg:text-3xl font-bold drop-shadow-md mb-3" style={{ color: '#fff8e7' }}>
-                دبلومة المساحة المتكاملة
-              </p>
-              <p className="text-base md:text-lg lg:text-xl mt-4 drop-shadow-md max-w-3xl mx-auto leading-relaxed">
-                في كورس واحد متكامل وشامل من البداية إلى الاحتراف
-              </p>
-            </div>
-
-            {/* Content */}
-            <div className="p-6 md:p-8">
-              {/* Course Content */}
-              <div className="mb-10">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center" style={{ color: '#d6ac72' }}>
-                  محتوى الدبلومة
-                </h3>
-                <div className="space-y-5">
-                  <div className="bg-gradient-to-l from-gray-50 to-primary-50 rounded-xl p-5 md:p-6 border-r-4 shadow-sm hover:shadow-md transition-shadow" style={{ borderRightColor: '#d6ac72' }}>
-                    <p className="text-gray-900 font-bold text-lg md:text-xl mb-3" style={{ color: '#b2884c' }}>
-                      1- دراسة المساحة المستوية والمساحة الجيوديسية
-                    </p>
-                    <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-                      بجميع مراحلها - التعليم والتدريب داخل الموقع على الأجهزة المساحية (Level - G.P.S - Total station) وطرق تنفيذ الأعمال المساحية المطلوبة
-                    </p>
-                  </div>
-                  
-                  <div className="bg-gradient-to-l from-gray-50 to-primary-50 rounded-xl p-5 md:p-6 border-r-4 shadow-sm hover:shadow-md transition-shadow" style={{ borderRightColor: '#d6ac72' }}>
-                    <p className="text-gray-900 font-bold text-lg md:text-xl mb-3" style={{ color: '#b2884c' }}>
-                      2- التدريب على البرامج الهندسية والمساحية
-                    </p>
-                    <p className="text-gray-700 text-base md:text-lg leading-relaxed font-semibold">
-                      (AUTOCAD - SURFER)
-                    </p>
-                  </div>
-                  
-                  <div className="bg-gradient-to-l from-gray-50 to-primary-50 rounded-xl p-5 md:p-6 border-r-4 shadow-sm hover:shadow-md transition-shadow" style={{ borderRightColor: '#d6ac72' }}>
-                    <p className="text-gray-900 font-bold text-lg md:text-xl" style={{ color: '#b2884c' }}>
-                      3- شرح برنامج Civil 3D
-                    </p>
-                  </div>
-                  
-                  <div className="bg-gradient-to-l from-gray-50 to-primary-50 rounded-xl p-5 md:p-6 border-r-4 shadow-sm hover:shadow-md transition-shadow" style={{ borderRightColor: '#d6ac72' }}>
-                    <p className="text-gray-900 font-bold text-lg md:text-xl mb-3" style={{ color: '#b2884c' }}>
-                      4- مقدمة عن نظم المعلومات الجغرافية
-                    </p>
-                    <p className="text-gray-700 text-base md:text-lg leading-relaxed">
-                      وشرح برنامج Arc GIS
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Certificates */}
-              <div className="mb-10">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center" style={{ color: '#d6ac72' }}>
-                  يحصل المتدرب في نهاية الدبلومة على
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="flex items-start space-x-3 space-x-reverse bg-gradient-to-l from-primary-50 to-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-primary-100">
-                    <FiBook size={28} style={{ color: '#d6ac72' }} className="flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="text-gray-900 font-bold text-lg mb-1">كتب ومذكرات علمية</p>
-                      <p className="text-gray-600 text-base">في المساحة ونظم المعلومات الجغرافية</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-3 space-x-reverse bg-gradient-to-l from-primary-50 to-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-primary-100">
-                    <FiBook size={28} style={{ color: '#d6ac72' }} className="flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="text-gray-900 font-bold text-lg mb-1">شهادة خبرة معتمدة</p>
-                      <p className="text-gray-600 text-base">من الشركة</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-3 space-x-reverse bg-gradient-to-l from-primary-50 to-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-primary-100">
-                    <FiBook size={28} style={{ color: '#d6ac72' }} className="flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="text-gray-900 font-bold text-lg">شهادة قياس مهارة</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-3 space-x-reverse bg-gradient-to-l from-primary-50 to-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-primary-100">
-                    <FiBook size={28} style={{ color: '#d6ac72' }} className="flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="text-gray-900 font-bold text-lg">كارنية مزاولة المهنة</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-3 space-x-reverse bg-gradient-to-l from-primary-50 to-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-primary-100">
-                    <FiBook size={28} style={{ color: '#d6ac72' }} className="flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="text-gray-900 font-bold text-lg">كارنية رابطة مهندسي المساحة</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-3 space-x-reverse bg-gradient-to-l from-primary-50 to-white p-5 rounded-xl shadow-sm hover:shadow-md transition-shadow border border-primary-100">
-                    <FiBook size={28} style={{ color: '#d6ac72' }} className="flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="text-gray-900 font-bold text-lg mb-1">تغيير المسمى الوظيفي</p>
-                      <p className="text-gray-600 text-base">في البطاقة الشخصية</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Additional Info */}
-              <div className="mb-10 space-y-5">
-                <div className="bg-gradient-to-l from-blue-50 to-blue-100 rounded-xl p-5 md:p-6 border-r-4 shadow-sm" style={{ borderRightColor: '#3b82f6' }}>
-                  <p className="text-gray-900 font-bold text-lg md:text-xl">
-                    ✨ مساعدة المتميزين لإيجاد فرص عمل داخل أو خارج مصر
-                  </p>
-                </div>
-                
-                <div className="bg-gradient-to-l from-green-50 to-green-100 rounded-xl p-5 md:p-6 border-r-4 shadow-sm" style={{ borderRightColor: '#10b981' }}>
-                  <p className="text-gray-900 font-bold text-lg md:text-xl mb-2">
-                    يوجد أيضاً بشركة إعمار دورة تفصيلية عن الإشراف المعماري
-                  </p>
-                  <p className="text-gray-700 text-base">
-                    باحترافية كاملة
-                  </p>
-                </div>
-                
-                <div className="bg-gradient-to-l from-yellow-50 to-yellow-100 rounded-xl p-5 md:p-6 border-r-4 shadow-sm" style={{ borderRightColor: '#f59e0b' }}>
-                  <p className="text-gray-900 font-bold text-lg md:text-xl">
-                    🎯 هدفنا الرئيسي هو إتقان المتدرب لمجال المساحة بمنتهى الإتقان والأمانة
-                  </p>
-                  <p className="text-gray-700 text-base mt-2">
-                    على أيدي أساتذة ومهندسين متخصصين في مجال المساحة
-                  </p>
-                </div>
-              </div>
-
-              {/* Contact Info */}
-              <div 
-                className="rounded-xl p-8 md:p-10 text-center text-white shadow-lg"
-                style={{ background: 'linear-gradient(135deg, #d6ac72 0%, #c49a5f 50%, #b2884c 100%)' }}
-              >
-                <h3 className="text-2xl md:text-3xl font-bold mb-6 drop-shadow-lg">
-                  للحجز والاستعلام
-                </h3>
-                <a 
-                  href="tel:01011942703"
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold hover:underline drop-shadow-md block transition-transform hover:scale-105"
-                >
-                  01011942703
-                </a>
-              </div>
-
-              {/* Courses Packages */}
-              <div className="mt-10">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6 text-center" style={{ color: '#d6ac72' }}>
-                  الكورسات المتاحة
-                </h3>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">الكورسات المتاحة</h2>
+            <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
+          </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
                   {[
                     { 
@@ -478,33 +369,6 @@ const SurveyingServices = () => {
                     )
                   })}
                 </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Services Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">خدماتنا</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-lg p-8 text-center card-hover"
-              >
-                <div className="text-5xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                <p className="text-gray-600">{service.description}</p>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
 
         {/* Courses Section */}
@@ -512,51 +376,114 @@ const SurveyingServices = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">الدورات التدريبية</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">الدورات التدريبية</h2>
+            <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {courses.map((course, index) => (
               <motion.div
                 key={course.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden card-hover"
+                className="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-100"
               >
-                <div className="relative h-48 overflow-hidden">
+                <div 
+                  className="relative h-48 overflow-hidden bg-gray-200 cursor-pointer"
+                  onClick={() => course.videoUrl && setVideoUrl(course.videoUrl)}
+                >
                   <img
                     src={course.image}
                     alt={course.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                    onError={(e) => {
+                      e.target.src = '/image/medium (1).webp'
+                    }}
                   />
+                  {course.videoUrl && (
+                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                      <div className="bg-red-600 text-white rounded-full p-3 transform hover:scale-110 transition-transform">
+                        <FiPlay size={24} />
+                      </div>
+                    </div>
+                  )}
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{course.title}</h3>
-                  <p className="text-gray-600 mb-4">{course.description}</p>
+                <div className="p-5">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">{course.title}</h3>
                   
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center text-gray-600">
-                      <FiClock className="ml-2" size={18} />
-                      <span className="text-sm">{course.duration}</span>
+                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
+                    <div className="flex items-center text-gray-600 text-sm">
+                      <FiClock className="ml-1.5" size={16} />
+                      <span>{course.duration}</span>
                     </div>
-                    <div className="flex items-center font-bold" style={{ color: '#d6ac72' }}>
-                      <FiDollarSign size={18} />
-                      <span>{course.price.toLocaleString()} جنيه</span>
+                    <div className="flex items-center font-bold text-base" style={{ color: '#d6ac72' }}>
+                      <FiDollarSign size={16} />
+                      <span>{course.price.toLocaleString()} ج.م</span>
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => setSelectedCourse(course)}
-                    className="w-full btn-primary"
-                  >
-                    عرض التفاصيل
-                  </button>
+                  <div className="flex flex-col gap-2">
+                    {course.videoUrl && (
+                      <button
+                        onClick={() => setVideoUrl(course.videoUrl)}
+                        className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold text-sm"
+                      >
+                        <FiPlay size={16} />
+                        <span>شاهد الفيديو</span>
+                      </button>
+                    )}
+                    <button
+                      onClick={() => setSelectedCourse(course)}
+                      className="w-full btn-primary text-sm py-2.5"
+                    >
+                      عرض التفاصيل
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </div>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {videoUrl && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-4"
+            onClick={() => setVideoUrl(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="relative bg-black rounded-lg overflow-hidden max-w-5xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setVideoUrl(null)}
+                className="absolute top-4 left-4 z-10 bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors"
+              >
+                <FiX size={24} />
+              </button>
+              <div className="aspect-video">
+                <iframe
+                  src={videoUrl}
+                  title="فيديو الدورة"
+                  className="w-full h-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
