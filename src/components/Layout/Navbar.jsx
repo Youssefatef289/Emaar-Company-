@@ -49,20 +49,20 @@ const Navbar = () => {
           <div className="w-full">
             <div className="container-custom max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3 space-x-reverse">
+            <Link to="/" className="flex items-center space-x-4 space-x-reverse">
               <img 
                 src="/image/Logo.png" 
                 alt="شركة إعمار" 
-                className="h-14 w-auto object-contain"
+                className="h-20 md:h-24 w-auto object-contain"
               />
-              <div className="flex flex-col text-center">
-                <span className="text-xl md:text-2xl font-bold text-primary-700 whitespace-nowrap">
+              <div className="flex flex-col text-right">
+                <span className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary-700 whitespace-nowrap">
                   اعمار
                 </span>
-                <span className="text-sm md:text-base font-semibold text-gray-700 whitespace-nowrap">
+                <span className="text-sm md:text-base font-bold text-gray-700 whitespace-nowrap">
                   للمقاولات و الاعمال المساحيه
                 </span>
-                <span className="text-sm md:text-base font-semibold text-gray-700 whitespace-nowrap">
+                <span className="text-sm md:text-base font-bold text-gray-700 whitespace-nowrap">
                   و الاستثمار العفارى
                 </span>
               </div>
@@ -80,7 +80,7 @@ const Navbar = () => {
                     >
                       <Link
                         to={link.path}
-                        className="flex items-center space-x-1 space-x-reverse text-gray-700 font-semibold hover:text-primary-700 transition-colors duration-300"
+                        className="flex items-center space-x-1 space-x-reverse text-gray-700 font-bold hover:text-primary-700 transition-colors duration-300"
                       >
                         <span>{language === 'ar' ? link.label : link.labelEn}</span>
                         <FiChevronDown size={16} />
@@ -114,7 +114,7 @@ const Navbar = () => {
                   ) : (
                     <Link
                       to={link.path}
-                      className={`text-gray-700 font-semibold transition-colors duration-300 ${
+                      className={`text-gray-700 font-bold transition-colors duration-300 ${
                         location.pathname === link.path
                           ? 'text-primary-700'
                           : 'hover:text-primary-700'
@@ -156,7 +156,7 @@ const Navbar = () => {
                   {link.hasDropdown ? (
                     <div>
                       <div className="flex items-center justify-between py-2">
-                        <span className={`font-semibold transition-colors text-gray-700 ${
+                        <span className={`font-bold transition-colors text-gray-700 ${
                           location.pathname === link.path
                             ? 'text-primary-700'
                             : ''
@@ -211,7 +211,7 @@ const Navbar = () => {
                     <Link
                       to={link.path}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={`block py-2 font-semibold transition-colors text-gray-700 ${
+                      className={`block py-2 font-bold transition-colors text-gray-700 ${
                         location.pathname === link.path
                           ? 'text-primary-700'
                           : 'hover:text-primary-700'
