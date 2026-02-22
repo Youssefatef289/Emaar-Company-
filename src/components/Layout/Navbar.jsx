@@ -32,7 +32,7 @@ const Navbar = () => {
       hasDropdown: true 
     },
     { path: '/real-estate-marketing', label: 'التسويق العقاري', labelEn: 'Real Estate Marketing' },
-    { path: '/surveying-services', label: 'الدورات المساحية', labelEn: 'Surveying Courses' },
+    { path: '/surveying-services', label: 'الدورات التدريبية', labelEn: 'Training Courses' },
     { path: '/contact', label: 'تواصل معنا', labelEn: 'Contact Us' },
   ]
 
