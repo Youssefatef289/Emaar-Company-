@@ -69,7 +69,7 @@ const AboutSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient-custom">
             من نحن
           </h2>
           <div className="about-section-divider"></div>
@@ -89,19 +89,19 @@ const AboutSection = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <h3 className="text-3xl font-bold mb-6 text-gray-800">رؤيتنا</h3>
+            <h3 className="text-3xl font-extrabold mb-6 text-gray-900">رؤيتنا</h3>
             <p className="text-gray-600 text-lg leading-relaxed mb-4">
               نسعى لأن نكون الشركة الرائدة في التطوير العقاري والمقاولات والأعمال المساحية في مصر والمنطقة، 
               من خلال تقديم مشاريع متميزة تلبي احتياجات عملائنا وتضيف قيمة حقيقية للمجتمع. نهدف لبناء مستقبل أفضل 
               من خلال مشاريع مستدامة وعالية الجودة.
             </p>
-            <h3 className="text-3xl font-bold mb-6 text-gray-800 mt-8">مهمتنا</h3>
+            <h3 className="text-3xl font-extrabold mb-6 text-gray-900 mt-8">مهمتنا</h3>
             <p className="text-gray-600 text-lg leading-relaxed mb-4">
               نلتزم بتقديم خدمات عالية الجودة في التطوير العقاري والمقاولات والأعمال المساحية، 
               مع التركيز على الابتكار والاستدامة ورضا العملاء، من خلال فريق محترف 
               وشراكات استراتيجية قوية. نسعى دائمًا لتجاوز توقعات عملائنا وتحقيق أفضل النتائج.
             </p>
-            <h3 className="text-3xl font-bold mb-6 text-gray-800 mt-8">قيمنا</h3>
+            <h3 className="text-3xl font-extrabold mb-6 text-gray-900 mt-8">قيمنا</h3>
             <p className="text-gray-600 text-lg leading-relaxed">
               نؤمن بالشفافية والجودة والابتكار والالتزام. هذه القيم هي أساس كل ما نقوم به، 
               ونسعى دائمًا لتطبيقها في جميع مشاريعنا وخدماتنا لضمان رضا عملائنا وبناء علاقات طويلة الأمد.
@@ -148,7 +148,7 @@ const AboutSection = () => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="mb-16"
         >
-          <h3 className="text-3xl font-bold mb-8 text-center text-gray-800">ما يميزنا</h3>
+          <h3 className="text-3xl font-extrabold mb-8 text-center text-gray-900">ما يميزنا</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
@@ -161,7 +161,7 @@ const AboutSection = () => {
                 <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <feature.icon className="about-section-icon" size={32} />
                 </div>
-                <h4 className="text-xl font-bold mb-3 text-gray-800">{feature.title}</h4>
+                <h4 className="text-xl font-extrabold mb-3 text-gray-900">{feature.title}</h4>
                 <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}

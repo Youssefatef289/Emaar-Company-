@@ -46,7 +46,7 @@ const About = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient">
               قيمنا
             </h2>
             <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
@@ -64,7 +64,7 @@ const About = () => {
                 <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <value.icon style={{ color: '#d6ac72' }} size={32} />
                 </div>
-                <h4 className="text-xl font-bold mb-3 text-gray-800">{value.title}</h4>
+                <h4 className="text-xl font-extrabold mb-3 text-gray-900">{value.title}</h4>
                 <p className="text-gray-600 leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
@@ -76,7 +76,7 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h3 className="text-3xl font-bold mb-6 text-gray-800">إنجازاتنا</h3>
+              <h3 className="text-3xl font-extrabold mb-6 text-gray-900">إنجازاتنا</h3>
               <ul className="space-y-4">
                 {achievements.map((achievement, index) => (
                   <motion.li

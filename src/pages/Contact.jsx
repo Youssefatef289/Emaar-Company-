@@ -80,7 +80,7 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient">
             تواصل معنا
           </h1>
           <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
@@ -101,7 +101,7 @@ const Contact = () => {
               <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <info.icon style={{ color: '#d6ac72' }} size={32} />
               </div>
-              <h3 className="text-xl font-bold mb-2 text-gray-800">{info.title}</h3>
+              <h3 className="text-xl font-extrabold mb-2 text-gray-900">{info.title}</h3>
               {info.link ? (
                 <a
                   href={info.link}
@@ -125,7 +125,7 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-8 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">أرسل لنا رسالة</h2>
+            <h2 className="text-3xl font-extrabold mb-6 text-gray-900">أرسل لنا رسالة</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
@@ -249,7 +249,7 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-8 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">موقعنا</h2>
+            <h2 className="text-3xl font-extrabold mb-6 text-gray-900">موقعنا</h2>
             <div className="aspect-video rounded-lg overflow-hidden bg-gray-200">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.5!2d31.2357!3d30.0444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzM5LjgiTiAzMcKwMTQnMDguNSJF!5e0!3m2!1sen!2seg!4v1234567890"

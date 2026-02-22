@@ -110,7 +110,7 @@ const CurrentProjects = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-white drop-shadow-lg">
               مشاريعنا الحالية
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
@@ -181,7 +181,7 @@ const CurrentProjects = () => {
               </div>
 
               <div className="p-4">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+                <h3 className="text-xl font-extrabold text-gray-900 mb-2">{project.title}</h3>
                 <p className="text-sm text-gray-600 mb-3 leading-relaxed line-clamp-2">{project.description}</p>
                 {(project.cardNote || project.cardUnitsMix) && (
                   <div className="mb-3 space-y-1">

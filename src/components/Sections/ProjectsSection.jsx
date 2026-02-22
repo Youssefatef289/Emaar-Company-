@@ -86,7 +86,7 @@ const ProjectsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient-custom">
             مشاريعنا
           </h2>
           <div className="projects-section-divider"></div>
@@ -137,7 +137,7 @@ const ProjectsSection = () => {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-bold mb-3 text-gray-800">{project.title}</h3>
+                <h3 className="text-2xl font-extrabold mb-3 text-gray-900">{project.title}</h3>
                 {project.cardNote && (
                   <p className="text-sm font-bold text-gray-800 mb-2" style={{ color: '#d6ac72' }}>
                     {project.cardNote}

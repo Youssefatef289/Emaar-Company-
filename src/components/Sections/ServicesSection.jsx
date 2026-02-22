@@ -71,7 +71,7 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient-custom">
             خدماتنا
           </h2>
           <div className="services-section-divider"></div>
@@ -92,7 +92,7 @@ const ServicesSection = () => {
               <div className={`w-16 h-16 ${service.color} rounded-xl flex items-center justify-center mb-6 text-white`}>
                 <service.icon size={32} />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">{service.title}</h3>
+              <h3 className="text-2xl font-extrabold mb-4 text-gray-900">{service.title}</h3>
               <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
               <Link
                 to="/services"

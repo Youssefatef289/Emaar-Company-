@@ -80,7 +80,7 @@ const HowWeHelpSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient-custom">
             كيف نساعدك
           </h2>
           <div className="how-we-help-divider"></div>
@@ -102,7 +102,7 @@ const HowWeHelpSection = () => {
               <div className={`w-16 h-16 ${benefit.color} rounded-xl flex items-center justify-center mb-6 text-white`}>
                 <benefit.icon size={32} />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">{benefit.title}</h3>
+              <h3 className="text-2xl font-extrabold mb-4 text-gray-900">{benefit.title}</h3>
               <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
             </motion.div>
           ))}
@@ -115,7 +115,7 @@ const HowWeHelpSection = () => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="mb-16"
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+          <h3 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-900">
             خطوات العمل معنا
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -130,7 +130,7 @@ const HowWeHelpSection = () => {
                 <div className="how-we-help-step-circle text-2xl font-bold">
                   {step.number}
                 </div>
-                <h4 className="text-xl font-bold mb-3 text-gray-800">{step.title}</h4>
+                <h4 className="text-xl font-extrabold mb-3 text-gray-900">{step.title}</h4>
                 <p className="text-gray-600 leading-relaxed">{step.description}</p>
               </motion.div>
             ))}
@@ -144,7 +144,7 @@ const HowWeHelpSection = () => {
           transition={{ delay: 1.1, duration: 0.6 }}
           className="how-we-help-cta"
         >
-          <h3 className="text-3xl md:text-4xl font-bold mb-4">
+          <h3 className="text-3xl md:text-4xl font-extrabold mb-4">
             جاهزون لبدء مشروعك؟
           </h3>
           <p className="text-xl mb-8 text-primary-100 max-w-2xl mx-auto">

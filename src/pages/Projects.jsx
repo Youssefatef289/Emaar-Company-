@@ -11,7 +11,7 @@ const Projects = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient">
             مشاريعنا
           </h1>
           <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
@@ -32,7 +32,7 @@ const Projects = () => {
             className="bg-white rounded-2xl shadow-lg p-8 text-center card-hover group"
           >
             <div className="text-6xl mb-4">🏗️</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">المشاريع الحالية</h2>
+            <h2 className="text-2xl font-extrabold text-gray-900 mb-3">المشاريع الحالية</h2>
             <p className="text-gray-600 mb-4">
               تعرف على مشاريعنا الجارية وآخر التطورات
             </p>
@@ -47,7 +47,7 @@ const Projects = () => {
             className="bg-white rounded-2xl shadow-lg p-8 text-center card-hover group"
           >
             <div className="text-6xl mb-4">✅</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">المشاريع السابقة</h2>
+            <h2 className="text-2xl font-extrabold text-gray-900 mb-3">المشاريع السابقة</h2>
             <p className="text-gray-600 mb-4">
               استعرض مشاريعنا المكتملة التي نفذناها باحترافية عالية
             </p>

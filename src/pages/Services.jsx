@@ -106,7 +106,7 @@ const Services = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-gradient">
             خدماتنا
           </h1>
           <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
@@ -128,7 +128,7 @@ const Services = () => {
                 <div className={`w-20 h-20 ${service.color} rounded-xl flex items-center justify-center mb-6 text-white`}>
                   <service.icon size={40} />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
+                <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-gray-900">
                   {service.title}
                 </h2>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed">
