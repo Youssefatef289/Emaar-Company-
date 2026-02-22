@@ -32,12 +32,12 @@ const Projects = () => {
             className="bg-white rounded-2xl shadow-lg p-8 text-center card-hover group"
           >
             <div className="text-6xl mb-4">🏗️</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">المشاريع الحالية</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Current Projects</h2>
             <p className="text-gray-600 mb-4">
-              تعرف على مشاريعنا الجارية وأحدث التطورات
+              Learn about our ongoing projects and latest developments
             </p>
             <div className="inline-flex items-center gap-2 text-primary-700 font-semibold group-hover:gap-4 transition-all">
-              <span>عرض المشاريع الحالية</span>
+              <span>View Current Projects</span>
               <span>→</span>
             </div>
           </Link>
@@ -47,12 +47,12 @@ const Projects = () => {
             className="bg-white rounded-2xl shadow-lg p-8 text-center card-hover group"
           >
             <div className="text-6xl mb-4">✅</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">المشاريع السابقة</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Previous Projects</h2>
             <p className="text-gray-600 mb-4">
-              استعرض مشاريعنا المكتملة التي نفذناها باحترافية عالية
+              Browse our completed projects executed with high professionalism
             </p>
             <div className="inline-flex items-center gap-2 text-primary-700 font-semibold group-hover:gap-4 transition-all">
-              <span>عرض المشاريع السابقة</span>
+              <span>View Previous Projects</span>
               <span>→</span>
             </div>
           </Link>
