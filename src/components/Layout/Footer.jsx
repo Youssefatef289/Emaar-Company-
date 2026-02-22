@@ -102,11 +102,11 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="footer-section">
-            <h3 className="footer-title">تواصل معنا</h3>
+            <h3 className="footer-title">Contact Us</h3>
             <ul className="footer-contact">
               <li className="footer-contact-item">
                 <FiMapPin className="footer-icon" size={20} />
-                <span>الزراعيين - عبد السلام عارف - اعلى مطعم بكار</span>
+                <span>Al-Ziraaiyin - Abdel Salam Aref - Above Bakar Restaurant</span>
               </li>
               <li className="footer-contact-item">
                 <FiPhone className="footer-icon" size={20} />
@@ -132,7 +132,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {currentYear} شركة إعمار للمقاولات والأعمال المساحية والاستثمار العقاري. جميع الحقوق محفوظة.
+            © {currentYear} Emaar Company for Contracting, Surveying Works, and Real Estate Investment. All rights reserved.
           </p>
         </div>
       </div>
