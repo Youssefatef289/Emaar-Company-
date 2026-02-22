@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import HeroSlider from '../components/Hero/HeroSlider'
+import HeroSection from '../components/Hero/HeroSection'
 import AboutSection from '../components/Sections/AboutSection'
 import ServicesSection from '../components/Sections/ServicesSection'
 import ProjectsSection from '../components/Sections/ProjectsSection'
@@ -10,7 +10,7 @@ import './Home.css'
 const Home = () => {
   return (
     <div className="w-full">
-      <HeroSlider />
+      <HeroSection />
       <AboutSection />
       <StatsSection />
       <ServicesSection />
