@@ -48,13 +48,6 @@ const HeroSlider = () => {
     setCurrentSlide(index)
   }
 
-  const goToPrevious = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }
-
-  const goToNext = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }
 
   return (
     <div className="hero-slider-container relative overflow-hidden">
@@ -162,46 +155,6 @@ const HeroSlider = () => {
                   </motion.div>
                 </div>
               </div>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={goToPrevious}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800/80 hover:bg-gray-900 text-white p-3 rounded-full transition-all z-20 shadow-lg"
-                aria-label="Previous slide"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-              <button
-                onClick={goToNext}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800/80 hover:bg-gray-900 text-white p-3 rounded-full transition-all z-20 shadow-lg"
-                aria-label="Next slide"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
 
               {/* Slide Indicators */}
               <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
