@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Controller } from 'swiper/modules'
 import { Link } from 'react-router-dom'
@@ -7,58 +7,50 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import './HeroSlider.css'
 import { ICONS } from '../../constants/assets'
-import { useLanguage } from '../../contexts/LanguageContext'
 
 const HeroSlider = () => {
   const [imageSwiper, setImageSwiper] = useState(null)
   const [textSwiper, setTextSwiper] = useState(null)
-  const { language, t } = useLanguage()
 
   // بيانات السلايدر - الصور والنصوص معاً
-  const slides = useMemo(() => [
+  const slides = [
     {
       id: 1,
       image: '/image/Slider/slider (1).jpg',
-      subtitle: language === 'ar' ? 'ليه تختار' : 'Why Choose',
-      title: language === 'ar' ? 'إعمار' : 'Emaar',
-      titleSuffix: language === 'ar' ? 'للاستثمار العقاري؟' : 'for Real Estate Investment?',
-      description: language === 'ar' 
-        ? 'نقدم لك أفضل الفرص الاستثمارية في السوق العقاري المصري مع ضمانات عالية الجودة وخطط سداد مرنة تناسب احتياجاتك.'
-        : 'We offer you the best investment opportunities in the Egyptian real estate market with high-quality guarantees and flexible payment plans that suit your needs.',
-      primaryCta: language === 'ar' ? 'اطلب استشارة مجانية' : 'Request Free Consultation',
+      subtitle: 'Why Choose',
+      title: 'Emaar',
+      titleSuffix: 'for Real Estate Investment?',
+      description: 'We offer you the best investment opportunities in the Egyptian real estate market with high-quality guarantees and flexible payment plans that suit your needs.',
+      primaryCta: 'Request Free Consultation',
       primaryLink: '/contact',
-      secondaryCta: language === 'ar' ? 'شاهد مشاريعنا' : 'View Our Projects',
+      secondaryCta: 'View Our Projects',
       secondaryLink: '/projects',
     },
     {
       id: 2,
       image: '/image/Slider/slider (2).jpg',
-      subtitle: language === 'ar' ? 'حقق حلمك مع' : 'Achieve Your Dream with',
-      title: language === 'ar' ? 'إعمار' : 'Emaar',
-      titleSuffix: language === 'ar' ? 'من غير ما تقلق من التكاليف' : 'Without Worrying About Costs',
-      description: language === 'ar'
-        ? 'خطط سداد مرنة وأسعار تنافسية تجعل حلمك في امتلاك عقار حقيقي. نضمن لك أفضل قيمة مقابل المال مع جودة لا مثيل لها.'
-        : 'Flexible payment plans and competitive prices make your dream of owning real estate a reality. We guarantee you the best value for money with unmatched quality.',
-      primaryCta: language === 'ar' ? 'اطلب عرض سعر' : 'Request a Quote',
+      subtitle: 'Achieve Your Dream with',
+      title: 'Emaar',
+      titleSuffix: 'Without Worrying About Costs',
+      description: 'Flexible payment plans and competitive prices make your dream of owning real estate a reality. We guarantee you the best value for money with unmatched quality.',
+      primaryCta: 'Request a Quote',
       primaryLink: '/contact',
-      secondaryCta: language === 'ar' ? 'تعرف على عروضنا' : 'View Our Offers',
+      secondaryCta: 'View Our Offers',
       secondaryLink: '/offers',
     },
     {
       id: 3,
       image: '/image/Slider/slider (3).jpg',
-      subtitle: language === 'ar' ? 'عمرك فكرت ليه الاستثمار في العقارات' : 'Have You Ever Wondered Why',
-      title: language === 'ar' ? 'قيمته بتزيد مع الوقت' : 'Real Estate Investment',
-      titleSuffix: language === 'ar' ? '' : 'Increases in Value Over Time',
-      description: language === 'ar'
-        ? 'الاستثمار العقاري هو الاستثمار الأكثر أماناً وربحية على المدى الطويل. مع إعمار، تضمن نمو قيمة استثمارك مع مرور الوقت.'
-        : 'Real estate investment is the safest and most profitable investment in the long term. With Emaar, you ensure the growth of your investment value over time.',
-      primaryCta: language === 'ar' ? 'ابدأ استثمارك الآن' : 'Start Your Investment Now',
+      subtitle: 'Have You Ever Wondered Why',
+      title: 'Real Estate Investment',
+      titleSuffix: 'Increases in Value Over Time',
+      description: 'Real estate investment is the safest and most profitable investment in the long term. With Emaar, you ensure the growth of your investment value over time.',
+      primaryCta: 'Start Your Investment Now',
       primaryLink: '/contact',
-      secondaryCta: language === 'ar' ? 'تعرف علينا' : 'Learn About Us',
+      secondaryCta: 'Learn About Us',
       secondaryLink: '/about',
     },
-  ], [language])
+  ]
 
   return (
     <div className="relative w-full overflow-hidden bg-gray-900 hero-slider-container">

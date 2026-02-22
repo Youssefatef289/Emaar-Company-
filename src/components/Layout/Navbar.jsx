@@ -57,13 +57,13 @@ const Navbar = () => {
               />
               <div className="flex flex-col text-center">
                 <span className="text-xl md:text-2xl font-bold text-primary-700 whitespace-nowrap">
-                  {language === 'ar' ? 'اعمار' : 'Emaar'}
+                  Emaar
                 </span>
                 <span className="text-sm md:text-base font-semibold text-gray-700 whitespace-nowrap">
-                  {language === 'ar' ? 'للمقاولات و الاعمال المساحيه' : 'Contracting & Surveying Works'}
+                  Contracting & Surveying Works
                 </span>
                 <span className="text-sm md:text-base font-semibold text-gray-700 whitespace-nowrap">
-                  {language === 'ar' ? 'و الاستثمار العفارى' : '& Real Estate Investment'}
+                  & Real Estate Investment
                 </span>
               </div>
             </Link>
@@ -73,15 +73,11 @@ const Navbar = () => {
               {/* Language Toggle Button */}
               <button
                 onClick={toggleLanguage}
-                className="flex items-center space-x-2 space-x-reverse px-4 py-2 rounded-lg transition-all duration-300 font-semibold"
-                style={{ 
-                  backgroundColor: language === 'ar' ? '#d6ac72' : '#f3f4f6',
-                  color: language === 'ar' ? 'white' : '#374151',
-                  border: language === 'ar' ? 'none' : '2px solid #d6ac72'
-                }}
+                className="flex items-center space-x-2 space-x-reverse px-4 py-2 rounded-lg font-semibold transition-colors duration-300 hover:bg-primary-50"
+                style={{ color: '#d6ac72' }}
                 title={language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
               >
-                <FiGlobe size={18} />
+                <FiGlobe size={20} />
                 <span>{language === 'ar' ? 'EN' : 'عربي'}</span>
               </button>
               
@@ -142,30 +138,13 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Mobile Menu Button and Language Toggle */}
-            <div className="md:hidden flex items-center space-x-2 space-x-reverse">
-              {/* Language Toggle Button - Mobile */}
-              <button
-                onClick={toggleLanguage}
-                className="flex items-center space-x-1 space-x-reverse px-3 py-2 rounded-lg transition-all duration-300 font-semibold text-sm"
-                style={{ 
-                  backgroundColor: language === 'ar' ? '#d6ac72' : '#f3f4f6',
-                  color: language === 'ar' ? 'white' : '#374151',
-                  border: language === 'ar' ? 'none' : '2px solid #d6ac72'
-                }}
-                title={language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
-              >
-                <FiGlobe size={16} />
-                <span>{language === 'ar' ? 'EN' : 'عربي'}</span>
-              </button>
-              
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-lg transition-colors text-gray-700"
-              >
-                {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-              </button>
-            </div>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg transition-colors text-gray-700"
+            >
+              {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
             </div>
           </div>
         </div>
@@ -183,24 +162,18 @@ const Navbar = () => {
             }`}
           >
             <div className="container-custom py-4 space-y-4">
-              {/* Language Toggle Button in Mobile Menu */}
-              <div className="pb-4 border-b border-gray-200">
-                <button
-                  onClick={() => {
-                    toggleLanguage()
-                    setIsMobileMenuOpen(false)
-                  }}
-                  className="w-full flex items-center justify-center space-x-2 space-x-reverse px-4 py-3 rounded-lg transition-all duration-300 font-semibold"
-                  style={{ 
-                    backgroundColor: language === 'ar' ? '#d6ac72' : '#f3f4f6',
-                    color: language === 'ar' ? 'white' : '#374151',
-                    border: language === 'ar' ? 'none' : '2px solid #d6ac72'
-                  }}
-                >
-                  <FiGlobe size={18} />
-                  <span>{language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}</span>
-                </button>
-              </div>
+              {/* Language Toggle Button - Mobile */}
+              <button
+                onClick={() => {
+                  toggleLanguage()
+                  setIsMobileMenuOpen(false)
+                }}
+                className="flex items-center justify-center space-x-2 space-x-reverse w-full px-4 py-3 rounded-lg font-semibold transition-colors duration-300 mb-4"
+                style={{ backgroundColor: '#d6ac72', color: 'white' }}
+              >
+                <FiGlobe size={20} />
+                <span>{language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}</span>
+              </button>
               
               {navLinks.map((link) => (
                 <div key={link.path}>
@@ -241,7 +214,7 @@ const Navbar = () => {
                                 }}
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
-                                {language === 'ar' ? 'المشاريع الحالية' : 'Current Projects'}
+                                Current Projects
                               </Link>
                               <Link
                                 to="/previous-projects"
@@ -251,7 +224,7 @@ const Navbar = () => {
                                 }}
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
-                                {language === 'ar' ? 'المشاريع السابقة' : 'Previous Projects'}
+                                Previous Projects
                               </Link>
                             </div>
                           </motion.div>
