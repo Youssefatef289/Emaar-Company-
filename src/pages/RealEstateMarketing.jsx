@@ -1,12 +1,14 @@
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { FiSearch, FiFilter, FiMapPin, FiHome, FiDollarSign, FiMaximize2 } from 'react-icons/fi'
+import { FaWhatsapp } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useAuth } from '../contexts/AuthContext'
 
 const RealEstateMarketing = () => {
   const { t } = useLanguage()
   const { isAuthenticated, addFavorite } = useAuth()
+  const [activeTab, setActiveTab] = useState('تمليك')
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
     area: '',
@@ -21,56 +23,165 @@ const RealEstateMarketing = () => {
   const [showFilters, setShowFilters] = useState(false)
 
   // Mock data - In production, this would come from an API
-  const units = [
-    {
-      id: 1,
-      title: 'شقة فاخرة في قلب القاهرة',
-      area: 'المعادي',
-      rooms: 3,
-      finishing: 'سوبر لوكس',
-      areaSize: 120,
-      floor: 5,
-      price: 2500000,
-      image: '/image/medium (1).webp',
-      description: 'شقة فاخرة بتشطيب سوبر لوكس في موقع مميز',
-    },
-    {
-      id: 2,
-      title: 'شقة دوبلكس راقية',
-      area: 'مدينة نصر',
-      rooms: 4,
-      finishing: 'لوكس',
-      areaSize: 180,
-      floor: 2,
-      price: 3500000,
-      image: '/image/medium (2).webp',
-      description: 'دوبلكس راقي بمساحة واسعة',
-    },
-    {
-      id: 3,
-      title: 'شقة استوديو حديثة',
-      area: 'زايد',
-      rooms: 1,
-      finishing: 'نص تشطيب',
-      areaSize: 60,
-      floor: 10,
-      price: 800000,
-      image: '/image/medium (3).webp',
-      description: 'شقة استوديو حديثة بموقع ممتاز',
-    },
-    {
-      id: 4,
-      title: 'شقة عائلية كبيرة',
-      area: 'الشروق',
-      rooms: 5,
-      finishing: 'سوبر لوكس',
-      areaSize: 250,
-      floor: 3,
-      price: 4500000,
-      image: '/image/medium (4).webp',
-      description: 'شقة عائلية كبيرة بتشطيب فاخر',
-    },
-  ]
+  const allUnits = {
+    'تمليك': [
+      {
+        id: 1,
+        title: 'شقة تمليك فاخرة - بني سويف',
+        area: 'بني سويف الجديدة',
+        rooms: 3,
+        finishing: 'سوبر لوكس',
+        areaSize: 120,
+        floor: 5,
+        price: 2500000,
+        image: '/image/medium (1).webp',
+        description: 'شقة تمليك فاخرة بتشطيب سوبر لوكس في موقع مميز',
+        type: 'تمليك',
+      },
+      {
+        id: 2,
+        title: 'شقة تمليك دوبلكس',
+        area: 'بني سويف',
+        rooms: 4,
+        finishing: 'لوكس',
+        areaSize: 180,
+        floor: 2,
+        price: 3500000,
+        image: '/image/medium (2).webp',
+        description: 'دوبلكس راقي بمساحة واسعة',
+        type: 'تمليك',
+      },
+      {
+        id: 3,
+        title: 'شقة تمليك استوديو',
+        area: 'بني سويف الجديدة',
+        rooms: 1,
+        finishing: 'نص تشطيب',
+        areaSize: 60,
+        floor: 10,
+        price: 800000,
+        image: '/image/medium (3).webp',
+        description: 'شقة استوديو حديثة بموقع ممتاز',
+        type: 'تمليك',
+      },
+    ],
+    'إيجار': [
+      {
+        id: 4,
+        title: 'شقة إيجار عائلية',
+        area: 'بني سويف',
+        rooms: 3,
+        finishing: 'سوبر لوكس',
+        areaSize: 130,
+        floor: 4,
+        price: 5000,
+        image: '/image/medium (4).webp',
+        description: 'شقة إيجار عائلية بتشطيب فاخر',
+        type: 'إيجار',
+        monthlyRent: true,
+      },
+      {
+        id: 5,
+        title: 'شقة إيجار راقية',
+        area: 'بني سويف الجديدة',
+        rooms: 2,
+        finishing: 'لوكس',
+        areaSize: 90,
+        floor: 6,
+        price: 3500,
+        image: '/image/medium (5).webp',
+        description: 'شقة إيجار راقية بموقع مميز',
+        type: 'إيجار',
+        monthlyRent: true,
+      },
+    ],
+    'مخازن': [
+      {
+        id: 6,
+        title: 'مخزن تجاري للبيع',
+        area: 'بني سويف',
+        rooms: 0,
+        finishing: 'نص تشطيب',
+        areaSize: 200,
+        floor: 0,
+        price: 1500000,
+        image: '/image/medium (6).webp',
+        description: 'مخزن تجاري بمساحة واسعة',
+        type: 'مخازن',
+      },
+      {
+        id: 7,
+        title: 'مخزن كبير',
+        area: 'بني سويف الجديدة',
+        rooms: 0,
+        finishing: 'نص تشطيب',
+        areaSize: 300,
+        floor: 0,
+        price: 2200000,
+        image: '/image/medium (7).webp',
+        description: 'مخزن كبير بموقع استراتيجي',
+        type: 'مخازن',
+      },
+    ],
+    'إداري': [
+      {
+        id: 8,
+        title: 'شقة إداري للبيع',
+        area: 'بني سويف',
+        rooms: 2,
+        finishing: 'لوكس',
+        areaSize: 100,
+        floor: 3,
+        price: 1800000,
+        image: '/image/medium (1).webp',
+        description: 'شقة إداري مناسبة للمكاتب',
+        type: 'إداري',
+      },
+      {
+        id: 9,
+        title: 'شقة إداري فاخرة',
+        area: 'بني سويف الجديدة',
+        rooms: 3,
+        finishing: 'سوبر لوكس',
+        areaSize: 150,
+        floor: 5,
+        price: 2800000,
+        image: '/image/medium (2).webp',
+        description: 'شقة إداري فاخرة بموقع مميز',
+        type: 'إداري',
+      },
+    ],
+    'أراضي': [
+      {
+        id: 10,
+        title: 'أرض سكنية للبيع',
+        area: 'بني سويف الجديدة',
+        rooms: 0,
+        finishing: '',
+        areaSize: 500,
+        floor: 0,
+        price: 3000000,
+        image: '/image/medium (3).webp',
+        description: 'أرض سكنية بمساحة 500 متر',
+        type: 'أراضي',
+      },
+      {
+        id: 11,
+        title: 'أرض تجارية',
+        area: 'بني سويف',
+        rooms: 0,
+        finishing: '',
+        areaSize: 300,
+        floor: 0,
+        price: 2500000,
+        image: '/image/medium (4).webp',
+        description: 'أرض تجارية بموقع استراتيجي',
+        type: 'أراضي',
+      },
+    ],
+  }
+
+  const units = allUnits[activeTab] || []
 
   const filteredUnits = useMemo(() => {
     return units.filter(unit => {
@@ -140,6 +251,38 @@ const RealEstateMarketing = () => {
       </div>
 
       <div className="container-custom mt-12">
+
+        {/* Tabs Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-xl shadow-md p-2 mb-6"
+        >
+          <div className="flex flex-wrap gap-2 justify-center">
+            {['تمليك', 'إيجار', 'مخازن', 'إداري', 'أراضي'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => {
+                  setActiveTab(tab)
+                  setSearchTerm('')
+                  handleResetFilters()
+                }}
+                className={`px-6 py-3 rounded-lg font-bold transition-all duration-300 ${
+                  activeTab === tab
+                    ? 'text-white shadow-lg transform scale-105'
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+                style={activeTab === tab ? { backgroundColor: '#d6ac72' } : {}}
+              >
+                {tab === 'تمليك' && 'شقق تمليك'}
+                {tab === 'إيجار' && 'شقق إيجار'}
+                {tab === 'مخازن' && 'مخازن'}
+                {tab === 'إداري' && 'شقق إداري'}
+                {tab === 'أراضي' && 'أراضي'}
+              </button>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Search and Filter Bar */}
         <motion.div
@@ -340,7 +483,9 @@ const RealEstateMarketing = () => {
                     </div>
                     <div className="flex items-center font-bold text-base pt-1" style={{ color: '#d6ac72' }}>
                       <FiDollarSign size={16} />
-                      <span>{unit.price.toLocaleString()} جنيه</span>
+                      <span>
+                        {unit.price.toLocaleString()} {unit.monthlyRent ? 'جنيه/شهر' : 'جنيه'}
+                      </span>
                     </div>
                   </div>
 
@@ -352,6 +497,15 @@ const RealEstateMarketing = () => {
                       className="flex-1 btn-primary text-center text-sm py-2"
                     >
                       عرض التفاصيل
+                    </a>
+                    <a
+                      href={`https://wa.me/2010027347377?text=مرحباً، أريد الاستفسار عن: ${encodeURIComponent(unit.title)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <FaWhatsapp size={18} />
+                      <span className="hidden sm:inline">واتساب</span>
                     </a>
                     {isAuthenticated && (
                       <button
