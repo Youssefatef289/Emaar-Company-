@@ -87,11 +87,11 @@ const ProjectsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
-            Our Projects
+            مشاريعنا
           </h2>
           <div className="projects-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We are proud of our distinguished projects that reflect our experience and commitment to quality
+            نفخر بمشاريعنا المتميزة التي تعكس خبرتنا والتزامنا بالجودة
           </p>
         </motion.div>
 
@@ -156,13 +156,13 @@ const ProjectsSection = () => {
                   {project.floors && (
                     <div className="flex items-center text-gray-600 text-sm">
                       <FiLayers className="ml-2" size={16} style={{ color: '#d6ac72' }} />
-                      <span>{project.floors} floors</span>
+                      <span>{project.floors} طوابق</span>
                     </div>
                   )}
                   {project.progress && (
                     <div className="flex items-center text-gray-600 text-sm">
                       <FiTrendingUp className="ml-2" size={16} style={{ color: '#d6ac72' }} />
-                      <span>Progress: {project.progress}%</span>
+                      <span>نسبة الإنجاز: {project.progress}%</span>
                       <div className="flex-1 mr-3 bg-gray-200 rounded-full h-2">
                         <div 
                           className="h-2 rounded-full transition-all duration-300"
@@ -173,7 +173,7 @@ const ProjectsSection = () => {
                   )}
                   {project.startingPrice && (
                     <div className="text-gray-600 text-sm">
-                      <span className="font-semibold">Starting from:</span> EGP {project.startingPrice.toLocaleString()}
+                      <span className="font-semibold">يبدأ من:</span> {project.startingPrice.toLocaleString()} ج.م
                     </div>
                   )}
                 </div>
@@ -181,7 +181,7 @@ const ProjectsSection = () => {
                   to={`/projects/${project.id}`}
                   className="projects-section-link inline-flex items-center"
                 >
-                  View Details
+                  عرض التفاصيل
                   <span className="mr-2">←</span>
                 </Link>
               </div>
@@ -196,7 +196,7 @@ const ProjectsSection = () => {
           className="text-center mt-12"
         >
           <Link to="/projects" className="btn-primary text-lg">
-            View All Projects
+            عرض جميع المشاريع
           </Link>
         </motion.div>
       </div>

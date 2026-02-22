@@ -11,38 +11,38 @@ const HowWeHelpSection = () => {
   const benefits = [
     {
       icon: FiCheckCircle,
-      title: 'Integrated Solutions',
-      description: 'We provide comprehensive solutions covering all your real estate needs from design to final delivery',
+      title: 'حلول متكاملة',
+      description: 'نقدم حلولاً شاملة تغطي جميع احتياجاتك العقارية من التصميم حتى التسليم النهائي',
       color: 'bg-blue-500',
     },
     {
       icon: FiAward,
-      title: 'High Quality',
-      description: 'We are committed to the highest quality standards in all our projects and services to ensure customer satisfaction',
+      title: 'جودة عالية',
+      description: 'نلتزم بأعلى معايير الجودة في جميع مشاريعنا وخدماتنا لضمان رضا العملاء',
       color: 'bg-green-500',
     },
     {
       icon: FiTrendingUp,
-      title: 'Smart Investment',
-      description: 'We help you make informed investment decisions that ensure a profitable return on your investment',
+      title: 'استثمار ذكي',
+      description: 'نساعدك على اتخاذ قرارات استثمارية مدروسة تضمن عائدًا مربحًا على استثمارك',
       color: 'bg-purple-500',
     },
     {
       icon: FiShield,
-      title: 'Guarantee and Reliability',
-      description: 'We provide comprehensive guarantees and after-sales services to ensure your comfort and confidence in your project',
+      title: 'ضمان وموثوقية',
+      description: 'نوفر ضمانات شاملة وخدمات ما بعد البيع لضمان راحتك وثقتك في مشروعك',
       color: 'bg-orange-500',
     },
     {
       icon: FiUsers,
-      title: 'Professional Team',
-      description: 'A specialized and experienced team ready to serve you at any time',
+      title: 'فريق محترف',
+      description: 'فريق متخصص وذو خبرة جاهز لخدمتك في أي وقت',
       color: 'bg-pink-500',
     },
     {
       icon: FiArrowLeft,
-      title: 'Continuous Support',
-      description: 'We provide continuous technical and advisory support before, during, and after completing your project',
+      title: 'دعم مستمر',
+      description: 'نوفر دعماً فنياً واستشارياً مستمراً قبل وأثناء وبعد إتمام مشروعك',
       color: 'bg-cyan-500',
     },
   ]
@@ -50,23 +50,23 @@ const HowWeHelpSection = () => {
   const steps = [
     {
       number: '01',
-      title: 'Free Consultation',
-      description: 'We start by understanding your needs and goals through a free consultation with our specialized team',
+      title: 'استشارة مجانية',
+      description: 'نبدأ بفهم احتياجاتك وأهدافك من خلال استشارة مجانية مع فريقنا المتخصص',
     },
     {
       number: '02',
-      title: 'Planning and Design',
-      description: 'We design a customized solution that fits your needs and budget using the latest technologies',
+      title: 'التخطيط والتصميم',
+      description: 'نصمم حلًا مخصصًا يناسب احتياجاتك وميزانيتك باستخدام أحدث التقنيات',
     },
     {
       number: '03',
-      title: 'Professional Execution',
-      description: 'We execute your project with the highest quality and professionalism standards while meeting deadlines',
+      title: 'تنفيذ احترافي',
+      description: 'ننفذ مشروعك بأعلى معايير الجودة والاحترافية مع الالتزام بالمواعيد',
     },
     {
       number: '04',
-      title: 'Delivery and Follow-up',
-      description: 'We deliver your completed project and continue to follow up to ensure your complete satisfaction',
+      title: 'التسليم والمتابعة',
+      description: 'نسلم مشروعك المكتمل ونستمر في المتابعة لضمان رضاك التام',
     },
   ]
 
@@ -81,11 +81,11 @@ const HowWeHelpSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
-            How We Help You
+            كيف نساعدك
           </h2>
           <div className="how-we-help-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We provide you with an exceptional experience in real estate development with integrated solutions and professional services
+            نقدم لك تجربة استثنائية في التطوير العقاري مع حلول متكاملة وخدمات احترافية
           </p>
         </motion.div>
 

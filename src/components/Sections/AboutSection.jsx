@@ -30,33 +30,33 @@ const AboutSection = () => {
   const features = [
     {
       icon: FiAward,
-      title: 'Long Experience',
-      description: 'More than 15 years of experience in real estate development, contracting, and surveying works',
+      title: 'خبرة طويلة',
+      description: 'أكثر من 15 عامًا من الخبرة في التطوير العقاري والمقاولات والأعمال المساحية',
     },
     {
       icon: FiTarget,
-      title: 'Clear Vision',
-      description: 'We strive to achieve a clear vision in developing distinguished real estate projects that meet market needs',
+      title: 'رؤية واضحة',
+      description: 'نسعى لتحقيق رؤية واضحة في تطوير مشاريع عقارية متميزة تلبي احتياجات السوق',
     },
     {
       icon: FiEye,
-      title: 'High Quality',
-      description: 'We are committed to the highest quality standards in all our projects and services with guaranteed satisfaction',
+      title: 'جودة عالية',
+      description: 'نلتزم بأعلى معايير الجودة في جميع مشاريعنا وخدماتنا مع ضمان الرضا التام',
     },
     {
       icon: FiUsers,
-      title: 'Professional Team',
-      description: 'A specialized and highly experienced team in all areas of real estate development and contracting',
+      title: 'فريق محترف',
+      description: 'فريق متخصص وذو خبرة عالية في جميع مجالات التطوير العقاري والمقاولات',
     },
     {
       icon: FiTrendingUp,
-      title: 'Continuous Growth',
-      description: 'Continuous growth in project portfolio and services with expansion into new areas',
+      title: 'نمو مستمر',
+      description: 'نمو مستمر في محفظة المشاريع والخدمات مع التوسع في مناطق جديدة',
     },
     {
       icon: FiShield,
-      title: 'Strong Guarantees',
-      description: 'We provide strong guarantees and flexible payment plans that suit all our clients\' needs',
+      title: 'ضمانات قوية',
+      description: 'نوفر ضمانات قوية وخطط دفع مرنة تناسب جميع احتياجات عملائنا',
     },
   ]
 
@@ -70,16 +70,16 @@ const AboutSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
-            About Us
+            من نحن
           </h2>
           <div className="about-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6">
-            Emaar Company for Contracting, Surveying Works, and Real Estate Investment is a leading company in real estate development and contracting in Egypt, 
-            established with the aim of providing integrated and high-quality solutions in the real estate, contracting, and surveying sectors.
+            شركة إعمار للمقاولات والأعمال المساحية والاستثمار العقاري هي شركة رائدة في التطوير العقاري والمقاولات في مصر، 
+            تأسست بهدف تقديم حلول متكاملة وعالية الجودة في قطاعات العقارات والمقاولات والمساحة.
           </p>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We provide comprehensive services including real estate development, general contracting, surveying works, 
-            and real estate investment, with a focus on quality, innovation, and customer satisfaction.
+            نقدم خدمات شاملة تشمل التطوير العقاري والمقاولات العامة والأعمال المساحية 
+            والاستثمار العقاري، مع التركيز على الجودة والابتكار ورضا العملاء.
           </p>
         </motion.div>
 
@@ -89,22 +89,22 @@ const AboutSection = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <h3 className="text-3xl font-bold mb-6 text-gray-800">Our Vision</h3>
+            <h3 className="text-3xl font-bold mb-6 text-gray-800">رؤيتنا</h3>
             <p className="text-gray-600 text-lg leading-relaxed mb-4">
-              We strive to be the leading company in real estate development, contracting, and surveying works in Egypt and the region, 
-              by providing distinguished projects that meet our clients' needs and add real value to society. We aim to build a better future 
-              through sustainable and high-quality projects.
+              نسعى لأن نكون الشركة الرائدة في التطوير العقاري والمقاولات والأعمال المساحية في مصر والمنطقة، 
+              من خلال تقديم مشاريع متميزة تلبي احتياجات عملائنا وتضيف قيمة حقيقية للمجتمع. نهدف لبناء مستقبل أفضل 
+              من خلال مشاريع مستدامة وعالية الجودة.
             </p>
-            <h3 className="text-3xl font-bold mb-6 text-gray-800 mt-8">Our Mission</h3>
+            <h3 className="text-3xl font-bold mb-6 text-gray-800 mt-8">مهمتنا</h3>
             <p className="text-gray-600 text-lg leading-relaxed mb-4">
-              We are committed to providing high-quality services in real estate development, contracting, and surveying works, 
-              with a focus on innovation, sustainability, and customer satisfaction, through a professional team 
-              and strong strategic partnerships. We always strive to exceed our clients' expectations and achieve the best results.
+              نلتزم بتقديم خدمات عالية الجودة في التطوير العقاري والمقاولات والأعمال المساحية، 
+              مع التركيز على الابتكار والاستدامة ورضا العملاء، من خلال فريق محترف 
+              وشراكات استراتيجية قوية. نسعى دائمًا لتجاوز توقعات عملائنا وتحقيق أفضل النتائج.
             </p>
-            <h3 className="text-3xl font-bold mb-6 text-gray-800 mt-8">Our Values</h3>
+            <h3 className="text-3xl font-bold mb-6 text-gray-800 mt-8">قيمنا</h3>
             <p className="text-gray-600 text-lg leading-relaxed">
-              We believe in transparency, quality, innovation, and commitment. These values are the foundation of everything we do, 
-              and we always strive to apply them in all our projects and services to ensure our clients' satisfaction and build long-term relationships.
+              نؤمن بالشفافية والجودة والابتكار والالتزام. هذه القيم هي أساس كل ما نقوم به، 
+              ونسعى دائمًا لتطبيقها في جميع مشاريعنا وخدماتنا لضمان رضا عملائنا وبناء علاقات طويلة الأمد.
             </p>
           </motion.div>
 
@@ -137,7 +137,7 @@ const AboutSection = () => {
             </div>
             <div className="absolute -bottom-6 -left-6 about-section-badge hidden md:block">
               <div className="text-4xl font-bold">15+</div>
-              <div className="text-lg">Years Experience</div>
+              <div className="text-lg">سنوات خبرة</div>
             </div>
           </motion.div>
         </div>
@@ -148,7 +148,7 @@ const AboutSection = () => {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="mb-16"
         >
-          <h3 className="text-3xl font-bold mb-8 text-center text-gray-800">What Sets Us Apart</h3>
+          <h3 className="text-3xl font-bold mb-8 text-center text-gray-800">ما يميزنا</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
