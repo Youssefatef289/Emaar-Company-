@@ -10,7 +10,7 @@ const StatsSection = () => {
 
   const stats = [
     { number: 100, suffix: '+', label: 'مشروع مكتمل' },
-    { number: 100, suffix: '+', label: 'عميل راضٍ' },
+    { number: 150, suffix: '+', label: 'عميل راضٍ' },
     { number: 15, suffix: '+', label: 'سنة خبرة' },
     { number: 20, suffix: '+', label: 'فريق محترف' },
   ]
