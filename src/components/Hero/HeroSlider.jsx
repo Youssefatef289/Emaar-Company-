@@ -21,17 +21,17 @@ const HeroSlider = () => {
   const slides = [
     {
       id: 1,
-      image: '/image/medium (1).webp',
+      image: '/image/Slider/slider (1).jpg',
       ...getSlideData('slide1'),
     },
     {
       id: 2,
-      image: '/image/medium (2).webp',
+      image: '/image/Slider/slider (2).jpg',
       ...getSlideData('slide2'),
     },
     {
       id: 3,
-      image: '/image/medium (3).webp',
+      image: '/image/Slider/slider (3).jpg',
       ...getSlideData('slide3'),
     },
   ]
@@ -69,36 +69,41 @@ const HeroSlider = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="relative w-full min-h-[80vh] flex items-center"
-              style={{
-                background: 'linear-gradient(135deg, #d6ac72 0%, #c49a5f 50%, #b2884c 100%)',
-              }}
+              className="relative w-full min-h-[80vh] flex items-center bg-white"
             >
-              {/* Background Image */}
-              <div
-                className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage: `url(${slide.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}
-              />
+              <div className="container-custom relative z-10 py-16 md:py-24">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                  {/* Image Section - على اليمين */}
+                  <motion.div
+                    initial={{ opacity: 0, x: language === 'ar' ? 50 : -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2, duration: 0.6 }}
+                    className="order-2 lg:order-1 hero-image-wrapper rounded-2xl overflow-hidden shadow-2xl"
+                  >
+                    <img
+                      src={slide.image}
+                      alt={slide.title || 'Emaar Company'}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.src = '/image/Slider/slider (1).jpg'
+                      }}
+                    />
+                  </motion.div>
 
-              <div className="container-custom relative z-10 py-20 md:py-28">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                  {/* Text Content */}
+                  {/* Text Content - على اليسار */}
                   <motion.div
                     initial={{ opacity: 0, x: language === 'ar' ? -50 : 50 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2, duration: 0.6 }}
-                    className="hero-text-section text-white"
+                    transition={{ delay: 0.3, duration: 0.6 }}
+                    className="order-1 lg:order-2 hero-text-section"
                   >
                     {slide.subtitle && (
                       <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        className="text-xl md:text-2xl font-semibold mb-4 text-white/90"
+                        transition={{ delay: 0.4, duration: 0.6 }}
+                        className="text-lg md:text-xl font-semibold mb-3 text-gray-600"
+                        style={{ color: '#d6ac72' }}
                       >
                         {slide.subtitle}
                       </motion.p>
@@ -107,12 +112,14 @@ const HeroSlider = () => {
                     <motion.h1
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4, duration: 0.6 }}
-                      className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight drop-shadow-lg"
+                      transition={{ delay: 0.5, duration: 0.6 }}
+                      className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight text-gray-900"
                     >
                       {slide.title}
                       {slide.titleSuffix && (
-                        <span className="block mt-2">{slide.titleSuffix}</span>
+                        <span className="block mt-2" style={{ color: '#d6ac72' }}>
+                          {slide.titleSuffix}
+                        </span>
                       )}
                     </motion.h1>
 
@@ -120,8 +127,8 @@ const HeroSlider = () => {
                       <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5, duration: 0.6 }}
-                        className="text-lg md:text-xl mb-8 text-white/90 drop-shadow-md leading-relaxed"
+                        transition={{ delay: 0.6, duration: 0.6 }}
+                        className="text-base md:text-lg mb-8 text-gray-700 leading-relaxed max-w-xl"
                       >
                         {slide.description}
                       </motion.p>
@@ -130,13 +137,14 @@ const HeroSlider = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6, duration: 0.6 }}
-                      className="flex flex-wrap gap-4"
+                      transition={{ delay: 0.7, duration: 0.6 }}
+                      className="flex flex-wrap gap-4 mt-8"
                     >
                       {slide.primaryCta && (
                         <Link
                           to="/contact"
-                          className="bg-white text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+                          className="px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-white"
+                          style={{ backgroundColor: '#d6ac72' }}
                         >
                           {slide.primaryCta}
                         </Link>
@@ -144,29 +152,13 @@ const HeroSlider = () => {
                       {slide.secondaryCta && (
                         <Link
                           to="/projects"
-                          className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-300"
+                          className="px-8 py-4 rounded-lg font-bold text-lg border-2 transition-all duration-300 text-gray-900 hover:bg-gray-50"
+                          style={{ borderColor: '#d6ac72', color: '#d6ac72' }}
                         >
                           {slide.secondaryCta}
                         </Link>
                       )}
                     </motion.div>
-                  </motion.div>
-
-                  {/* Image Section */}
-                  <motion.div
-                    initial={{ opacity: 0, x: language === 'ar' ? 50 : -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
-                    className="hero-image-wrapper rounded-2xl overflow-hidden"
-                  >
-                    <img
-                      src={slide.image}
-                      alt={slide.title || 'Emaar Company'}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.target.src = '/image/medium (1).webp'
-                      }}
-                    />
                   </motion.div>
                 </div>
               </div>
@@ -174,7 +166,7 @@ const HeroSlider = () => {
               {/* Navigation Arrows */}
               <button
                 onClick={goToPrevious}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all z-20"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800/80 hover:bg-gray-900 text-white p-3 rounded-full transition-all z-20 shadow-lg"
                 aria-label="Previous slide"
               >
                 <svg
@@ -193,7 +185,7 @@ const HeroSlider = () => {
               </button>
               <button
                 onClick={goToNext}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-all z-20"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800/80 hover:bg-gray-900 text-white p-3 rounded-full transition-all z-20 shadow-lg"
                 aria-label="Next slide"
               >
                 <svg
@@ -217,10 +209,10 @@ const HeroSlider = () => {
                   <button
                     key={index}
                     onClick={() => goToSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-all ${
+                    className={`h-3 rounded-full transition-all ${
                       index === currentSlide
-                        ? 'bg-white w-8'
-                        : 'bg-white/50 hover:bg-white/75'
+                        ? 'bg-gray-800 w-8'
+                        : 'bg-gray-400 w-3 hover:bg-gray-600'
                     }`}
                     aria-label={`Go to slide ${index + 1}`}
                   />
