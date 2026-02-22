@@ -73,15 +73,14 @@ const Navbar = () => {
               {/* Language Toggle Button */}
               <button
                 onClick={toggleLanguage}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all hover:shadow-md"
-                style={{ 
-                  backgroundColor: language === 'ar' ? '#d6ac72' : '#f3f4f6',
-                  color: language === 'ar' ? 'white' : '#374151'
-                }}
+                className="flex items-center space-x-2 space-x-reverse px-4 py-2 rounded-lg transition-all duration-300 hover:bg-primary-50 border border-gray-200 hover:border-primary-300"
+                style={{ color: '#d6ac72' }}
                 title={language === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
               >
                 <FiGlobe size={18} />
-                <span>{language === 'ar' ? 'EN' : 'عربي'}</span>
+                <span className="font-semibold text-sm">
+                  {language === 'ar' ? 'EN' : 'AR'}
+                </span>
               </button>
               
               {navLinks.map((link) => (
@@ -141,29 +140,13 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* Language Toggle & Mobile Menu Button */}
-            <div className="flex items-center gap-2">
-              {/* Language Toggle Button - Mobile */}
-              <button
-                onClick={toggleLanguage}
-                className="p-2 rounded-lg font-semibold transition-all"
-                style={{ 
-                  backgroundColor: language === 'ar' ? '#d6ac72' : '#f3f4f6',
-                  color: language === 'ar' ? 'white' : '#374151'
-                }}
-                title={language === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
-              >
-                <FiGlobe size={20} />
-              </button>
-              
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden p-2 rounded-lg transition-colors text-gray-700"
-              >
-                {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-              </button>
-            </div>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg transition-colors text-gray-700"
+            >
+              {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
             </div>
           </div>
         </div>
@@ -181,21 +164,25 @@ const Navbar = () => {
             }`}
           >
             <div className="container-custom py-4 space-y-4">
-              {/* Language Toggle in Mobile Menu */}
+              {/* Language Toggle Button - Mobile */}
               <div className="pb-4 border-b border-gray-200">
                 <button
                   onClick={() => {
                     toggleLanguage()
                     setIsMobileMenuOpen(false)
                   }}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg font-semibold transition-all"
-                  style={{ 
-                    backgroundColor: language === 'ar' ? '#d6ac72' : '#f3f4f6',
-                    color: language === 'ar' ? 'white' : '#374151'
-                  }}
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-300 hover:bg-primary-50 border border-gray-200"
+                  style={{ color: '#d6ac72' }}
                 >
-                  <FiGlobe size={20} />
-                  <span>{language === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}</span>
+                  <div className="flex items-center space-x-2 space-x-reverse">
+                    <FiGlobe size={20} />
+                    <span className="font-semibold">
+                      {language === 'ar' ? 'Switch to English' : 'التبديل إلى العربية'}
+                    </span>
+                  </div>
+                  <span className="font-bold text-lg">
+                    {language === 'ar' ? 'EN' : 'AR'}
+                  </span>
                 </button>
               </div>
               
