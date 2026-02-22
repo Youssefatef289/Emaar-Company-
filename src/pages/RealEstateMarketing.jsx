@@ -8,7 +8,7 @@ import { useAuth } from '../contexts/AuthContext'
 const RealEstateMarketing = () => {
   const { t } = useLanguage()
   const { isAuthenticated, addFavorite } = useAuth()
-  const [activeTab, setActiveTab] = useState('تمليك')
+  const [activeTab, setActiveTab] = useState('كل')
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
     area: '',
@@ -181,7 +181,9 @@ const RealEstateMarketing = () => {
     ],
   }
 
-  const units = allUnits[activeTab] || []
+  const units = activeTab === 'كل' 
+    ? Object.values(allUnits).flat() 
+    : allUnits[activeTab] || []
 
   const filteredUnits = useMemo(() => {
     return units.filter(unit => {
@@ -259,7 +261,7 @@ const RealEstateMarketing = () => {
           className="bg-white rounded-xl shadow-md p-2 mb-6"
         >
           <div className="flex flex-wrap gap-2 justify-center">
-            {['تمليك', 'إيجار', 'مخازن', 'إداري', 'أراضي'].map((tab) => (
+            {['كل', 'تمليك', 'إيجار', 'مخازن', 'إداري', 'أراضي'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => {
@@ -274,6 +276,7 @@ const RealEstateMarketing = () => {
                 }`}
                 style={activeTab === tab ? { backgroundColor: '#d6ac72' } : {}}
               >
+                {tab === 'كل' && 'كل'}
                 {tab === 'تمليك' && 'شقق تمليك'}
                 {tab === 'إيجار' && 'شقق إيجار'}
                 {tab === 'مخازن' && 'مخازن'}
