@@ -73,7 +73,7 @@ const Offers = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-white drop-shadow-lg">
               عروضنا الحصرية
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
@@ -119,7 +119,7 @@ const Offers = () => {
               </div>
 
               <div className="p-4 flex-grow flex flex-col">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">{offer.title}</h3>
+                <h3 className="text-lg font-extrabold text-gray-900 mb-2 line-clamp-2">{offer.title}</h3>
                 <p className="text-sm text-gray-600 mb-3 line-clamp-2 flex-grow">{offer.description}</p>
 
                 <div className="flex items-center text-gray-600 mb-4">
@@ -165,7 +165,7 @@ const Offers = () => {
           </div>
           <div className="relative z-10">
             <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">🎊 مسابقة رمضان المبارك 🎊</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-white drop-shadow-lg">🎊 مسابقة رمضان المبارك 🎊</h2>
               <p className="text-lg md:text-xl mb-2 text-white drop-shadow-md font-semibold">
                 تهنئة بمناسبة شهر رمضان المبارك
               </p>
@@ -185,7 +185,7 @@ const Offers = () => {
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold mb-4 text-center text-white drop-shadow-md">🗓️ مواعيد المسابقة:</h3>
+                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">🗓️ مواعيد المسابقة:</h3>
                 <div className="bg-white/20 rounded-lg p-4 mb-4 border border-white/30">
                   <p className="text-lg mb-2 text-white font-semibold">انتظروا أسئلتنا الدينية مرتين أسبوعياً:</p>
                   <ul className="space-y-2 text-right">
@@ -202,7 +202,7 @@ const Offers = () => {
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold mb-4 text-center text-white drop-shadow-md">📝 شروط وطريقة المشاركة (هام جداً):</h3>
+                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">📝 شروط وطريقة المشاركة (هام جداً):</h3>
                 <div className="bg-white/20 rounded-lg p-4 space-y-3 text-right border border-white/30">
                   <p className="font-semibold mb-3 text-white">لضمان دخول اسمك في السحب على جوائز الفيديو، يرجى اتباع الخطوات التالية:</p>
                   <div className="space-y-2">
@@ -227,7 +227,7 @@ const Offers = () => {
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold mb-4 text-center text-white drop-shadow-md">⚖️ شروط الفوز (هام جداً):</h3>
+                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">⚖️ شروط الفوز (هام جداً):</h3>
                 <div className="bg-red-600/30 border-2 border-red-500/70 rounded-lg p-4">
                   <p className="text-center font-bold text-lg text-white drop-shadow-md">
                     يجب الإجابة على جميع الأسئلة طوال شهر رمضان؛ وفوات أي حلقة يعني الاستبعاد التلقائي من السحب. 🚫
@@ -236,14 +236,14 @@ const Offers = () => {
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold mb-4 text-center text-white drop-shadow-md">🏆 الجوائز:</h3>
+                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">🏆 الجوائز:</h3>
                 <p className="text-center text-lg bg-white/20 rounded-lg p-4 text-white font-semibold border border-white/30">
                   جوائز قيمة ومنوعة كما ظهرت في الفيديو، بانتظار الملتزمين بالشروط وأصحاب الإجابات الصحيحة.
                 </p>
               </div>
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold mb-4 text-center text-white drop-shadow-md">🎊 موعد التتويج:</h3>
+                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">🎊 موعد التتويج:</h3>
                 <p className="text-center text-lg bg-white/20 rounded-lg p-4 text-white font-semibold border border-white/30">
                   سيتم إجراء القرعة العلنية وتوزيع الجوائز على الفائزين بعد عطلة عيد الفطر المبارك مباشرة. 🎁🌙
                 </p>
@@ -272,7 +272,7 @@ const Offers = () => {
           className="mt-16 rounded-2xl p-8 text-center text-white"
           style={{ background: 'linear-gradient(to right, #d6ac72, #c49a5f)' }}
         >
-          <h2 className="text-3xl font-bold mb-4">هل تبحث عن عرض خاص؟</h2>
+          <h2 className="text-3xl font-extrabold mb-4">هل تبحث عن عرض خاص؟</h2>
           <p className="text-lg mb-6 opacity-90">
             تواصل معنا للحصول على عروض مخصصة تناسب احتياجاتك
           </p>

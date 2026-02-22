@@ -27,7 +27,7 @@ const Profile = () => {
               {user.name?.charAt(0) || 'U'}
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">{user.name}</h1>
+              <h1 className="text-3xl font-extrabold text-gray-900">{user.name}</h1>
               <p className="text-gray-600">{user.email}</p>
             </div>
           </div>
@@ -39,7 +39,7 @@ const Profile = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-2xl shadow-lg p-8 mb-8"
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">معلومات الحساب</h2>
+          <h2 className="text-2xl font-extrabold text-gray-900 mb-6">معلومات الحساب</h2>
           <div className="space-y-4">
             <div className="flex items-center space-x-3 space-x-reverse">
               <FiUser style={{ color: '#d6ac72' }} size={20} />
@@ -76,7 +76,7 @@ const Profile = () => {
         >
           <div className="flex items-center space-x-3 space-x-reverse mb-6">
             <FiPackage style={{ color: '#d6ac72' }} size={24} />
-            <h2 className="text-2xl font-bold text-gray-900">حجوزاتي</h2>
+            <h2 className="text-2xl font-extrabold text-gray-900">حجوزاتي</h2>
           </div>
           {user.bookings && user.bookings.length > 0 ? (
             <div className="space-y-4">
@@ -86,7 +86,7 @@ const Profile = () => {
                   className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
                 >
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold text-gray-900">{booking.courseTitle}</h3>
+                    <h3 className="font-extrabold text-gray-900">{booking.courseTitle}</h3>
                     <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
                       booking.status === 'confirmed' ? 'bg-green-100 text-green-700' :
                       booking.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
@@ -126,7 +126,7 @@ const Profile = () => {
         >
           <div className="flex items-center space-x-3 space-x-reverse mb-6">
             <FiHeart style={{ color: '#d6ac72' }} size={24} />
-            <h2 className="text-2xl font-bold text-gray-900">مفضلاتي</h2>
+            <h2 className="text-2xl font-extrabold text-gray-900">مفضلاتي</h2>
           </div>
           {user.favorites && user.favorites.length > 0 ? (
             <div className="space-y-4">

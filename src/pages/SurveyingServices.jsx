@@ -142,7 +142,7 @@ const SurveyingServices = () => {
             </div>
 
             <div className="p-8">
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">{selectedCourse.title}</h1>
+              <h1 className="text-3xl font-extrabold text-gray-900 mb-4">{selectedCourse.title}</h1>
               <p className="text-lg text-gray-600 mb-6">{selectedCourse.description}</p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -172,7 +172,7 @@ const SurveyingServices = () => {
               </div>
 
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">المحتوى التعليمي</h2>
+                <h2 className="text-2xl font-extrabold text-gray-900 mb-4">المحتوى التعليمي</h2>
                 <ul className="space-y-3">
                   {selectedCourse.content.map((item, index) => (
                     <li key={index} className="flex items-start space-x-3 space-x-reverse">
@@ -184,13 +184,13 @@ const SurveyingServices = () => {
               </div>
 
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">عن المدرب</h2>
+                <h2 className="text-2xl font-extrabold text-gray-900 mb-4">عن المدرب</h2>
                 <p className="text-gray-700">{selectedCourse.instructorBio}</p>
               </div>
 
               {selectedCourse.videoUrl && (
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">فيديو تعريفي</h2>
+                  <h2 className="text-2xl font-extrabold text-gray-900 mb-4">فيديو تعريفي</h2>
                   {!showVideoInDetail ? (
                     <button
                       onClick={() => setShowVideoInDetail(true)}
@@ -258,7 +258,7 @@ const SurveyingServices = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-white drop-shadow-lg">
               الدورات المساحية
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
@@ -276,7 +276,7 @@ const SurveyingServices = () => {
           className="mb-16"
         >
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">الكورسات المتاحة</h2>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">الكورسات المتاحة</h2>
             <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
@@ -327,7 +327,7 @@ const SurveyingServices = () => {
                         style={{ borderColor: '#d6ac72' }}
                       >
                         <div className="p-5">
-                          <h4 className="text-gray-900 font-bold text-lg mb-3 leading-tight min-h-[3rem]">
+                          <h4 className="text-gray-900 font-extrabold text-lg mb-3 leading-tight min-h-[3rem]">
                             {course.title}
                           </h4>
                           <div className="flex items-center justify-between mb-4 text-sm text-gray-600">
@@ -377,7 +377,7 @@ const SurveyingServices = () => {
           animate={{ opacity: 1, y: 0 }}
         >
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">الدورات التدريبية</h2>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">الدورات التدريبية</h2>
             <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -411,7 +411,7 @@ const SurveyingServices = () => {
                 </div>
                 
                 <div className="p-5">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">{course.title}</h3>
+                  <h3 className="text-lg font-extrabold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">{course.title}</h3>
                   
                   <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
                     <div className="flex items-center text-gray-600 text-sm">

@@ -349,7 +349,7 @@ const ProjectDetail = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-6 right-6 text-white">
-              <h1 className="text-4xl font-bold mb-2">{project.title}</h1>
+              <h1 className="text-4xl font-extrabold mb-2">{project.title}</h1>
               <div className="flex items-center space-x-4 space-x-reverse">
                 <div className="flex items-center">
                   <FiMapPin className="ml-1" size={18} />
@@ -373,7 +373,7 @@ const ProjectDetail = () => {
               transition={{ delay: 0.1 }}
               className="bg-white rounded-2xl shadow-lg p-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">عن المشروع</h2>
+              <h2 className="text-2xl font-extrabold text-gray-900 mb-4">عن المشروع</h2>
               <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                 {project.longDescription || project.description}
               </p>
@@ -387,12 +387,12 @@ const ProjectDetail = () => {
                 transition={{ delay: 0.15 }}
                 className="bg-white rounded-2xl shadow-lg p-8"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">تفاصيل الشقق</h2>
+                <h2 className="text-2xl font-extrabold text-gray-900 mb-6">تفاصيل الشقق</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {project.towers.map((tower) => (
                     <div key={tower.id} className="border-2 rounded-xl p-6" style={{ borderColor: '#d6ac72' }}>
                       <div className="mb-4">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">{tower.name}</h3>
+                        <h3 className="text-xl font-extrabold text-gray-900 mb-2">{tower.name}</h3>
                         <p className="text-sm text-gray-600 mb-3">{tower.location}</p>
                         <div className="flex gap-2 mb-3">
                           {tower.basement && (
@@ -447,7 +447,7 @@ const ProjectDetail = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-2xl shadow-lg p-8"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">معرض الصور</h2>
+                <h2 className="text-2xl font-extrabold text-gray-900 mb-6">معرض الصور</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {project.images.map((image, index) => (
                     <div 
@@ -524,7 +524,7 @@ const ProjectDetail = () => {
                 transition={{ delay: 0.3 }}
                 className="bg-white rounded-2xl shadow-lg p-8"
               >
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">فيديو المشروع</h2>
+                <h2 className="text-2xl font-extrabold text-gray-900 mb-6">فيديو المشروع</h2>
                 <div className="aspect-video rounded-lg overflow-hidden">
                   <iframe
                     src={project.video}
@@ -543,7 +543,7 @@ const ProjectDetail = () => {
               transition={{ delay: 0.4 }}
               className="bg-white rounded-2xl shadow-lg p-8"
             >
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">الموقع</h2>
+              <h2 className="text-2xl font-extrabold text-gray-900 mb-6">الموقع</h2>
               <div className="h-96 rounded-lg overflow-hidden">
                 <iframe
                   width="100%"
@@ -571,7 +571,7 @@ const ProjectDetail = () => {
               transition={{ delay: 0.1 }}
               className="bg-white rounded-2xl shadow-lg p-6"
             >
-              <h3 className="text-xl font-bold text-gray-900 mb-4">معلومات المشروع</h3>
+              <h3 className="text-xl font-extrabold text-gray-900 mb-4">معلومات المشروع</h3>
               <div className="space-y-4">
                 {project.units && (
                   <div className="flex items-center text-gray-700">
@@ -631,7 +631,7 @@ const ProjectDetail = () => {
                 </div>
                 {project.features && (
                   <div className="pt-4 border-t border-gray-200">
-                    <h4 className="text-sm font-bold text-gray-700 mb-3" style={{ color: '#d6ac72' }}>المميزات:</h4>
+                    <h4 className="text-sm font-extrabold text-gray-700 mb-3" style={{ color: '#d6ac72' }}>المميزات:</h4>
                     <ul className="space-y-2">
                       {project.features.map((feature, idx) => (
                         <li key={idx} className="flex items-start text-gray-700 text-sm">
@@ -653,7 +653,7 @@ const ProjectDetail = () => {
               className="rounded-2xl shadow-lg p-6 text-white"
               style={{ background: 'linear-gradient(to right, #d6ac72, #c49a5f)' }}
             >
-              <h3 className="text-xl font-bold mb-4">استفسر عن المشروع</h3>
+              <h3 className="text-xl font-extrabold mb-4">استفسر عن المشروع</h3>
               <p className="mb-6 opacity-90">
                 تواصل معنا لمعرفة المزيد عن هذا المشروع والوحدات المتاحة
               </p>

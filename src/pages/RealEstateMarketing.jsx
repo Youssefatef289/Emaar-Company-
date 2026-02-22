@@ -126,7 +126,7 @@ const RealEstateMarketing = () => {
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 text-white drop-shadow-lg">
               التسويق العقاري
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
@@ -320,7 +320,7 @@ const RealEstateMarketing = () => {
                 </div>
                 
                 <div className="p-4">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{unit.title}</h3>
+                  <h3 className="text-lg font-extrabold text-gray-900 mb-2 line-clamp-1">{unit.title}</h3>
                   
                   <div className="space-y-1.5 mb-3">
                     <div className="flex items-center text-gray-600 text-sm">

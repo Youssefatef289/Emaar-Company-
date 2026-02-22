@@ -105,7 +105,7 @@ const CourseBooking = () => {
           className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center"
         >
           <FiCheckCircle className="text-green-500 mx-auto mb-4" size={64} />
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">تم الحجز بنجاح!</h2>
+          <h2 className="text-2xl font-extrabold text-gray-900 mb-4">تم الحجز بنجاح!</h2>
           <p className="text-gray-600 mb-6">
             تم إرسال تأكيد الحجز إلى بريدك الإلكتروني. سنتواصل معك قريبًا.
           </p>
@@ -124,10 +124,10 @@ const CourseBooking = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-2xl shadow-lg p-8 mb-8"
         >
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">حجز الدورة</h1>
+          <h1 className="text-3xl font-extrabold text-gray-900 mb-6">حجز الدورة</h1>
           
           <div className="bg-primary-50 rounded-lg p-6 mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">{course.title}</h2>
+            <h2 className="text-2xl font-extrabold text-gray-900 mb-4">{course.title}</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-3 space-x-reverse">
@@ -163,7 +163,7 @@ const CourseBooking = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-2xl shadow-lg p-8"
         >
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">معلومات الحجز</h2>
+          <h2 className="text-2xl font-extrabold text-gray-900 mb-6">معلومات الحجز</h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>

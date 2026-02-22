@@ -179,7 +179,7 @@ const CourseDetail = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-2xl font-bold text-gray-900 mb-4">الدورة غير موجودة</p>
+          <p className="text-2xl font-extrabold text-gray-900 mb-4">الدورة غير موجودة</p>
           <Link to="/surveying-services" className="btn-primary inline-block">
             العودة إلى الدورات
           </Link>
@@ -215,7 +215,7 @@ const CourseDetail = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 drop-shadow-lg">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 drop-shadow-lg">
                 {course.title}
               </h1>
               <p className="text-lg md:text-xl text-white/90 drop-shadow-md">
@@ -262,7 +262,7 @@ const CourseDetail = () => {
 
             {/* Content Section */}
             <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
                 محتوى الدورة
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -277,7 +277,7 @@ const CourseDetail = () => {
 
             {/* Benefits Section */}
             <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
                 المميزات
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -292,11 +292,11 @@ const CourseDetail = () => {
 
             {/* Instructor Section */}
             <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
+              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
                 عن المدرب
               </h2>
               <div className="bg-gray-50 rounded-lg p-6">
-                <p className="text-gray-800 font-bold text-lg mb-2">{course.instructor}</p>
+                <p className="text-gray-800 font-extrabold text-lg mb-2">{course.instructor}</p>
                 <p className="text-gray-700 text-base">{course.instructorBio}</p>
               </div>
             </div>
@@ -306,7 +306,7 @@ const CourseDetail = () => {
               className="rounded-xl p-8 text-center text-white mb-8"
               style={{ background: 'linear-gradient(135deg, #d6ac72 0%, #c49a5f 50%, #b2884c 100%)' }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 drop-shadow-lg">
+              <h2 className="text-2xl md:text-3xl font-extrabold mb-4 drop-shadow-lg">
                 طريقة الحجز
               </h2>
               <p className="text-lg md:text-xl mb-6 drop-shadow-md">
