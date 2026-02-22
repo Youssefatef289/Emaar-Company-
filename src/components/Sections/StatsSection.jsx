@@ -9,10 +9,10 @@ const StatsSection = () => {
   })
 
   const stats = [
-    { number: 150, suffix: '+', label: 'مشروع مكتمل' },
-    { number: 100, suffix: '+', label: 'عميل راضٍ' },
+    { number: 100, suffix: '+', label: 'مشروع مكتمل' },
+    { number: 150, suffix: '+', label: 'عميل راضٍ' },
     { number: 15, suffix: '+', label: 'سنة خبرة' },
-    { number: 120, suffix: '+', label: 'فريق محترف' },
+    { number: 160, suffix: '+', label: 'فريق محترف' },
   ]
 
   const [counters, setCounters] = useState(stats.map(() => 0))
