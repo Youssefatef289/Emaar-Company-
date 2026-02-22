@@ -7,21 +7,21 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const services = [
-    'General Contracting',
-    'Surveying Works',
-    'Real Estate Marketing',
-    'Real Estate Development',
-    'Real Estate Investment',
+    'المقاولات العامة',
+    'الأعمال المساحية',
+    'التسويق العقاري',
+    'التطوير العقاري',
+    'الاستثمار العقاري',
   ]
 
   const quickLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About Us' },
-    { path: '/offers', label: 'Our Offers' },
-    { path: '/projects', label: 'Our Projects' },
-    { path: '/real-estate-marketing', label: 'Real Estate Marketing' },
-    { path: '/surveying-services', label: 'Surveying Services' },
-    { path: '/contact', label: 'Contact Us' },
+    { path: '/', label: 'الرئيسية' },
+    { path: '/about', label: 'من نحن' },
+    { path: '/offers', label: 'عروضنا' },
+    { path: '/projects', label: 'مشاريعنا' },
+    { path: '/real-estate-marketing', label: 'التسويق العقاري' },
+    { path: '/surveying-services', label: 'الدورات المساحية' },
+    { path: '/contact', label: 'تواصل معنا' },
   ]
 
   const socialLinks = [
@@ -40,14 +40,14 @@ const Footer = () => {
             <div className="footer-logo mb-4">
               <img src="/image/Logo.png" alt="Emaar Company" className="h-14 mb-3" />
               <div className="footer-company-name">
-                <h3 className="text-xl font-bold mb-1">Emaar</h3>
-                <p className="text-sm">Contracting & Surveying Works</p>
-                <p className="text-sm">& Real Estate Investment</p>
+                <h3 className="text-xl font-bold mb-1">إعمار</h3>
+                <p className="text-sm">المقاولات والأعمال المساحية</p>
+                <p className="text-sm">والاستثمار العقاري</p>
               </div>
             </div>
             <p className="footer-description mb-6 leading-relaxed">
-              Emaar Company for Contracting, Surveying Works, and Real Estate Investment - A leader in real estate development and contracting in Egypt, 
-              we strive to provide the best services and real estate solutions to our clients.
+              شركة إعمار للمقاولات والأعمال المساحية والاستثمار العقاري - رائدة في التطوير العقاري والمقاولات في مصر، 
+              نسعى لتقديم أفضل الخدمات والحلول العقارية لعملائنا.
             </p>
             <div className="flex space-x-3 space-x-reverse">
               {socialLinks.map((social) => (
@@ -68,7 +68,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="footer-section">
-            <h3 className="footer-title">Quick Links</h3>
+            <h3 className="footer-title">روابط سريعة</h3>
             <ul className="footer-links">
               {quickLinks.map((link) => (
                 <li key={link.path}>
@@ -85,7 +85,7 @@ const Footer = () => {
 
           {/* Services */}
           <div className="footer-section">
-            <h3 className="footer-title">Our Services</h3>
+            <h3 className="footer-title">خدماتنا</h3>
             <ul className="footer-links">
               {services.map((service) => (
                 <li key={service}>
@@ -102,11 +102,11 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="footer-section">
-            <h3 className="footer-title">Contact Us</h3>
+            <h3 className="footer-title">تواصل معنا</h3>
             <ul className="footer-contact">
               <li className="footer-contact-item">
                 <FiMapPin className="footer-icon" size={20} />
-                <span>Al-Ziraaiyin - Abdel Salam Aref - Above Bakar Restaurant</span>
+                <span>الزراعيين - عبد السلام عارف - اعلى مطعم بكار</span>
               </li>
               <li className="footer-contact-item">
                 <FiPhone className="footer-icon" size={20} />
@@ -132,7 +132,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {currentYear} Emaar Company for Contracting, Surveying Works, and Real Estate Investment. All rights reserved.
+            © {currentYear} شركة إعمار للمقاولات والأعمال المساحية والاستثمار العقاري. جميع الحقوق محفوظة.
           </p>
         </div>
       </div>

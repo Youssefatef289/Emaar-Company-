@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiMenu, FiX, FiChevronDown, FiGlobe } from 'react-icons/fi'
+import { FiMenu, FiX, FiChevronDown } from 'react-icons/fi'
 import { useLanguage } from '../../contexts/LanguageContext'
 
 const Navbar = () => {
@@ -10,7 +10,7 @@ const Navbar = () => {
   const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false)
   const location = useLocation()
   const isHomePage = location.pathname === '/'
-  const { language, toggleLanguage, t } = useLanguage()
+  const { language, t } = useLanguage()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,35 +52,24 @@ const Navbar = () => {
             <Link to="/" className="flex items-center space-x-3 space-x-reverse">
               <img 
                 src="/image/Logo.png" 
-                alt="Emaar Company" 
+                alt="شركة إعمار" 
                 className="h-14 w-auto object-contain"
               />
               <div className="flex flex-col text-center">
                 <span className="text-xl md:text-2xl font-bold text-primary-700 whitespace-nowrap">
-                  Emaar
+                  اعمار
                 </span>
                 <span className="text-sm md:text-base font-semibold text-gray-700 whitespace-nowrap">
-                  Contracting & Surveying Works
+                  للمقاولات و الاعمال المساحيه
                 </span>
                 <span className="text-sm md:text-base font-semibold text-gray-700 whitespace-nowrap">
-                  & Real Estate Investment
+                  و الاستثمار العفارى
                 </span>
               </div>
             </Link>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6 space-x-reverse">
-              {/* Language Toggle Button */}
-              <button
-                onClick={toggleLanguage}
-                className="flex items-center space-x-2 space-x-reverse px-4 py-2 rounded-lg font-semibold transition-colors duration-300 hover:bg-primary-50"
-                style={{ color: '#d6ac72' }}
-                title={language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
-              >
-                <FiGlobe size={20} />
-                <span>{language === 'ar' ? 'EN' : 'عربي'}</span>
-              </button>
-              
               {navLinks.map((link) => (
                 <div key={link.path} className="relative">
                   {link.hasDropdown ? (
@@ -109,14 +98,14 @@ const Navbar = () => {
                               className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
                               onClick={() => setIsProjectsDropdownOpen(false)}
                             >
-                              {language === 'ar' ? 'المشاريع الحالية' : 'Current Projects'}
+                              المشاريع الحالية
                             </Link>
                             <Link
                               to="/previous-projects"
                               className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
                               onClick={() => setIsProjectsDropdownOpen(false)}
                             >
-                              {language === 'ar' ? 'المشاريع السابقة' : 'Previous Projects'}
+                              المشاريع السابقة
                             </Link>
                           </motion.div>
                         )}
@@ -162,19 +151,6 @@ const Navbar = () => {
             }`}
           >
             <div className="container-custom py-4 space-y-4">
-              {/* Language Toggle Button - Mobile */}
-              <button
-                onClick={() => {
-                  toggleLanguage()
-                  setIsMobileMenuOpen(false)
-                }}
-                className="flex items-center justify-center space-x-2 space-x-reverse w-full px-4 py-3 rounded-lg font-semibold transition-colors duration-300 mb-4"
-                style={{ backgroundColor: '#d6ac72', color: 'white' }}
-              >
-                <FiGlobe size={20} />
-                <span>{language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}</span>
-              </button>
-              
               {navLinks.map((link) => (
                 <div key={link.path}>
                   {link.hasDropdown ? (
@@ -214,7 +190,7 @@ const Navbar = () => {
                                 }}
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
-                                Current Projects
+                                المشاريع الحالية
                               </Link>
                               <Link
                                 to="/previous-projects"
@@ -224,7 +200,7 @@ const Navbar = () => {
                                 }}
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
-                                Previous Projects
+                                المشاريع السابقة
                               </Link>
                             </div>
                           </motion.div>
