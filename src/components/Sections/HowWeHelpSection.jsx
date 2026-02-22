@@ -11,38 +11,38 @@ const HowWeHelpSection = () => {
   const benefits = [
     {
       icon: FiCheckCircle,
-      title: 'حلول متكاملة',
-      description: 'نقدم حلولاً شاملة تغطي جميع احتياجاتك العقارية من التصميم حتى التسليم النهائي',
+      title: 'Integrated Solutions',
+      description: 'We provide comprehensive solutions covering all your real estate needs from design to final delivery',
       color: 'bg-blue-500',
     },
     {
       icon: FiAward,
-      title: 'جودة عالية',
-      description: 'نلتزم بأعلى معايير الجودة في جميع مشاريعنا وخدماتنا لضمان رضا عملائنا',
+      title: 'High Quality',
+      description: 'We are committed to the highest quality standards in all our projects and services to ensure customer satisfaction',
       color: 'bg-green-500',
     },
     {
       icon: FiTrendingUp,
-      title: 'استثمار ذكي',
-      description: 'نساعدك في اتخاذ قرارات استثمارية مدروسة تضمن عائداً مربحاً على استثمارك',
+      title: 'Smart Investment',
+      description: 'We help you make informed investment decisions that ensure a profitable return on your investment',
       color: 'bg-purple-500',
     },
     {
       icon: FiShield,
-      title: 'ضمان وموثوقية',
-      description: 'نوفر ضمانات شاملة وخدمات ما بعد البيع لضمان راحتك وثقتك في مشروعك',
+      title: 'Guarantee and Reliability',
+      description: 'We provide comprehensive guarantees and after-sales services to ensure your comfort and confidence in your project',
       color: 'bg-orange-500',
     },
     {
       icon: FiUsers,
-      title: 'فريق محترف',
-      description: 'فريق عمل متخصص وذو خبرة واسعة جاهز لخدمتك في أي وقت',
+      title: 'Professional Team',
+      description: 'A specialized and experienced team ready to serve you at any time',
       color: 'bg-pink-500',
     },
     {
       icon: FiArrowLeft,
-      title: 'دعم مستمر',
-      description: 'نقدم دعم فني واستشاري مستمر قبل وأثناء وبعد إتمام مشروعك',
+      title: 'Continuous Support',
+      description: 'We provide continuous technical and advisory support before, during, and after completing your project',
       color: 'bg-cyan-500',
     },
   ]
@@ -50,23 +50,23 @@ const HowWeHelpSection = () => {
   const steps = [
     {
       number: '01',
-      title: 'استشارة مجانية',
-      description: 'نبدأ بفهم احتياجاتك وأهدافك من خلال استشارة مجانية مع فريقنا المتخصص',
+      title: 'Free Consultation',
+      description: 'We start by understanding your needs and goals through a free consultation with our specialized team',
     },
     {
       number: '02',
-      title: 'تخطيط وتصميم',
-      description: 'نقوم بتصميم حل مخصص يناسب احتياجاتك وميزانيتك بأحدث التقنيات',
+      title: 'Planning and Design',
+      description: 'We design a customized solution that fits your needs and budget using the latest technologies',
     },
     {
       number: '03',
-      title: 'تنفيذ احترافي',
-      description: 'ننفذ مشروعك بأعلى معايير الجودة والاحترافية مع الالتزام بالمواعيد',
+      title: 'Professional Execution',
+      description: 'We execute your project with the highest quality and professionalism standards while meeting deadlines',
     },
     {
       number: '04',
-      title: 'تسليم ومتابعة',
-      description: 'نسلم مشروعك مكتملاً ونواصل متابعتك لضمان رضاك التام',
+      title: 'Delivery and Follow-up',
+      description: 'We deliver your completed project and continue to follow up to ensure your complete satisfaction',
     },
   ]
 
@@ -81,11 +81,11 @@ const HowWeHelpSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
-            كيف تستفيد منا
+            How We Help You
           </h2>
           <div className="how-we-help-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            نقدم لك تجربة استثنائية في مجال التطوير العقاري مع حلول متكاملة وخدمات احترافية
+            We provide you with an exceptional experience in real estate development with integrated solutions and professional services
           </p>
         </motion.div>
 

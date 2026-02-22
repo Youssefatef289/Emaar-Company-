@@ -11,10 +11,10 @@ const ClientsSection = () => {
   })
 
   const clients = [
-    { name: 'عميل 1', logo: '/image/medium  (11).webp', testimonial: 'خدمة ممتازة ومشروع رائع، أنصح بالتعامل معهم' },
-    { name: 'عميل 2', logo: '/image/medium  (12).webp', testimonial: 'فريق محترف ومشاريع عالية الجودة' },
-    { name: 'عميل 3', logo: '/image/medium  (13).webp', testimonial: 'راضون تماماً عن الخدمة والنتائج' },
-    { name: 'عميل 4', logo: '/image/medium  (14).webp', testimonial: 'شركة موثوقة وتنفذ المشاريع في الوقت المحدد' },
+    { name: 'Client 1', logo: '/image/medium  (11).webp', testimonial: 'Excellent service and great project, I recommend dealing with them' },
+    { name: 'Client 2', logo: '/image/medium  (12).webp', testimonial: 'Professional team and high-quality projects' },
+    { name: 'Client 3', logo: '/image/medium  (13).webp', testimonial: 'Completely satisfied with the service and results' },
+    { name: 'Client 4', logo: '/image/medium  (14).webp', testimonial: 'Trusted company that executes projects on time' },
   ]
 
   return (
@@ -27,11 +27,11 @@ const ClientsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
-            عملاؤنا وشركاؤنا
+            Our Clients and Partners
           </h2>
           <div className="about-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            نفتخر بثقة عملائنا وشركائنا في جميع مشاريعنا
+            We are proud of our clients' and partners' trust in all our projects
           </p>
         </motion.div>
 
@@ -89,7 +89,7 @@ const ClientsSection = () => {
                     </div>
                     <div>
                       <div className="font-bold text-gray-800">{client.name}</div>
-                      <div className="text-sm text-gray-600">عميل</div>
+                      <div className="text-sm text-gray-600">Client</div>
                     </div>
                   </div>
                 </div>
