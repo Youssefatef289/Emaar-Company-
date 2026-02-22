@@ -72,8 +72,8 @@ const ProjectsSection = () => {
   }
 
   const getStatusColor = (status) => {
-    if (status === 'مكتمل') return 'bg-green-100 text-green-800'
-    if (status === 'قيد التنفيذ') return 'bg-blue-100 text-blue-800'
+    if (status === 'Completed') return 'bg-green-100 text-green-800'
+    if (status === 'Under Construction') return 'bg-blue-100 text-blue-800'
     return 'bg-gray-100 text-gray-800'
   }
 
@@ -87,11 +87,11 @@ const ProjectsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
-            مشاريعنا
+            Our Projects
           </h2>
           <div className="projects-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            نفتخر بمشاريعنا المتميزة التي تعكس خبرتنا والتزامنا بالجودة
+            We are proud of our distinguished projects that reflect our experience and commitment to quality
           </p>
         </motion.div>
 
@@ -156,13 +156,13 @@ const ProjectsSection = () => {
                   {project.floors && (
                     <div className="flex items-center text-gray-600 text-sm">
                       <FiLayers className="ml-2" size={16} style={{ color: '#d6ac72' }} />
-                      <span>{project.floors} طابق</span>
+                      <span>{project.floors} floors</span>
                     </div>
                   )}
                   {project.progress && (
                     <div className="flex items-center text-gray-600 text-sm">
                       <FiTrendingUp className="ml-2" size={16} style={{ color: '#d6ac72' }} />
-                      <span>نسبة الإنجاز: {project.progress}%</span>
+                      <span>Progress: {project.progress}%</span>
                       <div className="flex-1 mr-3 bg-gray-200 rounded-full h-2">
                         <div 
                           className="h-2 rounded-full transition-all duration-300"
@@ -173,7 +173,7 @@ const ProjectsSection = () => {
                   )}
                   {project.startingPrice && (
                     <div className="text-gray-600 text-sm">
-                      <span className="font-semibold">السعر يبدأ من:</span> {project.startingPrice.toLocaleString()} جنيه
+                      <span className="font-semibold">Starting from:</span> EGP {project.startingPrice.toLocaleString()}
                     </div>
                   )}
                 </div>
@@ -181,7 +181,7 @@ const ProjectsSection = () => {
                   to={`/projects/${project.id}`}
                   className="projects-section-link inline-flex items-center"
                 >
-                  عرض التفاصيل
+                  View Details
                   <span className="mr-2">←</span>
                 </Link>
               </div>
@@ -196,7 +196,7 @@ const ProjectsSection = () => {
           className="text-center mt-12"
         >
           <Link to="/projects" className="btn-primary text-lg">
-            عرض جميع المشاريع
+            View All Projects
           </Link>
         </motion.div>
       </div>

@@ -20,44 +20,44 @@ const ServicesSection = () => {
   const services = [
     {
       icon: FiHome,
-      title: 'المقاولات العامة',
-      description: 'نقدم خدمات المقاولات العامة بمعايير عالمية وجودة عالية',
+      title: 'General Contracting',
+      description: 'We provide general contracting services with international standards and high quality',
       color: 'bg-blue-500',
     },
     {
       icon: FiMap,
-      title: 'الأعمال المساحية',
-      description: 'خدمات مساحية دقيقة ومحترفة لجميع أنواع المشاريع',
+      title: 'Surveying Works',
+      description: 'Accurate and professional surveying services for all types of projects',
       color: 'bg-green-500',
     },
     {
       icon: FiTrendingUp,
-      title: 'التسويق العقاري',
-      description: 'حلول تسويقية متكاملة لتعزيز قيمة المشاريع العقارية',
+      title: 'Real Estate Marketing',
+      description: 'Integrated marketing solutions to enhance the value of real estate projects',
       color: 'bg-purple-500',
     },
     {
       icon: FiLayers,
-      title: 'أعمال المباني',
-      description: 'بناء وتشييد المباني السكنية والتجارية بأعلى المعايير',
+      title: 'Building Works',
+      description: 'Construction and building of residential and commercial buildings with the highest standards',
       color: 'bg-orange-500',
     },
     {
       icon: FiTool,
-      title: 'التشطيبات',
-      description: 'تشطيبات فاخرة وعصرية تناسب جميع الأذواق والميزانيات',
+      title: 'Finishing Works',
+      description: 'Luxury and modern finishing that suits all tastes and budgets',
       color: 'bg-pink-500',
     },
     {
       icon: FiNavigation,
-      title: 'أعمال الطرق',
-      description: 'تنفيذ مشاريع الطرق والبنية التحتية بجودة عالية',
+      title: 'Road Works',
+      description: 'Execution of road and infrastructure projects with high quality',
       color: 'bg-yellow-500',
     },
     {
       icon: FiDroplet,
-      title: 'شبكات المياه والصرف الصحي',
-      description: 'تصميم وتنفيذ شبكات المياه والصرف الصحي بكفاءة عالية',
+      title: 'Water and Sewage Networks',
+      description: 'Design and implementation of water and sewage networks with high efficiency',
       color: 'bg-cyan-500',
     },
   ]
@@ -72,11 +72,11 @@ const ServicesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient-custom">
-            خدماتنا
+            Our Services
           </h2>
           <div className="services-section-divider"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            نقدم مجموعة شاملة من الخدمات المتخصصة في مجال التطوير العقاري والمقاولات
+            We provide a comprehensive range of specialized services in real estate development and contracting
           </p>
         </motion.div>
 
@@ -98,7 +98,7 @@ const ServicesSection = () => {
                 to="/services"
                 className="services-section-link inline-flex items-center"
               >
-                اعرف المزيد
+                Learn More
                 <span className="mr-2">←</span>
               </Link>
             </motion.div>
@@ -112,7 +112,7 @@ const ServicesSection = () => {
           className="text-center mt-12"
         >
           <Link to="/services" className="btn-primary text-lg">
-            عرض جميع الخدمات
+            View All Services
           </Link>
         </motion.div>
       </div>
