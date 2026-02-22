@@ -24,51 +24,51 @@ const RealEstateMarketing = () => {
   const units = [
     {
       id: 1,
-      title: 'شقة فاخرة في قلب القاهرة',
-      area: 'المعادي',
+      title: 'Luxury Apartment in the Heart of Cairo',
+      area: 'Maadi',
       rooms: 3,
-      finishing: 'سوبر لوكس',
+      finishing: 'Super Lux',
       areaSize: 120,
       floor: 5,
       price: 2500000,
       image: '/image/medium (1).webp',
-      description: 'شقة فاخرة بتشطيب سوبر لوكس في موقع مميز',
+      description: 'Luxury apartment with super lux finishing in a prime location',
     },
     {
       id: 2,
-      title: 'شقة دوبلكس راقية',
-      area: 'مدينة نصر',
+      title: 'Elegant Duplex Apartment',
+      area: 'Nasr City',
       rooms: 4,
-      finishing: 'لوكس',
+      finishing: 'Lux',
       areaSize: 180,
       floor: 2,
       price: 3500000,
       image: '/image/medium (2).webp',
-      description: 'دوبلكس راقي بمساحة واسعة',
+      description: 'Elegant duplex with spacious area',
     },
     {
       id: 3,
-      title: 'شقة استوديو حديثة',
-      area: 'زايد',
+      title: 'Modern Studio Apartment',
+      area: 'Zayed',
       rooms: 1,
-      finishing: 'نص تشطيب',
+      finishing: 'Semi-Finished',
       areaSize: 60,
       floor: 10,
       price: 800000,
       image: '/image/medium (3).webp',
-      description: 'شقة استوديو حديثة بموقع ممتاز',
+      description: 'Modern studio apartment in an excellent location',
     },
     {
       id: 4,
-      title: 'شقة عائلية كبيرة',
-      area: 'الشروق',
+      title: 'Large Family Apartment',
+      area: 'Al-Shorouk',
       rooms: 5,
-      finishing: 'سوبر لوكس',
+      finishing: 'Super Lux',
       areaSize: 250,
       floor: 3,
       price: 4500000,
       image: '/image/medium (4).webp',
-      description: 'شقة عائلية كبيرة بتشطيب فاخر',
+      description: 'Large family apartment with luxury finishing',
     },
   ]
 
@@ -127,13 +127,13 @@ const RealEstateMarketing = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              التسويق العقاري
+              Real Estate Marketing
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
-              اكتشف أفضل الوحدات السكنية والتجارية المتاحة لدينا
+              Discover the best residential and commercial units available
             </p>
             <p className="text-lg text-white drop-shadow-md">
-              وحدات فاخرة بمواقع مميزة وأسعار تنافسية
+              Luxury units in prime locations with competitive prices
             </p>
           </motion.div>
         </div>
@@ -155,7 +155,7 @@ const RealEstateMarketing = () => {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="ابحث عن منطقة أو عنوان..."
+                placeholder="Search for area or address..."
                 className="w-full pr-12 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
               />
             </div>
@@ -167,7 +167,7 @@ const RealEstateMarketing = () => {
               style={{ backgroundColor: '#d6ac72' }}
             >
               <FiFilter size={20} />
-              <span>فلترة</span>
+              <span>Filter</span>
             </button>
           </div>
 
@@ -180,13 +180,13 @@ const RealEstateMarketing = () => {
               className="mt-6 pt-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
             >
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">المنطقة</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Area</label>
                 <select
                   value={filters.area}
                   onChange={(e) => setFilters({ ...filters, area: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 >
-                  <option value="">جميع المناطق</option>
+                  <option value="">All Areas</option>
                   {areas.map(area => (
                     <option key={area} value={area}>{area}</option>
                   ))}
@@ -194,29 +194,29 @@ const RealEstateMarketing = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">عدد الغرف</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Number of Rooms</label>
                 <select
                   value={filters.rooms}
                   onChange={(e) => setFilters({ ...filters, rooms: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 >
-                  <option value="">جميع الأعداد</option>
-                  <option value="1">1 غرفة</option>
-                  <option value="2">2 غرف</option>
-                  <option value="3">3 غرف</option>
-                  <option value="4">4 غرف</option>
-                  <option value="5">5+ غرف</option>
+                  <option value="">All Numbers</option>
+                  <option value="1">1 Room</option>
+                  <option value="2">2 Rooms</option>
+                  <option value="3">3 Rooms</option>
+                  <option value="4">4 Rooms</option>
+                  <option value="5">5+ Rooms</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">حالة التشطيب</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Finishing Status</label>
                 <select
                   value={filters.finishing}
                   onChange={(e) => setFilters({ ...filters, finishing: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 >
-                  <option value="">جميع الأنواع</option>
+                  <option value="">All Types</option>
                   {finishingTypes.map(type => (
                     <option key={type} value={type}>{type}</option>
                   ))}
@@ -224,56 +224,56 @@ const RealEstateMarketing = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">الدور</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Floor</label>
                 <input
                   type="number"
                   value={filters.floor}
                   onChange={(e) => setFilters({ ...filters, floor: e.target.value })}
-                  placeholder="أي دور"
+                  placeholder="Any floor"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">المساحة (م²) - من</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Area (m²) - From</label>
                 <input
                   type="number"
                   value={filters.minArea}
                   onChange={(e) => setFilters({ ...filters, minArea: e.target.value })}
-                  placeholder="الحد الأدنى"
+                  placeholder="Minimum"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">المساحة (م²) - إلى</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Area (m²) - To</label>
                 <input
                   type="number"
                   value={filters.maxArea}
                   onChange={(e) => setFilters({ ...filters, maxArea: e.target.value })}
-                  placeholder="الحد الأقصى"
+                  placeholder="Maximum"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">السعر - من</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Price - From</label>
                 <input
                   type="number"
                   value={filters.minPrice}
                   onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })}
-                  placeholder="الحد الأدنى"
+                  placeholder="Minimum"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">السعر - إلى</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Price - To</label>
                 <input
                   type="number"
                   value={filters.maxPrice}
                   onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })}
-                  placeholder="الحد الأقصى"
+                  placeholder="Maximum"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72"
                 />
               </div>
@@ -283,7 +283,7 @@ const RealEstateMarketing = () => {
                   onClick={handleResetFilters}
                   className="px-6 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
-                  إعادة تعيين
+                  Reset
                 </button>
               </div>
             </motion.div>
@@ -293,7 +293,7 @@ const RealEstateMarketing = () => {
         {/* Results Count */}
         <div className="mb-4">
           <p className="text-gray-600 text-sm">
-            تم العثور على <span className="font-bold" style={{ color: '#d6ac72' }}>{filteredUnits.length}</span> وحدة
+            Found <span className="font-bold" style={{ color: '#d6ac72' }}>{filteredUnits.length}</span> units
           </p>
         </div>
 
@@ -329,18 +329,18 @@ const RealEstateMarketing = () => {
                     </div>
                     <div className="flex items-center text-gray-600 text-sm">
                       <FiHome className="ml-1.5" size={14} />
-                      <span>{unit.rooms} غرف</span>
+                      <span>{unit.rooms} rooms</span>
                     </div>
                     <div className="flex items-center text-gray-600 text-sm">
                       <FiMaximize2 className="ml-1.5" size={14} />
-                      <span>{unit.areaSize} م²</span>
+                      <span>{unit.areaSize} m²</span>
                     </div>
                     <div className="flex items-center text-gray-600 text-sm">
-                      <span className="ml-1.5">الدور: {unit.floor}</span>
+                      <span className="ml-1.5">Floor: {unit.floor}</span>
                     </div>
                     <div className="flex items-center font-bold text-base pt-1" style={{ color: '#d6ac72' }}>
                       <FiDollarSign size={16} />
-                      <span>{unit.price.toLocaleString()} جنيه</span>
+                      <span>EGP {unit.price.toLocaleString()}</span>
                     </div>
                   </div>
 
@@ -351,7 +351,7 @@ const RealEstateMarketing = () => {
                       href={`/real-estate-marketing/${unit.id}`}
                       className="flex-1 btn-primary text-center text-sm py-2"
                     >
-                      عرض التفاصيل
+                      View Details
                     </a>
                     {isAuthenticated && (
                       <button
@@ -369,7 +369,7 @@ const RealEstateMarketing = () => {
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-500 text-lg">لا توجد وحدات مطابقة لمعايير البحث</p>
+            <p className="text-gray-500 text-lg">No units match the search criteria</p>
           </div>
         )}
       </div>

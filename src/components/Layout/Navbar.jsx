@@ -52,18 +52,18 @@ const Navbar = () => {
             <Link to="/" className="flex items-center space-x-3 space-x-reverse">
               <img 
                 src="/image/Logo.png" 
-                alt="شركة إعمار" 
+                alt="Emaar Company" 
                 className="h-14 w-auto object-contain"
               />
               <div className="flex flex-col text-center">
                 <span className="text-xl md:text-2xl font-bold text-primary-700 whitespace-nowrap">
-                  اعمار
+                  Emaar
                 </span>
                 <span className="text-sm md:text-base font-semibold text-gray-700 whitespace-nowrap">
-                  للمقاولات و الاعمال المساحيه
+                  Contracting & Surveying Works
                 </span>
                 <span className="text-sm md:text-base font-semibold text-gray-700 whitespace-nowrap">
-                  و الاستثمار العفارى
+                  & Real Estate Investment
                 </span>
               </div>
             </Link>
@@ -98,14 +98,14 @@ const Navbar = () => {
                               className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
                               onClick={() => setIsProjectsDropdownOpen(false)}
                             >
-                              المشاريع الحالية
+                              Current Projects
                             </Link>
                             <Link
                               to="/previous-projects"
                               className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-700 transition-colors"
                               onClick={() => setIsProjectsDropdownOpen(false)}
                             >
-                              المشاريع السابقة
+                              Previous Projects
                             </Link>
                           </motion.div>
                         )}
@@ -190,7 +190,7 @@ const Navbar = () => {
                                 }}
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
-                                المشاريع الحالية
+                                Current Projects
                               </Link>
                               <Link
                                 to="/previous-projects"
@@ -200,7 +200,7 @@ const Navbar = () => {
                                 }}
                                 className="block py-2 text-sm text-gray-600 hover:text-primary-700 transition-colors"
                               >
-                                المشاريع السابقة
+                                Previous Projects
                               </Link>
                             </div>
                           </motion.div>

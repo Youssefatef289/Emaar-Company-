@@ -7,21 +7,21 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const services = [
-    'المقاولات العامة',
-    'الأعمال المساحية',
-    'التسويق العقاري',
-    'التطوير العقاري',
-    'الاستثمار العقاري',
+    'General Contracting',
+    'Surveying Works',
+    'Real Estate Marketing',
+    'Real Estate Development',
+    'Real Estate Investment',
   ]
 
   const quickLinks = [
-    { path: '/', label: 'الرئيسية' },
-    { path: '/about', label: 'من نحن' },
-    { path: '/offers', label: 'عروضنا' },
-    { path: '/projects', label: 'مشارعنا' },
-    { path: '/real-estate-marketing', label: 'التسويق العقاري' },
-    { path: '/surveying-services', label: 'الأعمال المساحية' },
-    { path: '/contact', label: 'تواصل معنا' },
+    { path: '/', label: 'Home' },
+    { path: '/about', label: 'About Us' },
+    { path: '/offers', label: 'Our Offers' },
+    { path: '/projects', label: 'Our Projects' },
+    { path: '/real-estate-marketing', label: 'Real Estate Marketing' },
+    { path: '/surveying-services', label: 'Surveying Services' },
+    { path: '/contact', label: 'Contact Us' },
   ]
 
   const socialLinks = [
@@ -38,16 +38,16 @@ const Footer = () => {
           {/* Company Info */}
           <div className="footer-company">
             <div className="footer-logo mb-4">
-              <img src="/image/Logo.png" alt="شركة إعمار" className="h-14 mb-3" />
+              <img src="/image/Logo.png" alt="Emaar Company" className="h-14 mb-3" />
               <div className="footer-company-name">
-                <h3 className="text-xl font-bold mb-1">اعمار</h3>
-                <p className="text-sm">للمقاولات و الاعمال المساحيه</p>
-                <p className="text-sm">و الاستثمار العفارى</p>
+                <h3 className="text-xl font-bold mb-1">Emaar</h3>
+                <p className="text-sm">Contracting & Surveying Works</p>
+                <p className="text-sm">& Real Estate Investment</p>
               </div>
             </div>
             <p className="footer-description mb-6 leading-relaxed">
-              شركة إعمار للمقاولات والأعمال المساحية والاستثمار العقاري - رائدة في مجال التطوير العقاري والمقاولات في مصر، 
-              نسعى لتقديم أفضل الخدمات والحلول العقارية لعملائنا.
+              Emaar Company for Contracting, Surveying Works, and Real Estate Investment - A leader in real estate development and contracting in Egypt, 
+              we strive to provide the best services and real estate solutions to our clients.
             </p>
             <div className="flex space-x-3 space-x-reverse">
               {socialLinks.map((social) => (
@@ -68,7 +68,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="footer-section">
-            <h3 className="footer-title">روابط سريعة</h3>
+            <h3 className="footer-title">Quick Links</h3>
             <ul className="footer-links">
               {quickLinks.map((link) => (
                 <li key={link.path}>
@@ -85,7 +85,7 @@ const Footer = () => {
 
           {/* Services */}
           <div className="footer-section">
-            <h3 className="footer-title">خدماتنا</h3>
+            <h3 className="footer-title">Our Services</h3>
             <ul className="footer-links">
               {services.map((service) => (
                 <li key={service}>

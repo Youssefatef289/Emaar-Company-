@@ -15,98 +15,98 @@ const SurveyingServices = () => {
   const courses = [
     {
       id: 1,
-      title: 'دورة المساحة التطبيقية المتقدمة',
-      description: 'دورة شاملة تغطي جميع أساسيات المساحة التطبيقية والتقنيات الحديثة',
-      duration: '40 ساعة',
+      title: 'Advanced Applied Surveying Course',
+      description: 'Comprehensive course covering all fundamentals of applied surveying and modern techniques',
+      duration: '40 hours',
       price: 5000,
       content: [
-        'مقدمة في المساحة التطبيقية',
-        'استخدام أجهزة المساحة الحديثة',
-        'الرفع المساحي والتوقيع',
-        'المساحة الجيوديسية',
-        'المساحة التصويرية',
-        'تطبيقات عملية',
+        'Introduction to Applied Surveying',
+        'Using Modern Surveying Equipment',
+        'Surveying and Layout',
+        'Geodetic Surveying',
+        'Photogrammetry',
+        'Practical Applications',
       ],
-      instructor: 'د. محمد أحمد',
-      instructorBio: 'خبير مساحي مع أكثر من 20 عامًا من الخبرة',
+      instructor: 'Dr. Mohamed Ahmed',
+      instructorBio: 'Surveying expert with over 20 years of experience',
       image: '/image/medium (5).webp',
     },
     {
       id: 2,
-      title: 'دورة الرفع المساحي باستخدام GPS',
-      description: 'تعلم استخدام تقنيات GPS في الرفع المساحي',
-      duration: '30 ساعة',
+      title: 'GPS Surveying Course',
+      description: 'Learn to use GPS technologies in surveying',
+      duration: '30 hours',
       price: 4000,
       content: [
-        'مقدمة في أنظمة GPS',
-        'استخدام أجهزة GPS المساحية',
-        'معالجة البيانات',
-        'تطبيقات عملية',
+        'Introduction to GPS Systems',
+        'Using GPS Surveying Equipment',
+        'Data Processing',
+        'Practical Applications',
       ],
-      instructor: 'م. أحمد محمود',
-      instructorBio: 'متخصص في أنظمة GPS والمساحة الحديثة',
+      instructor: 'Eng. Ahmed Mahmoud',
+      instructorBio: 'Specialist in GPS systems and modern surveying',
       image: '/image/medium (6).webp',
     },
     {
       id: 3,
-      title: 'دورة المساحة التصويرية',
-      description: 'تعلم تقنيات المساحة التصويرية والاستشعار عن بعد',
-      duration: '35 ساعة',
+      title: 'Photogrammetry Course',
+      description: 'Learn photogrammetry techniques and remote sensing',
+      duration: '35 hours',
       price: 4500,
       content: [
-        'أساسيات المساحة التصويرية',
-        'التصوير الجوي',
-        'معالجة الصور',
-        'الاستشعار عن بعد',
-        'تطبيقات عملية',
+        'Photogrammetry Fundamentals',
+        'Aerial Photography',
+        'Image Processing',
+        'Remote Sensing',
+        'Practical Applications',
       ],
-      instructor: 'د. سارة علي',
-      instructorBio: 'خبيرة في المساحة التصويرية والاستشعار عن بعد',
+      instructor: 'Dr. Sara Ali',
+      instructorBio: 'Expert in photogrammetry and remote sensing',
       image: '/image/medium (7).webp',
     },
     {
       id: 4,
-      title: 'دورة Total Station (توتال ستيشن)',
-      description: 'دورة متخصصة في استخدام جهاز Total Station للرفع المساحي الدقيق والتوقيع',
-      duration: '45 ساعة',
+      title: 'Total Station Course',
+      description: 'Specialized course in using Total Station for precise surveying and layout',
+      duration: '45 hours',
       price: 6000,
       content: [
-        'مقدمة في جهاز Total Station',
-        'مكونات الجهاز وطرق التشغيل',
-        'إعداد الجهاز والمعايرة',
-        'الرفع المساحي باستخدام Total Station',
-        'التوقيع والاستكشاف',
-        'قياس المسافات والزوايا',
-        'معالجة البيانات والتصدير',
-        'التدريب العملي داخل الموقع',
-        'حل المشاكل الشائعة',
-        'تطبيقات عملية متقدمة',
+        'Introduction to Total Station',
+        'Device Components and Operation Methods',
+        'Device Setup and Calibration',
+        'Surveying with Total Station',
+        'Layout and Exploration',
+        'Distance and Angle Measurement',
+        'Data Processing and Export',
+        'On-site Practical Training',
+        'Troubleshooting Common Issues',
+        'Advanced Practical Applications',
       ],
-      instructor: 'م. محمود السيد',
-      instructorBio: 'خبير في أجهزة Total Station مع أكثر من 12 عامًا من الخبرة العملية',
+      instructor: 'Eng. Mahmoud El-Sayed',
+      instructorBio: 'Total Station expert with over 12 years of practical experience',
       image: '/image/سعر-جهاز-توتال-ستيشن-سوكيا.jpg',
       videoUrl: 'https://www.youtube.com/embed/bkeLrvY5i2E',
     },
     {
       id: 5,
-      title: 'دورة تعليم الأوتوكاد (AutoCAD)',
-      description: 'دورة شاملة لتعلم برنامج AutoCAD من البداية إلى الاحتراف في الرسم والتصميم الهندسي',
-      duration: '40 ساعة',
+      title: 'AutoCAD Training Course',
+      description: 'Comprehensive course to learn AutoCAD from basics to professional level in engineering drawing and design',
+      duration: '40 hours',
       price: 5000,
       content: [
-        'مقدمة في برنامج AutoCAD',
-        'واجهة البرنامج والأدوات الأساسية',
-        'أوامر الرسم الأساسية (Line, Circle, Arc, etc.)',
-        'أوامر التعديل (Move, Copy, Rotate, Scale)',
-        'الطبقات (Layers) وإدارة الألوان',
-        'النصوص والكتابة (Text, MText)',
-        'الأبعاد والقياسات (Dimensions)',
-        'الكتل والمراجع (Blocks & References)',
-        'الطباعة والتصدير (Plot & Export)',
-        'مشاريع عملية وتطبيقات متقدمة',
+        'Introduction to AutoCAD',
+        'Program Interface and Basic Tools',
+        'Basic Drawing Commands (Line, Circle, Arc, etc.)',
+        'Modification Commands (Move, Copy, Rotate, Scale)',
+        'Layers and Color Management',
+        'Text and Writing (Text, MText)',
+        'Dimensions and Measurements',
+        'Blocks and References',
+        'Printing and Export (Plot & Export)',
+        'Practical Projects and Advanced Applications',
       ],
-      instructor: 'م. أحمد محمد',
-      instructorBio: 'خبير في برامج التصميم الهندسي مع أكثر من 15 عامًا من الخبرة في AutoCAD',
+      instructor: 'Eng. Ahmed Mohamed',
+      instructorBio: 'Expert in engineering design software with over 15 years of AutoCAD experience',
       image: '/image/maxresdefault.jpg',
       videoUrl: 'https://www.youtube.com/embed/nmA5m_7Enf8',
     },
@@ -125,7 +125,7 @@ const SurveyingServices = () => {
             style={{ color: '#d6ac72' }}
           >
             <FiArrowLeft className="ml-2" size={20} />
-            <span>العودة إلى الدورات</span>
+            <span>Back to Courses</span>
           </button>
 
           <motion.div
@@ -149,7 +149,7 @@ const SurveyingServices = () => {
                 <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
                   <FiClock size={24} style={{ color: '#d6ac72' }} />
                   <div>
-                    <p className="text-sm text-gray-600">المدة</p>
+                    <p className="text-sm text-gray-600">Duration</p>
                     <p className="font-bold text-gray-900">{selectedCourse.duration}</p>
                   </div>
                 </div>
@@ -157,22 +157,22 @@ const SurveyingServices = () => {
                 <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
                   <FiDollarSign size={24} style={{ color: '#d6ac72' }} />
                   <div>
-                    <p className="text-sm text-gray-600">السعر</p>
-                    <p className="font-bold text-gray-900">{selectedCourse.price.toLocaleString()} جنيه</p>
+                    <p className="text-sm text-gray-600">Price</p>
+                    <p className="font-bold text-gray-900">EGP {selectedCourse.price.toLocaleString()}</p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
                   <FiUsers size={24} style={{ color: '#d6ac72' }} />
                   <div>
-                    <p className="text-sm text-gray-600">المدرب</p>
+                    <p className="text-sm text-gray-600">Instructor</p>
                     <p className="font-bold text-gray-900">{selectedCourse.instructor}</p>
                   </div>
                 </div>
               </div>
 
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">المحتوى التعليمي</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Course Content</h2>
                 <ul className="space-y-3">
                   {selectedCourse.content.map((item, index) => (
                     <li key={index} className="flex items-start space-x-3 space-x-reverse">
@@ -184,13 +184,13 @@ const SurveyingServices = () => {
               </div>
 
               <div className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">عن المدرب</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">About the Instructor</h2>
                 <p className="text-gray-700">{selectedCourse.instructorBio}</p>
               </div>
 
               {selectedCourse.videoUrl && (
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">فيديو تعريفي</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Introductory Video</h2>
                   {!showVideoInDetail ? (
                     <button
                       onClick={() => setShowVideoInDetail(true)}
@@ -202,7 +202,7 @@ const SurveyingServices = () => {
                   ) : (
                     <div className="bg-gray-100 rounded-xl shadow-lg overflow-hidden">
                       <div className="flex items-center justify-between p-4 bg-gray-200">
-                        <h3 className="font-semibold text-gray-900">فيديو الدورة</h3>
+                        <h3 className="font-semibold text-gray-900">Course Video</h3>
                         <button
                           onClick={() => setShowVideoInDetail(false)}
                           className="text-gray-600 hover:text-gray-900 transition-colors"
@@ -213,7 +213,7 @@ const SurveyingServices = () => {
                       <div className="aspect-video">
                         <iframe
                           src={selectedCourse.videoUrl}
-                          title="فيديو الدورة"
+                          title="Course Video"
                           className="w-full h-full"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
@@ -228,7 +228,7 @@ const SurveyingServices = () => {
                 to={`/surveying-services/course/${selectedCourse.id}/book`}
                 className="btn-primary inline-block text-center w-full md:w-auto"
               >
-                احجز الدورة الآن
+                Book Course Now
               </Link>
             </div>
           </motion.div>
@@ -259,10 +259,10 @@ const SurveyingServices = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              الدورات المساحية
+              Surveying Courses
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
-              دورات تدريبية متخصصة وشاملة
+              Specialized and comprehensive training courses
             </p>
           </motion.div>
         </div>
@@ -276,44 +276,44 @@ const SurveyingServices = () => {
           className="mb-16"
         >
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">الكورسات المتاحة</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Available Courses</h2>
             <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
                   {[
                     { 
                       id: 'surveying-package',
-                      title: 'باكدج المساحة (الميزان - التوتال ستيشن)',
-                      duration: '60 ساعة',
+                      title: 'Surveying Package (Level - Total Station)',
+                      duration: '60 hours',
                       price: 8000
                     },
                     { 
                       id: 'autocad',
-                      title: 'الأوتوكاد',
-                      duration: '40 ساعة',
+                      title: 'AutoCAD',
+                      duration: '40 hours',
                       price: 5000
                     },
                     { 
                       id: 'civil-3d',
-                      title: 'سيفيل 3D',
-                      duration: '50 ساعة',
+                      title: 'Civil 3D',
+                      duration: '50 hours',
                       price: 7000
                     },
                     { 
                       id: '3d-max',
                       title: '3D Max',
-                      duration: '45 ساعة',
+                      duration: '45 hours',
                       price: 6000
                     },
                     { 
                       id: 'revit',
-                      title: 'الريفيت',
-                      duration: '50 ساعة',
+                      title: 'Revit',
+                      duration: '50 hours',
                       price: 7000
                     }
                   ].map((course) => {
                     const handleWhatsApp = () => {
-                      const message = `مرحباً، أريد الاستفسار عن دورة: ${course.title}`
+                      const message = `Hello, I would like to inquire about the course: ${course.title}`
                       const url = `https://wa.me/201011942703?text=${encodeURIComponent(message)}`
                       window.open(url, '_blank')
                     }
@@ -336,7 +336,7 @@ const SurveyingServices = () => {
                               <span>{course.duration}</span>
                             </div>
                             <div className="font-bold" style={{ color: '#d6ac72' }}>
-                              {course.price.toLocaleString()} ج.م
+                              EGP {course.price.toLocaleString()}
                             </div>
                           </div>
                           <div className="flex flex-col gap-2">
@@ -354,14 +354,14 @@ const SurveyingServices = () => {
                               }}
                             >
                               <FiInfo size={18} />
-                              <span>التفاصيل</span>
+                              <span>Details</span>
                             </Link>
                             <button
                               onClick={handleWhatsApp}
                               className="w-full bg-green-500 text-white py-2.5 rounded-lg font-semibold hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
                             >
                               <FaWhatsapp size={18} />
-                              <span>واتساب</span>
+                              <span>WhatsApp</span>
                             </button>
                           </div>
                         </div>
@@ -377,7 +377,7 @@ const SurveyingServices = () => {
           animate={{ opacity: 1, y: 0 }}
         >
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">الدورات التدريبية</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Training Courses</h2>
             <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -420,7 +420,7 @@ const SurveyingServices = () => {
                     </div>
                     <div className="flex items-center font-bold text-base" style={{ color: '#d6ac72' }}>
                       <FiDollarSign size={16} />
-                      <span>{course.price.toLocaleString()} ج.م</span>
+                      <span>EGP {course.price.toLocaleString()}</span>
                     </div>
                   </div>
 
@@ -431,14 +431,14 @@ const SurveyingServices = () => {
                         className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold text-sm"
                       >
                         <FiPlay size={16} />
-                        <span>شاهد الفيديو</span>
+                        <span>Watch Video</span>
                       </button>
                     )}
                     <button
                       onClick={() => setSelectedCourse(course)}
                       className="w-full btn-primary text-sm py-2.5"
                     >
-                      عرض التفاصيل
+                      View Details
                     </button>
                   </div>
                 </div>
@@ -474,7 +474,7 @@ const SurveyingServices = () => {
               <div className="aspect-video">
                 <iframe
                   src={videoUrl}
-                  title="فيديو الدورة"
+                  title="Course Video"
                   className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

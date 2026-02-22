@@ -131,7 +131,7 @@ const translations = {
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('language') || 'ar'
+    return localStorage.getItem('language') || 'en'
   })
 
   useEffect(() => {

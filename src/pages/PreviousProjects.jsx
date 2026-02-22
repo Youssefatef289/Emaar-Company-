@@ -9,15 +9,15 @@ const PreviousProjects = () => {
   const [selectedGalleryImageIndex, setSelectedGalleryImageIndex] = useState(null)
   const [cardImageIndices, setCardImageIndices] = useState({})
 
-  // المشاريع السابقة
+  // Previous Projects
   const previousProjects = [
     {
       id: 'beni-suef-post',
-      title: 'مبنى البريد - بنى سويف',
-      location: 'بنى سويف',
-      type: 'حكومي',
-      status: 'مكتمل',
-      description: 'مبنى البريد ودراسات إسلامية في بنى سويف',
+      title: 'Post Office Building - Beni Suef',
+      location: 'Beni Suef',
+      type: 'Government',
+      status: 'Completed',
+      description: 'Post office building and Islamic studies in Beni Suef',
       image: '/image/Beni Suef Post Office, Islamic Studies/Post office (1).jpg',
       images: [
         '/image/Beni Suef Post Office, Islamic Studies/Post office (1).jpg',
@@ -41,11 +41,11 @@ const PreviousProjects = () => {
     },
     {
       id: 'al-harbi',
-      title: 'شركة الحربي',
-      location: 'مصر',
-      type: 'تجاري',
-      status: 'مكتمل',
-      description: 'مشروع شركة الحربي',
+      title: 'Al-Harbi Company',
+      location: 'Egypt',
+      type: 'Commercial',
+      status: 'Completed',
+      description: 'Al-Harbi Company project',
       image: '/image/Al-Harbi Company/Al-Harbi Company (1).jpg',
       images: [
         '/image/Al-Harbi Company/Al-Harbi Company (1).jpg',
@@ -59,11 +59,11 @@ const PreviousProjects = () => {
     },
     {
       id: 'workers-university',
-      title: 'البوابات - الجامعة العمالية',
-      location: 'مصر',
-      type: 'تعليمي',
-      status: 'مكتمل',
-      description: 'بوابات الجامعة العمالية',
+      title: 'Gates - Workers University',
+      location: 'Egypt',
+      type: 'Educational',
+      status: 'Completed',
+      description: 'Workers University gates',
       image: '/image/البوبات/الجامعة العمالية/Workers\' University Gates (1).JPG',
       images: [
         '/image/البوبات/الجامعة العمالية/Workers\' University Gates (1).JPG',
@@ -86,11 +86,11 @@ const PreviousProjects = () => {
     },
     {
       id: 'beni-suef-university',
-      title: 'البوابات - جامعة بنى سويف',
-      location: 'بنى سويف',
-      type: 'تعليمي',
-      status: 'مكتمل',
-      description: 'بوابات جامعة بنى سويف',
+      title: 'Gates - Beni Suef University',
+      location: 'Beni Suef',
+      type: 'Educational',
+      status: 'Completed',
+      description: 'Beni Suef University gates',
       image: '/image/البوبات/جامعة بنى سويف/Beni Suef University Gates (1).JPG',
       images: [
         '/image/البوبات/جامعة بنى سويف/Beni Suef University Gates (1).JPG',
@@ -192,13 +192,13 @@ const PreviousProjects = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              المشاريع السابقة
+              Previous Projects
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
-              استعرض مشاريعنا المكتملة التي نفذناها باحترافية عالية
+              Browse our completed projects executed with high professionalism
             </p>
             <p className="text-lg text-white drop-shadow-md">
-              مشاريع متميزة بجودة عالية وتصميم عصري
+              Distinguished projects with high quality and modern design
             </p>
           </motion.div>
         </div>
@@ -300,13 +300,13 @@ const PreviousProjects = () => {
                     className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold text-sm shadow-md hover:shadow-lg"
                   >
                     <FiImage size={16} />
-                    <span>رؤية الصور ({project.images.length})</span>
+                    <span>View Images ({project.images.length})</span>
                   </button>
                   <Link
                     to={`/projects/${project.id}`}
                     className="w-full btn-primary text-sm py-2.5 flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
                   >
-                    <span>عرض التفاصيل</span>
+                    <span>View Details</span>
                     <FiArrowRight size={16} />
                   </Link>
                 </div>
@@ -323,10 +323,10 @@ const PreviousProjects = () => {
           className="mt-16"
         >
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">أبراج إعمار</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Emaar Towers</h2>
             <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-              استعرض صور مشروع أبراج إعمار
+              Browse Emaar Towers project images
             </p>
           </div>
 
@@ -378,7 +378,7 @@ const PreviousProjects = () => {
               >
                 <img
                   src={image}
-                  alt={`أبراج إعمار ${index + 1}`}
+                  alt={`Emaar Towers ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   loading="lazy"
                   onError={(e) => {
@@ -388,7 +388,7 @@ const PreviousProjects = () => {
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                   <span className="opacity-0 group-hover:opacity-100 text-white text-sm font-semibold transition-opacity">
-                    اضغط للتكبير
+                    Click to enlarge
                   </span>
                 </div>
               </motion.div>
@@ -397,7 +397,7 @@ const PreviousProjects = () => {
 
           <div className="text-center mb-8">
             <p className="text-xl font-semibold text-gray-800 mb-6">
-              هذه الصور من مشروع أبراج إعمار
+              These images are from the Emaar Towers project
             </p>
             <Link
               to="/projects/1"
@@ -426,10 +426,10 @@ const PreviousProjects = () => {
           className="mt-16"
         >
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">معرض الصور</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Image Gallery</h2>
             <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              استعرض صور مشاريعنا المكتملة
+              Browse our completed projects images
             </p>
           </div>
 
@@ -445,7 +445,7 @@ const PreviousProjects = () => {
               >
                 <img
                   src={image}
-                  alt={`مشروع ${index + 1}`}
+                  alt={`Project ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   loading="lazy"
                   onError={(e) => {
@@ -455,7 +455,7 @@ const PreviousProjects = () => {
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
                   <span className="opacity-0 group-hover:opacity-100 text-white text-sm font-semibold transition-opacity">
-                    اضغط للتكبير
+                    Click to enlarge
                   </span>
                 </div>
               </motion.div>
@@ -484,7 +484,7 @@ const PreviousProjects = () => {
               <button
                 onClick={handleCloseImageModal}
                 className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors z-10"
-                aria-label="إغلاق"
+                aria-label="Close"
               >
                 <FiX size={24} />
               </button>
@@ -496,7 +496,7 @@ const PreviousProjects = () => {
                     handlePrevImage()
                   }}
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
-                  aria-label="الصورة السابقة"
+                  aria-label="Previous image"
                 >
                   <span className="text-2xl">‹</span>
                 </button>
@@ -509,7 +509,7 @@ const PreviousProjects = () => {
                     handleNextImage()
                   }}
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
-                  aria-label="الصورة التالية"
+                  aria-label="Next image"
                 >
                   <span className="text-2xl">›</span>
                 </button>
@@ -517,7 +517,7 @@ const PreviousProjects = () => {
               
               <img
                 src={selectedProjectImages[selectedImageIndex]}
-                alt={`صورة ${selectedImageIndex + 1}`}
+                alt={`Image ${selectedImageIndex + 1}`}
                 className="max-w-full max-h-full object-contain rounded-lg"
                 onError={(e) => {
                   e.target.src = '/image/medium (1).webp'
@@ -552,7 +552,7 @@ const PreviousProjects = () => {
               <button
                 onClick={handleCloseGalleryModal}
                 className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors z-10"
-                aria-label="إغلاق"
+                aria-label="Close"
               >
                 <FiX size={24} />
               </button>
@@ -564,7 +564,7 @@ const PreviousProjects = () => {
                     handlePrevGalleryImage();
                   }}
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
-                  aria-label="الصورة السابقة"
+                  aria-label="Previous image"
                 >
                   <span className="text-2xl">‹</span>
                 </button>
@@ -577,7 +577,7 @@ const PreviousProjects = () => {
                     handleNextGalleryImage();
                   }}
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
-                  aria-label="الصورة التالية"
+                  aria-label="Next image"
                 >
                   <span className="text-2xl">›</span>
                 </button>
