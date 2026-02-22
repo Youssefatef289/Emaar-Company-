@@ -166,99 +166,107 @@ const Offers = () => {
           <div className="relative z-10">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-white drop-shadow-lg">🎊 مسابقة رمضان المبارك 🎊</h2>
-              <p className="text-lg md:text-xl mb-2 text-white drop-shadow-md font-semibold">
-                تهنئة بمناسبة شهر رمضان المبارك
-              </p>
-              <p className="text-base md:text-lg text-white drop-shadow-md">
-                وكما عودناكم على التميز في البناء والتطوير، نعدكم بالتميز في الجوائز!
-              </p>
             </div>
 
             <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6 md:p-8 mb-6 border border-white/30">
-              <div className="text-center mb-6">
-                <p className="text-xl md:text-2xl font-bold mb-4 text-white drop-shadow-md">
-                  📺 "شوف الفيديو الجوائز للآخر عشان تعرف هتكسب إيه!"
-                </p>
-                <p className="text-lg md:text-xl font-semibold mb-2 text-white drop-shadow-md">
-                  ✨ شعارنا في رمضان: "إعمار.. الكل معها كسبان" ✨
-                </p>
-              </div>
+              {/* Video and Text Side by Side Layout */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                {/* Competition Text - Left Side */}
+                <div className="order-1 lg:order-1 space-y-6 text-right">
+                  {/* Main Title */}
+                  <div className="text-center lg:text-right">
+                    <p className="text-2xl md:text-3xl font-extrabold mb-4 text-white drop-shadow-lg">
+                      جاهزين؟.. لأقوى مفاجأة في رمضان!
+                    </p>
+                  </div>
 
-              <div className="mb-6">
-                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">🗓️ مواعيد المسابقة:</h3>
-                <div className="bg-white/20 rounded-lg p-4 mb-4 border border-white/30">
-                  <p className="text-lg mb-2 text-white font-semibold">انتظروا أسئلتنا الدينية مرتين أسبوعياً:</p>
-                  <ul className="space-y-2 text-right">
-                    <li className="flex items-center gap-2 text-white">
-                      <span>📅</span>
-                      <span>يومي (الاثنين والخميس)</span>
-                    </li>
-                    <li className="flex items-center gap-2 text-white">
-                      <span>🕔</span>
-                      <span>الساعة 5:00 مساءً</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                  {/* Introduction */}
+                  <div className="bg-white/20 rounded-lg p-5 border border-white/30">
+                    <p className="text-lg md:text-xl mb-3 text-white leading-relaxed">
+                      السنة دي.. "إعمار" محضرة لكم مفاجأه كبيرة.. بجد.. فوق الخيال!
+                    </p>
+                    <p className="text-lg md:text-xl text-white leading-relaxed">
+                      مسابقتنا الدينية.. معاكم طول الشهر الكريم.. كل يوم سؤال جديد.. وفرصة جديدة.. عشان تكسبوا معانا!
+                    </p>
+                  </div>
 
-              <div className="mb-6">
-                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">📝 شروط وطريقة المشاركة (هام جداً):</h3>
-                <div className="bg-white/20 rounded-lg p-4 space-y-3 text-right border border-white/30">
-                  <p className="font-semibold mb-3 text-white">لضمان دخول اسمك في السحب على جوائز الفيديو، يرجى اتباع الخطوات التالية:</p>
-                  <div className="space-y-2">
-                    <div className="flex items-start gap-2 text-white">
-                      <span>✅</span>
-                      <span>الإجابة: اكتب إجابتك الصحيحة في تعليق واحد فقط على منشور السؤال.</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-white">
-                      <span>📸</span>
-                      <span>سكرين شوت: خذ لقطة شاشة (Screen Shot) لتعليقك.</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-white">
-                      <span>📩</span>
-                      <span>إرسال البيانات: أرسل "السكرين شوت" في رسالة خاصة (على الصفحة أو عبر الواتساب) مصحوبة برقم تليفونك للتواصل في حال الفوز.</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-white">
-                      <span>⏱️</span>
-                      <span>المهلة الزمنية: الإجابة متاحة من وقت نزول السؤال وحتى موعد نزول السؤال القادم.</span>
+                  {/* Prizes Section */}
+                  <div className="bg-white/20 rounded-lg p-5 border border-white/30">
+                    <h3 className="text-xl md:text-2xl font-extrabold mb-5 text-center text-white drop-shadow-md">
+                      تيجوا نعرف الجوايز؟.. ركزوا بقى..
+                    </h3>
+                    
+                    <div className="space-y-3">
+                      {/* Prize 1 */}
+                      <div className="bg-yellow-500/30 rounded-lg p-4 border border-yellow-400/50 hover:bg-yellow-500/40 transition-colors">
+                        <p className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                          <span className="text-2xl">🥇</span>
+                          <span>الجايزة الأولى:</span>
+                        </p>
+                        <p className="text-base text-white pr-6">
+                          نص تشطيب "شقتك".. واحد من العملاء القدام.. أيوه.. التشطيب علينا إحنا!
+                        </p>
+                      </div>
+
+                      {/* Prize 2 */}
+                      <div className="bg-yellow-500/30 rounded-lg p-4 border border-yellow-400/50 hover:bg-yellow-500/40 transition-colors">
+                        <p className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                          <span className="text-2xl">🥈</span>
+                          <span>والتانية؟</span>
+                        </p>
+                        <p className="text-base text-white pr-6">
+                          خصم ألف جنيه.. كاملين.. على "كل متر"— لواحد بس من أي عميل جديد هيتعاقد وهيجز معانا
+                        </p>
+                      </div>
+
+                      {/* Prize 3 */}
+                      <div className="bg-yellow-500/30 rounded-lg p-4 border border-yellow-400/50 hover:bg-yellow-500/40 transition-colors">
+                        <p className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                          <span className="text-2xl">🥉</span>
+                          <span>أما التالتة:</span>
+                        </p>
+                        <p className="text-base text-white pr-6">
+                          فهي خصم عشرة في المية.. على "المصنعيات".. كلها! لواحد بس حابب بشطب شقته معانا
+                        </p>
+                      </div>
+
+                      {/* Prize 4 */}
+                      <div className="bg-yellow-500/30 rounded-lg p-4 border border-yellow-400/50 hover:bg-yellow-500/40 transition-colors">
+                        <p className="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                          <span className="text-2xl">💰</span>
+                          <span>والجايزة الرابعة:</span>
+                        </p>
+                        <p className="text-base text-white pr-6">
+                          5 آلاف جنيه "كاش".. هيتوزعوا على 5 فايزين!
+                        </p>
+                      </div>
                     </div>
                   </div>
+
+                  {/* Call to Action */}
+                  <div className="text-center bg-green-500/30 border-2 border-green-400/70 rounded-lg p-5">
+                    <p className="text-xl md:text-2xl font-bold text-white drop-shadow-md mb-2">
+                      مستنيين إيه؟.. شاركوا.. جاوبوا.. واكسبوا..
+                    </p>
+                    <p className="text-lg md:text-xl font-bold text-white drop-shadow-md">
+                      وخلي "إعمار"— تكمّل حلم بيتكم!
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              <div className="mb-6">
-                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">⚖️ شروط الفوز (هام جداً):</h3>
-                <div className="bg-red-600/30 border-2 border-red-500/70 rounded-lg p-4">
-                  <p className="text-center font-bold text-lg text-white drop-shadow-md">
-                    يجب الإجابة على جميع الأسئلة طوال شهر رمضان؛ وفوات أي حلقة يعني الاستبعاد التلقائي من السحب. 🚫
-                  </p>
+                {/* Video Section - Right Side */}
+                <div className="order-2 lg:order-2">
+                  <div className="sticky top-6">
+                    <video
+                      controls
+                      className="w-full rounded-xl shadow-2xl"
+                      style={{ maxHeight: '600px' }}
+                    >
+                      <source src="/image/Ages competition in Ramadan.mp4" type="video/mp4" />
+                      متصفحك لا يدعم تشغيل الفيديو.
+                    </video>
+                  </div>
                 </div>
-              </div>
-
-              <div className="mb-6">
-                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">🏆 الجوائز:</h3>
-                <p className="text-center text-lg bg-white/20 rounded-lg p-4 text-white font-semibold border border-white/30">
-                  جوائز قيمة ومنوعة كما ظهرت في الفيديو، بانتظار الملتزمين بالشروط وأصحاب الإجابات الصحيحة.
-                </p>
-              </div>
-
-              <div className="mb-6">
-                <h3 className="text-xl font-extrabold mb-4 text-center text-white drop-shadow-md">🎊 موعد التتويج:</h3>
-                <p className="text-center text-lg bg-white/20 rounded-lg p-4 text-white font-semibold border border-white/30">
-                  سيتم إجراء القرعة العلنية وتوزيع الجوائز على الفائزين بعد عطلة عيد الفطر المبارك مباشرة. 🎁🌙
-                </p>
-              </div>
-
-              <div className="text-center bg-yellow-500/30 border-2 border-yellow-400/70 rounded-lg p-4 mb-6">
-                <p className="font-bold text-lg text-white drop-shadow-md">
-                  ⚠️🎁 وما تنساش تسال على العروض
-                </p>
-              </div>
-
-              <div className="text-center">
-                <p className="text-xl font-bold text-white drop-shadow-md">
-                  🏗️ مع إعمار.. دقة في التطوير.. ثقة في البناء.. والكل كسبان! 🌙
-                </p>
               </div>
             </div>
           </div>
