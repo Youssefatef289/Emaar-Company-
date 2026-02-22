@@ -49,13 +49,13 @@ const StatsSection = () => {
   }, [inView, stats])
 
   return (
-    <section ref={ref} className="section-padding stats-section text-white">
-      <div className="container-custom">
+    <section ref={ref} className="section-padding stats-section text-white w-full">
+      <div className="container-custom w-full">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 w-full"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -63,12 +63,12 @@ const StatsSection = () => {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="text-center"
+              className="text-center w-full"
             >
-              <div className="text-5xl md:text-6xl font-bold mb-2">
+              <div className="text-5xl md:text-6xl font-bold mb-2 text-white">
                 {counters[index]}{stat.suffix}
               </div>
-              <div className="text-xl md:text-2xl text-primary-100">{stat.label}</div>
+              <div className="text-xl md:text-2xl text-white opacity-90">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
