@@ -9,8 +9,8 @@ const Offers = () => {
   const offers = [
     {
       id: 1,
-      title: '10% Discount on All Residential Units',
-      description: 'Special limited-time offer - 10% discount on all residential units in our new project',
+      title: 'خصم 10% على جميع الوحدات السكنية',
+      description: 'عرض خاص لفترة محدودة - خصم 10% على جميع الوحدات السكنية في مشروعنا الجديد',
       discount: 10,
       validUntil: '2024-12-31',
       image: '/image/medium (8).webp',
@@ -19,8 +19,8 @@ const Offers = () => {
     },
     {
       id: 2,
-      title: '20% Discount on Surveying Courses',
-      description: 'Get 20% off when registering for any of our surveying courses',
+      title: 'خصم 20% على دورات المساحة',
+      description: 'احصل على خصم 20% عند التسجيل في أي من دوراتنا المساحية',
       discount: 20,
       validUntil: '2024-11-30',
       image: '/image/medium (9).webp',
@@ -29,8 +29,8 @@ const Offers = () => {
     },
     {
       id: 3,
-      title: 'Easy Financing Up to 10 Years',
-      description: 'Easy financing offers up to 10 years without additional interest',
+      title: 'تمويل سهل حتى 10 سنوات',
+      description: 'عروض تمويل سهلة حتى 10 سنوات بدون فوائد إضافية',
       discount: 0,
       validUntil: '2024-12-31',
       image: '/image/medium (10).webp',
@@ -39,8 +39,8 @@ const Offers = () => {
     },
     {
       id: 4,
-      title: 'Special Offer for Commercial Projects',
-      description: 'Exclusive discounts on commercial units in prime locations',
+      title: 'عرض خاص للمشاريع التجارية',
+      description: 'خصومات حصرية على الوحدات التجارية في مواقع ممتازة',
       discount: 15,
       validUntil: '2024-12-15',
       image: '/image/medium (11).webp',
@@ -51,12 +51,12 @@ const Offers = () => {
 
   const getOfferTypeLabel = (type) => {
     const types = {
-      'real-estate': 'Real Estate',
-      'course': 'Courses',
-      'financing': 'Financing',
-      'commercial': 'Commercial',
+      'real-estate': 'عقاري',
+      'course': 'دورات',
+      'financing': 'تمويل',
+      'commercial': 'تجاري',
     }
-    return types[type] || 'General'
+    return types[type] || 'عام'
   }
 
   return (
@@ -74,13 +74,13 @@ const Offers = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              Our Exclusive Offers
+              عروضنا الحصرية
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
-              Take advantage of the best offers and discounts on our services and projects
+              استفد من أفضل العروض والخصومات على خدماتنا ومشاريعنا
             </p>
             <p className="text-lg text-white drop-shadow-md">
-              Limited offers await you - Don't miss out
+              عروض محدودة في انتظارك - لا تفوت الفرصة
             </p>
           </motion.div>
         </div>
@@ -101,7 +101,7 @@ const Offers = () => {
               {/* Discount Badge */}
               {offer.discount > 0 && (
                 <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full font-bold text-sm z-10">
-                  {offer.discount}% OFF
+                  خصم {offer.discount}%
                 </div>
               )}
 
@@ -124,7 +124,7 @@ const Offers = () => {
 
                 <div className="flex items-center text-gray-600 mb-4">
                   <FiCalendar className="ml-2" size={14} />
-                  <span className="text-xs">Valid until: {offer.validUntil}</span>
+                  <span className="text-xs">صالح حتى: {offer.validUntil}</span>
                 </div>
 
                 <div className="flex flex-col gap-2">
@@ -136,7 +136,7 @@ const Offers = () => {
                     style={{ backgroundColor: '#25D366' }}
                   >
                     <FaWhatsapp size={18} />
-                    <span>Get Offer</span>
+                    <span>احصل على العرض</span>
                   </a>
                   <Link
                     to={offer.link}
@@ -144,7 +144,7 @@ const Offers = () => {
                     style={{ color: '#d6ac72', borderColor: '#d6ac72' }}
                   >
                     <FiInfo size={16} />
-                    <span>Offer Details</span>
+                    <span>تفاصيل العرض</span>
                   </Link>
                 </div>
               </div>

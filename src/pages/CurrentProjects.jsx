@@ -10,14 +10,14 @@ const CurrentProjects = () => {
   const projects = [
     {
       id: 1,
-      title: 'Emaar Towers',
-      location: 'Beni Suef - Al-Ramad District - Behind Pilots Land',
-      type: 'Residential',
-      status: 'Under Construction',
+      title: 'أبراج إعمار',
+      location: 'بنى سويف - حى الرمد - خلف ارض الطيارين',
+      type: 'سكني',
+      status: 'قيد الإنشاء',
       completionDate: '2025-12-31',
-      description: 'Luxury tower complex with modern design and integrated services.',
-      cardNote: '4 towers, each tower separate from the other',
-      cardUnitsMix: 'Residential apartments - Administrative apartments - Shops - Basement',
+      description: 'مجمع أبراج فاخر بتصميم عصري وخدمات متكاملة.',
+      cardNote: '4 ابراج كل برج منفصل عن الاخر',
+      cardUnitsMix: 'شقق سكنيه - شقق اداريه - محلات - بدروم',
       image: '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
       images: [
         '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
@@ -36,21 +36,21 @@ const CurrentProjects = () => {
       startingPrice: 3500000,
       features: [],
       longDescription: `
-        Emaar Towers is a luxury residential project located in Beni Suef - Al-Ramad District - Behind Pilots Land. 
-        The project features a modern design that combines luxury and comfort, with the highest quality standards in construction and finishing.
+        أبراج إعمار هو مشروع سكني فاخر يقع في بنى سويف - حى الرمد - خلف ارض الطيارين. 
+        يتميز المشروع بتصميم عصري يجمع بين الفخامة والراحة، مع مراعاة أعلى معايير الجودة في البناء والتشطيب.
         
-        The project includes 4 separate towers, each tower consists of 7 floors, and each floor contains 4 apartments.
-        The project includes residential apartments, administrative apartments, shops, and basement.
+        يضم المشروع 4 أبراج منفصلة، كل برج يتكون من 7 طوابق، وكل طابق يحتوي على 4 شقق.
+        المشروع يضم شقق سكنية، شقق إدارية، محلات، وبدروم.
       `,
     },
     {
       id: 2,
-      title: 'Royal City',
-      location: 'Al-Ramad Extension behind Pilots Land in front of Emaar Towers',
-      type: 'Residential',
-      status: 'Under Construction',
+      title: 'رويال سيتي',
+      location: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
+      type: 'سكني',
+      status: 'قيد الإنشاء',
       completionDate: '2025-09-30',
-      description: 'Upscale residential complex with luxury finishes and integrated facilities',
+      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة',
       image: '/image/Our current projects/Royal city/royal city (1).jpg',
       images: [
         '/image/Our current projects/Royal city/royal city (1).jpg',
@@ -64,11 +64,11 @@ const CurrentProjects = () => {
       progress: 55,
       floors: 7,
       startingPrice: 2800000,
-      cardNote: '4 apartments per floor',
+      cardNote: '4 شقق بالدور',
       features: [],
       longDescription: `
-        Royal City is an upscale residential complex featuring modern design and integrated facilities.
-        The project includes 7 floors, and each floor contains 4 apartments.
+        رويال سيتي هو مجمع سكني راقي يتميز بتصميم عصري ومرافق متكاملة.
+        يضم المشروع 7 طوابق، وكل طابق يحتوي على 4 شقق.
       `,
     },
   ]
@@ -111,13 +111,13 @@ const CurrentProjects = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              Our Current Projects
+              مشاريعنا الحالية
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-md font-semibold">
-              Learn about our ongoing projects and latest developments
+              تعرف على مشاريعنا الجارية وأحدث التطورات
             </p>
             <p className="text-lg text-white drop-shadow-md">
-              Distinguished projects with high quality and modern design
+              مشاريع متميزة بجودة عالية وتصميم عصري
             </p>
           </motion.div>
         </div>
@@ -206,13 +206,13 @@ const CurrentProjects = () => {
                   {project.floors && (
                     <div className="flex items-center text-gray-700 text-sm">
                       <FiLayers className="ml-2" size={14} style={{ color: '#d6ac72' }} />
-                      <span>{project.floors} floors</span>
+                      <span>{project.floors} طابق</span>
                     </div>
                   )}
                   {project.startingPrice && (
                     <div className="flex items-center text-gray-700 text-sm">
                       <FiTrendingUp className="ml-2" size={14} style={{ color: '#d6ac72' }} />
-                      <span>From EGP {project.startingPrice.toLocaleString()}</span>
+                      <span>من {project.startingPrice.toLocaleString()} جنيه</span>
                     </div>
                   )}
                 </div>
@@ -234,7 +234,7 @@ const CurrentProjects = () => {
                   to={`/projects/${project.id}`}
                   className="btn-primary w-full flex items-center justify-center space-x-2 space-x-reverse text-sm py-2"
                 >
-                  <span>View Details</span>
+                  <span>عرض التفاصيل</span>
                   <FiArrowRight size={16} />
                 </Link>
               </div>
@@ -250,12 +250,12 @@ const CurrentProjects = () => {
           className="mt-16 rounded-2xl p-8 text-center text-white"
           style={{ background: 'linear-gradient(to right, #d6ac72, #c49a5f)' }}
         >
-          <h2 className="text-3xl font-bold mb-4">Inquire About Our Projects</h2>
+          <h2 className="text-3xl font-bold mb-4">استفسر عن مشاريعنا</h2>
           <p className="text-lg mb-6 opacity-90">
-            Contact us to learn more about our current projects and available units
+            تواصل معنا لمعرفة المزيد عن مشاريعنا الحالية والوحدات المتاحة
           </p>
           <Link to="/contact" className="btn-secondary bg-white hover:bg-gray-50 inline-block" style={{ color: '#d6ac72' }}>
-            Contact Us Now
+            تواصل معنا الآن
           </Link>
         </motion.div>
       </div>
@@ -280,7 +280,7 @@ const CurrentProjects = () => {
               <button
                 onClick={handleCloseImageModal}
                 className="absolute top-4 right-4 text-white bg-black/50 hover:bg-black/70 rounded-full p-2 transition-colors z-10"
-                aria-label="Close"
+                aria-label="إغلاق"
               >
                 <FiX size={24} />
               </button>
@@ -292,7 +292,7 @@ const CurrentProjects = () => {
                     handlePrevImage()
                   }}
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
-                  aria-label="Previous image"
+                  aria-label="الصورة السابقة"
                 >
                   <span className="text-2xl">‹</span>
                 </button>
@@ -305,7 +305,7 @@ const CurrentProjects = () => {
                     handleNextImage()
                   }}
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/50 hover:bg-black/70 rounded-full p-3 transition-colors z-10"
-                  aria-label="Next image"
+                  aria-label="الصورة التالية"
                 >
                   <span className="text-2xl">›</span>
                 </button>
@@ -313,7 +313,7 @@ const CurrentProjects = () => {
               
               <img
                 src={selectedProjectImages[selectedImageIndex]}
-                alt={`Image ${selectedImageIndex + 1}`}
+                alt={`صورة ${selectedImageIndex + 1}`}
                 className="max-w-full max-h-full object-contain rounded-lg"
                 onError={(e) => {
                   e.target.src = '/image/medium (1).webp'

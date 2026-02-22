@@ -47,25 +47,25 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: FiMapPin,
-      title: 'Address',
-      content: 'Al-Ziraaiyin - Abdel Salam Aref - Above Bakar Restaurant',
+      title: 'العنوان',
+      content: 'الزراعيين - عبد السلام عارف - اعلى مطعم بكار',
       link: null,
     },
     {
       icon: FiPhone,
-      title: 'Phone',
+      title: 'الهاتف',
       content: '0100 561 7186',
       link: 'tel:+201005617186',
     },
     {
       icon: FiPhone,
-      title: 'Phone',
+      title: 'الهاتف',
       content: '0102 734 7377',
       link: 'tel:+2010027347377',
     },
     {
       icon: FiMail,
-      title: 'Email',
+      title: 'البريد الإلكتروني',
       content: 'emaarcompany83@gmail.com',
       link: 'mailto:emaarcompany83@gmail.com',
     },
@@ -81,11 +81,11 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
-            Contact Us
+            تواصل معنا
           </h1>
           <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We are here to answer all your inquiries and help you achieve your real estate goals
+            نحن هنا للإجابة على جميع استفساراتك ومساعدتك في تحقيق أهدافك العقارية
           </p>
         </motion.div>
 
@@ -125,11 +125,11 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="bg-white p-8 rounded-xl shadow-lg"
           >
-            <h2 className="text-3xl font-bold mb-6 text-gray-800">Send Us a Message</h2>
+            <h2 className="text-3xl font-bold mb-6 text-gray-800">أرسل لنا رسالة</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
-                  Full Name
+                  الاسم الكامل
                 </label>
                 <div className="relative">
                   <FiUser className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
@@ -141,14 +141,14 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
-                    placeholder="Enter your full name"
+                    placeholder="أدخل اسمك الكامل"
                   />
                 </div>
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-gray-700 font-semibold mb-2">
-                  Email
+                  البريد الإلكتروني
                 </label>
                 <div className="relative">
                   <FiMail className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
@@ -167,7 +167,7 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="phone" className="block text-gray-700 font-semibold mb-2">
-                  Phone Number
+                  رقم الهاتف
                 </label>
                 <div className="relative">
                   <FiPhone className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
@@ -186,7 +186,7 @@ const Contact = () => {
 
               <div>
                 <label htmlFor="subject" className="block text-gray-700 font-semibold mb-2">
-                  Subject
+                  الموضوع
                 </label>
                 <input
                   type="text"
@@ -196,13 +196,13 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent"
-                  placeholder="Message subject"
+                  placeholder="موضوع الرسالة"
                 />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">
-                  Message
+                  الرسالة
                 </label>
                 <div className="relative">
                   <FiMessageSquare className="absolute right-3 top-3 text-gray-400" size={20} />
@@ -214,14 +214,14 @@ const Contact = () => {
                     required
                     rows="5"
                     className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-#d6ac72 focus:border-transparent resize-none"
-                    placeholder="Write your message here..."
+                    placeholder="اكتب رسالتك هنا..."
                   />
                 </div>
               </div>
 
               {submitStatus === 'success' && (
                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
-                  Your message has been sent successfully! We will contact you soon.
+                  تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.
                 </div>
               )}
 
@@ -231,11 +231,11 @@ const Contact = () => {
                 className="w-full btn-primary flex items-center justify-center"
               >
                 {isSubmitting ? (
-                  'Sending...'
+                  'جاري الإرسال...'
                 ) : (
                   <>
                     <FiSend className="ml-2" size={20} />
-                    Send Message
+                    إرسال الرسالة
                   </>
                 )}
               </button>

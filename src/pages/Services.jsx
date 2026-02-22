@@ -13,85 +13,85 @@ const Services = () => {
   const services = [
     {
       icon: FiHome,
-      title: 'General Contracting',
-      description: 'We provide general contracting services with international standards and high quality, with a professional team with extensive experience in executing major projects',
+      title: 'المقاولات العامة',
+      description: 'نقدم خدمات المقاولات العامة بمعايير دولية وجودة عالية، مع فريق محترف ذو خبرة واسعة في تنفيذ المشاريع الكبرى',
       features: [
-        'Execution of residential and commercial projects',
-        'Integrated project management',
-        'Quality assurance and commitment to deadlines',
-        'Use of latest technologies and materials',
+        'تنفيذ المشاريع السكنية والتجارية',
+        'إدارة متكاملة للمشاريع',
+        'ضمان الجودة والالتزام بالمواعيد',
+        'استخدام أحدث التقنيات والمواد',
       ],
       color: 'bg-blue-500',
     },
     {
       icon: FiMap,
-      title: 'Surveying Works',
-      description: 'Accurate and professional surveying services for all types of projects, using the latest equipment and technologies',
+      title: 'الأعمال المساحية',
+      description: 'خدمات مساحية دقيقة ومحترفة لجميع أنواع المشاريع، باستخدام أحدث الأجهزة والتقنيات',
       features: [
-        'Accurate surveying',
-        'Boundary and area determination',
-        'Topographic maps',
-        'Certified surveying reports',
+        'رفع مساحي دقيق',
+        'تحديد الحدود والمساحات',
+        'خرائط طبوغرافية',
+        'تقارير مساحية معتمدة',
       ],
       color: 'bg-green-500',
     },
     {
       icon: FiTrendingUp,
-      title: 'Real Estate Marketing',
-      description: 'Integrated marketing solutions to enhance the value of real estate projects and increase sales',
+      title: 'التسويق العقاري',
+      description: 'حلول تسويقية متكاملة لتعزيز قيمة المشاريع العقارية وزيادة المبيعات',
       features: [
-        'Integrated marketing strategies',
-        'Sales management',
-        'Brand development',
-        'Effective advertising campaigns',
+        'استراتيجيات تسويقية متكاملة',
+        'إدارة المبيعات',
+        'تطوير العلامة التجارية',
+        'حملات إعلانية فعالة',
       ],
       color: 'bg-purple-500',
     },
     {
       icon: FiLayers,
-      title: 'Building Works',
-      description: 'Construction and building of residential and commercial buildings with the highest standards and quality',
+      title: 'أعمال البناء',
+      description: 'تشييد وبناء المباني السكنية والتجارية بأعلى المعايير والجودة',
       features: [
-        'Modern architectural design',
-        'Precise execution of specifications',
-        'Use of high-quality materials',
-        'Continuous quality monitoring',
+        'تصميم معماري عصري',
+        'تنفيذ دقيق للمواصفات',
+        'استخدام مواد عالية الجودة',
+        'مراقبة مستمرة للجودة',
       ],
       color: 'bg-orange-500',
     },
     {
       icon: FiTool,
-      title: 'Finishing Works',
-      description: 'Luxury and modern finishing that suits all tastes and budgets',
+      title: 'أعمال التشطيب',
+      description: 'تشطيب فاخر وعصري يناسب جميع الأذواق والميزانيات',
       features: [
-        'Interior and exterior finishing',
-        'Painting and decoration works',
-        'Flooring and tile installation',
-        'Plumbing and electrical works',
+        'تشطيب داخلي وخارجي',
+        'أعمال الدهان والديكور',
+        'تركيب الأرضيات والبلاط',
+        'أعمال السباكة والكهرباء',
       ],
       color: 'bg-pink-500',
     },
     {
       icon: FiNavigation,
-      title: 'Road Works',
-      description: 'Execution of road and infrastructure projects with high quality',
+      title: 'أعمال الطرق',
+      description: 'تنفيذ مشاريع الطرق والبنية التحتية بجودة عالية',
       features: [
-        'Road and street paving',
-        'Sewage works',
-        'Road lighting',
-        'Landscaping works',
+        'رصف الطرق والشوارع',
+        'أعمال الصرف الصحي',
+        'إنارة الطرق',
+        'أعمال التنسيق والزراعة',
       ],
       color: 'bg-yellow-500',
     },
     {
       icon: FiDroplet,
-      title: 'Water and Sewage Networks',
-      description: 'Design and implementation of water and sewage networks with high efficiency',
+      title: 'شبكات المياه والصرف',
+      description: 'تصميم وتنفيذ شبكات المياه والصرف بكفاءة عالية',
       features: [
-        'Water network design',
-        'Sewage network implementation',
-        'Network maintenance and repair',
-        'Treatment plant installation',
+        'تصميم شبكات المياه',
+        'تنفيذ شبكات الصرف',
+        'صيانة وإصلاح الشبكات',
+        'تركيب محطات المعالجة',
       ],
       color: 'bg-cyan-500',
     },
@@ -107,11 +107,11 @@ const Services = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
-            Our Services
+            خدماتنا
           </h1>
           <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We provide a comprehensive range of specialized services in real estate development and contracting
+            نقدم مجموعة شاملة من الخدمات المتخصصة في التطوير العقاري والمقاولات
           </p>
         </motion.div>
 

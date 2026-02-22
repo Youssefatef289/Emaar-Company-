@@ -6,32 +6,32 @@ const About = () => {
   const values = [
     {
       icon: FiAward,
-      title: 'Quality',
-      description: 'We are committed to the highest quality standards in all our projects',
+      title: 'الجودة',
+      description: 'نلتزم بأعلى معايير الجودة في جميع مشاريعنا',
     },
     {
       icon: FiTarget,
-      title: 'Commitment',
-      description: 'We are committed to delivery deadlines and agreed specifications',
+      title: 'الالتزام',
+      description: 'نلتزم بمواعيد التسليم والمواصفات المتفق عليها',
     },
     {
       icon: FiEye,
-      title: 'Transparency',
-      description: 'Complete transparency in dealing with our clients',
+      title: 'الشفافية',
+      description: 'شفافية كاملة في التعامل مع عملائنا',
     },
     {
       icon: FiUsers,
-      title: 'Client Satisfaction',
-      description: 'Our clients\' satisfaction is our top priority',
+      title: 'رضا العملاء',
+      description: 'رضا عملائنا هو أولويتنا القصوى',
     },
   ]
 
   const achievements = [
-    'More than 150 successfully completed projects',
-    'Professional team of over 50 employees',
-    'Strategic partnerships with major companies',
-    'Certified quality certificates',
-    '98% client satisfaction rate',
+    'أكثر من 150 مشروعًا مكتملاً بنجاح',
+    'فريق محترف يزيد عن 50 موظفًا',
+    'شراكات استراتيجية مع شركات كبرى',
+    'شهادات جودة معتمدة',
+    'نسبة رضا العملاء 98%',
   ]
 
   return (
@@ -47,7 +47,7 @@ const About = () => {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">
-              Our Values
+              قيمنا
             </h2>
             <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
           </motion.div>
@@ -76,7 +76,7 @@ const About = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h3 className="text-3xl font-bold mb-6 text-gray-800">Our Achievements</h3>
+              <h3 className="text-3xl font-bold mb-6 text-gray-800">إنجازاتنا</h3>
               <ul className="space-y-4">
                 {achievements.map((achievement, index) => (
                   <motion.li
@@ -102,7 +102,7 @@ const About = () => {
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src="/image/about/about (1).jpg"
-                  alt="Our Achievements"
+                  alt="إنجازاتنا"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   loading="lazy"
                 />
