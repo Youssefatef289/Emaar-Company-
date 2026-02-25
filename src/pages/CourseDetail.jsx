@@ -37,7 +37,7 @@ const CourseDetail = () => {
         'مساعدة في إيجاد فرص عمل',
         'كارنية مزاولة المهنة'
       ],
-      image: '/image/medium (5).webp',
+      image: '/image/Courses/Area package (leveling - total station).jpg',
       whatsappNumber: '01011942703'
     },
     'autocad': {
@@ -64,7 +64,7 @@ const CourseDetail = () => {
         'مشاريع عملية',
         'دعم فني بعد الدورة'
       ],
-      image: '/image/medium (6).webp',
+      image: '/image/Courses/Auto cat.jpeg',
       whatsappNumber: '01011942703'
     },
     'civil-3d': {
@@ -91,7 +91,7 @@ const CourseDetail = () => {
         'مشاريع عملية',
         'دعم فني مستمر'
       ],
-      image: '/image/medium (7).webp',
+      image: '/image/Courses/Civil 3D.jpg',
       whatsappNumber: '01011942703'
     },
     '3d-max': {
@@ -118,7 +118,7 @@ const CourseDetail = () => {
         'مكتبة مواد مجانية',
         'دعم فني'
       ],
-      image: '/image/medium (5).webp',
+      image: '/image/Courses/3D Max.jpeg',
       whatsappNumber: '01011942703'
     },
     'revit': {
@@ -145,7 +145,7 @@ const CourseDetail = () => {
         'مكتبة عناصر مجانية',
         'دعم فني مستمر'
       ],
-      image: '/image/medium (6).webp',
+      image: '/image/Courses/Revit.jpg',
       whatsappNumber: '01011942703'
     }
   }
