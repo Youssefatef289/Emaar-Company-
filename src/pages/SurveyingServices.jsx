@@ -35,7 +35,7 @@ const SurveyingServices = () => {
       id: 2,
       title: 'دورة الرفع المساحي باستخدام GPS',
       description: 'تعلم استخدام تقنيات GPS في الرفع المساحي',
-      duration: '30 ساعة',
+      duration: '12 ساعة',
       price: 4000,
       content: [
         'مقدمة في أنظمة GPS',
@@ -68,8 +68,8 @@ const SurveyingServices = () => {
       id: 4,
       title: 'دورة Total Station (توتال ستيشن)',
       description: 'دورة متخصصة في استخدام جهاز Total Station للرفع المساحي الدقيق والتوقيع',
-      duration: '45 ساعة',
-      price: 6000,
+      duration: '24 ساعة',
+      price: 1500,
       content: [
         'مقدمة في جهاز Total Station',
         'مكونات الجهاز وطرق التشغيل',
@@ -91,8 +91,8 @@ const SurveyingServices = () => {
       id: 5,
       title: 'دورة تعليم الأوتوكاد (AutoCAD)',
       description: 'دورة شاملة لتعلم برنامج AutoCAD من البداية إلى الاحتراف في الرسم والتصميم الهندسي',
-      duration: '40 ساعة',
-      price: 5000,
+      duration: '20 ساعة',
+      price: 700,
       content: [
         'مقدمة في برنامج AutoCAD',
         'واجهة البرنامج والأدوات الأساسية',
@@ -284,36 +284,36 @@ const SurveyingServices = () => {
                     { 
                       id: 'surveying-package',
                       title: 'باكدج المساحة (الميزان - التوتال ستيشن)',
-                      duration: '60 ساعة',
-                      price: 8000,
+                      duration: '24 ساعة',
+                      price: 1500,
                       image: '/image/Courses/Area package (leveling - total station).jpg'
                     },
                     { 
                       id: 'autocad',
                       title: 'الأوتوكاد',
-                      duration: '40 ساعة',
-                      price: 5000,
+                      duration: '20 ساعة',
+                      price: 700,
                       image: '/image/Courses/Auto cat.jpeg'
                     },
                     { 
                       id: 'civil-3d',
                       title: 'سيفيل 3D',
-                      duration: '50 ساعة',
-                      price: 7000,
+                      duration: '20 ساعة',
+                      price: 700,
                       image: '/image/Courses/Civil 3D.jpg'
                     },
                     { 
                       id: '3d-max',
                       title: '3D Max',
-                      duration: '45 ساعة',
-                      price: 6000,
+                      duration: '20 ساعة',
+                      price: 2000,
                       image: '/image/Courses/3D Max.jpeg'
                     },
                     { 
                       id: 'revit',
                       title: 'الريفيت',
-                      duration: '50 ساعة',
-                      price: 7000,
+                      duration: '20 ساعة',
+                      price: 2000,
                       image: '/image/Courses/Revit.jpg'
                     }
                   ].map((course) => {
