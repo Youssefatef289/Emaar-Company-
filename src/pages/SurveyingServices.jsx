@@ -285,31 +285,36 @@ const SurveyingServices = () => {
                       id: 'surveying-package',
                       title: 'باكدج المساحة (الميزان - التوتال ستيشن)',
                       duration: '60 ساعة',
-                      price: 8000
+                      price: 8000,
+                      image: '/image/Courses/Area package (leveling - total station).jpg'
                     },
                     { 
                       id: 'autocad',
                       title: 'الأوتوكاد',
                       duration: '40 ساعة',
-                      price: 5000
+                      price: 5000,
+                      image: '/image/Courses/Auto cat.jpeg'
                     },
                     { 
                       id: 'civil-3d',
                       title: 'سيفيل 3D',
                       duration: '50 ساعة',
-                      price: 7000
+                      price: 7000,
+                      image: '/image/Courses/Civil 3D.jpg'
                     },
                     { 
                       id: '3d-max',
                       title: '3D Max',
                       duration: '45 ساعة',
-                      price: 6000
+                      price: 6000,
+                      image: '/image/Courses/3D Max.jpeg'
                     },
                     { 
                       id: 'revit',
                       title: 'الريفيت',
                       duration: '50 ساعة',
-                      price: 7000
+                      price: 7000,
+                      image: '/image/Courses/Revit.jpg'
                     }
                   ].map((course) => {
                     const handleWhatsApp = () => {
@@ -326,6 +331,17 @@ const SurveyingServices = () => {
                         className="bg-white rounded-xl border-2 shadow-lg hover:shadow-xl transition-all overflow-hidden"
                         style={{ borderColor: '#d6ac72' }}
                       >
+                        {/* Course Image */}
+                        <div className="relative h-48 overflow-hidden bg-gray-200">
+                          <img
+                            src={course.image}
+                            alt={course.title}
+                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                            onError={(e) => {
+                              e.target.src = '/image/medium (1).webp'
+                            }}
+                          />
+                        </div>
                         <div className="p-5">
                           <h4 className="text-gray-900 font-extrabold text-lg mb-3 leading-tight min-h-[3rem]">
                             {course.title}

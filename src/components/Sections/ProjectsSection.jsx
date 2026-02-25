@@ -18,46 +18,46 @@ const ProjectsSection = () => {
     {
       id: 1,
       image: '/image/Our current projects/Emaar Towers/Emaar Towers (1).jpg',
-      title: 'Emaar Towers',
-      location: 'Beni Suef - Al-Ramad District - Behind Pilots Land',
-      area: '4 Towers - 7 Floors',
-      status: 'Under Construction',
-      type: 'Residential',
-      description: 'Luxury tower complex with modern design and integrated services. 4 towers, each tower separate from the other - Residential apartments - Administrative apartments - Shops - Basement',
+      title: 'أبراج إعمار',
+      location: 'بنى سويف - حى الرمد - خلف ارض الطيارين',
+      area: '4 أبراج - 7 طوابق',
+      status: 'قيد الإنشاء',
+      type: 'سكني',
+      description: 'مجمع أبراج فاخر بتصميم عصري وخدمات متكاملة. 4 أبراج، كل برج منفصل عن الآخر - شقق سكنية - شقق إدارية - محلات - بدروم',
       features: [
-        '4 Separate Towers',
-        '7 Floors per Tower',
-        '4 Apartments per Floor',
-        'Residential and Administrative Apartments',
-        'Commercial Shops',
-        'Basement',
+        '4 أبراج منفصلة',
+        '7 طوابق لكل برج',
+        '4 شقق لكل طابق',
+        'شقق سكنية وإدارية',
+        'محلات تجارية',
+        'بدروم',
       ],
       progress: 75,
       floors: 7,
       startingPrice: 3500000,
-      cardNote: '4 towers, each tower separate from the other',
-      cardUnitsMix: 'Residential apartments - Administrative apartments - Shops - Basement',
+      cardNote: '4 أبراج، كل برج منفصل عن الآخر',
+      cardUnitsMix: 'شقق سكنية - شقق إدارية - محلات - بدروم',
     },
     {
       id: 2,
       image: '/image/Our current projects/Royal city/royal city (1).jpg',
-      title: 'Royal City',
-      location: 'Al-Ramad Extension behind Pilots Land in front of Emaar Towers',
-      area: '7 Floors',
-      status: 'Under Construction',
-      type: 'Residential',
-      description: 'Upscale residential complex with luxury finishes and integrated facilities. 4 apartments per floor',
+      title: 'رويال سيتي',
+      location: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
+      area: '7 طوابق',
+      status: 'قيد الإنشاء',
+      type: 'سكني',
+      description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة. 4 شقق لكل طابق',
       features: [
-        '7 Floors',
-        '4 Apartments per Floor',
-        'Luxury Finishes',
-        'Integrated Facilities',
-        'Prime Location',
+        '7 طوابق',
+        '4 شقق لكل طابق',
+        'تشطيبات فاخرة',
+        'مرافق متكاملة',
+        'موقع مميز',
       ],
       progress: 55,
       floors: 7,
       startingPrice: 2800000,
-      cardNote: '4 apartments per floor',
+      cardNote: '4 شقق لكل طابق',
     },
   ]
 
@@ -72,8 +72,8 @@ const ProjectsSection = () => {
   }
 
   const getStatusColor = (status) => {
-    if (status === 'Completed') return 'bg-green-100 text-green-800'
-    if (status === 'Under Construction') return 'bg-blue-100 text-blue-800'
+    if (status === 'مكتمل' || status === 'Completed') return 'bg-green-100 text-green-800'
+    if (status === 'قيد الإنشاء' || status === 'Under Construction') return 'bg-blue-100 text-blue-800'
     return 'bg-gray-100 text-gray-800'
   }
 

@@ -19,7 +19,7 @@ const ProjectDetail = () => {
       address: 'بنى سويف - حى الرمد - خلف ارض الطيارين',
       type: 'سكني',
       status: 'قيد الإنشاء',
-      completionDate: '2025-12-31',
+      completionDate: '2026-12-30',
       description: 'مجمع أبراج فاخر بتصميم عصري وخدمات متكاملة.',
       longDescription: `
         4 ابراج كل برج منفصل عن الاخر
@@ -49,6 +49,28 @@ const ProjectDetail = () => {
       startingPrice: 3500000,
       features: [],
       coordinates: { lat: 29.0661, lng: 31.0994 }, // Mock coordinates for Beni Suef
+      pricing: {
+        pricePerSquareMeter: {
+          '110': 10000,
+          '115': 10000,
+          '135': 11500,
+          '155': 11500,
+          '196': 11500,
+          '230': 12000,
+        },
+        installment: {
+          twoYears: {
+            downPayment: 50,
+            priceIncrease: 1000,
+            description: 'نظام القسط على سنتين: مقدم 50% والباقي على سنتين - سعر المتر يزيد 1000 جنيه عن الكاش'
+          },
+          threeYears: {
+            downPayment: 20,
+            priceIncrease: 2000,
+            description: 'نظام القسط على ثلاث سنوات: مقدم 20% والباقي على ثلاث سنوات - سعر المتر يزيد 2000 جنيه عن الكاش'
+          }
+        }
+      },
       towers: [
         {
           id: 1,
@@ -223,7 +245,7 @@ const ProjectDetail = () => {
       address: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
       type: 'سكني',
       status: 'قيد الإنشاء',
-      completionDate: '2025-09-30',
+      completionDate: '2026-12-30',
       description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة',
       longDescription: `
         رويال سيتي هو مجمع سكني راقي يتميز بتصميم عصري ومرافق متكاملة.
@@ -244,6 +266,25 @@ const ProjectDetail = () => {
       startingPrice: 2800000,
       features: [],
       coordinates: { lat: 29.0661, lng: 31.0994 }, // Mock coordinates for Beni Suef
+      pricing: {
+        pricePerSquareMeter: {
+          '115': 10000,
+          '150': 11500,
+          '175': 11000,
+        },
+        installment: {
+          twoYears: {
+            downPayment: 50,
+            priceIncrease: 1000,
+            description: 'نظام القسط على سنتين: مقدم 50% والباقي على سنتين - سعر المتر يزيد 1000 جنيه عن الكاش'
+          },
+          threeYears: {
+            downPayment: 20,
+            priceIncrease: 2000,
+            description: 'نظام القسط على ثلاث سنوات: مقدم 20% والباقي على ثلاث سنوات - سعر المتر يزيد 2000 جنيه عن الكاش'
+          }
+        }
+      },
       towers: [
         {
           id: 1,
@@ -405,16 +446,33 @@ const ProjectDetail = () => {
                       </div>
                       <div className="space-y-3">
                         <h4 className="text-sm font-semibold text-gray-700 mb-3">الشقق:</h4>
-                        {tower.apartments.map((apt) => (
+                        {tower.apartments.map((apt) => {
+                          const pricePerMeter = project.pricing?.pricePerSquareMeter?.[apt.area.toString()] || 0
+                          const totalPrice = pricePerMeter * apt.area
+                          return (
                           <div key={apt.number} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                             <div className="flex items-center justify-between mb-2">
                               <span className="text-gray-900 font-semibold">
                                 شقة رقم {apt.number}
                               </span>
-                              <span className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {apt.area} {apt.unit}
-                              </span>
+                              <div className="text-left">
+                                <span className="font-bold text-lg block" style={{ color: '#d6ac72' }}>
+                                  {apt.area} {apt.unit}
+                                </span>
+                                {pricePerMeter > 0 && (
+                                  <span className="text-xs text-gray-600 block">
+                                    {pricePerMeter.toLocaleString()} ج.م/م²
+                                  </span>
+                                )}
+                              </div>
                             </div>
+                            {totalPrice > 0 && (
+                              <div className="mt-2 pt-2 border-t border-gray-300">
+                                <p className="text-sm font-bold text-gray-900">
+                                  السعر الكاش: <span style={{ color: '#d6ac72' }}>{totalPrice.toLocaleString()} ج.م</span>
+                                </p>
+                              </div>
+                            )}
                             {apt.rooms && (
                               <div className="flex items-center gap-4 text-xs text-gray-600 mb-2">
                                 <span>{apt.rooms} غرفة</span>
@@ -431,10 +489,192 @@ const ProjectDetail = () => {
                               </div>
                             )}
                           </div>
-                        ))}
+                          )
+                        })}
                       </div>
                     </div>
                   ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Pricing Section */}
+            {project.pricing && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="bg-white rounded-2xl shadow-lg p-8"
+              >
+                <h2 className="text-2xl font-extrabold text-gray-900 mb-6">الأسعار ونظام التقسيط</h2>
+                
+                {/* Price Per Square Meter */}
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>أسعار المتر المربع (كاش):</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {project.id === 1 ? (
+                      <>
+                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
+                          <p className="text-sm text-gray-600 mb-1">الشقق 110 و 115 م²</p>
+                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
+                            {project.pricing.pricePerSquareMeter['110'].toLocaleString()} ج.م
+                          </p>
+                        </div>
+                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
+                          <p className="text-sm text-gray-600 mb-1">الشقق 135 و 155 و 196 م²</p>
+                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
+                            {project.pricing.pricePerSquareMeter['135'].toLocaleString()} ج.م
+                          </p>
+                        </div>
+                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
+                          <p className="text-sm text-gray-600 mb-1">الشقق 230 م²</p>
+                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
+                            {project.pricing.pricePerSquareMeter['230'].toLocaleString()} ج.م
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
+                          <p className="text-sm text-gray-600 mb-1">الشقق 115 م²</p>
+                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
+                            {project.pricing.pricePerSquareMeter['115'].toLocaleString()} ج.م
+                          </p>
+                        </div>
+                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
+                          <p className="text-sm text-gray-600 mb-1">الشقق 150 م²</p>
+                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
+                            {project.pricing.pricePerSquareMeter['150'].toLocaleString()} ج.م
+                          </p>
+                        </div>
+                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
+                          <p className="text-sm text-gray-600 mb-1">الشقق 175 م²</p>
+                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
+                            {project.pricing.pricePerSquareMeter['175'].toLocaleString()} ج.م
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Installment Plans */}
+                <div className="space-y-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>نظام التقسيط:</h3>
+                  
+                  {/* Two Years Installment */}
+                  <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-300">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-lg font-extrabold text-gray-900">تقسيط على سنتين</h4>
+                      <span className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-semibold">مقدم {project.pricing.installment.twoYears.downPayment}%</span>
+                    </div>
+                    <p className="text-gray-700 mb-3">{project.pricing.installment.twoYears.description}</p>
+                      <div className="bg-white rounded-lg p-4">
+                      <p className="text-sm text-gray-600 mb-2">سعر المتر مع التقسيط:</p>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {project.id === 1 ? (
+                          <>
+                            <div>
+                              <p className="text-xs text-gray-600">110/115 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['110'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">135/155/196 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['135'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">230 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['230'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div>
+                              <p className="text-xs text-gray-600">115 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['115'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">150 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['150'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">175 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['175'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Three Years Installment */}
+                  <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 border-2 border-green-300">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-lg font-extrabold text-gray-900">تقسيط على ثلاث سنوات</h4>
+                      <span className="px-3 py-1 bg-green-500 text-white rounded-full text-sm font-semibold">مقدم {project.pricing.installment.threeYears.downPayment}%</span>
+                    </div>
+                    <p className="text-gray-700 mb-3">{project.pricing.installment.threeYears.description}</p>
+                    <div className="bg-white rounded-lg p-4">
+                      <p className="text-sm text-gray-600 mb-2">سعر المتر مع التقسيط:</p>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {project.id === 1 ? (
+                          <>
+                            <div>
+                              <p className="text-xs text-gray-600">110/115 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['110'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">135/155/196 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['135'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">230 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['230'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div>
+                              <p className="text-xs text-gray-600">115 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['115'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">150 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['150'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-xs text-gray-600">175 م²</p>
+                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
+                                {(project.pricing.pricePerSquareMeter['175'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
+                              </p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -582,19 +822,13 @@ const ProjectDetail = () => {
                 {project.floors && (
                   <div className="flex items-center text-gray-700">
                     <FiLayers className="ml-2" size={20} style={{ color: '#d6ac72' }} />
-                    <span>{project.floors} طابق</span>
+                    <span>{project.floors} طوابق</span>
                   </div>
                 )}
                 <div className="flex items-center text-gray-700">
                   <FiCalendar className="ml-2" size={20} style={{ color: '#d6ac72' }} />
                   <span>تاريخ الانتهاء: {project.completionDate}</span>
                 </div>
-                {project.startingPrice && (
-                  <div className="flex items-center text-gray-700">
-                    <FiDollarSign className="ml-2" size={20} style={{ color: '#d6ac72' }} />
-                    <span>السعر يبدأ من: {project.startingPrice.toLocaleString()} جنيه</span>
-                  </div>
-                )}
                 <div className="pt-4 border-t border-gray-200">
                   <div className="flex justify-center items-center mb-4">
                     <div className="relative w-32 h-32">

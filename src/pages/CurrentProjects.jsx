@@ -14,7 +14,7 @@ const CurrentProjects = () => {
       location: 'بنى سويف - حى الرمد - خلف ارض الطيارين',
       type: 'سكني',
       status: 'قيد الإنشاء',
-      completionDate: '2025-12-31',
+      completionDate: '2026-12-30',
       description: 'مجمع أبراج فاخر بتصميم عصري وخدمات متكاملة.',
       cardNote: '4 ابراج كل برج منفصل عن الاخر',
       cardUnitsMix: 'شقق سكنيه - شقق اداريه - محلات - بدروم',
@@ -35,6 +35,26 @@ const CurrentProjects = () => {
       floors: 7,
       startingPrice: 3500000,
       features: [],
+      pricing: {
+        pricePerSquareMeter: {
+          '110': 10000,
+          '115': 10000,
+          '135': 11500,
+          '155': 11500,
+          '196': 11500,
+          '230': 12000,
+        },
+        installment: {
+          twoYears: {
+            downPayment: 50,
+            priceIncrease: 1000,
+          },
+          threeYears: {
+            downPayment: 20,
+            priceIncrease: 2000,
+          }
+        }
+      },
       longDescription: `
         أبراج إعمار هو مشروع سكني فاخر يقع في بنى سويف - حى الرمد - خلف ارض الطيارين. 
         يتميز المشروع بتصميم عصري يجمع بين الفخامة والراحة، مع مراعاة أعلى معايير الجودة في البناء والتشطيب.
@@ -49,7 +69,7 @@ const CurrentProjects = () => {
       location: 'امتداد الرمد خلف ارض الطيارين امام ابراج اعمار',
       type: 'سكني',
       status: 'قيد الإنشاء',
-      completionDate: '2025-09-30',
+      completionDate: '2026-12-30',
       description: 'مجمع سكني راقي بتشطيبات فاخرة ومرافق متكاملة',
       image: '/image/Our current projects/Royal city/royal city (1).jpg',
       images: [
@@ -66,6 +86,23 @@ const CurrentProjects = () => {
       startingPrice: 2800000,
       cardNote: '4 شقق بالدور',
       features: [],
+      pricing: {
+        pricePerSquareMeter: {
+          '115': 10000,
+          '150': 11500,
+          '175': 11000,
+        },
+        installment: {
+          twoYears: {
+            downPayment: 50,
+            priceIncrease: 1000,
+          },
+          threeYears: {
+            downPayment: 20,
+            priceIncrease: 2000,
+          }
+        }
+      },
       longDescription: `
         رويال سيتي هو مجمع سكني راقي يتميز بتصميم عصري ومرافق متكاملة.
         يضم المشروع 7 طوابق، وكل طابق يحتوي على 4 شقق.
@@ -206,13 +243,30 @@ const CurrentProjects = () => {
                   {project.floors && (
                     <div className="flex items-center text-gray-700 text-sm">
                       <FiLayers className="ml-2" size={14} style={{ color: '#d6ac72' }} />
-                      <span>{project.floors} طابق</span>
+                      <span>{project.floors} طوابق</span>
                     </div>
                   )}
-                  {project.startingPrice && (
-                    <div className="flex items-center text-gray-700 text-sm">
-                      <FiTrendingUp className="ml-2" size={14} style={{ color: '#d6ac72' }} />
-                      <span>من {project.startingPrice.toLocaleString()} جنيه</span>
+                  {project.pricing && (
+                    <div className="mt-2 pt-2 border-t border-gray-200">
+                      <p className="text-xs font-bold text-gray-800 mb-1" style={{ color: '#d6ac72' }}>أسعار المتر (كاش):</p>
+                      <div className="flex flex-wrap gap-2 text-xs">
+                        {project.id === 1 ? (
+                          <>
+                            <span className="bg-yellow-50 px-2 py-1 rounded">110/115: {project.pricing.pricePerSquareMeter['110'].toLocaleString()} ج.م</span>
+                            <span className="bg-yellow-50 px-2 py-1 rounded">135/155/196: {project.pricing.pricePerSquareMeter['135'].toLocaleString()} ج.م</span>
+                            <span className="bg-yellow-50 px-2 py-1 rounded">230: {project.pricing.pricePerSquareMeter['230'].toLocaleString()} ج.م</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="bg-yellow-50 px-2 py-1 rounded">115: {project.pricing.pricePerSquareMeter['115'].toLocaleString()} ج.م</span>
+                            <span className="bg-yellow-50 px-2 py-1 rounded">150: {project.pricing.pricePerSquareMeter['150'].toLocaleString()} ج.م</span>
+                            <span className="bg-yellow-50 px-2 py-1 rounded">175: {project.pricing.pricePerSquareMeter['175'].toLocaleString()} ج.م</span>
+                          </>
+                        )}
+                      </div>
+                      <p className="text-xs text-gray-600 mt-2">
+                        تقسيط متاح: سنتين (مقدم 50%) أو 3 سنوات (مقدم 20%)
+                      </p>
                     </div>
                   )}
                 </div>
