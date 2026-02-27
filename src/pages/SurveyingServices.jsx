@@ -148,7 +148,7 @@ const SurveyingServices = () => {
       ],
       instructor: 'د. محمد أحمد',
       instructorBio: 'خبير مساحي مع أكثر من 20 عامًا من الخبرة في المساحة التطبيقية',
-      image: '/image/medium (5).webp',
+      image: '/image/تعريف علم المساحة بشكل شامل المساح المحترف.jpg',
       videoUrl: 'https://www.youtube.com/embed/RdR3WFBPw5o',
     },
   ]

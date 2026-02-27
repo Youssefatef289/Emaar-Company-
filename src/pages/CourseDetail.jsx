@@ -225,7 +225,7 @@ const CourseDetail = () => {
         'فيديو تعريفي',
         'دعم فني مستمر'
       ],
-      image: '/image/medium (5).webp',
+      image: '/image/تعريف علم المساحة بشكل شامل المساح المحترف.jpg',
       videoUrl: 'https://www.youtube.com/embed/RdR3WFBPw5o',
       whatsappNumber: '01011942703'
     }
