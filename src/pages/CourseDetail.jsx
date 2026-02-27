@@ -342,6 +342,27 @@ const CourseDetail = () => {
               </div>
             </div>
 
+            {/* Video Section */}
+            {course.videoUrl && (
+              <div className="mb-8">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
+                  فيديو تعريفي للدورة
+                </h2>
+                <div className="bg-gray-50 rounded-xl overflow-hidden shadow-lg">
+                  <div className="aspect-video w-full">
+                    <iframe
+                      src={course.videoUrl}
+                      title={course.title}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      frameBorder="0"
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Instructor Section */}
             <div className="mb-8">
               <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
