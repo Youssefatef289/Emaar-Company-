@@ -9,43 +9,47 @@ const Offers = () => {
   const offers = [
     {
       id: 1,
-      title: 'خصم 10% على جميع الوحدات السكنية',
-      description: 'عرض خاص لفترة محدودة - خصم 10% على جميع الوحدات السكنية في مشروعنا الجديد',
-      discount: 10,
-      validUntil: '2024-12-31',
-      image: '/image/medium (8).webp',
+      title: '🥇 الجائزة الأولى - نص تشطيب شقتك مجاناً',
+      description: 'نص تشطيب "شقتك" مجاناً - واحد من العملاء القدام.. أيوه.. التشطيب علينا إحنا!',
+      discount: 50,
+      discountType: 'percentage',
+      validUntil: '2024-04-10',
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
       link: '/real-estate-marketing',
-      type: 'real-estate',
+      type: 'ramadan',
     },
     {
       id: 2,
-      title: 'خصم 20% على دورات المساحة',
-      description: 'احصل على خصم 20% عند التسجيل في أي من دوراتنا المساحية',
-      discount: 20,
-      validUntil: '2024-11-30',
-      image: '/image/medium (9).webp',
-      link: '/surveying-services',
-      type: 'course',
+      title: '🥈 الجائزة الثانية - خصم 1000 جنيه على كل متر',
+      description: 'خصم ألف جنيه كاملين على "كل متر" - لواحد بس من أي عميل جديد هيتعاقد وهيجز معانا',
+      discount: 1000,
+      discountType: 'amount',
+      validUntil: '2024-04-10',
+      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
+      link: '/real-estate-marketing',
+      type: 'ramadan',
     },
     {
       id: 3,
-      title: 'تمويل سهل حتى 10 سنوات',
-      description: 'عروض تمويل سهلة حتى 10 سنوات بدون فوائد إضافية',
-      discount: 0,
-      validUntil: '2024-12-31',
-      image: '/image/medium (10).webp',
-      link: '/contact',
-      type: 'financing',
+      title: '🥉 الجائزة الثالثة - خصم 10% على المصنعيات',
+      description: 'خصم عشرة في المية على "المصنعيات" كلها! لواحد بس حابب بشطب شقته معانا',
+      discount: 10,
+      discountType: 'percentage',
+      validUntil: '2024-04-10',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
+      link: '/real-estate-marketing',
+      type: 'ramadan',
     },
     {
       id: 4,
-      title: 'عرض خاص للمشاريع التجارية',
-      description: 'خصومات حصرية على الوحدات التجارية في مواقع ممتازة',
-      discount: 15,
-      validUntil: '2024-12-15',
-      image: '/image/medium (11).webp',
-      link: '/real-estate-marketing',
-      type: 'commercial',
+      title: '💰 الجائزة الرابعة - 5000 جنيه كاش',
+      description: '5 آلاف جنيه "كاش" - هيتوزعوا على 5 فايزين!',
+      discount: 5000,
+      discountType: 'amount',
+      validUntil: '2024-04-10',
+      image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=600&fit=crop',
+      link: '/contact',
+      type: 'ramadan',
     },
   ]
 
@@ -55,6 +59,7 @@ const Offers = () => {
       'course': 'دورات',
       'financing': 'تمويل',
       'commercial': 'تجاري',
+      'ramadan': 'رمضان',
     }
     return types[type] || 'عام'
   }
@@ -101,7 +106,10 @@ const Offers = () => {
               {/* Discount Badge */}
               {offer.discount > 0 && (
                 <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full font-bold text-sm z-10">
-                  خصم {offer.discount}%
+                  {offer.discountType === 'amount' 
+                    ? `${offer.discount.toLocaleString()} ج.م`
+                    : `خصم ${offer.discount}%`
+                  }
                 </div>
               )}
 

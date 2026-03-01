@@ -436,99 +436,21 @@ const RealEstateMarketing = () => {
           )}
         </motion.div>
 
-        {/* Results Count */}
-        <div className="mb-4">
-          <p className="text-gray-600 text-sm">
-            تم العثور على <span className="font-bold" style={{ color: '#d6ac72' }}>{filteredUnits.length}</span> وحدة
-          </p>
-        </div>
-
-        {/* Units Grid */}
-        {filteredUnits.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {filteredUnits.map((unit, index) => (
-              <motion.div
-                key={unit.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-md overflow-hidden card-hover"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={unit.image}
-                    alt={unit.title}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  />
-                  <div className="absolute top-2 right-2 text-white px-2 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: '#d6ac72' }}>
-                    {unit.finishing}
-                  </div>
-                </div>
-                
-                <div className="p-4">
-                  <h3 className="text-lg font-extrabold text-gray-900 mb-2 line-clamp-1">{unit.title}</h3>
-                  
-                  <div className="space-y-1.5 mb-3">
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <FiMapPin className="ml-1.5" size={14} />
-                      <span>{unit.area}</span>
-                    </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <FiHome className="ml-1.5" size={14} />
-                      <span>{unit.rooms} غرف</span>
-                    </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <FiMaximize2 className="ml-1.5" size={14} />
-                      <span>{unit.areaSize} م²</span>
-                    </div>
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <span className="ml-1.5">الدور: {unit.floor}</span>
-                    </div>
-                    <div className="flex items-center font-bold text-base pt-1" style={{ color: '#d6ac72' }}>
-                      <FiDollarSign size={16} />
-                      <span>
-                        {unit.price.toLocaleString()} {unit.monthlyRent ? 'جنيه/شهر' : 'جنيه'}
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 text-xs mb-3 line-clamp-2">{unit.description}</p>
-
-                  <div className="flex gap-2">
-                    <a
-                      href={`/real-estate-marketing/${unit.id}`}
-                      className="flex-1 btn-primary text-center text-sm py-2"
-                    >
-                      عرض التفاصيل
-                    </a>
-                    <a
-                      href={`https://wa.me/2010027347377?text=مرحباً، أريد الاستفسار عن: ${encodeURIComponent(unit.title)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
-                    >
-                      <FaWhatsapp size={18} />
-                      <span className="hidden sm:inline">واتساب</span>
-                    </a>
-                    {isAuthenticated && (
-                      <button
-                        onClick={() => addFavorite(unit.id, 'unit')}
-                        className="px-3 py-2 border-2 rounded-lg hover:bg-primary-50 transition-colors text-sm"
-                        style={{ color: '#d6ac72', borderColor: '#d6ac72' }}
-                      >
-                        ♡
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+        {/* Coming Soon Message */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center justify-center min-h-[400px]"
+        >
+          <div className="text-center">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4" style={{ color: '#d6ac72' }}>
+              قريباً
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-600">
+              سنقوم بإضافة الوحدات العقارية قريباً
+            </p>
           </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-gray-500 text-lg">لا توجد وحدات مطابقة لمعايير البحث</p>
-          </div>
-        )}
+        </motion.div>
       </div>
     </div>
   )
