@@ -25,7 +25,7 @@ const Footer = () => {
   ]
 
   const socialLinks = [
-    { icon: FaWhatsapp, href: 'https://wa.me/2010027347377', label: 'WhatsApp', color: '#25D366' },
+    { icon: FaWhatsapp, href: 'https://wa.me/201027347377', label: 'WhatsApp', color: '#25D366' },
     { icon: FiFacebook, href: 'https://www.facebook.com/share/18Aw9QebCy/', label: 'Facebook', color: '#1877F2' },
     { icon: FiInstagram, href: 'https://www.instagram.com/emaarcompany1?igsh=MTF4NmJ2dWJvd3huNQ==', label: 'Instagram', color: '#E4405F' },
     { icon: FiYoutube, href: 'https://youtube.com/channel/UCZfRI4IthrN74NOuJO-KVzw?si=6WRGbj5O4mRQ4699', label: 'YouTube', color: '#FF0000' },

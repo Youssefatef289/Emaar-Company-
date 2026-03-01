@@ -137,7 +137,7 @@ const Offers = () => {
 
                 <div className="flex flex-col gap-2">
                   <a
-                    href={`https://wa.me/201005617186?text=${encodeURIComponent(`I want to take advantage of the offer: ${offer.title}`)}`}
+                    href={`https://wa.me/201027347377?text=${encodeURIComponent(`I want to take advantage of the offer: ${offer.title}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-white transition-all hover:shadow-lg"

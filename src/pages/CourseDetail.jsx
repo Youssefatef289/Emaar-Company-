@@ -38,7 +38,7 @@ const CourseDetail = () => {
         'كارنية مزاولة المهنة'
       ],
       image: '/image/Courses/Area package (leveling - total station).jpg',
-      whatsappNumber: '01011942703'
+      whatsappNumber: '01027347377'
     },
     'autocad': {
       id: 'autocad',
@@ -65,7 +65,7 @@ const CourseDetail = () => {
         'دعم فني بعد الدورة'
       ],
       image: '/image/Courses/Auto cat.jpeg',
-      whatsappNumber: '01011942703'
+      whatsappNumber: '01027347377'
     },
     'civil-3d': {
       id: 'civil-3d',
@@ -92,7 +92,7 @@ const CourseDetail = () => {
         'دعم فني مستمر'
       ],
       image: '/image/Courses/Civil 3D.jpg',
-      whatsappNumber: '01011942703'
+      whatsappNumber: '01027347377'
     },
     '3d-max': {
       id: '3d-max',
@@ -119,7 +119,7 @@ const CourseDetail = () => {
         'دعم فني'
       ],
       image: '/image/Courses/3D Max.jpeg',
-      whatsappNumber: '01011942703'
+      whatsappNumber: '01027347377'
     },
     'revit': {
       id: 'revit',
@@ -146,7 +146,7 @@ const CourseDetail = () => {
         'دعم فني مستمر'
       ],
       image: '/image/Courses/Revit.jpg',
-      whatsappNumber: '01011942703'
+      whatsappNumber: '01027347377'
     },
     'gps': {
       id: 'gps',
@@ -170,7 +170,7 @@ const CourseDetail = () => {
         'دعم فني'
       ],
       image: '/image/medium (6).webp',
-      whatsappNumber: '01011942703'
+      whatsappNumber: '01027347377'
     },
     'cross-section': {
       id: 'cross-section',
@@ -198,7 +198,7 @@ const CourseDetail = () => {
       ],
       image: '/image/شرح القطاع العرضى ومفهومه والفرق بينه وبين القطاع الطولى.jpeg',
       videoUrl: 'https://www.youtube.com/embed/Gsg--Tvimio',
-      whatsappNumber: '01011942703'
+      whatsappNumber: '01027347377'
     },
     'surveying-intro': {
       id: 'surveying-intro',
@@ -227,7 +227,7 @@ const CourseDetail = () => {
       ],
       image: '/image/تعريف علم المساحة بشكل شامل المساح المحترف.jpg',
       videoUrl: 'https://www.youtube.com/embed/RdR3WFBPw5o',
-      whatsappNumber: '01011942703'
+      whatsappNumber: '01027347377'
     }
   }
 

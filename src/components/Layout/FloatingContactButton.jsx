@@ -27,7 +27,7 @@ const FloatingContactButton = () => {
     {
       name: 'واتساب',
       icon: FaWhatsapp,
-      href: 'https://wa.me/2010027347377',
+      href: 'https://wa.me/201027347377',
       color: 'whatsapp-color',
       gradient: 'linear-gradient(0deg, #00B100, #09db09)',
     },

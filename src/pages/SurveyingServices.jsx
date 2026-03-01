@@ -309,7 +309,7 @@ const SurveyingServices = () => {
                   ].map((course) => {
                     const handleWhatsApp = () => {
                       const message = `مرحباً، أريد الاستفسار عن دورة: ${course.title}`
-                      const url = `https://wa.me/201011942703?text=${encodeURIComponent(message)}`
+                      const url = `https://wa.me/201027347377?text=${encodeURIComponent(message)}`
                       window.open(url, '_blank')
                     }
 
