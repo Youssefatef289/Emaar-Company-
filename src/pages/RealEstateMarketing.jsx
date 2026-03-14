@@ -1,13 +1,16 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiSearch, FiFilter, FiMapPin, FiHome, FiDollarSign, FiMaximize2 } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
 import { useAuth } from '../contexts/AuthContext'
+import { api, apiImage } from '../services/api'
 
 const RealEstateMarketing = () => {
   const { t } = useLanguage()
   const { isAuthenticated, addFavorite } = useAuth()
+  const [apiUnits, setApiUnits] = useState([])
+  const [apiLoading, setApiLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('الكل')
   const [searchTerm, setSearchTerm] = useState('')
   const [filters, setFilters] = useState({
@@ -181,15 +184,29 @@ const RealEstateMarketing = () => {
     ],
   }
 
+  useEffect(() => {
+    api.realEstate.list()
+      .then((res) => setApiUnits(res.data || []))
+      .catch(() => setApiUnits([]))
+      .finally(() => setApiLoading(false))
+  }, [])
+
   const units = activeTab === 'الكل' 
     ? Object.values(allUnits).flat() 
     : allUnits[activeTab] || []
 
+  const displayUnits = apiUnits.length > 0 ? apiUnits : units
+  const useCmsData = apiUnits.length > 0
+
   const filteredUnits = useMemo(() => {
-    return units.filter(unit => {
-      const matchesSearch = unit.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           unit.area.toLowerCase().includes(searchTerm.toLowerCase())
-      
+    const list = useCmsData ? apiUnits : units
+    return list.filter(unit => {
+      const title = (unit.title || unit.name || '').toLowerCase()
+      const area = (unit.area || '').toLowerCase()
+      const desc = (unit.description || '').toLowerCase()
+      const matchesSearch = !searchTerm || title.includes(searchTerm.toLowerCase()) ||
+                           area.includes(searchTerm.toLowerCase()) || desc.includes(searchTerm.toLowerCase())
+      if (useCmsData) return matchesSearch
       const matchesArea = !filters.area || unit.area === filters.area
       const matchesRooms = !filters.rooms || unit.rooms === parseInt(filters.rooms)
       const matchesFinishing = !filters.finishing || unit.finishing === filters.finishing
@@ -198,14 +215,13 @@ const RealEstateMarketing = () => {
       const matchesFloor = !filters.floor || unit.floor === parseInt(filters.floor)
       const matchesMinPrice = !filters.minPrice || unit.price >= parseInt(filters.minPrice)
       const matchesMaxPrice = !filters.maxPrice || unit.price <= parseInt(filters.maxPrice)
-
       return matchesSearch && matchesArea && matchesRooms && matchesFinishing &&
              matchesMinArea && matchesMaxArea && matchesFloor && matchesMinPrice && matchesMaxPrice
     })
-  }, [searchTerm, filters])
+  }, [searchTerm, filters, useCmsData, apiUnits, units])
 
-  const areas = [...new Set(units.map(unit => unit.area))]
-  const finishingTypes = [...new Set(units.map(unit => unit.finishing))]
+  const areas = [...new Set(units.map(unit => unit.area).filter(Boolean))]
+  const finishingTypes = [...new Set(units.map(unit => unit.finishing).filter(Boolean))]
 
   const handleResetFilters = () => {
     setFilters({
@@ -436,11 +452,11 @@ const RealEstateMarketing = () => {
           )}
         </motion.div>
 
-        {/* Coming Soon Message */}
+        {/* منتصف الصفحة: قريباً — البطاقات مُزالة، التابات والبحث فقط */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-center min-h-[400px]"
+          className="flex items-center justify-center min-h-[400px] py-16"
         >
           <div className="text-center">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold mb-4" style={{ color: '#d6ac72' }}>

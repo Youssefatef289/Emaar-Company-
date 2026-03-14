@@ -1,12 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { FiClock, FiDollarSign, FiUsers, FiBook, FiArrowLeft, FiInfo, FiX, FiPlay } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
 import { useLanguage } from '../contexts/LanguageContext'
+import { api, apiImage } from '../services/api'
 
 const SurveyingServices = () => {
   const { t } = useLanguage()
+  const [apiCourses, setApiCourses] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
   const [videoUrl, setVideoUrl] = useState(null)
   const [showVideoInDetail, setShowVideoInDetail] = useState(false)
@@ -102,6 +104,15 @@ const SurveyingServices = () => {
     },
   ]
 
+  useEffect(() => {
+    api.courses.list()
+      .then((res) => setApiCourses(res.data || []))
+      .catch(() => setApiCourses([]))
+  }, [])
+
+  const displayCourses = apiCourses.length > 0 ? apiCourses : courses
+  const useCmsCourses = apiCourses.length > 0
+
   if (selectedCourse) {
     return (
       <div className="min-h-screen bg-gray-50 pb-16">
@@ -125,58 +136,66 @@ const SurveyingServices = () => {
           >
             <div className="relative h-96">
               <img
-                src={selectedCourse.image}
-                alt={selectedCourse.title}
+                src={useCmsCourses && selectedCourse.image ? apiImage(selectedCourse.image) : selectedCourse.image}
+                alt={selectedCourse.title || selectedCourse.name}
                 className="w-full h-full object-cover"
               />
             </div>
 
             <div className="p-8">
-              <h1 className="text-3xl font-extrabold text-gray-900 mb-4">{selectedCourse.title}</h1>
+              <h1 className="text-3xl font-extrabold text-gray-900 mb-4">{selectedCourse.title || selectedCourse.name}</h1>
               <p className="text-lg text-gray-600 mb-6">{selectedCourse.description}</p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                  <FiClock size={24} style={{ color: '#d6ac72' }} />
-                  <div>
-                    <p className="text-sm text-gray-600">المدة</p>
-                    <p className="font-bold text-gray-900">{selectedCourse.duration}</p>
+                {selectedCourse.duration && (
+                  <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
+                    <FiClock size={24} style={{ color: '#d6ac72' }} />
+                    <div>
+                      <p className="text-sm text-gray-600">المدة</p>
+                      <p className="font-bold text-gray-900">{selectedCourse.duration}</p>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
                   <FiDollarSign size={24} style={{ color: '#d6ac72' }} />
                   <div>
                     <p className="text-sm text-gray-600">السعر</p>
-                    <p className="font-bold text-gray-900">{selectedCourse.price.toLocaleString()} جنيه</p>
+                    <p className="font-bold text-gray-900">{(selectedCourse.price != null ? selectedCourse.price : 0).toLocaleString()} جنيه</p>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                  <FiUsers size={24} style={{ color: '#d6ac72' }} />
-                  <div>
-                    <p className="text-sm text-gray-600">المدرب</p>
-                    <p className="font-bold text-gray-900">{selectedCourse.instructor}</p>
+                {selectedCourse.instructor && (
+                  <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
+                    <FiUsers size={24} style={{ color: '#d6ac72' }} />
+                    <div>
+                      <p className="text-sm text-gray-600">المدرب</p>
+                      <p className="font-bold text-gray-900">{selectedCourse.instructor}</p>
+                    </div>
                   </div>
+                )}
+              </div>
+
+              {selectedCourse.content && selectedCourse.content.length > 0 && (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-extrabold text-gray-900 mb-4">المحتوى التعليمي</h2>
+                  <ul className="space-y-3">
+                    {selectedCourse.content.map((item, index) => (
+                      <li key={index} className="flex items-start space-x-3 space-x-reverse">
+                        <FiBook className="mt-1 flex-shrink-0" size={18} style={{ color: '#d6ac72' }} />
+                        <span className="text-gray-700">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
+              )}
 
-              <div className="mb-8">
-                <h2 className="text-2xl font-extrabold text-gray-900 mb-4">المحتوى التعليمي</h2>
-                <ul className="space-y-3">
-                  {selectedCourse.content.map((item, index) => (
-                    <li key={index} className="flex items-start space-x-3 space-x-reverse">
-                      <FiBook className="mt-1 flex-shrink-0" size={18} style={{ color: '#d6ac72' }} />
-                      <span className="text-gray-700">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mb-8">
-                <h2 className="text-2xl font-extrabold text-gray-900 mb-4">عن المدرب</h2>
-                <p className="text-gray-700">{selectedCourse.instructorBio}</p>
-              </div>
+              {selectedCourse.instructorBio && (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-extrabold text-gray-900 mb-4">عن المدرب</h2>
+                  <p className="text-gray-700">{selectedCourse.instructorBio}</p>
+                </div>
+              )}
 
               {selectedCourse.videoUrl && (
                 <div className="mb-8">
@@ -214,12 +233,23 @@ const SurveyingServices = () => {
                 </div>
               )}
 
-              <Link
-                to={`/surveying-services/course/${selectedCourse.id}/book`}
-                className="btn-primary inline-block text-center w-full md:w-auto"
-              >
-                احجز الدورة الآن
-              </Link>
+              {selectedCourse.registrationLink ? (
+                <a
+                  href={selectedCourse.registrationLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary inline-block text-center w-full md:w-auto"
+                >
+                  سجل الآن
+                </a>
+              ) : (
+                <Link
+                  to={`/surveying-services/course/${selectedCourse.id || selectedCourse._id}/book`}
+                  className="btn-primary inline-block text-center w-full md:w-auto"
+                >
+                  احجز الدورة الآن
+                </Link>
+              )}
             </div>
           </motion.div>
         </div>
@@ -375,82 +405,6 @@ const SurveyingServices = () => {
                     )
                   })}
                 </div>
-        </motion.div>
-
-        {/* Courses Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">الدورات التدريبية</h2>
-            <div className="w-24 h-1 mx-auto mb-6" style={{ backgroundColor: '#d6ac72' }}></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-            {courses.map((course, index) => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-md overflow-hidden card-hover border border-gray-100"
-              >
-                <div 
-                  className="relative h-48 overflow-hidden bg-gray-200 cursor-pointer"
-                  onClick={() => course.videoUrl && setVideoUrl(course.videoUrl)}
-                >
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                    onError={(e) => {
-                      e.target.src = '/image/medium (1).webp'
-                    }}
-                  />
-                  {course.videoUrl && (
-                    <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                      <div className="bg-red-600 text-white rounded-full p-3 transform hover:scale-110 transition-transform">
-                        <FiPlay size={24} />
-                      </div>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="p-5">
-                  <h3 className="text-lg font-extrabold text-gray-900 mb-2 line-clamp-2 min-h-[3.5rem]">{course.title}</h3>
-                  
-                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-gray-100">
-                    <div className="flex items-center text-gray-600 text-sm">
-                      <FiClock className="ml-1.5" size={16} />
-                      <span>{course.duration}</span>
-                    </div>
-                    <div className="flex items-center font-bold text-base" style={{ color: '#d6ac72' }}>
-                      <FiDollarSign size={16} />
-                      <span>{course.price.toLocaleString()} ج.م</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    {course.videoUrl && (
-                      <button
-                        onClick={() => setVideoUrl(course.videoUrl)}
-                        className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold text-sm"
-                      >
-                        <FiPlay size={16} />
-                        <span>شاهد الفيديو</span>
-                      </button>
-                    )}
-                    <button
-                      onClick={() => setSelectedCourse(course)}
-                      className="w-full btn-primary text-sm py-2.5"
-                    >
-                      عرض التفاصيل
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </motion.div>
       </div>
 

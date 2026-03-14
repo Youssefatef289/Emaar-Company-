@@ -1,16 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { FiMapPin, FiImage, FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { api, apiImage } from '../services/api'
 
 const PreviousProjects = () => {
   const [selectedProjectImages, setSelectedProjectImages] = useState(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [selectedGalleryImageIndex, setSelectedGalleryImageIndex] = useState(null)
   const [cardImageIndices, setCardImageIndices] = useState({})
+  const [apiProjects, setApiProjects] = useState([])
+  const [apiLoading, setApiLoading] = useState(true)
 
-  // المشاريع السابقة
-  const previousProjects = [
+  useEffect(() => {
+    api.projects.list('previous')
+      .then((res) => setApiProjects(res.data || []))
+      .catch(() => setApiProjects([]))
+      .finally(() => setApiLoading(false))
+  }, [])
+
+  // المشاريع السابقة (mock - used when no CMS data)
+  const mockPreviousProjects = [
     {
       id: 'beni-suef-post',
       title: 'مبنى البريد - بنى سويف',
@@ -100,6 +110,19 @@ const PreviousProjects = () => {
       ],
     },
   ]
+
+  const previousProjects = apiProjects.length > 0
+    ? apiProjects.map((p) => ({
+        id: p._id,
+        _id: p._id,
+        title: p.name,
+        name: p.name,
+        description: p.description,
+        image: p.image || (p.images && p.images[0]),
+        images: (p.images && p.images.length > 0) ? p.images : (p.image ? [p.image] : []),
+      }))
+    : mockPreviousProjects
+  const useCmsProjects = apiProjects.length > 0
 
   const handleViewImages = (projectImages, index = 0) => {
     setSelectedProjectImages(projectImages)
@@ -206,10 +229,15 @@ const PreviousProjects = () => {
 
       <div className="container-custom mt-12">
         {/* Previous Projects Grid */}
+        {apiLoading ? (
+          <div className="flex justify-center py-16">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500" />
+          </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
           {previousProjects.map((project, index) => (
             <motion.div
-              key={project.id}
+              key={project.id || project._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -218,9 +246,9 @@ const PreviousProjects = () => {
               <div className="relative h-56 overflow-hidden group">
                 <AnimatePresence mode="wait">
                   <motion.img
-                    key={cardImageIndices[project.id] || 0}
-                    src={project.images[cardImageIndices[project.id] || 0]}
-                    alt={project.title}
+                    key={cardImageIndices[project.id || project._id] || 0}
+                    src={useCmsProjects && project.image ? apiImage(project.image) : (project.images && project.images[cardImageIndices[project.id || project._id] || 0] || project.image)}
+                    alt={project.title || project.name}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -233,7 +261,7 @@ const PreviousProjects = () => {
                 </AnimatePresence>
                 
                 {/* Navigation Buttons */}
-                {project.images.length > 1 && (
+                {project.images && project.images.length > 1 && (
                   <>
                     <button
                       onClick={(e) => {
@@ -278,23 +306,28 @@ const PreviousProjects = () => {
                 )}
                 
                 <div className="absolute top-2 right-2 text-white px-2 py-1 rounded-full text-xs font-semibold z-10" style={{ backgroundColor: '#d6ac72' }}>
-                  {project.type}
+                  {project.type || 'مكتمل'}
                 </div>
+                {!useCmsProjects && (
                 <div className="absolute top-2 left-2 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-semibold z-10">
                   {project.status}
                 </div>
+                )}
               </div>
 
               <div className="p-4">
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{project.title}</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">{project.title || project.name}</h3>
                 <p className="text-sm text-gray-600 mb-3 line-clamp-2">{project.description}</p>
                 
+                {project.location && (
                 <div className="flex items-center text-gray-700 text-sm mb-4">
                   <FiMapPin className="ml-2" size={14} style={{ color: '#d6ac72' }} />
                   <span>{project.location}</span>
                 </div>
+                )}
 
                 <div className="flex flex-col gap-2">
+                  {project.images && project.images.length > 0 && (
                   <button
                     onClick={() => handleViewImages(project.images, 0)}
                     className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold text-sm shadow-md hover:shadow-lg"
@@ -302,8 +335,9 @@ const PreviousProjects = () => {
                     <FiImage size={16} />
                     <span>رؤية الصور ({project.images.length})</span>
                   </button>
+                  )}
                   <Link
-                    to={`/projects/${project.id}`}
+                    to={`/projects/${project.id || project._id}`}
                     className="w-full btn-primary text-sm py-2.5 flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
                   >
                     <span>عرض التفاصيل</span>
@@ -314,6 +348,7 @@ const PreviousProjects = () => {
             </motion.div>
           ))}
         </div>
+        )}
 
         {/* Emaar Towers Section */}
         <motion.div

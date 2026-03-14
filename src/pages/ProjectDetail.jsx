@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMapPin, FiCalendar, FiHome, FiDollarSign, FiArrowLeft, FiLayers, FiX } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import { api, apiImage } from '../services/api'
 
 const ProjectDetail = () => {
   const { id } = useParams()
@@ -10,7 +11,7 @@ const ProjectDetail = () => {
   const [loading, setLoading] = useState(true)
   const [selectedImage, setSelectedImage] = useState(null)
 
-  // Mock data - In production, this would come from an API
+  // Mock data - used when id is not from CMS
   const projects = {
     1: {
       id: 1,
@@ -332,11 +333,24 @@ const ProjectDetail = () => {
   }
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setProject(projects[id])
-      setLoading(false)
-    }, 500)
+    api.projects.get(id)
+      .then((res) => {
+        const p = res.data
+        setProject({
+          id: p._id,
+          title: p.name,
+          name: p.name,
+          description: p.description,
+          longDescription: p.description,
+          images: p.image ? [p.image] : [],
+          image: p.image,
+          fromCms: true,
+        })
+      })
+      .catch(() => {
+        setProject(projects[id] || null)
+      })
+      .finally(() => setLoading(false))
   }, [id])
 
   if (loading) {
@@ -363,6 +377,8 @@ const ProjectDetail = () => {
     )
   }
 
+  const getImageUrl = (url) => (project.fromCms && url ? apiImage(url) : url)
+
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
       <div className="container-custom max-w-6xl">
@@ -384,21 +400,25 @@ const ProjectDetail = () => {
         >
           <div className="relative h-96 overflow-hidden">
             <img
-              src={project.images[0]}
-              alt={project.title}
+              src={getImageUrl(project.images && project.images[0]) || getImageUrl(project.image)}
+              alt={project.title || project.name}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-6 right-6 text-white">
-              <h1 className="text-4xl font-extrabold mb-2">{project.title}</h1>
+              <h1 className="text-4xl font-extrabold mb-2">{project.title || project.name}</h1>
               <div className="flex items-center space-x-4 space-x-reverse">
+                {project.location && (
                 <div className="flex items-center">
                   <FiMapPin className="ml-1" size={18} />
                   <span>{project.location}</span>
                 </div>
+                )}
+                {project.type && (
                 <span className="px-3 py-1 rounded-full text-sm font-semibold text-white" style={{ backgroundColor: '#d6ac72' }}>
                   {project.type}
                 </span>
+                )}
               </div>
             </div>
           </div>
@@ -680,7 +700,7 @@ const ProjectDetail = () => {
             )}
 
             {/* Images Gallery */}
-            {project.images.length > 1 && (
+            {project.images && project.images.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -696,8 +716,8 @@ const ProjectDetail = () => {
                       onClick={() => setSelectedImage(image)}
                     >
                       <img
-                        src={image}
-                        alt={`${project.title} - ${index + 1}`}
+                        src={getImageUrl(image)}
+                        alt={`${project.title || project.name} - ${index + 1}`}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                         loading="lazy"
                         onError={(e) => {
@@ -744,8 +764,8 @@ const ProjectDetail = () => {
                       <FiX size={24} />
                     </button>
                     <img
-                      src={selectedImage}
-                      alt={project.title}
+                      src={getImageUrl(selectedImage)}
+                      alt={project.title || project.name}
                       className="max-w-full max-h-full object-contain rounded-lg"
                     />
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black/50 px-4 py-2 rounded-full text-sm">

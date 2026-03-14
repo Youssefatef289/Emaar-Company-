@@ -1,69 +1,7 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiTag, FiCalendar, FiArrowRight, FiInfo } from 'react-icons/fi'
-import { FaWhatsapp } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 const Offers = () => {
-  // Mock data - In production, this would come from an API/Admin Dashboard
-  const offers = [
-    {
-      id: 1,
-      title: '🥇 الجائزة الأولى - نص تشطيب شقتك مجاناً',
-      description: 'نص تشطيب "شقتك" مجاناً - واحد من العملاء القدام.. أيوه.. التشطيب علينا إحنا!',
-      discount: 50,
-      discountType: 'percentage',
-      validUntil: '2024-04-10',
-      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
-      link: '/real-estate-marketing',
-      type: 'ramadan',
-    },
-    {
-      id: 2,
-      title: '🥈 الجائزة الثانية - خصم 1000 جنيه على كل متر',
-      description: 'خصم ألف جنيه كاملين على "كل متر" - لواحد بس من أي عميل جديد هيتعاقد وهيجز معانا',
-      discount: 1000,
-      discountType: 'amount',
-      validUntil: '2024-04-10',
-      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
-      link: '/real-estate-marketing',
-      type: 'ramadan',
-    },
-    {
-      id: 3,
-      title: '🥉 الجائزة الثالثة - خصم 10% على المصنعيات',
-      description: 'خصم عشرة في المية على "المصنعيات" كلها! لواحد بس حابب بشطب شقته معانا',
-      discount: 10,
-      discountType: 'percentage',
-      validUntil: '2024-04-10',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
-      link: '/real-estate-marketing',
-      type: 'ramadan',
-    },
-    {
-      id: 4,
-      title: '💰 الجائزة الرابعة - 5000 جنيه كاش',
-      description: '5 آلاف جنيه "كاش" - هيتوزعوا على 5 فايزين!',
-      discount: 5000,
-      discountType: 'amount',
-      validUntil: '2024-04-10',
-      image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=600&fit=crop',
-      link: '/contact',
-      type: 'ramadan',
-    },
-  ]
-
-  const getOfferTypeLabel = (type) => {
-    const types = {
-      'real-estate': 'عقاري',
-      'course': 'دورات',
-      'financing': 'تمويل',
-      'commercial': 'تجاري',
-      'ramadan': 'رمضان',
-    }
-    return types[type] || 'عام'
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
       {/* Hero Section */}
@@ -92,73 +30,6 @@ const Offers = () => {
       </div>
 
       <div className="container-custom mt-12">
-
-        {/* Offers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {offers.map((offer, index) => (
-            <motion.div
-              key={offer.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-md overflow-hidden card-hover relative flex flex-col"
-            >
-              {/* Discount Badge */}
-              {offer.discount > 0 && (
-                <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full font-bold text-sm z-10">
-                  {offer.discountType === 'amount' 
-                    ? `${offer.discount.toLocaleString()} ج.م`
-                    : `خصم ${offer.discount}%`
-                  }
-                </div>
-              )}
-
-              {/* Type Badge */}
-              <div className="absolute top-3 left-3 text-white px-2 py-1 rounded-full text-xs font-semibold z-10" style={{ backgroundColor: '#d6ac72' }}>
-                {getOfferTypeLabel(offer.type)}
-              </div>
-
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={offer.image}
-                  alt={offer.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                />
-              </div>
-
-              <div className="p-4 flex-grow flex flex-col">
-                <h3 className="text-lg font-extrabold text-gray-900 mb-2 line-clamp-2">{offer.title}</h3>
-                <p className="text-sm text-gray-600 mb-3 line-clamp-2 flex-grow">{offer.description}</p>
-
-                <div className="flex items-center text-gray-600 mb-4">
-                  <FiCalendar className="ml-2" size={14} />
-                  <span className="text-xs">صالح حتى: {offer.validUntil}</span>
-                </div>
-
-                <div className="flex flex-col gap-2">
-                  <a
-                    href={`https://wa.me/201027347377?text=${encodeURIComponent(`I want to take advantage of the offer: ${offer.title}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold text-white transition-all hover:shadow-lg"
-                    style={{ backgroundColor: '#25D366' }}
-                  >
-                    <FaWhatsapp size={18} />
-                    <span>احصل على العرض</span>
-                  </a>
-                  <Link
-                    to={offer.link}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg font-semibold transition-all hover:shadow-lg border-2"
-                    style={{ color: '#d6ac72', borderColor: '#d6ac72' }}
-                  >
-                    <FiInfo size={16} />
-                    <span>تفاصيل العرض</span>
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
 
         {/* Ramadan Competition Section */}
         <motion.div

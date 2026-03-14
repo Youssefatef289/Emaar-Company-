@@ -1,13 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { FiMapPin, FiCalendar, FiArrowRight, FiHome, FiLayers, FiTrendingUp, FiX, FiImage } from 'react-icons/fi'
+import { api, apiImage } from '../services/api'
 
 const CurrentProjects = () => {
   const [selectedProjectImages, setSelectedProjectImages] = useState(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
-  // Mock data - In production, this would come from an API
-  const projects = [
+  const [apiProjects, setApiProjects] = useState([])
+  const [apiLoading, setApiLoading] = useState(true)
+
+  useEffect(() => {
+    api.projects.list('current')
+      .then((res) => setApiProjects(res.data || []))
+      .catch(() => setApiProjects([]))
+      .finally(() => setApiLoading(false))
+  }, [])
+
+  // Mock data - used when no CMS data
+  const mockProjects = [
     {
       id: 1,
       title: 'أبراج إعمار',
@@ -110,6 +121,9 @@ const CurrentProjects = () => {
     },
   ]
 
+  // عرض بطاقتي مشاريع إعمار وأبراج إعمار فقط (أبراج إعمار + رويال سيتي)
+  const projects = mockProjects
+  const useCmsProjects = false
 
   const handleViewImages = (projectImages, index = 0) => {
     setSelectedProjectImages(projectImages)
@@ -163,10 +177,15 @@ const CurrentProjects = () => {
       <div className="container-custom mt-12">
 
         {/* Projects Grid */}
+        {apiLoading ? (
+          <div className="flex justify-center py-16">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500" />
+          </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
             <motion.div
-              key={project.id}
+              key={project.id || project._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -174,36 +193,26 @@ const CurrentProjects = () => {
             >
               <div className="relative h-56 overflow-hidden">
                 <img
-                  src={project.image}
-                  alt={project.title}
+                  src={useCmsProjects && project.image ? apiImage(project.image) : project.image}
+                  alt={project.title || project.name}
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                 />
                 <div className="absolute top-2 right-2 text-white px-2 py-1 rounded-full text-xs font-semibold" style={{ backgroundColor: '#d6ac72' }}>
                   {project.type}
                 </div>
-                <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                  {project.status}
-                </div>
-                
-                {/* Circular Progress */}
+                {!useCmsProjects && (
+                  <div className="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                    {project.status}
+                  </div>
+                )}
+                {!useCmsProjects && project.progress != null && (
                 <div className="absolute bottom-2 right-2">
                   <div className="relative w-16 h-16">
                     <svg className="transform -rotate-90 w-16 h-16">
+                      <circle cx="32" cy="32" r="28" stroke="rgba(255,255,255,0.3)" strokeWidth="4" fill="none" />
                       <circle
-                        cx="32"
-                        cy="32"
-                        r="28"
-                        stroke="rgba(255,255,255,0.3)"
-                        strokeWidth="4"
-                        fill="none"
-                      />
-                      <circle
-                        cx="32"
-                        cy="32"
-                        r="28"
-                        stroke="#ffffff"
-                        strokeWidth="4"
-                        fill="none"
+                        cx="32" cy="32" r="28"
+                        stroke="#ffffff" strokeWidth="4" fill="none"
                         strokeDasharray={`${2 * Math.PI * 28}`}
                         strokeDashoffset={`${2 * Math.PI * 28 * (1 - project.progress / 100)}`}
                         strokeLinecap="round"
@@ -215,31 +224,27 @@ const CurrentProjects = () => {
                     </div>
                   </div>
                 </div>
+                )}
               </div>
 
               <div className="p-4">
-                <h3 className="text-xl font-extrabold text-gray-900 mb-2">{project.title}</h3>
+                <h3 className="text-xl font-extrabold text-gray-900 mb-2">{project.title || project.name}</h3>
                 <p className="text-sm text-gray-600 mb-3 leading-relaxed line-clamp-2">{project.description}</p>
-                {(project.cardNote || project.cardUnitsMix) && (
+                {!useCmsProjects && (project.cardNote || project.cardUnitsMix) && (
                   <div className="mb-3 space-y-1">
-                    {project.cardNote && (
-                      <p className="text-xs font-bold text-gray-800">
-                        {project.cardNote}
-                      </p>
-                    )}
-                    {project.cardUnitsMix && (
-                      <p className="text-xs text-gray-700">
-                        {project.cardUnitsMix}
-                      </p>
-                    )}
+                    {project.cardNote && <p className="text-xs font-bold text-gray-800">{project.cardNote}</p>}
+                    {project.cardUnitsMix && <p className="text-xs text-gray-700">{project.cardUnitsMix}</p>}
                   </div>
                 )}
 
+                {!useCmsProjects && (
                 <div className="space-y-2 mb-4">
+                  {project.location && (
                   <div className="flex items-center text-gray-700 text-sm">
                     <FiMapPin className="ml-2" size={14} style={{ color: '#d6ac72' }} />
                     <span>{project.location}</span>
                   </div>
+                  )}
                   {project.floors && (
                     <div className="flex items-center text-gray-700 text-sm">
                       <FiLayers className="ml-2" size={14} style={{ color: '#d6ac72' }} />
@@ -270,22 +275,20 @@ const CurrentProjects = () => {
                     </div>
                   )}
                 </div>
+                )}
 
-                {/* Features Preview */}
-                {project.features && (
+                {!useCmsProjects && project.features && project.features.length > 0 && (
                   <div className="mb-4">
                     <div className="flex flex-wrap gap-1.5">
                       {project.features.slice(0, 3).map((feature, idx) => (
-                        <span key={idx} className="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full">
-                          {feature}
-                        </span>
+                        <span key={idx} className="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full">{feature}</span>
                       ))}
                     </div>
                   </div>
                 )}
 
                 <Link
-                  to={`/projects/${project.id}`}
+                  to={`/projects/${project.id || project._id}`}
                   className="btn-primary w-full flex items-center justify-center space-x-2 space-x-reverse text-sm py-2"
                 >
                   <span>عرض التفاصيل</span>
@@ -295,6 +298,7 @@ const CurrentProjects = () => {
             </motion.div>
           ))}
         </div>
+        )}
 
         {/* Call to Action */}
         <motion.div

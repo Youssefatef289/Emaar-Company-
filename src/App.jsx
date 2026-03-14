@@ -1,11 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { LanguageProvider } from './contexts/LanguageContext'
 import { AuthProvider } from './contexts/AuthContext'
+import { AdminAuthProvider } from './contexts/AdminAuthContext'
 import Navbar from './components/Layout/Navbar'
 import Footer from './components/Layout/Footer'
 import NewsTicker from './components/Layout/NewsTicker'
 import FloatingContactButton from './components/Layout/FloatingContactButton'
 import ScrollToTop from './components/ScrollToTop'
+import ProtectedAdminRoute from './components/Admin/ProtectedAdminRoute'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
@@ -20,13 +22,15 @@ import CourseBooking from './pages/CourseBooking'
 import CourseDetail from './pages/CourseDetail'
 import Profile from './pages/Profile'
 import ProjectDetail from './pages/ProjectDetail'
+import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
   return (
     <LanguageProvider>
       <AuthProvider>
-        <Router>
+        <AdminAuthProvider>
+        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <ScrollToTop />
           <div className="min-h-screen flex flex-col bg-white">
             <NewsTicker />
@@ -47,13 +51,15 @@ function App() {
                 <Route path="/surveying-services/course/:courseId/book" element={<CourseBooking />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/projects/:id" element={<ProjectDetail />} />
-                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
               </Routes>
             </main>
             <Footer />
             <FloatingContactButton />
           </div>
         </Router>
+        </AdminAuthProvider>
       </AuthProvider>
     </LanguageProvider>
   )
