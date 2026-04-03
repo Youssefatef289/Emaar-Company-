@@ -342,8 +342,10 @@ const ProjectDetail = () => {
           name: p.name,
           description: p.description,
           longDescription: p.description,
-          images: p.image ? [p.image] : [],
-          image: p.image,
+          images: Array.isArray(p.images) && p.images.length > 0 ? p.images : (p.image ? [p.image] : []),
+          image: p.image || (Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : ''),
+          type: p.type === 'previous' ? 'مشروع سابق' : 'مشروع حالي',
+          projectType: p.type,
           fromCms: true,
         })
       })
@@ -378,13 +380,14 @@ const ProjectDetail = () => {
   }
 
   const getImageUrl = (url) => (project.fromCms && url ? apiImage(url) : url)
+  const backPath = project.projectType === 'previous' ? '/previous-projects' : '/current-projects'
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
       <div className="container-custom max-w-6xl">
         {/* Back Button */}
         <Link
-          to="/current-projects"
+          to={backPath}
           className="flex items-center mb-6"
           style={{ color: '#d6ac72' }}
         >

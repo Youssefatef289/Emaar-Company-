@@ -2,6 +2,11 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { FiMapPin, FiImage, FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import {
+  FALLBACK_PREVIOUS_PROJECT_EMAAR_IMAGES,
+  FALLBACK_PREVIOUS_PROJECT_GALLERY_IMAGES,
+  FALLBACK_PREVIOUS_PROJECTS,
+} from '../constants/fallbackData'
 import { api, apiImage } from '../services/api'
 
 const PreviousProjects = () => {
@@ -19,97 +24,9 @@ const PreviousProjects = () => {
       .finally(() => setApiLoading(false))
   }, [])
 
-  // المشاريع السابقة (mock - used when no CMS data)
-  const mockPreviousProjects = [
-    {
-      id: 'beni-suef-post',
-      title: 'مبنى البريد - بنى سويف',
-      location: 'بنى سويف',
-      type: 'حكومي',
-      status: 'مكتمل',
-      description: 'مبنى البريد ودراسات إسلامية في بنى سويف',
-      image: '/image/Beni Suef Post Office, Islamic Studies/Post office (1).jpg',
-      images: [
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (1).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (2).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (3).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (4).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (5).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (6).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (7).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (8).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (9).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (10).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (11).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (12).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (13).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (14).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (15).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (16).jpg',
-        '/image/Beni Suef Post Office, Islamic Studies/Post office (17).jpg',
-      ],
-    },
-    {
-      id: 'al-harbi',
-      title: 'شركة الحربي',
-      location: 'مصر',
-      type: 'تجاري',
-      status: 'مكتمل',
-      description: 'مشروع شركة الحربي',
-      image: '/image/Al-Harbi Company/Al-Harbi Company (1).jpg',
-      images: [
-        '/image/Al-Harbi Company/Al-Harbi Company (1).jpg',
-        '/image/Al-Harbi Company/Al-Harbi Company (2).jpg',
-        '/image/Al-Harbi Company/Al-Harbi Company (3).jpg',
-        '/image/Al-Harbi Company/Al-Harbi Company (4).jpg',
-        '/image/Al-Harbi Company/Al-Harbi Company (5).jpg',
-        '/image/Al-Harbi Company/Al-Harbi Company (6).jpg',
-        '/image/Al-Harbi Company/Al-Harbi Company (7).jpg',
-      ],
-    },
-    {
-      id: 'workers-university',
-      title: 'البوابات - الجامعة العمالية',
-      location: 'مصر',
-      type: 'تعليمي',
-      status: 'مكتمل',
-      description: 'بوابات الجامعة العمالية',
-      image: '/image/البوبات/الجامعة العمالية/Workers\' University Gates (1).JPG',
-      images: [
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (1).JPG',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (2).JPG',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (3).JPG',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (4).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (5).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (6).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (7).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (8).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (9).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (10).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (11).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (12).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (13).jpg',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (14).JPG',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (15).JPG',
-        '/image/البوبات/الجامعة العمالية/Workers\' University Gates (16).JPG',
-      ],
-    },
-    {
-      id: 'beni-suef-university',
-      title: 'البوابات - جامعة بنى سويف',
-      location: 'بنى سويف',
-      type: 'تعليمي',
-      status: 'مكتمل',
-      description: 'بوابات جامعة بنى سويف',
-      image: '/image/البوبات/جامعة بنى سويف/Beni Suef University Gates (1).JPG',
-      images: [
-        '/image/البوبات/جامعة بنى سويف/Beni Suef University Gates (1).JPG',
-        '/image/البوبات/جامعة بنى سويف/Beni Suef University Gates (2).JPG',
-        '/image/البوبات/جامعة بنى سويف/Beni Suef University Gates (3).JPG',
-        '/image/البوبات/جامعة بنى سويف/Beni Suef University Gates (4).JPG',
-      ],
-    },
-  ]
+  const mockPreviousProjects = FALLBACK_PREVIOUS_PROJECTS
+  const allProjectImages = FALLBACK_PREVIOUS_PROJECT_GALLERY_IMAGES
+  const emaarTowerImages = FALLBACK_PREVIOUS_PROJECT_EMAAR_IMAGES
 
   const previousProjects = apiProjects.length > 0
     ? apiProjects.map((p) => ({
@@ -145,40 +62,6 @@ const PreviousProjects = () => {
       setSelectedImageIndex(selectedImageIndex - 1)
     }
   }
-
-  // جميع الصور من المشاريع
-  const allProjectImages = [
-    '/image/Our projects/Our projects (1).jpg',
-    '/image/Our projects/Our projects (2).jpg',
-    '/image/Our projects/Our projects (3).jpg',
-    '/image/Our projects/Our projects (4).jpg',
-    '/image/Our projects/Our projects (5).jpg',
-    '/image/Our projects/Our projects (6).jpg',
-    '/image/Our projects/Our projects (7).jpg',
-    '/image/Our projects/Our projects (8).jpg',
-    '/image/Our projects/Our projects (9).jpg',
-    '/image/Our projects/Our projects (10).jpg',
-    '/image/Our projects/Our projects (11).jpg',
-    '/image/Our projects/Our projects (12).jpg',
-    '/image/Our projects/Our projects (13).jpg',
-    '/image/Our projects/Our projects (14).jpg',
-    '/image/Our projects/Our projects (15).jpg',
-    '/image/Our projects/Our projects (16).jpg',
-    '/image/Our projects/Our projects (17).jpg',
-    '/image/Our projects/Our projects (18).jpg',
-    '/image/Our projects/Our projects (19).jpg',
-    '/image/Our projects/Our projects (20).jpg',
-    '/image/Our projects/Our projects (21).jpg',
-    '/image/Our projects/Our projects (22).jpg',
-    '/image/Our projects/Our projects (23).jpg',
-    '/image/Our projects/Our projects (24).jpg',
-    '/image/Our projects/Our projects (25).jpg',
-    '/image/Our projects/Our projects (26).jpg',
-    '/image/Our projects/Our projects (27).jpg',
-    '/image/Our projects/Our projects (28).jpg',
-    '/image/Our projects/Our projects (29).jpg',
-    '/image/Our projects/Our projects (30).jpg',
-  ]
 
   const handleGalleryImageClick = (index) => {
     setSelectedGalleryImageIndex(index)
@@ -366,23 +249,7 @@ const PreviousProjects = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
-            {[
-              '/image/Our projects/Our projects  Emaar tower (12).jpg',
-              '/image/Our projects/Our projects  Emaar tower (13).jpg',
-              '/image/Our projects/Our projects  Emaar tower (14).jpg',
-              '/image/Our projects/Our projects  Emaar tower (15).jpg',
-              '/image/Our projects/Our projects  Emaar tower (16).jpg',
-              '/image/Our projects/Our projects  Emaar tower (17).jpg',
-              '/image/Our projects/Our projects  Emaar tower (18).jpg',
-              '/image/Our projects/Our projects  Emaar tower (19).jpg',
-              '/image/Our projects/Our projects  Emaar tower (20).jpg',
-              '/image/Our projects/Our projects  Emaar tower (21).jpg',
-              '/image/Our projects/Our projects  Emaar tower (22).jpg',
-              '/image/Our projects/Our projects  Emaar tower (23).jpg',
-              '/image/Our projects/Our projects  Emaar tower (24).jpg',
-              '/image/Our projects/Our projects  Emaar tower (25).jpg',
-              '/image/Our projects/Our projects  Emaar tower (26).jpg',
-            ].map((image, index) => (
+            {emaarTowerImages.map((image, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -390,23 +257,6 @@ const PreviousProjects = () => {
                 transition={{ delay: index * 0.05, duration: 0.3 }}
                 className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group shadow-md hover:shadow-xl transition-all"
                 onClick={() => {
-                  const emaarTowerImages = [
-                    '/image/Our projects/Our projects  Emaar tower (12).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (13).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (14).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (15).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (16).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (17).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (18).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (19).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (20).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (21).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (22).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (23).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (24).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (25).jpg',
-                    '/image/Our projects/Our projects  Emaar tower (26).jpg',
-                  ]
                   setSelectedProjectImages(emaarTowerImages)
                   setSelectedImageIndex(index)
                 }}
@@ -636,4 +486,3 @@ const PreviousProjects = () => {
 }
 
 export default PreviousProjects
-

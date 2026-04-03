@@ -1,256 +1,134 @@
-import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FiArrowLeft, FiClock, FiDollarSign, FiBook, FiUsers, FiCheck } from 'react-icons/fi'
+import { FiArrowLeft, FiBook, FiCheck, FiClock, FiDollarSign, FiUsers } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
+import { FALLBACK_COURSE_MAP } from '../constants/fallbackData'
+import { api, apiImage } from '../services/api'
 
-const CourseDetail = () => {
+const DEFAULT_WHATSAPP = '01027347377'
+
+function normalizeListField(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item).trim()).filter(Boolean)
+  }
+
+  if (typeof value === 'string') {
+    return value
+      .split(/\r?\n|,/)
+      .map((item) => item.trim())
+      .filter(Boolean)
+  }
+
+  return []
+}
+
+function normalizeTextField(value) {
+  return typeof value === 'string' ? value.trim() : ''
+}
+
+function buildDefaultImportance(course) {
+  const title = normalizeTextField(course.title) || 'هذا الكورس'
+  const description = normalizeTextField(course.description)
+
+  if (description) {
+    return `${title} يمنح الطالب أساسًا واضحًا وتطبيقًا عمليًا يساعده على فهم المجال بشكل أفضل وتحويل المعرفة النظرية إلى خطوات قابلة للتنفيذ داخل الدراسة أو سوق العمل.`
+  }
+
+  return `${title} من الكورسات المهمة لأنه يساعد الطالب على بناء أساس قوي، وفهم خطوات العمل بشكل منظم، واكتساب خبرة عملية يمكن الاعتماد عليها في التطبيق الفعلي.`
+}
+
+function buildDefaultContent(course) {
+  const title = normalizeTextField(course.title) || 'الكورس'
+
+  return [
+    `مقدمة شاملة في ${title} وأهم المفاهيم الأساسية المرتبطة به.`,
+    'شرح الأدوات والخطوات العملية المستخدمة أثناء الدراسة والتطبيق.',
+    'تدريب على أمثلة وتمارين تساعد على تثبيت المعلومات بشكل واضح.',
+    'مراجعة عملية تساعد الطالب على تنفيذ المطلوب بثقة أكبر بعد انتهاء الكورس.',
+  ]
+}
+
+function buildDefaultUsefulness(course) {
+  const title = normalizeTextField(course.title) || 'الكورس'
+
+  return [
+    `فهم أساسيات ${title} بطريقة مرتبة وسهلة التطبيق.`,
+    'اكتساب قدرة أفضل على تنفيذ المهام المطلوبة بشكل عملي ومنظم.',
+    'رفع مستوى الطالب العلمي والمهاري بما يفيده في الدراسة أو العمل.',
+    'الانتقال من الفهم النظري إلى التطبيق الفعلي بثقة أكبر.',
+  ]
+}
+
+function buildDefaultBenefits(course) {
+  const level = normalizeTextField(course.level)
+
+  return [
+    'شرح مبسط ومنظم مناسب لفهم الموضوع خطوة بخطوة.',
+    'تطبيقات وتمارين عملية تساعد على تثبيت المعلومة.',
+    level ? `محتوى مناسب لمستوى ${level}.` : 'محتوى مناسب للمبتدئين والراغبين في تطوير مستواهم.',
+    'إمكانية الاستفادة من الكورس في الدراسة أو العمل بشكل مباشر.',
+  ]
+}
+
+export default function CourseDetail() {
   const { courseId } = useParams()
   const [course, setCourse] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // Mock data - In production, this would come from an API
-  const courses = {
-    'surveying-package': {
-      id: 'surveying-package',
-      title: 'باكدج المساحة (الميزان - التوتال ستيشن)',
-      description: 'دورة شاملة في المساحة التطبيقية تغطي جميع أساسيات المساحة المستوية والجيوديسية مع التدريب العملي على الأجهزة المساحية الحديثة',
-      duration: '24 ساعة',
-      price: 1500,
-      level: 'مبتدئ - متقدم',
-      instructor: 'م. محمود أحمد',
-      instructorBio: 'خبير مساحي مع أكثر من 15 عامًا من الخبرة في المساحة التطبيقية',
-      content: [
-        'مقدمة في المساحة المستوية والجيوديسية',
-        'التدريب على جهاز الميزان (Level)',
-        'التدريب على جهاز GPS',
-        'التدريب على جهاز Total Station',
-        'طرق تنفيذ الأعمال المساحية المطلوبة',
-        'التدريب العملي داخل الموقع',
-        'معالجة البيانات المساحية',
-        'تطبيقات عملية شاملة'
-      ],
-      benefits: [
-        'شهادة معتمدة من الشركة',
-        'كتب ومذكرات علمية',
-        'تدريب عملي على الأجهزة',
-        'مساعدة في إيجاد فرص عمل',
-        'كارنية مزاولة المهنة'
-      ],
-      image: '/image/Courses/Area package (leveling - total station).jpg',
-      whatsappNumber: '01027347377'
-    },
-    'autocad': {
-      id: 'autocad',
-      title: 'الأوتوكاد',
-      description: 'دورة متكاملة في برنامج AutoCAD من الأساسيات إلى المستوى المتقدم، مع التركيز على التطبيقات المساحية والهندسية',
-      duration: '20 ساعة',
-      price: 700,
-      level: 'مبتدئ - متوسط',
-      instructor: 'م. سارة محمد',
-      instructorBio: 'خبيرة في برامج التصميم الهندسي مع أكثر من 10 أعوام من الخبرة',
-      content: [
-        'مقدمة في برنامج AutoCAD',
-        'الأوامر الأساسية والرسم',
-        'التعديل والتحرير',
-        'طباعة المخططات',
-        'التطبيقات المساحية',
-        'مشاريع عملية',
-        'نصائح واحترافيات'
-      ],
-      benefits: [
-        'شهادة معتمدة',
-        'ملفات تدريبية',
-        'مشاريع عملية',
-        'دعم فني بعد الدورة'
-      ],
-      image: '/image/Courses/Auto cat.jpeg',
-      whatsappNumber: '01027347377'
-    },
-    'civil-3d': {
-      id: 'civil-3d',
-      title: 'سيفيل 3D',
-      description: 'دورة متخصصة في برنامج Civil 3D للتطبيقات المدنية والمساحية، من الأساسيات إلى المستوى المتقدم',
-      duration: '20 ساعة',
-      price: 700,
-      level: 'متوسط - متقدم',
-      instructor: 'د. أحمد علي',
-      instructorBio: 'خبير في برامج التصميم المدني والمساحي',
-      content: [
-        'مقدمة في Civil 3D',
-        'إنشاء الأسطح والمنحنيات',
-        'التصميم الطرقي',
-        'التصميم المساحي',
-        'معالجة البيانات المساحية',
-        'التطبيقات العملية',
-        'مشاريع متقدمة'
-      ],
-      benefits: [
-        'شهادة معتمدة',
-        'ملفات تدريبية شاملة',
-        'مشاريع عملية',
-        'دعم فني مستمر'
-      ],
-      image: '/image/Courses/Civil 3D.jpg',
-      whatsappNumber: '01027347377'
-    },
-    '3d-max': {
-      id: '3d-max',
-      title: '3D Max',
-      description: 'دورة شاملة في برنامج 3D Max للتصميم ثلاثي الأبعاد والتقديم المعماري',
-      duration: '20 ساعة',
-      price: 2000,
-      level: 'مبتدئ - متوسط',
-      instructor: 'م. يوسف محمود',
-      instructorBio: 'مصمم معماري متخصص في التصميم ثلاثي الأبعاد',
-      content: [
-        'مقدمة في 3D Max',
-        'النمذجة ثلاثية الأبعاد',
-        'المواد والإضاءة',
-        'الكاميرات والحركة',
-        'التقديم والرندر',
-        'مشاريع عملية',
-        'نصائح احترافية'
-      ],
-      benefits: [
-        'شهادة معتمدة',
-        'ملفات تدريبية',
-        'مكتبة مواد مجانية',
-        'دعم فني'
-      ],
-      image: '/image/Courses/3D Max.jpeg',
-      whatsappNumber: '01027347377'
-    },
-    'revit': {
-      id: 'revit',
-      title: 'الريفيت',
-      description: 'دورة متخصصة في برنامج Revit للتصميم المعماري والهندسي باستخدام تقنية BIM',
-      duration: '20 ساعة',
-      price: 2000,
-      level: 'مبتدئ - متقدم',
-      instructor: 'م. نورا أحمد',
-      instructorBio: 'خبيرة في تقنيات BIM والتصميم المعماري',
-      content: [
-        'مقدمة في Revit و BIM',
-        'إنشاء المشاريع',
-        'النمذجة المعمارية',
-        'الرسومات والتفاصيل',
-        'التقديم والتصور',
-        'التنسيق مع الفرق',
-        'مشاريع متقدمة'
-      ],
-      benefits: [
-        'شهادة معتمدة',
-        'ملفات تدريبية',
-        'مكتبة عناصر مجانية',
-        'دعم فني مستمر'
-      ],
-      image: '/image/Courses/Revit.jpg',
-      whatsappNumber: '01027347377'
-    },
-    'gps': {
-      id: 'gps',
-      title: 'دورة الرفع المساحي باستخدام GPS',
-      description: 'تعلم استخدام تقنيات GPS في الرفع المساحي',
-      duration: '12 ساعة',
-      price: 4000,
-      level: 'مبتدئ - متوسط',
-      instructor: 'م. أحمد محمود',
-      instructorBio: 'متخصص في أنظمة GPS والمساحة الحديثة',
-      content: [
-        'مقدمة في أنظمة GPS',
-        'استخدام أجهزة GPS المساحية',
-        'معالجة البيانات',
-        'تطبيقات عملية',
-      ],
-      benefits: [
-        'شهادة معتمدة',
-        'ملفات تدريبية',
-        'تدريب عملي على الأجهزة',
-        'دعم فني'
-      ],
-      image: '/image/medium (6).webp',
-      whatsappNumber: '01027347377'
-    },
-    'cross-section': {
-      id: 'cross-section',
-      title: 'شرح القطاع العرضى ومفهومه والفرق بينه وبين القطاع الطولى',
-      description: 'دورة متخصصة في شرح القطاع العرضي للطرق ومفهومه والفرق بينه وبين القطاع الطولي',
-      duration: '15 ساعة',
-      price: 1500,
-      level: 'مبتدئ - متوسط',
-      instructor: 'م. محمود السيد',
-      instructorBio: 'خبير في التصميم الطرقي والهندسة المدنية',
-      content: [
-        'مقدمة في القطاعات الطولية والعرضية',
-        'مفهوم القطاع العرضي',
-        'مكونات القطاع العرضي للطرق',
-        'الفرق بين القطاع العرضي والطولي',
-        'تطبيقات القطاع العرضي في التصميم',
-        'قراءة وتحليل القطاعات',
-        'تطبيقات عملية',
-      ],
-      benefits: [
-        'شهادة معتمدة',
-        'ملفات تدريبية',
-        'فيديو تعريفي',
-        'دعم فني'
-      ],
-      image: '/image/شرح القطاع العرضى ومفهومه والفرق بينه وبين القطاع الطولى.jpeg',
-      videoUrl: 'https://www.youtube.com/embed/Gsg--Tvimio',
-      whatsappNumber: '01027347377'
-    },
-    'surveying-intro': {
-      id: 'surveying-intro',
-      title: 'تعريف علم المساحة بشكل شامل المساح المحترف',
-      description: 'دورة شاملة تقدم تعريفاً كاملاً لعلم المساحة وأساسياته للمساح المحترف',
-      duration: '20 ساعة',
-      price: 2000,
-      level: 'مبتدئ - متوسط',
-      instructor: 'د. محمد أحمد',
-      instructorBio: 'خبير مساحي مع أكثر من 20 عامًا من الخبرة في المساحة التطبيقية',
-      content: [
-        'مقدمة في علم المساحة',
-        'تعريف علم المساحة وأهميته',
-        'أنواع المساحة المختلفة',
-        'الأجهزة المساحية الأساسية',
-        'الطرق والأساليب المساحية',
-        'تطبيقات المساحة في المشاريع',
-        'المساح المحترف: المهارات والكفاءات',
-        'تطبيقات عملية شاملة',
-      ],
-      benefits: [
-        'شهادة معتمدة',
-        'ملفات تدريبية شاملة',
-        'فيديو تعريفي',
-        'دعم فني مستمر'
-      ],
-      image: '/image/تعريف علم المساحة بشكل شامل المساح المحترف.jpg',
-      videoUrl: 'https://www.youtube.com/embed/RdR3WFBPw5o',
-      whatsappNumber: '01027347377'
-    }
-  }
-
   useEffect(() => {
-    const foundCourse = courses[courseId]
-    if (foundCourse) {
-      setCourse(foundCourse)
+    let cancelled = false
+
+    api.courses
+      .get(courseId)
+      .then((response) => {
+        if (cancelled) return
+        const cmsCourse = response.data
+        setCourse({
+          id: cmsCourse._id,
+          title: cmsCourse.name,
+          description: normalizeTextField(cmsCourse.description),
+          duration: cmsCourse.duration,
+          price: cmsCourse.price,
+          level: cmsCourse.level,
+          instructor: normalizeTextField(cmsCourse.instructor),
+          instructorBio: normalizeTextField(cmsCourse.instructorBio),
+          content: normalizeListField(cmsCourse.content),
+          benefits: normalizeListField(cmsCourse.benefits),
+          importance: normalizeTextField(cmsCourse.importance),
+          usefulness: normalizeListField(cmsCourse.usefulness),
+          image: cmsCourse.image,
+          videoUrl: cmsCourse.videoUrl,
+          registrationLink: cmsCourse.registrationLink,
+          whatsappNumber: cmsCourse.whatsappNumber || DEFAULT_WHATSAPP,
+          fromCms: true,
+        })
+      })
+      .catch(() => {
+        if (!cancelled) setCourse(FALLBACK_COURSE_MAP[courseId] || null)
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+
+    return () => {
+      cancelled = true
     }
-    setLoading(false)
   }, [courseId])
 
-  const handleWhatsApp = () => {
-    const message = `مرحباً، أريد الاستفسار عن دورة: ${course?.title}`
-    const url = `https://wa.me/${course?.whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`
-    window.open(url, '_blank')
-  }
+  const whatsappHref = useMemo(() => {
+    if (!course) return '#'
+    const phone = String(course.whatsappNumber || DEFAULT_WHATSAPP).replace(/[^0-9]/g, '')
+    const text = encodeURIComponent(`مرحبًا، أريد الاستفسار عن دورة: ${course.title}`)
+    return `https://wa.me/${phone}?text=${text}`
+  }, [course])
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#d6ac72' }}></div>
-          <p className="text-gray-600">جاري التحميل...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#d6ac72' }} />
+          <p className="text-gray-600">جارٍ التحميل...</p>
         </div>
       </div>
     )
@@ -269,10 +147,19 @@ const CourseDetail = () => {
     )
   }
 
+  const heroImage = course.image ? apiImage(course.image) : ''
+  const courseContent = normalizeListField(course.content)
+  const courseBenefits = normalizeListField(course.benefits)
+  const courseUsefulness = normalizeListField(course.usefulness)
+  const courseImportance = normalizeTextField(course.importance)
+  const detailContent = courseContent.length > 0 ? courseContent : buildDefaultContent(course)
+  const detailBenefits = courseBenefits.length > 0 ? courseBenefits : buildDefaultBenefits(course)
+  const detailUsefulness = courseUsefulness.length > 0 ? courseUsefulness : buildDefaultUsefulness(course)
+  const detailImportance = courseImportance || buildDefaultImportance(course)
+
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
       <div className="container-custom">
-        {/* Back Button */}
         <Link
           to="/surveying-services"
           className="flex items-center mb-6 mt-8"
@@ -287,97 +174,120 @@ const CourseDetail = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-2xl shadow-xl overflow-hidden"
         >
-          {/* Hero Image */}
-          <div className="relative h-64 md:h-96">
-            <img
-              src={course.image}
-              alt={course.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+          <div className="relative h-64 md:h-96 bg-gray-100">
+            {heroImage ? (
+              <img src={heroImage} alt={course.title} className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-gray-400">بدون صورة</div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2 drop-shadow-lg">
                 {course.title}
               </h1>
-              <p className="text-lg md:text-xl text-white/90 drop-shadow-md">
-                {course.description}
-              </p>
+              {course.description && (
+                <p className="text-lg md:text-xl text-white/90 drop-shadow-md">{course.description}</p>
+              )}
             </div>
           </div>
 
           <div className="p-6 md:p-8">
-            {/* Course Info Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-              <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                <FiClock size={24} style={{ color: '#d6ac72' }} />
-                <div>
-                  <p className="text-sm text-gray-600">المدة</p>
-                  <p className="font-bold text-gray-900">{course.duration}</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                <FiDollarSign size={24} style={{ color: '#d6ac72' }} />
-                <div>
-                  <p className="text-sm text-gray-600">السعر</p>
-                  <p className="font-bold text-gray-900">{course.price.toLocaleString()} جنيه</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                <FiUsers size={24} style={{ color: '#d6ac72' }} />
-                <div>
-                  <p className="text-sm text-gray-600">المستوى</p>
-                  <p className="font-bold text-gray-900">{course.level}</p>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                <FiBook size={24} style={{ color: '#d6ac72' }} />
-                <div>
-                  <p className="text-sm text-gray-600">المدرب</p>
-                  <p className="font-bold text-gray-900">{course.instructor}</p>
-                </div>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+              {course.duration && (
+                <InfoCard icon={FiClock} label="المدة" value={course.duration} />
+              )}
+              {course.price !== null && course.price !== undefined && (
+                <InfoCard
+                  icon={FiDollarSign}
+                  label="السعر"
+                  value={`${Number(course.price).toLocaleString()} جنيه`}
+                />
+              )}
+              {course.level && (
+                <InfoCard icon={FiUsers} label="المستوى" value={course.level} />
+              )}
+              {course.instructor && (
+                <InfoCard icon={FiBook} label="المدرب" value={course.instructor} />
+              )}
             </div>
 
-            {/* Content Section */}
-            <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
-                محتوى الدورة
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {course.content.map((item, index) => (
-                  <div key={index} className="flex items-start space-x-3 space-x-reverse bg-gray-50 p-4 rounded-lg">
-                    <FiCheck className="mt-1 flex-shrink-0" size={20} style={{ color: '#d6ac72' }} />
-                    <span className="text-gray-700 text-base">{item}</span>
+            {detailContent.length > 0 && (
+              <Section title="محتوى الكورس">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {detailContent.map((item, index) => (
+                    <div key={index} className="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
+                      <FiCheck className="mt-1 flex-shrink-0" size={18} style={{ color: '#d6ac72' }} />
+                      <span className="text-gray-700">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {detailBenefits.length > 0 && (
+              <Section title="مميزات الدورة">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {detailBenefits.map((item, index) => (
+                    <div key={index} className="flex items-start gap-3 bg-primary-50 p-4 rounded-lg">
+                      <FiCheck className="mt-1 flex-shrink-0" size={18} style={{ color: '#d6ac72' }} />
+                      <span className="text-gray-800 font-semibold">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {detailImportance && (
+              <Section title="أهمية الكورس">
+                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-xl p-6 border-r-4 shadow-md" style={{ borderColor: '#d6ac72' }}>
+                  <div className="flex items-start gap-3 mb-4">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: '#d6ac72' }}>
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">لماذا هذا الكورس مهم؟</h3>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <p className="text-gray-800 text-lg leading-relaxed">{detailImportance}</p>
+                </div>
+              </Section>
+            )}
 
-            {/* Benefits Section */}
-            <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
-                المميزات
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {course.benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-start space-x-3 space-x-reverse bg-primary-50 p-4 rounded-lg">
-                    <FiCheck className="mt-1 flex-shrink-0" size={20} style={{ color: '#d6ac72' }} />
-                    <span className="text-gray-800 font-semibold text-base">{benefit}</span>
+            {detailUsefulness.length > 0 && (
+              <Section title="كيفية استفادة الطالب من الكورس">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 shadow-md">
+                  <div className="flex items-start gap-3 mb-6">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-blue-500">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">كيف سيستفيد الطالب؟</h3>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div className="space-y-4">
+                    {detailUsefulness.map((item, index) => (
+                      <div key={index} className="flex items-start gap-4 bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-blue-500 text-white font-bold">
+                          {index + 1}
+                        </div>
+                        <div className="flex-grow">
+                          <p className="text-gray-800 text-base leading-relaxed font-medium">{item}</p>
+                        </div>
+                        <div className="flex-shrink-0">
+                          <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Section>
+            )}
 
-            {/* Video Section */}
             {course.videoUrl && (
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
-                  فيديو تعريفي للدورة
-                </h2>
-                <div className="bg-gray-50 rounded-xl overflow-hidden shadow-lg">
+              <Section title="فيديو تعريفي">
+                <div className="bg-gray-50 rounded-xl overflow-hidden shadow-sm">
                   <div className="aspect-video w-full">
                     <iframe
                       src={course.videoUrl}
@@ -385,48 +295,57 @@ const CourseDetail = () => {
                       className="w-full h-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
-                      frameBorder="0"
-                    ></iframe>
+                    />
                   </div>
                 </div>
-              </div>
+              </Section>
             )}
 
-            {/* Instructor Section */}
-            <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
-                عن المدرب
-              </h2>
-              <div className="bg-gray-50 rounded-lg p-6">
-                <p className="text-gray-800 font-extrabold text-lg mb-2">{course.instructor}</p>
-                <p className="text-gray-700 text-base">{course.instructorBio}</p>
-              </div>
-            </div>
+            {(course.instructor || course.instructorBio) && (
+              <Section title="عن المدرب">
+                <div className="bg-gray-50 rounded-lg p-6">
+                  {course.instructor && <p className="text-gray-900 font-extrabold text-lg mb-2">{course.instructor}</p>}
+                  {course.instructorBio && <p className="text-gray-700">{course.instructorBio}</p>}
+                </div>
+              </Section>
+            )}
 
-            {/* Booking Section */}
-            <div 
-              className="rounded-xl p-8 text-center text-white mb-8"
+            <div
+              className="rounded-xl p-8 text-center text-white"
               style={{ background: 'linear-gradient(135deg, #d6ac72 0%, #c49a5f 50%, #b2884c 100%)' }}
             >
               <h2 className="text-2xl md:text-3xl font-extrabold mb-4 drop-shadow-lg">
-                طريقة الحجز
+                التسجيل والحجز
               </h2>
               <p className="text-lg md:text-xl mb-6 drop-shadow-md">
-                للحجز والاستعلام عن الدورة، يمكنك التواصل معنا عبر واتساب
+                إذا كان للكورس رابط تسجيل مباشر فسيتم استخدامه، وإلا يمكنك الحجز من خلال صفحة الحجز أو التواصل عبر واتساب.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={handleWhatsApp}
+                {course.registrationLink ? (
+                  <a
+                    href={course.registrationLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-50 transition-colors shadow-lg"
+                  >
+                    سجل الآن
+                  </a>
+                ) : (
+                  <Link
+                    to={`/surveying-services/course/${course.id}/book`}
+                    className="bg-white text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-50 transition-colors shadow-lg"
+                  >
+                    احجز الدورة الآن
+                  </Link>
+                )}
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="bg-white text-green-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-50 transition-colors flex items-center justify-center gap-3 shadow-lg"
                 >
                   <FaWhatsapp size={24} />
-                  <span>حجز عبر واتساب</span>
-                </button>
-                <a
-                  href={`tel:${course.whatsappNumber}`}
-                  className="bg-white text-gray-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-3 shadow-lg"
-                >
-                  <span>اتصل بنا: {course.whatsappNumber}</span>
+                  <span>تواصل عبر واتساب</span>
                 </a>
               </div>
             </div>
@@ -437,5 +356,25 @@ const CourseDetail = () => {
   )
 }
 
-export default CourseDetail
+function InfoCard({ icon: Icon, label, value }) {
+  return (
+    <div className="flex items-center gap-3 bg-primary-50 p-4 rounded-lg">
+      <Icon size={24} style={{ color: '#d6ac72' }} />
+      <div>
+        <p className="text-sm text-gray-600">{label}</p>
+        <p className="font-bold text-gray-900">{value}</p>
+      </div>
+    </div>
+  )
+}
 
+function Section({ title, children }) {
+  return (
+    <div className="mb-8">
+      <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>
+        {title}
+      </h2>
+      {children}
+    </div>
+  )
+}

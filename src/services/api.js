@@ -69,6 +69,7 @@ export const realEstate = {
 // ——— الكورسات ———
 export const courses = {
   list: () => coursesStorage.list(),
+  get: (id) => coursesStorage.get(id),
   create: (body) => coursesStorage.create(bodyToObject(body)),
   update: (id, body) => coursesStorage.update(id, bodyToObject(body)),
   delete: (id) => coursesStorage.delete(id),
