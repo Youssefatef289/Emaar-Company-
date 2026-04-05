@@ -1,9 +1,126 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiMapPin, FiCalendar, FiHome, FiDollarSign, FiArrowLeft, FiLayers, FiX } from 'react-icons/fi'
+import { FiMapPin, FiCalendar, FiHome, FiArrowLeft, FiLayers, FiX } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { api, apiImage } from '../services/api'
+
+const INSTALLMENT_OFFER_TITLE = 'اسأل عن عرض نظام التقسيط'
+const INSTALLMENT_OFFER_BADGES = ['20%', '40%']
+const INSTALLMENT_OFFER_DESCRIPTION =
+  'تواصل معنا لمعرفة تفاصيل الوحدات المتاحة وأحدث عروض التقسيط المناسبة لكل برج ولكل شقة.'
+const DEFAULT_PROJECT_COORDINATES = { lat: 29.0661, lng: 31.0994 }
+
+function normalizeListField(value) {
+  if (Array.isArray(value)) {
+    return value.map((item) => String(item).trim()).filter(Boolean)
+  }
+
+  if (typeof value === 'string') {
+    return value
+      .split(/\r?\n|,/)
+      .map((item) => item.trim())
+      .filter(Boolean)
+  }
+
+  return []
+}
+
+function normalizeNumberField(value) {
+  if (value === '' || value === null || value === undefined) return null
+  const parsed = Number(value)
+  return Number.isFinite(parsed) ? parsed : null
+}
+
+function normalizeMatchValue(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[()]/g, ' ')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+}
+
+function normalizeCoordinates(value, latitude, longitude) {
+  const lat = normalizeNumberField(latitude ?? value?.lat)
+  const lng = normalizeNumberField(longitude ?? value?.lng)
+
+  if (lat === null || lng === null) return null
+
+  return { lat, lng }
+}
+
+function findFallbackProjectByValue(fallbackProjects, projectValue) {
+  const keys = [projectValue?._id, projectValue?.id, projectValue?.name, projectValue?.title]
+    .map(normalizeMatchValue)
+    .filter(Boolean)
+
+  if (keys.length === 0) return null
+
+  return Object.values(fallbackProjects).find((fallbackProject) => {
+    const fallbackKeys = [fallbackProject?.id, fallbackProject?.name, fallbackProject?.title]
+      .map(normalizeMatchValue)
+      .filter(Boolean)
+
+    return keys.some((key) => fallbackKeys.includes(key))
+  }) || null
+}
+
+function mergeProjectWithCmsData(cmsProject, fallbackProject) {
+  const images = Array.isArray(cmsProject?.images) && cmsProject.images.length > 0
+    ? cmsProject.images
+    : Array.isArray(fallbackProject?.images) && fallbackProject.images.length > 0
+      ? fallbackProject.images
+      : (cmsProject?.image ? [cmsProject.image] : [])
+
+  const coordinates = normalizeCoordinates(
+    cmsProject?.coordinates,
+    cmsProject?.latitude,
+    cmsProject?.longitude,
+  ) || fallbackProject?.coordinates || DEFAULT_PROJECT_COORDINATES
+
+  const features = normalizeListField(cmsProject?.features)
+  const offerBadges = normalizeListField(cmsProject?.offerBadges)
+
+  return {
+    ...(fallbackProject || {}),
+    id: cmsProject?._id,
+    _id: cmsProject?._id,
+    title: cmsProject?.name || fallbackProject?.title || '',
+    name: cmsProject?.name || fallbackProject?.name || fallbackProject?.title || '',
+    description: cmsProject?.description || fallbackProject?.description || '',
+    longDescription:
+      cmsProject?.longDescription ||
+      cmsProject?.description ||
+      fallbackProject?.longDescription ||
+      fallbackProject?.description ||
+      '',
+    location: cmsProject?.location || fallbackProject?.location || '',
+    address: cmsProject?.address || fallbackProject?.address || '',
+    type: cmsProject?.type === 'previous' ? 'مشروع سابق' : 'مشروع حالي',
+    projectType: cmsProject?.type || fallbackProject?.projectType || 'current',
+    status: cmsProject?.statusLabel || fallbackProject?.status || '',
+    statusLabel: cmsProject?.statusLabel || fallbackProject?.status || '',
+    completionDate: cmsProject?.completionDate || fallbackProject?.completionDate || '',
+    images,
+    image: cmsProject?.image || images[0] || fallbackProject?.image || '',
+    video: cmsProject?.video || fallbackProject?.video || null,
+    floors: normalizeNumberField(cmsProject?.floors) ?? fallbackProject?.floors ?? null,
+    progress: normalizeNumberField(cmsProject?.progress) ?? fallbackProject?.progress ?? 0,
+    units: normalizeNumberField(cmsProject?.units) ?? fallbackProject?.units ?? null,
+    features: features.length > 0 ? features : normalizeListField(fallbackProject?.features),
+    coordinates,
+    latitude: coordinates.lat,
+    longitude: coordinates.lng,
+    offerTitle: cmsProject?.offerTitle || '',
+    offerDescription: cmsProject?.offerDescription || '',
+    offerBadges,
+    towers: Array.isArray(cmsProject?.towers) && cmsProject.towers.length > 0
+      ? cmsProject.towers
+      : (Array.isArray(fallbackProject?.towers) ? fallbackProject.towers : []),
+    fromCms: true,
+  }
+}
 
 const ProjectDetail = () => {
   const { id } = useParams()
@@ -47,31 +164,8 @@ const ProjectDetail = () => {
       video: null,
       floors: 7,
       progress: 75,
-      startingPrice: 3500000,
       features: [],
       coordinates: { lat: 29.0661, lng: 31.0994 }, // Mock coordinates for Beni Suef
-      pricing: {
-        pricePerSquareMeter: {
-          '110': 10000,
-          '115': 10000,
-          '135': 11500,
-          '155': 11500,
-          '196': 11500,
-          '230': 12000,
-        },
-        installment: {
-          twoYears: {
-            downPayment: 50,
-            priceIncrease: 1000,
-            description: 'نظام القسط على سنتين: مقدم 50% والباقي على سنتين - سعر المتر يزيد 1000 جنيه عن الكاش'
-          },
-          threeYears: {
-            downPayment: 20,
-            priceIncrease: 2000,
-            description: 'نظام القسط على ثلاث سنوات: مقدم 20% والباقي على ثلاث سنوات - سعر المتر يزيد 2000 جنيه عن الكاش'
-          }
-        }
-      },
       towers: [
         {
           id: 1,
@@ -264,28 +358,8 @@ const ProjectDetail = () => {
       video: null,
       floors: 7,
       progress: 55,
-      startingPrice: 2800000,
       features: [],
       coordinates: { lat: 29.0661, lng: 31.0994 }, // Mock coordinates for Beni Suef
-      pricing: {
-        pricePerSquareMeter: {
-          '115': 10000,
-          '150': 11500,
-          '175': 11000,
-        },
-        installment: {
-          twoYears: {
-            downPayment: 50,
-            priceIncrease: 1000,
-            description: 'نظام القسط على سنتين: مقدم 50% والباقي على سنتين - سعر المتر يزيد 1000 جنيه عن الكاش'
-          },
-          threeYears: {
-            downPayment: 20,
-            priceIncrease: 2000,
-            description: 'نظام القسط على ثلاث سنوات: مقدم 20% والباقي على ثلاث سنوات - سعر المتر يزيد 2000 جنيه عن الكاش'
-          }
-        }
-      },
       towers: [
         {
           id: 1,
@@ -335,19 +409,9 @@ const ProjectDetail = () => {
   useEffect(() => {
     api.projects.get(id)
       .then((res) => {
-        const p = res.data
-        setProject({
-          id: p._id,
-          title: p.name,
-          name: p.name,
-          description: p.description,
-          longDescription: p.description,
-          images: Array.isArray(p.images) && p.images.length > 0 ? p.images : (p.image ? [p.image] : []),
-          image: p.image || (Array.isArray(p.images) && p.images.length > 0 ? p.images[0] : ''),
-          type: p.type === 'previous' ? 'مشروع سابق' : 'مشروع حالي',
-          projectType: p.type,
-          fromCms: true,
-        })
+        const cmsProject = res.data
+        const fallbackProject = findFallbackProjectByValue(projects, cmsProject)
+        setProject(mergeProjectWithCmsData(cmsProject, fallbackProject))
       })
       .catch(() => {
         setProject(projects[id] || null)
@@ -381,6 +445,14 @@ const ProjectDetail = () => {
 
   const getImageUrl = (url) => (project.fromCms && url ? apiImage(url) : url)
   const backPath = project.projectType === 'previous' ? '/previous-projects' : '/current-projects'
+  const isCurrentProject = project.projectType !== 'previous'
+  const offerTitle = project.offerTitle || INSTALLMENT_OFFER_TITLE
+  const offerDescription = project.offerDescription || INSTALLMENT_OFFER_DESCRIPTION
+  const offerBadges = Array.isArray(project.offerBadges) && project.offerBadges.length > 0
+    ? project.offerBadges
+    : INSTALLMENT_OFFER_BADGES
+  const mapCoordinates = project.coordinates || DEFAULT_PROJECT_COORDINATES
+  const progressValue = typeof project.progress === 'number' ? project.progress : 0
 
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
@@ -470,8 +542,6 @@ const ProjectDetail = () => {
                       <div className="space-y-3">
                         <h4 className="text-sm font-semibold text-gray-700 mb-3">الشقق:</h4>
                         {tower.apartments.map((apt) => {
-                          const pricePerMeter = project.pricing?.pricePerSquareMeter?.[apt.area.toString()] || 0
-                          const totalPrice = pricePerMeter * apt.area
                           return (
                           <div key={apt.number} className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                             <div className="flex items-center justify-between mb-2">
@@ -482,20 +552,8 @@ const ProjectDetail = () => {
                                 <span className="font-bold text-lg block" style={{ color: '#d6ac72' }}>
                                   {apt.area} {apt.unit}
                                 </span>
-                                {pricePerMeter > 0 && (
-                                  <span className="text-xs text-gray-600 block">
-                                    {pricePerMeter.toLocaleString()} ج.م/م²
-                                  </span>
-                                )}
                               </div>
                             </div>
-                            {totalPrice > 0 && (
-                              <div className="mt-2 pt-2 border-t border-gray-300">
-                                <p className="text-sm font-bold text-gray-900">
-                                  السعر الكاش: <span style={{ color: '#d6ac72' }}>{totalPrice.toLocaleString()} ج.م</span>
-                                </p>
-                              </div>
-                            )}
                             {apt.rooms && (
                               <div className="flex items-center gap-4 text-xs text-gray-600 mb-2">
                                 <span>{apt.rooms} غرفة</span>
@@ -511,6 +569,22 @@ const ProjectDetail = () => {
                                 ))}
                               </div>
                             )}
+                            <div className="mt-3 rounded-lg border border-primary-100 bg-white p-3">
+                              <div className="mb-2 flex flex-wrap gap-2">
+                                {offerBadges.map((badge) => (
+                                  <span
+                                    key={`${tower.id}-${apt.number}-${badge}`}
+                                    className="rounded-full bg-primary-500 px-3 py-1 text-xs font-bold text-white"
+                                  >
+                                    مقدم {badge}
+                                  </span>
+                                ))}
+                              </div>
+                              <p className="text-sm font-bold text-gray-900">{offerTitle}</p>
+                              <p className="mt-1 text-xs leading-6 text-gray-600">
+                                {offerDescription}
+                              </p>
+                            </div>
                           </div>
                           )
                         })}
@@ -522,182 +596,35 @@ const ProjectDetail = () => {
             )}
 
             {/* Pricing Section */}
-            {project.pricing && (
+            {isCurrentProject && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-2xl shadow-lg p-8"
               >
-                <h2 className="text-2xl font-extrabold text-gray-900 mb-6">الأسعار ونظام التقسيط</h2>
-                
-                {/* Price Per Square Meter */}
-                <div className="mb-8">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>أسعار المتر المربع (كاش):</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {project.id === 1 ? (
-                      <>
-                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
-                          <p className="text-sm text-gray-600 mb-1">الشقق 110 و 115 م²</p>
-                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
-                            {project.pricing.pricePerSquareMeter['110'].toLocaleString()} ج.م
-                          </p>
-                        </div>
-                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
-                          <p className="text-sm text-gray-600 mb-1">الشقق 135 و 155 و 196 م²</p>
-                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
-                            {project.pricing.pricePerSquareMeter['135'].toLocaleString()} ج.م
-                          </p>
-                        </div>
-                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
-                          <p className="text-sm text-gray-600 mb-1">الشقق 230 م²</p>
-                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
-                            {project.pricing.pricePerSquareMeter['230'].toLocaleString()} ج.م
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
-                          <p className="text-sm text-gray-600 mb-1">الشقق 115 م²</p>
-                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
-                            {project.pricing.pricePerSquareMeter['115'].toLocaleString()} ج.م
-                          </p>
-                        </div>
-                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
-                          <p className="text-sm text-gray-600 mb-1">الشقق 150 م²</p>
-                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
-                            {project.pricing.pricePerSquareMeter['150'].toLocaleString()} ج.م
-                          </p>
-                        </div>
-                        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-4 border-2" style={{ borderColor: '#d6ac72' }}>
-                          <p className="text-sm text-gray-600 mb-1">الشقق 175 م²</p>
-                          <p className="text-2xl font-extrabold" style={{ color: '#d6ac72' }}>
-                            {project.pricing.pricePerSquareMeter['175'].toLocaleString()} ج.م
-                          </p>
-                        </div>
-                      </>
-                    )}
+                <h2 className="text-2xl font-extrabold text-gray-900 mb-6">اسأل عن عروض التقسيط</h2>
+                <div className="rounded-2xl border border-primary-100 bg-gradient-to-br from-primary-50 via-white to-amber-50 p-6 md:p-8">
+                  <div className="mb-5 flex flex-wrap gap-3">
+                    {offerBadges.map((badge) => (
+                      <span
+                        key={`pricing-${badge}`}
+                        className="rounded-full bg-primary-500 px-4 py-2 text-sm font-extrabold text-white"
+                      >
+                        مقدم {badge}
+                      </span>
+                    ))}
                   </div>
-                </div>
-
-                {/* Installment Plans */}
-                <div className="space-y-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4" style={{ color: '#d6ac72' }}>نظام التقسيط:</h3>
-                  
-                  {/* Two Years Installment */}
-                  <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-300">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-lg font-extrabold text-gray-900">تقسيط على سنتين</h4>
-                      <span className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-semibold">مقدم {project.pricing.installment.twoYears.downPayment}%</span>
-                    </div>
-                    <p className="text-gray-700 mb-3">{project.pricing.installment.twoYears.description}</p>
-                      <div className="bg-white rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-2">سعر المتر مع التقسيط:</p>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {project.id === 1 ? (
-                          <>
-                            <div>
-                              <p className="text-xs text-gray-600">110/115 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['110'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-600">135/155/196 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['135'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-600">230 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['230'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div>
-                              <p className="text-xs text-gray-600">115 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['115'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-600">150 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['150'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-600">175 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['175'] + project.pricing.installment.twoYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Three Years Installment */}
-                  <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-xl p-6 border-2 border-green-300">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="text-lg font-extrabold text-gray-900">تقسيط على ثلاث سنوات</h4>
-                      <span className="px-3 py-1 bg-green-500 text-white rounded-full text-sm font-semibold">مقدم {project.pricing.installment.threeYears.downPayment}%</span>
-                    </div>
-                    <p className="text-gray-700 mb-3">{project.pricing.installment.threeYears.description}</p>
-                    <div className="bg-white rounded-lg p-4">
-                      <p className="text-sm text-gray-600 mb-2">سعر المتر مع التقسيط:</p>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {project.id === 1 ? (
-                          <>
-                            <div>
-                              <p className="text-xs text-gray-600">110/115 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['110'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-600">135/155/196 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['135'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-600">230 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['230'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div>
-                              <p className="text-xs text-gray-600">115 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['115'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-600">150 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['150'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-xs text-gray-600">175 م²</p>
-                              <p className="font-bold text-lg" style={{ color: '#d6ac72' }}>
-                                {(project.pricing.pricePerSquareMeter['175'] + project.pricing.installment.threeYears.priceIncrease).toLocaleString()} ج.م
-                              </p>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                  <h3 className="text-xl font-extrabold text-gray-900 mb-3">{offerTitle}</h3>
+                  <p className="text-gray-700 leading-8 mb-6">
+                    {offerDescription}
+                  </p>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center rounded-xl bg-primary-500 px-6 py-3 text-sm font-extrabold text-white transition-colors hover:bg-primary-600"
+                  >
+                    اسأل الآن عن العرض
+                  </Link>
                 </div>
               </motion.div>
             )}
@@ -815,12 +742,12 @@ const ProjectDetail = () => {
                   loading="lazy"
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"
-                  src={`https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${project.coordinates.lat},${project.coordinates.lng}`}
+                  src={`https://maps.google.com/maps?q=${mapCoordinates.lat},${mapCoordinates.lng}&z=15&output=embed`}
                 />
               </div>
               <p className="mt-4 text-gray-600">
                 <FiMapPin className="inline ml-1" size={16} />
-                {project.address}
+                {project.address || project.location}
               </p>
             </motion.div>
           </div>
@@ -872,21 +799,21 @@ const ProjectDetail = () => {
                           strokeWidth="8"
                           fill="none"
                           strokeDasharray={`${2 * Math.PI * 56}`}
-                          strokeDashoffset={`${2 * Math.PI * 56 * (1 - project.progress / 100)}`}
+                          strokeDashoffset={`${2 * Math.PI * 56 * (1 - progressValue / 100)}`}
                           strokeLinecap="round"
                           className="transition-all duration-500"
                         />
                       </svg>
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center">
-                          <span className="text-3xl font-bold block" style={{ color: '#d6ac72' }}>{project.progress}%</span>
+                          <span className="text-3xl font-bold block" style={{ color: '#d6ac72' }}>{progressValue}%</span>
                           <span className="text-sm text-gray-600">نسبة الإنجاز</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                {project.features && (
+                {Array.isArray(project.features) && project.features.length > 0 && (
                   <div className="pt-4 border-t border-gray-200">
                     <h4 className="text-sm font-extrabold text-gray-700 mb-3" style={{ color: '#d6ac72' }}>المميزات:</h4>
                     <ul className="space-y-2">
@@ -912,7 +839,9 @@ const ProjectDetail = () => {
             >
               <h3 className="text-xl font-extrabold mb-4">استفسر عن المشروع</h3>
               <p className="mb-6 opacity-90">
-                تواصل معنا لمعرفة المزيد عن هذا المشروع والوحدات المتاحة
+                {isCurrentProject
+                  ? `تواصل معنا لمعرفة الوحدات المتاحة واسأل عن ${offerTitle}${offerBadges.length > 0 ? ` ${offerBadges.join(' و')}` : ''}`
+                  : 'تواصل معنا لمعرفة المزيد عن هذا المشروع والتفاصيل المتاحة'}
               </p>
               <Link
                 to="/contact"

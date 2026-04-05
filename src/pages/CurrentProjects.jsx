@@ -28,6 +28,9 @@ export default function CurrentProjects() {
       _id: project._id,
       title: project.name,
       description: project.description,
+      location: project.location,
+      floors: project.floors,
+      progress: project.progress,
       image: project.image || project.images?.[0] || '',
       images: Array.isArray(project.images) && project.images.length > 0
         ? project.images
@@ -117,7 +120,7 @@ export default function CurrentProjects() {
                   >
                     {project.type}
                   </div>
-                  {!project.fromCms && project.progress != null && (
+                  {project.progress !== null && project.progress !== undefined && project.progress !== '' && (
                     <div className="absolute top-3 left-3 bg-white/90 text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
                       {project.progress}% إنجاز
                     </div>
@@ -128,22 +131,20 @@ export default function CurrentProjects() {
                   <h3 className="text-xl font-extrabold text-gray-900 mb-2">{project.title}</h3>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">{project.description}</p>
 
-                  {!project.fromCms && (
-                    <div className="space-y-2 mb-4 text-sm text-gray-700">
-                      {project.location && (
-                        <div className="flex items-center gap-2">
-                          <FiMapPin size={15} style={{ color: '#d6ac72' }} />
-                          <span>{project.location}</span>
-                        </div>
-                      )}
-                      {project.floors && (
-                        <div className="flex items-center gap-2">
-                          <FiLayers size={15} style={{ color: '#d6ac72' }} />
-                          <span>{project.floors} طوابق</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  <div className="space-y-2 mb-4 text-sm text-gray-700">
+                    {project.location && (
+                      <div className="flex items-center gap-2">
+                        <FiMapPin size={15} style={{ color: '#d6ac72' }} />
+                        <span>{project.location}</span>
+                      </div>
+                    )}
+                    {project.floors && (
+                      <div className="flex items-center gap-2">
+                        <FiLayers size={15} style={{ color: '#d6ac72' }} />
+                        <span>{project.floors} طوابق</span>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="flex flex-col gap-3">
                     {project.images?.length > 1 && (

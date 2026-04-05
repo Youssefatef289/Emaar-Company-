@@ -15,6 +15,7 @@ import {
   FiX,
 } from 'react-icons/fi'
 import {
+  FALLBACK_COURSE_MAP,
   FALLBACK_PREVIOUS_PROJECT_EMAAR_IMAGES,
   FALLBACK_PREVIOUS_PROJECT_GALLERY_IMAGES,
   FALLBACK_PREVIOUS_PROJECTS,
@@ -32,6 +33,217 @@ const TABS = [
 
 const REAL_ESTATE_CATEGORIES = ['تمليك', 'إيجار', 'مخازن', 'إداري', 'أراضي']
 const PROJECT_TYPES = ['current', 'previous']
+const PROJECT_INSTALLMENT_DEFAULT_TITLE = 'اسأل عن عرض نظام التقسيط'
+const PROJECT_INSTALLMENT_DEFAULT_DESCRIPTION =
+  'تواصل معنا لمعرفة تفاصيل الوحدات المتاحة وأحدث عروض التقسيط المناسبة لكل برج ولكل شقة.'
+const PROJECT_INSTALLMENT_DEFAULT_BADGES = ['20%', '40%']
+
+function normalizeMatchValue(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[()]/g, ' ')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+}
+
+function findFallbackCourseForAdmin(course) {
+  const courseKeys = [course?.id, course?._id, course?.title, course?.name]
+    .map(normalizeMatchValue)
+    .filter(Boolean)
+
+  if (courseKeys.length === 0) return null
+
+  return Object.values(FALLBACK_COURSE_MAP).find((fallbackCourse) => {
+    const fallbackKeys = [
+      fallbackCourse.id,
+      fallbackCourse.title,
+      fallbackCourse.title.replace(/\(.+?\)/g, '').trim(),
+    ]
+      .map(normalizeMatchValue)
+      .filter(Boolean)
+
+    return courseKeys.some((key) => fallbackKeys.includes(key))
+  }) || null
+}
+
+function mergeCourseWithFallbackForAdmin(course) {
+  const fallbackCourse = findFallbackCourseForAdmin(course)
+
+  if (!fallbackCourse) {
+    return {
+      ...course,
+      usefulness: Array.isArray(course.usefulness) ? course.usefulness : [],
+      content: Array.isArray(course.content) ? course.content : [],
+      benefits: Array.isArray(course.benefits) ? course.benefits : [],
+      syllabus: Array.isArray(course.syllabus) ? course.syllabus : [],
+    }
+  }
+
+  return {
+    ...fallbackCourse,
+    ...course,
+    _id: course._id,
+    name: course.name || fallbackCourse.title,
+    description: course.description || fallbackCourse.description,
+    duration: course.duration || fallbackCourse.duration,
+    price: course.price ?? fallbackCourse.price,
+    image: course.image || fallbackCourse.image,
+    registrationLink: course.registrationLink || fallbackCourse.registrationLink,
+    whatsappNumber: course.whatsappNumber || fallbackCourse.whatsappNumber,
+    importance: course.importance || fallbackCourse.importance,
+    usefulness: Array.isArray(course.usefulness) && course.usefulness.length > 0
+      ? course.usefulness
+      : (fallbackCourse.usefulness || []),
+    content: Array.isArray(course.content) && course.content.length > 0
+      ? course.content
+      : (fallbackCourse.content || []),
+    benefits: Array.isArray(course.benefits) && course.benefits.length > 0
+      ? course.benefits
+      : (fallbackCourse.benefits || []),
+    syllabus: Array.isArray(course.syllabus) && course.syllabus.length > 0
+      ? course.syllabus
+      : (fallbackCourse.syllabus || []),
+    level: course.level || fallbackCourse.level,
+    instructor: course.instructor || fallbackCourse.instructor,
+    instructorBio: course.instructorBio || fallbackCourse.instructorBio,
+    videoUrl: course.videoUrl || fallbackCourse.videoUrl,
+  }
+}
+
+function mergeProjectWithDashboardDefaults(project) {
+  const isCurrentProject = project?.type !== 'previous'
+
+  return {
+    ...project,
+    longDescription: project?.longDescription || project?.description || '',
+    location: project?.location || '',
+    address: project?.address || '',
+    categoryLabel: project?.categoryLabel || '',
+    statusLabel: project?.statusLabel || '',
+    completionDate: project?.completionDate || '',
+    floors: project?.floors ?? '',
+    progress: project?.progress ?? '',
+    units: project?.units ?? '',
+    features: Array.isArray(project?.features) ? project.features : [],
+    video: project?.video || '',
+    latitude: project?.latitude ?? project?.coordinates?.lat ?? '',
+    longitude: project?.longitude ?? project?.coordinates?.lng ?? '',
+    offerTitle: project?.offerTitle || (isCurrentProject ? PROJECT_INSTALLMENT_DEFAULT_TITLE : ''),
+    offerDescription: project?.offerDescription || (isCurrentProject ? PROJECT_INSTALLMENT_DEFAULT_DESCRIPTION : ''),
+    offerBadges: Array.isArray(project?.offerBadges) && project.offerBadges.length > 0
+      ? project.offerBadges
+      : (isCurrentProject ? PROJECT_INSTALLMENT_DEFAULT_BADGES : []),
+    towers: Array.isArray(project?.towers) ? project.towers : [],
+    images: Array.isArray(project?.images) ? project.images : [],
+  }
+}
+
+function formatSyllabusField(value) {
+  if (!Array.isArray(value) || value.length === 0) return ''
+
+  return value
+    .map((item, index) => {
+      if (!item) return ''
+
+      if (typeof item === 'string') {
+        return `${index + 1} | ${item}`
+      }
+
+      const section = String(item.section || item.group || item.module || '').trim()
+      const serial = String(item.serial || item.number || item.id || index + 1).trim()
+      const topic = String(item.topic || item.title || item.name || item.content || '').trim()
+      const duration = String(item.duration || '').trim()
+      const note = String(item.note || item.type || item.kind || '').trim()
+      const parts = [section, serial, topic, duration, note].filter(Boolean)
+
+      return parts.join(' | ')
+    })
+    .filter(Boolean)
+    .join('\n')
+}
+
+function parseSyllabusField(rawValue) {
+  return String(rawValue || '')
+    .split(/\r?\n/)
+    .map((line, index) => {
+      const parts = line
+        .split('|')
+        .map((part) => part.trim())
+        .filter(Boolean)
+
+      if (parts.length === 0) return null
+
+      if (parts.length === 1) {
+        return {
+          serial: String(index + 1),
+          topic: parts[0],
+          duration: '',
+          note: '',
+          section: '',
+        }
+      }
+
+      if (parts.length === 2) {
+        return {
+          serial: parts[0],
+          topic: parts[1],
+          duration: '',
+          note: '',
+          section: '',
+        }
+      }
+
+      if (parts.length === 3) {
+        return {
+          serial: parts[0],
+          topic: parts[1],
+          duration: parts[2],
+          note: '',
+          section: '',
+        }
+      }
+
+      if (parts.length === 4) {
+        return {
+          serial: parts[0],
+          topic: parts[1],
+          duration: parts[2],
+          note: parts[3],
+          section: '',
+        }
+      }
+
+      return {
+        section: parts[0],
+        serial: parts[1],
+        topic: parts[2],
+        duration: parts[3] || '',
+        note: parts[4] || '',
+      }
+    })
+    .filter(Boolean)
+}
+
+function formatJsonField(value) {
+  if (!Array.isArray(value) || value.length === 0) return ''
+  return JSON.stringify(value, null, 2)
+}
+
+function parseJsonField(rawValue, fieldLabel) {
+  const trimmedValue = String(rawValue || '').trim()
+  if (!trimmedValue) return []
+
+  try {
+    const parsed = JSON.parse(trimmedValue)
+    if (!Array.isArray(parsed)) {
+      throw new Error(`${fieldLabel} يجب أن يكون على هيئة مصفوفة JSON.`)
+    }
+    return parsed
+  } catch (error) {
+    throw new Error(error?.message || `تعذر قراءة ${fieldLabel}.`)
+  }
+}
 
 export default function AdminDashboard() {
   const { admin, adminLogout } = useAdminAuth()
@@ -58,12 +270,12 @@ export default function AdminDashboard() {
 
   const loadCourses = async () => {
     const result = await api.courses.list()
-    setCourses(result.data || [])
+    setCourses((result.data || []).map(mergeCourseWithFallbackForAdmin))
   }
 
   const loadProjects = async () => {
     const result = await api.projects.list()
-    setProjects(result.data || [])
+    setProjects((result.data || []).map(mergeProjectWithDashboardDefaults))
   }
 
   const loadDashboard = async () => {
@@ -287,6 +499,17 @@ export default function AdminDashboard() {
                 multilineList: true,
                 helpText: 'اكتب كل ميزة في سطر منفصل.',
               },
+              {
+                key: 'syllabusText',
+                payloadKey: 'syllabus',
+                label: 'الخطة التفصيلية للكورس',
+                type: 'textarea',
+                rows: 8,
+                getValue: (source) => formatSyllabusField(source.syllabus),
+                parseValue: (rawValue) => parseSyllabusField(rawValue),
+                helpText:
+                  'اكتب كل سطر بهذا الشكل: القسم | المسلسل | المحور | المدة | الملاحظة. ويمكن حذف القسم إذا لم يكن مطلوبًا.',
+              },
             ]}
           />
         )}
@@ -303,7 +526,7 @@ export default function AdminDashboard() {
               emptyMessage="لا توجد مشاريع حالية حتى الآن."
               onReload={loadProjects}
               api={api.projects}
-              createDefaults={{ type: 'current' }}
+              createDefaults={mergeProjectWithDashboardDefaults({ type: 'current' })}
               columns={[
                 { key: 'name', label: 'اسم المشروع' },
                 { key: 'description', label: 'الوصف', truncate: 100 },
@@ -326,7 +549,7 @@ export default function AdminDashboard() {
               emptyMessage="لا توجد مشاريع سابقة حتى الآن."
               onReload={loadProjects}
               api={api.projects}
-              createDefaults={{ type: 'previous' }}
+              createDefaults={mergeProjectWithDashboardDefaults({ type: 'previous' })}
               showAllImages
               extraContent={<PreviousProjectsStaticGallery />}
               columns={[
@@ -349,7 +572,40 @@ export default function AdminDashboard() {
 
 const projectFormFields = [
   { key: 'name', label: 'اسم المشروع', required: true },
-  { key: 'description', label: 'وصف المشروع', type: 'textarea' },
+  { key: 'description', label: 'وصف مختصر', type: 'textarea' },
+  { key: 'longDescription', label: 'وصف صفحة التفاصيل', type: 'textarea', rows: 6 },
+  { key: 'location', label: 'المدينة أو المنطقة' },
+  { key: 'address', label: 'العنوان التفصيلي', type: 'textarea', rows: 3 },
+  { key: 'categoryLabel', label: 'تصنيف المشروع' },
+  { key: 'statusLabel', label: 'حالة المشروع' },
+  { key: 'completionDate', label: 'تاريخ الانتهاء', type: 'date' },
+  { key: 'floors', label: 'عدد الطوابق', type: 'number' },
+  { key: 'progress', label: 'نسبة الإنجاز', type: 'number' },
+  { key: 'units', label: 'عدد الوحدات', type: 'number' },
+  {
+    key: 'features',
+    label: 'مميزات المشروع',
+    type: 'textarea',
+    multilineList: true,
+    helpText: 'اكتب كل ميزة في سطر منفصل.',
+  },
+  { key: 'offerTitle', label: 'عنوان عرض التقسيط' },
+  {
+    key: 'offerDescription',
+    label: 'وصف عرض التقسيط',
+    type: 'textarea',
+    rows: 4,
+  },
+  {
+    key: 'offerBadges',
+    label: 'نسب عرض التقسيط',
+    type: 'textarea',
+    multilineList: true,
+    helpText: 'اكتب كل نسبة أو شارة في سطر منفصل مثل 20% أو 40%.',
+  },
+  { key: 'latitude', label: 'خط العرض', type: 'number' },
+  { key: 'longitude', label: 'خط الطول', type: 'number' },
+  { key: 'video', label: 'رابط فيديو المشروع', type: 'url' },
   { key: 'type', label: 'نوع المشروع', type: 'select', options: PROJECT_TYPES },
   {
     key: 'imagesText',
@@ -358,6 +614,16 @@ const projectFormFields = [
     type: 'textarea',
     multilineList: true,
     helpText: 'كل رابط صورة في سطر منفصل. سيُستخدم الحقل لتعبئة معرض الصور في صفحة المشروع.',
+  },
+  {
+    key: 'towersJson',
+    payloadKey: 'towers',
+    label: 'بيانات الأبراج والشقق (JSON)',
+    type: 'textarea',
+    rows: 12,
+    getValue: (source) => formatJsonField(source.towers),
+    parseValue: (rawValue) => parseJsonField(rawValue, 'بيانات الأبراج والشقق'),
+    helpText: 'اختياري. أدخل مصفوفة JSON إذا أردت إدارة الأبراج والشقق من لوحة التحكم.',
   },
 ]
 
@@ -472,10 +738,12 @@ function CrudSection({
     const nextForm = {}
     formFields.forEach((field) => {
       const storageKey = field.payloadKey || field.key
-      const rawValue = source[storageKey]
-      nextForm[field.key] = field.multilineList
-        ? Array.isArray(rawValue) ? rawValue.join('\n') : ''
-        : rawValue ?? ''
+      const rawValue = field.getValue ? field.getValue(source) : source[storageKey]
+      nextForm[field.key] = field.getValue
+        ? rawValue ?? ''
+        : field.multilineList
+          ? Array.isArray(rawValue) ? rawValue.join('\n') : ''
+          : rawValue ?? ''
     })
     nextForm.image = source.image ?? ''
     return nextForm
@@ -507,8 +775,14 @@ function CrudSection({
       formFields.forEach((field) => {
         const storageKey = field.payloadKey || field.key
         const rawValue = form[field.key]
+
+        if (field.parseValue) {
+          payload[storageKey] = field.parseValue(rawValue, form)
+          return
+        }
+
         payload[storageKey] = field.multilineList
-          ? rawValue
+          ? String(rawValue || '')
               .split(/\r?\n/)
               .map((item) => item.trim())
               .filter(Boolean)
@@ -879,22 +1153,19 @@ function RamadanOffersBlock() {
       className="rounded-xl p-6 text-white"
       style={{ background: 'linear-gradient(135deg, #d6ac72 0%, #c49a5f 50%, #b2884c 100%)' }}
     >
-      <p className="text-xl font-bold mb-4">مسابقة رمضان المبارك</p>
-      <div className="space-y-3 text-sm md:text-base">
-        <div className="bg-white/20 rounded-lg p-3 border border-white/30">
-          الجائزة الأولى: نصف تشطيب مجانًا لأحد العملاء القدامى.
-        </div>
-        <div className="bg-white/20 rounded-lg p-3 border border-white/30">
-          الجائزة الثانية: خصم 1000 جنيه على كل متر لأحد العملاء الجدد.
-        </div>
-        <div className="bg-white/20 rounded-lg p-3 border border-white/30">
-          الجائزة الثالثة: خصم 10% على المصنعيات.
-        </div>
-        <div className="bg-white/20 rounded-lg p-3 border border-white/30">
-          الجائزة الرابعة: 5000 جنيه كاش موزعة على 5 فائزين.
-        </div>
+      <p className="text-2xl font-extrabold mb-3 text-center">انتظروا عروضنا</p>
+      <p className="text-center text-sm md:text-base leading-7 text-white/95">
+        صفحة العروض في الموقع تعرض حاليًا رسالة انتظار للعروض القادمة بدل عرض رمضان القديم.
+      </p>
+      <div className="mt-5 rounded-2xl border border-white/30 bg-white/15 p-4 text-sm md:text-base">
+        <p className="font-bold mb-2">المتاح الآن:</p>
+        <p className="leading-7">
+          يمكن للعميل زيارة المشاريع الحالية والاستفسار عن عرض نظام التقسيط 20% و40%.
+        </p>
       </div>
-      <p className="text-center font-bold mt-4 text-lg">العروض ثابتة الآن ولا ترتبط ببطاقات CMS.</p>
+      <p className="text-center font-bold mt-4 text-lg">
+        هذا التبويب للمتابعة فقط ولا يحتوي على بطاقات عروض قابلة للإدارة حاليًا.
+      </p>
     </div>
   )
 }

@@ -27,6 +27,105 @@ function normalizeTextField(value) {
   return typeof value === 'string' ? value.trim() : ''
 }
 
+function normalizeCourseMatchValue(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[()]/g, ' ')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+}
+
+function normalizeSyllabusField(value) {
+  if (!Array.isArray(value)) return []
+
+  return value
+    .map((item, index) => {
+      if (!item) return null
+
+      if (typeof item === 'string') {
+        const topic = item.trim()
+        return topic ? { serial: String(index + 1), topic, duration: '', note: '' } : null
+      }
+
+      const topic = normalizeTextField(item.topic || item.title || item.name || item.content)
+      const duration = normalizeTextField(item.duration)
+      const note = normalizeTextField(item.note || item.type || item.kind)
+      const section = normalizeTextField(item.section || item.group || item.module)
+      const serial = normalizeTextField(item.serial || item.number || item.id) || String(index + 1)
+
+      if (!topic) return null
+
+      return { serial, topic, duration, note, section }
+    })
+    .filter(Boolean)
+}
+
+function findFallbackCourse(course) {
+  const courseKeys = [course?.id, course?._id, course?.title, course?.name]
+    .map(normalizeCourseMatchValue)
+    .filter(Boolean)
+
+  if (courseKeys.length === 0) return null
+
+  return Object.values(FALLBACK_COURSE_MAP).find((fallbackCourse) => {
+    const fallbackKeys = [
+      fallbackCourse.id,
+      fallbackCourse.title,
+      fallbackCourse.title.replace(/\(.+?\)/g, '').trim(),
+    ]
+      .map(normalizeCourseMatchValue)
+      .filter(Boolean)
+
+    return courseKeys.some((key) => fallbackKeys.includes(key))
+  }) || null
+}
+
+function mergeCourseWithFallback(course) {
+  const fallbackCourse = findFallbackCourse(course)
+
+  if (!fallbackCourse) {
+    return course
+  }
+
+  return {
+    ...fallbackCourse,
+    ...course,
+    id: course.id || course._id || fallbackCourse.id,
+    title: course.title || course.name || fallbackCourse.title,
+    description: course.description || fallbackCourse.description,
+    duration: course.duration || fallbackCourse.duration,
+    price: course.price ?? fallbackCourse.price,
+    image: course.image || fallbackCourse.image,
+    registrationLink: course.registrationLink || fallbackCourse.registrationLink,
+    whatsappNumber: course.whatsappNumber || fallbackCourse.whatsappNumber,
+    importance: course.importance || fallbackCourse.importance,
+    usefulness: Array.isArray(course.usefulness) && course.usefulness.length > 0 ? course.usefulness : fallbackCourse.usefulness,
+    content: Array.isArray(course.content) && course.content.length > 0 ? course.content : fallbackCourse.content,
+    benefits: Array.isArray(course.benefits) && course.benefits.length > 0 ? course.benefits : fallbackCourse.benefits,
+    syllabus: Array.isArray(course.syllabus) && course.syllabus.length > 0 ? course.syllabus : fallbackCourse.syllabus,
+    level: course.level || fallbackCourse.level,
+    instructor: course.instructor || fallbackCourse.instructor,
+    instructorBio: course.instructorBio || fallbackCourse.instructorBio,
+    videoUrl: course.videoUrl || fallbackCourse.videoUrl,
+  }
+}
+
+function groupSyllabusField(items) {
+  return items.reduce((groups, item) => {
+    const title = normalizeTextField(item.section)
+    const lastGroup = groups[groups.length - 1]
+
+    if (!lastGroup || lastGroup.title !== title) {
+      groups.push({ title, items: [item] })
+      return groups
+    }
+
+    lastGroup.items.push(item)
+    return groups
+  }, [])
+}
+
 function buildDefaultImportance(course) {
   const title = normalizeTextField(course.title) || 'هذا الكورس'
   const description = normalizeTextField(course.description)
@@ -84,25 +183,29 @@ export default function CourseDetail() {
       .then((response) => {
         if (cancelled) return
         const cmsCourse = response.data
-        setCourse({
-          id: cmsCourse._id,
-          title: cmsCourse.name,
-          description: normalizeTextField(cmsCourse.description),
-          duration: cmsCourse.duration,
-          price: cmsCourse.price,
-          level: cmsCourse.level,
-          instructor: normalizeTextField(cmsCourse.instructor),
-          instructorBio: normalizeTextField(cmsCourse.instructorBio),
-          content: normalizeListField(cmsCourse.content),
-          benefits: normalizeListField(cmsCourse.benefits),
-          importance: normalizeTextField(cmsCourse.importance),
-          usefulness: normalizeListField(cmsCourse.usefulness),
-          image: cmsCourse.image,
-          videoUrl: cmsCourse.videoUrl,
-          registrationLink: cmsCourse.registrationLink,
-          whatsappNumber: cmsCourse.whatsappNumber || DEFAULT_WHATSAPP,
-          fromCms: true,
-        })
+        setCourse(
+          mergeCourseWithFallback({
+            id: cmsCourse._id,
+            _id: cmsCourse._id,
+            title: cmsCourse.name,
+            description: normalizeTextField(cmsCourse.description),
+            duration: cmsCourse.duration,
+            price: cmsCourse.price,
+            level: cmsCourse.level,
+            instructor: normalizeTextField(cmsCourse.instructor),
+            instructorBio: normalizeTextField(cmsCourse.instructorBio),
+            content: normalizeListField(cmsCourse.content),
+            benefits: normalizeListField(cmsCourse.benefits),
+            importance: normalizeTextField(cmsCourse.importance),
+            usefulness: normalizeListField(cmsCourse.usefulness),
+            syllabus: normalizeSyllabusField(cmsCourse.syllabus),
+            image: cmsCourse.image,
+            videoUrl: cmsCourse.videoUrl,
+            registrationLink: cmsCourse.registrationLink,
+            whatsappNumber: cmsCourse.whatsappNumber || DEFAULT_WHATSAPP,
+            fromCms: true,
+          }),
+        )
       })
       .catch(() => {
         if (!cancelled) setCourse(FALLBACK_COURSE_MAP[courseId] || null)
@@ -152,6 +255,8 @@ export default function CourseDetail() {
   const courseBenefits = normalizeListField(course.benefits)
   const courseUsefulness = normalizeListField(course.usefulness)
   const courseImportance = normalizeTextField(course.importance)
+  const courseSyllabus = normalizeSyllabusField(course.syllabus)
+  const courseSyllabusGroups = groupSyllabusField(courseSyllabus)
   const detailContent = courseContent.length > 0 ? courseContent : buildDefaultContent(course)
   const detailBenefits = courseBenefits.length > 0 ? courseBenefits : buildDefaultBenefits(course)
   const detailUsefulness = courseUsefulness.length > 0 ? courseUsefulness : buildDefaultUsefulness(course)
@@ -218,6 +323,57 @@ export default function CourseDetail() {
                     <div key={index} className="flex items-start gap-3 bg-gray-50 p-4 rounded-lg">
                       <FiCheck className="mt-1 flex-shrink-0" size={18} style={{ color: '#d6ac72' }} />
                       <span className="text-gray-700">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {courseSyllabusGroups.length > 0 && (
+              <Section title="الخطة التفصيلية للكورس">
+                <div className="space-y-6">
+                  {courseSyllabusGroups.map((group, groupIndex) => (
+                    <div
+                      key={`${group.title || 'syllabus'}-${groupIndex}`}
+                      className="overflow-hidden rounded-2xl border border-primary-100 bg-white shadow-sm"
+                    >
+                      {group.title && (
+                        <div className="border-b border-primary-100 bg-gradient-to-r from-primary-50 via-white to-amber-50 px-5 py-4">
+                          <h3 className="text-lg font-extrabold text-gray-900">{group.title}</h3>
+                        </div>
+                      )}
+                      <div className="overflow-x-auto">
+                        <table className="min-w-full text-right text-sm">
+                          <thead className="bg-primary-50 text-gray-900">
+                            <tr>
+                              <th className="px-4 py-4 font-extrabold">م</th>
+                              <th className="px-4 py-4 font-extrabold">المحور</th>
+                              <th className="px-4 py-4 font-extrabold">المدة</th>
+                              <th className="px-4 py-4 font-extrabold">النوع</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {group.items.map((item, index) => (
+                              <tr key={`${group.title}-${item.serial}-${index}`} className="border-t border-gray-100">
+                                <td className="px-4 py-4 font-bold text-primary-700">{item.serial}</td>
+                                <td className="px-4 py-4 leading-7 text-gray-800">{item.topic}</td>
+                                <td className="px-4 py-4 text-gray-600">{item.duration || 'حسب الشرح'}</td>
+                                <td className="px-4 py-4">
+                                  <span
+                                    className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${
+                                      item.note === 'عملي'
+                                        ? 'bg-blue-50 text-blue-700'
+                                        : 'bg-amber-50 text-amber-700'
+                                    }`}
+                                  >
+                                    {item.note || 'عام'}
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   ))}
                 </div>

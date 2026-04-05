@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { FiArrowUpLeft, FiBookOpen, FiCheckCircle, FiClock, FiDollarSign, FiInfo } from 'react-icons/fi'
 import { FaWhatsapp } from 'react-icons/fa'
-import { FALLBACK_COURSE_LIST } from '../constants/fallbackData'
+import { FALLBACK_COURSE_LIST, FALLBACK_COURSE_MAP } from '../constants/fallbackData'
 import { api, apiImage } from '../services/api'
 
 const DEFAULT_WHATSAPP = '201027347377'
@@ -44,6 +44,10 @@ function formatCoursePrice(price) {
 }
 
 function getCourseHighlights(course) {
+  if (Array.isArray(course.content) && course.content.length > 0) {
+    return course.content.slice(0, 2)
+  }
+
   if (Array.isArray(course.usefulness) && course.usefulness.length > 0) {
     return course.usefulness.slice(0, 2)
   }
@@ -57,6 +61,71 @@ function getCourseHighlights(course) {
   }
 
   return ['محتوى تدريبي عملي يساعدك على التطبيق المباشر وتطوير مستواك المهني بسرعة.']
+}
+
+function normalizeCourseMatchValue(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[()]/g, ' ')
+    .replace(/[_-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+}
+
+function findFallbackCourse(course) {
+  const courseKeys = [course?.id, course?._id, course?.title, course?.name]
+    .map(normalizeCourseMatchValue)
+    .filter(Boolean)
+
+  if (courseKeys.length === 0) return null
+
+  return Object.values(FALLBACK_COURSE_MAP).find((fallbackCourse) => {
+    const fallbackKeys = [
+      fallbackCourse.id,
+      fallbackCourse.title,
+      fallbackCourse.title.replace(/\(.+?\)/g, '').trim(),
+    ]
+      .map(normalizeCourseMatchValue)
+      .filter(Boolean)
+
+    return courseKeys.some((key) => fallbackKeys.includes(key))
+  }) || null
+}
+
+function mergeCourseWithFallback(course) {
+  const fallbackCourse = findFallbackCourse(course)
+
+  if (!fallbackCourse) {
+    return course
+  }
+
+  return {
+    ...fallbackCourse,
+    ...course,
+    id: course.id || course._id || fallbackCourse.id,
+    title: course.title || course.name || fallbackCourse.title,
+    description: course.description || fallbackCourse.description,
+    duration: course.duration || fallbackCourse.duration,
+    price: course.price ?? fallbackCourse.price,
+    image: course.image || fallbackCourse.image,
+    registrationLink: course.registrationLink || fallbackCourse.registrationLink,
+    whatsappNumber: course.whatsappNumber || fallbackCourse.whatsappNumber,
+    importance: course.importance || fallbackCourse.importance,
+    usefulness: Array.isArray(course.usefulness) && course.usefulness.length > 0 ? course.usefulness : fallbackCourse.usefulness,
+    content: Array.isArray(course.content) && course.content.length > 0 ? course.content : fallbackCourse.content,
+    benefits: Array.isArray(course.benefits) && course.benefits.length > 0 ? course.benefits : fallbackCourse.benefits,
+    syllabus: Array.isArray(course.syllabus) && course.syllabus.length > 0 ? course.syllabus : fallbackCourse.syllabus,
+    level: course.level || fallbackCourse.level,
+    instructor: course.instructor || fallbackCourse.instructor,
+    instructorBio: course.instructorBio || fallbackCourse.instructorBio,
+  }
+}
+
+function isArcGisCourse(course) {
+  const courseId = String(course?._id || course?.id || '').trim().toLowerCase()
+  const title = String(course?.title || course?.name || '').trim().toLowerCase()
+
+  return courseId === 'arc-gis' || (title.includes('arc') && title.includes('gis'))
 }
 
 export default function SurveyingServices() {
@@ -73,20 +142,34 @@ export default function SurveyingServices() {
 
   const courses = useMemo(() => {
     if (apiCourses.length === 0) return FALLBACK_COURSE_LIST
-    return apiCourses.map((course) => ({
-      id: course._id,
-      _id: course._id,
-      title: course.name,
-      description: course.description,
-      duration: course.duration,
-      price: course.price,
-      image: course.image,
-      registrationLink: course.registrationLink,
-      whatsappNumber: course.whatsappNumber || DEFAULT_WHATSAPP,
-      importance: course.importance,
-      usefulness: course.usefulness,
-      fromCms: true,
-    }))
+
+    const mappedCourses = apiCourses.map((course) =>
+      mergeCourseWithFallback({
+        id: course._id,
+        _id: course._id,
+        title: course.name,
+        description: course.description,
+        duration: course.duration,
+        price: course.price,
+        image: course.image,
+        registrationLink: course.registrationLink,
+        whatsappNumber: course.whatsappNumber || DEFAULT_WHATSAPP,
+        importance: course.importance,
+        usefulness: course.usefulness,
+        content: course.content,
+        benefits: course.benefits,
+        level: course.level,
+        instructor: course.instructor,
+        instructorBio: course.instructorBio,
+        fromCms: true,
+      }),
+    )
+
+    if (mappedCourses.some(isArcGisCourse)) {
+      return mappedCourses
+    }
+
+    return [FALLBACK_COURSE_MAP['arc-gis'], ...mappedCourses]
   }, [apiCourses])
 
   return (

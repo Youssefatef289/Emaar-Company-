@@ -38,6 +38,38 @@ function normalizeListField(value) {
   return []
 }
 
+function normalizeNumberField(value) {
+  if (value === '' || value === null || value === undefined) return null
+  const parsed = Number(value)
+  return Number.isFinite(parsed) ? parsed : null
+}
+
+function normalizeObjectArrayField(value) {
+  return Array.isArray(value) ? value.filter(Boolean) : []
+}
+
+function buildCoordinates(body, current = {}) {
+  const latitude = normalizeNumberField(body.latitude !== undefined ? body.latitude : current.latitude)
+  const longitude = normalizeNumberField(body.longitude !== undefined ? body.longitude : current.longitude)
+
+  if (latitude === null || longitude === null) {
+    return {
+      latitude,
+      longitude,
+      coordinates: current.coordinates || null,
+    }
+  }
+
+  return {
+    latitude,
+    longitude,
+    coordinates: {
+      lat: latitude,
+      lng: longitude,
+    },
+  }
+}
+
 export const productsStorage = {
   list: () => Promise.resolve({ data: get(KEYS.products) }),
   create: (body) => {
@@ -144,6 +176,7 @@ export const coursesStorage = {
       usefulness: normalizeListField(body.usefulness),
       content: normalizeListField(body.content),
       benefits: normalizeListField(body.benefits),
+      syllabus: normalizeObjectArrayField(body.syllabus),
       whatsappNumber: body.whatsappNumber || '01027347377',
     }
     data.unshift(item)
@@ -172,6 +205,7 @@ export const coursesStorage = {
       usefulness: body.usefulness !== undefined ? normalizeListField(body.usefulness) : current.usefulness,
       content: body.content !== undefined ? normalizeListField(body.content) : current.content,
       benefits: body.benefits !== undefined ? normalizeListField(body.benefits) : current.benefits,
+      syllabus: body.syllabus !== undefined ? normalizeObjectArrayField(body.syllabus) : current.syllabus,
       whatsappNumber: body.whatsappNumber !== undefined ? body.whatsappNumber : current.whatsappNumber,
     }
 
@@ -199,10 +233,29 @@ export const projectsStorage = {
     const data = get(KEYS.projects)
     const images = Array.isArray(body.images) ? body.images.filter(Boolean) : (body.image ? [body.image] : [])
     const image = body.image || images[0] || ''
+    const { latitude, longitude, coordinates } = buildCoordinates(body)
     const item = {
       _id: nextId(),
       name: body.name || '',
       description: body.description || '',
+      longDescription: body.longDescription || '',
+      location: body.location || '',
+      address: body.address || '',
+      categoryLabel: body.categoryLabel || '',
+      statusLabel: body.statusLabel || '',
+      completionDate: body.completionDate || '',
+      floors: normalizeNumberField(body.floors),
+      progress: normalizeNumberField(body.progress),
+      units: normalizeNumberField(body.units),
+      features: normalizeListField(body.features),
+      video: body.video || '',
+      latitude,
+      longitude,
+      coordinates,
+      offerTitle: body.offerTitle || '',
+      offerDescription: body.offerDescription || '',
+      offerBadges: normalizeListField(body.offerBadges),
+      towers: normalizeObjectArrayField(body.towers),
       image,
       images,
       type: body.type || 'current',
@@ -221,11 +274,30 @@ export const projectsStorage = {
       ? (Array.isArray(body.images) ? body.images.filter(Boolean) : [])
       : current.images
     const image = body.image !== undefined ? body.image : (current.image || images?.[0] || '')
+    const { latitude, longitude, coordinates } = buildCoordinates(body, current)
 
     data[index] = {
       ...current,
       name: body.name ?? current.name,
       description: body.description ?? current.description,
+      longDescription: body.longDescription !== undefined ? body.longDescription : current.longDescription,
+      location: body.location !== undefined ? body.location : current.location,
+      address: body.address !== undefined ? body.address : current.address,
+      categoryLabel: body.categoryLabel !== undefined ? body.categoryLabel : current.categoryLabel,
+      statusLabel: body.statusLabel !== undefined ? body.statusLabel : current.statusLabel,
+      completionDate: body.completionDate !== undefined ? body.completionDate : current.completionDate,
+      floors: body.floors !== undefined ? normalizeNumberField(body.floors) : current.floors,
+      progress: body.progress !== undefined ? normalizeNumberField(body.progress) : current.progress,
+      units: body.units !== undefined ? normalizeNumberField(body.units) : current.units,
+      features: body.features !== undefined ? normalizeListField(body.features) : current.features,
+      video: body.video !== undefined ? body.video : current.video,
+      latitude,
+      longitude,
+      coordinates,
+      offerTitle: body.offerTitle !== undefined ? body.offerTitle : current.offerTitle,
+      offerDescription: body.offerDescription !== undefined ? body.offerDescription : current.offerDescription,
+      offerBadges: body.offerBadges !== undefined ? normalizeListField(body.offerBadges) : current.offerBadges,
+      towers: body.towers !== undefined ? normalizeObjectArrayField(body.towers) : current.towers,
       image,
       images: images || current.images || [],
       type: body.type !== undefined ? body.type : current.type,
